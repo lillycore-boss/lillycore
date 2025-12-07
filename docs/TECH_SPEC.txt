@@ -1,0 +1,182 @@
+# ========================================
+# FILE: TECH_SPEC
+# ROLE: Technical standards and environment details for LillyCORE
+# NOTE: This file defines HOW we build and run things, not WHAT the system is.
+# ========================================
+
+
+# ========================================
+# SECTION 1: RUNTIMES AND LANGUAGES
+# ========================================
+# Primary language:
+#   - Python 3.x
+#
+# Rules:
+#   - Always target python3, NEVER python2.
+#   - Prefer standard library unless a dependency is explicitly approved.
+#
+# Other languages (if any):
+#   - (e.g. shell scripts, TypeScript for UI, etc. — leave blank or TODO)
+#
+# TODO:
+#   - Confirm exact minimum Python version (e.g. 3.10, 3.11).
+#   - List any pre-approved third-party libraries once decided.
+
+
+# ========================================
+# SECTION 2: CODE STYLE & COMMENTS
+# ========================================
+# General style:
+#   - Follow Pythonic conventions (PEP8-ish, but Andrew is the final authority).
+#
+# Comments:
+#   - Use "#" for line comments.
+#   - For larger logical blocks in config/docs, use this pattern:
+#     # ========================================
+#     # SECTION: NAME
+#     # ========================================
+#
+# Naming conventions:
+#   - snake_case for functions and variables.
+#   - lowercase_with_underscores or lowercase-hyphen for files/folders (Andrew to confirm).
+#
+# GPT RULE:
+#   - If any style or naming detail is unclear, ASK Andrew instead of guessing.
+
+
+# ========================================
+# SECTION 3: REPOSITORY LAYOUT
+# ========================================
+# (This is intentionally light for now; will grow with the project.)
+#
+# Likely top-level folders (example / TODO):
+#   - core/        -> runtime loop, logging, core services
+#   - modules/     -> plug-in modules (Notes Engine, etc.)
+#   - scripts/     -> maintenance / helper / dev scripts
+#   - docs/        -> human-facing docs (optional)
+#   - tests/       -> tests (when they exist)
+#
+# GPT RULES:
+#   - Do NOT invent new folders without approval.
+#   - If unsure where something belongs, ASK Andrew:
+#       "Should this live in core/, modules/, or somewhere else?"
+#
+# TODO:
+#   - Fill in actual folder names once Phase 0 is implemented.
+#   - Lock in a standard for where configs live (e.g. config/ or inside core/).
+
+
+# ========================================
+# SECTION 4: LOGGING & ERROR HANDLING
+# ========================================
+# Logging:
+#   - There will be a unified logging system (defined in Phase 1).
+#   - All new code that does meaningful work SHOULD log via that system once it exists.
+#
+# Errors:
+#   - Prefer explicit exceptions over silent failure.
+#   - Wrap external/IO calls where appropriate with clear error envelopes (as per design).
+#
+# GPT RULE:
+#   - If logging or error envelope APIs are not defined yet, do NOT invent them.
+#   - Instead, note in PLAN/DOC:
+#       "Logging/error handling integration TBD once core logging is defined."
+#
+# TODO:
+#   - Define the actual logging interface once Phase 1 is built.
+
+
+# ========================================
+# SECTION 5: SCRIPTS & CLI TOOLS
+# ========================================
+# Script expectations:
+#   - Scripts should be runnable via python3 from the repo root unless otherwise specified.
+#   - Prefer argument-based CLIs (e.g. argparse) over interactive prompts for automation.
+#
+# Behaviour:
+#   - Scripts SHOULD:
+#       - Exit with non-zero status on failure.
+#       - Print clear error messages for humans if they fail.
+#
+# GPT RULE:
+#   - Do NOT assume a script name or path.
+#   - If a script is needed, propose a name and location, and ASK Andrew to confirm.
+
+
+# ========================================
+# SECTION 6: STORAGE & DATABASE
+# ========================================
+# Current state:
+#   - System DOC is conceptually defined in the Roadmap.
+#   - No specific DB engine is frozen yet (e.g. SQLite vs Postgres).
+#
+# Interim rules:
+#   - For early prototypes, prefer file-based or in-memory options UNLESS Andrew says otherwise.
+#   - The Architect must NOT commit the system to a specific database without Andrew’s explicit decision.
+#
+# GPT RULE:
+#   - If a feature needs persistence, ASK:
+#       "For this feature, should we use a simple file approach, in-memory, or design for a future DB?"
+#
+# TODO:
+#   - Decide on default DB (if any) for early phases.
+#   - Document connection patterns once chosen.
+
+
+# ========================================
+# SECTION 7: ENVIRONMENTS & HARDWARE
+# ========================================
+# Development environment:
+#   - Assume Andrew is developing on local hardware (exact OS/hardware to be clarified if needed).
+#
+# Hardware constraints:
+#   - Do NOT assume GPU availability.
+#   - Do NOT assume multi-machine cluster.
+#
+# GPT RULE:
+#   - If hardware affects a design (e.g. heavy parallelism, GPU ops), ASK Andrew first.
+#
+# TODO:
+#   - Specify OS assumptions if they become important (e.g. Linux vs Windows paths).
+#   - Document any future dedicated appliance constraints (for Appliance Layer / Phase 15).
+
+
+# ========================================
+# SECTION 8: TESTING
+# ========================================
+# General approach:
+#   - Tests are encouraged but not fully standardized yet.
+#   - Small, focused tests or usage examples are preferred.
+#
+# GPT RULE:
+#   - When implementing non-trivial behaviour, propose at least:
+#       - A unit-test skeleton, OR
+#       - A simple manual test procedure.
+#
+# TODO:
+#   - Agree on test framework (e.g. pytest).
+#   - Define folder/filename conventions for tests.
+
+
+# ========================================
+# SECTION 9: GPT-SPECIFIC NOTES
+# ========================================
+# For Architect and Implementer GPTs:
+# - NEVER:
+#     - invent libraries
+#     - invent folder structures
+#     - invent tools or CLIs
+#   without Andrew’s explicit approval.
+#
+# - ALWAYS:
+#     - Ask for clarification when technical constraints matter.
+#     - Treat this TECH_SPEC as evolving; if something feels missing:
+#         Ask:
+#         "Should we add this rule or choice to TECH_SPEC?"
+#
+# This file is living documentation and will grow as LillyCORE matures.
+
+
+# ========================================
+# END OF TECH_SPEC
+# ========================================
