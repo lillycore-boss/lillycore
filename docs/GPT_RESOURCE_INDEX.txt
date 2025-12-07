@@ -136,7 +136,7 @@
 # status: future
 # description:
 #   Placeholder for any additional docs you may add later:
-#   - e.g., NOTES_ENGINE_SPEC, DREAM_ENGINE_SPEC, etc.
+#   - e.g., NOTES_PLUGIN_SPEC, DREAM_ENGINE_SPEC, etc.
 #
 # When new docs are added, they should follow the same pattern:
 # - SECTION header
