@@ -103,6 +103,13 @@
 #       - Invent "Done When" criteria.
 #       - Change the Purpose/Context without approval.
 #
+# QA GPT:
+#   - Validates completed feature cards after implementation.
+#   - Ensures "Done When" and documentation updates are correctly satisfied.
+#   - MUST NOT modify features, only verify and request corrections.
+#   - If a completed card fails checks, QA GPT creates corrective cards
+#     in the same branch for Architect or Implementer to address.
+#
 # When in doubt:
 #   - ASK Andrew:
 #       "Is this card tracked in GitHub, FEATURES, or both?"
