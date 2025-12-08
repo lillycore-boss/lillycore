@@ -1,0 +1,250 @@
+# ========================================
+# PHASE 0 — ATTEMPT 0
+# BUNDLE: P0.2 — Repository Taxonomy & Naming Standards
+# ========================================
+
+# Cards: P0.2.1 – P0.2.8 (QA)
+# Role: Architect GPT (decomposition)
+# Type: Leaf-level Implementer cards + final QA card
+# Phase: 0 (Foundations)
+# ========================================
+
+
+# ----------------------------------------
+# CARD: P0.2.1
+# ----------------------------------------
+ID: P0.2.1  
+Title: Finalize Conceptual Top-Level Repository Layout for Phase 0  
+Type: Implementer  
+
+Description:  
+Define the authoritative conceptual top-level folder tree for LillyCORE in Phase 0, incorporating Andrew’s decisions: `core/`, `engines/`, `plugins/`, `config/`, `docs/`, `tests/`, `scripts/`. Align this with TECH_SPEC and correct any outdated references (e.g., `modules/`).  
+
+Steps:
+1. Extract TECH_SPEC’s current top-level folder rules.  
+2. Draft the new Phase-0 conceptual layout including:
+   - core/  
+   - engines/  
+   - plugins/  
+   - config/  
+   - docs/ (with docs/build/)  
+   - tests/  
+   - scripts/  
+3. Ensure alignment with MODULES: engines and plugins mapping.  
+4. Identify and correct all outdated references to `modules/`.  
+5. Rewrite TECH_SPEC Section 3 as a ready-to-paste block reflecting the new layout.  
+6. Update any other TECH_SPEC sections referencing runtime paths, scripts, or tests to match the new structure.  
+7. Provide all updated sections as ready-to-paste markdown.  
+
+Done When:
+- A complete conceptual repo tree exists.  
+- TECH_SPEC Section 3 is updated and consistent.  
+- No references to old folder names remain.  
+
+Deliverable:
+- Updated TECH_SPEC Section 3 (and any other required blocks).  
+
+
+# ----------------------------------------
+# CARD: P0.2.2
+# ----------------------------------------
+ID: P0.2.2  
+Title: Define Folder and File Naming Conventions (Snake Case Standard)  
+Type: Implementer  
+
+Description:  
+Establish a unified naming convention across the entire repo: folders = lowercase_with_underscores; files = snake_case.py; exceptions documented explicitly.  
+
+Steps:
+1. Collect naming rules from CANON & TECH_SPEC.  
+2. Draft unified naming rules including:
+   - Folders: lowercase_with_underscores  
+   - Python files: snake_case  
+   - Non-Python files: lowercase_with_underscores unless tool-standard (pyproject.toml, .editorconfig).  
+3. Document all allowed exceptions.  
+4. Integrate naming rules for each top-level folder.  
+5. Update TECH_SPEC Section 2 accordingly.  
+6. Add minimal clarification note to CANON if needed.  
+7. Provide updated sections as ready-to-paste markdown.  
+
+Done When:
+- Naming rules are unambiguous.  
+- TECH_SPEC & CANON are consistent.  
+
+Deliverable:
+- Updated TECH_SPEC Section 2 + optional CANON line.  
+
+
+# ----------------------------------------
+# CARD: P0.2.3
+# ----------------------------------------
+ID: P0.2.3  
+Title: Define docs/ Layout and Build Documentation Home (docs/build/)  
+Type: Implementer  
+
+Description:  
+Define the structure and purpose of docs/, with docs/build/ as the home for all engineering/system docs (Canon, Roadmap, TECH_SPEC, MODULES, FEATURES, GPT_RESOURCE_INDEX).  
+
+Steps:
+1. Enumerate all existing system docs.  
+2. Draft docs layout:
+   - docs/build/ (system/build docs)  
+   - future placeholders: docs/user/, docs/api/  
+3. Define conceptual paths for each major document.  
+4. Update GPT_RESOURCE_INDEX logic to reflect new physical locations.  
+5. Update TECH_SPEC Section 3 to require docs/ and docs/build/.  
+6. Provide all updated snippets as ready-to-paste markdown.  
+7. Add guidance to avoid mixing future user documentation with build docs.  
+
+Done When:
+- docs/build/ is clearly defined.  
+- All doc locations are consistent.  
+
+Deliverable:
+- Updated TECH_SPEC blocks and notes for GPT_RESOURCE_INDEX.  
+
+
+# ----------------------------------------
+# CARD: P0.2.4
+# ----------------------------------------
+ID: P0.2.4  
+Title: Define Core/Engines/Plugins/Config/Scripts/Tests Boundary Rules  
+Type: Implementer  
+
+Description:  
+Document explicit boundaries for each top-level folder. Ensure they match PROJECT_CANON ontology and MODULES responsibilities.  
+
+Steps:
+1. Re-read ontology in PROJECT_CANON and MODULES.  
+2. For each top-level folder define:
+   - Allowed content  
+   - Forbidden content  
+   - Dependency direction rules  
+3. Document:
+   - engines/ must not import plugins/  
+   - plugins/ must depend on engines/ not vice versa  
+   - core/ must not contain UX or plugin-specific logic  
+4. Add subsection to TECH_SPEC describing these boundaries.  
+5. Add any required cross-links inside MODULES.  
+6. Provide updated sections as ready-to-paste markdown.  
+
+Done When:
+- Every top-level folder has clear rules.  
+- Boundaries match MODULES and Canon.  
+
+Deliverable:
+- A ready-to-paste TECH_SPEC subsection on boundaries.  
+
+
+# ----------------------------------------
+# CARD: P0.2.5
+# ----------------------------------------
+ID: P0.2.5  
+Title: Define Scripts/ and Tests/ Substructure & Density Rules  
+Type: Implementer  
+
+Description:  
+Define minimal Phase-0 structure for scripts/ and tests/, plus heuristics for when to introduce new subfolders (preventing gigantic junk drawers or over-sharding).  
+
+Steps:
+1. Extract relevant rules from TECH_SPEC Sections 3, 5, and 8.  
+2. Set Phase-0 defaults:
+   - scripts/: flat  
+   - tests/: tests/core/, tests/plugins/, tests/scripts/ (engines included under core)  
+3. Define density heuristics for future subfolders.  
+4. Document these rules in TECH_SPEC.  
+5. Clarify mapping of engine tests under tests/core/.  
+6. Provide updated snippets as ready-to-paste markdown.  
+
+Done When:
+- Default layout is clear.  
+- Heuristics are documented.  
+
+Deliverable:
+- Updated TECH_SPEC entries.  
+
+
+# ----------------------------------------
+# CARD: P0.2.6
+# ----------------------------------------
+ID: P0.2.6  
+Title: Decide Tooling Config Placement (pyproject, editorconfig, pre-commit)  
+Type: Implementer  
+
+Description:  
+Present Andrew with the explicit options for where tooling configs live (repo root vs docs/build/), capture the decision, and update TECH_SPEC with a clear rule.  
+
+Steps:
+1. Summarize tradeoffs discussed.  
+2. Present concise options to Andrew.  
+3. Record Andrew’s decision.  
+4. Update TECH_SPEC to define:
+   - What “root” means (project repo root)  
+   - Where configs must live  
+5. Ensure rules don’t conflict with docs/build/ approach.  
+6. Provide ready-to-paste TECH_SPEC update.  
+
+Done When:
+- Config placement is unambiguous.  
+- TECH_SPEC reflects Andrew’s decision.  
+
+Deliverable:
+- A TECH_SPEC subsection defining config placement.  
+
+
+# ----------------------------------------
+# CARD: P0.2.7
+# ----------------------------------------
+ID: P0.2.7  
+Title: Define Taxonomy Change & Approval Process (Architect + Phase Cards)  
+Type: Implementer  
+
+Description:  
+Define the explicit process for proposing, approving, and documenting taxonomy changes and when they require Phase cards.  
+
+Steps:
+1. Review PROJECT_CANON documentation rules, decomposition rules, and FEATURES QA rules.  
+2. Draft rules specifying:
+   - When Implementers must request Architect involvement  
+   - When TECH_SPEC or CANON updates are required  
+   - When a new Phase card is required  
+3. Explain how QA interacts with taxonomy changes.  
+4. Add a TECH_SPEC subsection capturing this process.  
+5. Add a brief Canon note reinforcing that repo structure lives in TECH_SPEC.  
+6. Deliver updated text snippets.  
+
+Done When:
+- The process is formalized and documented.  
+
+Deliverable:
+- TECH_SPEC subsection and Canon note.  
+
+
+# ----------------------------------------
+# CARD: P0.2.8 (QA)
+# ----------------------------------------
+ID: P0.2.8  
+Title: QA for P0.2 Repository Taxonomy & Naming Standards  
+Type: QA  
+
+Description:  
+QA GPT validates the consistent completion of P0.2.1–P0.2.7. If any gaps exist, QA generates corrective P0.2.8.x cards.  
+
+Steps:
+1. Load outputs for P0.2.1–P0.2.7.  
+2. Verify all steps in each card were executed.  
+3. Check TECH_SPEC and CANON updates for consistency.  
+4. Confirm correct folder taxonomy and naming standards.  
+5. Validate docs/build/ policy.  
+6. Validate folder boundary rules.  
+7. Check scripts/tests layout and heuristics.  
+8. Confirm config placement is resolved.  
+9. Validate taxonomy-change process.  
+10. If issues → FAIL + generate P0.2.8.x corrective cards.  
+11. If no issues → PASS summary.  
+
+Done When:
+- QA declares PASS for P0.2.8 or produces corrective cards.  
+
+Deliverable:
+- QA PASS/FAIL report + corrective tasks if required.
