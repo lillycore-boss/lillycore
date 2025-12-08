@@ -57,8 +57,91 @@
 #     # ========================================
 #
 # Naming conventions:
-#   - snake_case for functions and variables.
-#   - lowercase_with_underscores or lowercase-hyphen for files/folders (Andrew to confirm).
+#   - Functions and variables:
+#       - Use snake_case for all Python functions, methods, variables, and module-level names.
+#
+#   - Folders and Python modules:
+#       - All project-owned folders and Python modules MUST use snake_case
+#         (lowercase_with_underscores).
+#       - Hyphens ("-") MUST NOT be used in any importable Python package
+#         or module name.
+#
+#   - Python files:
+#       - Python source files MUST use snake_case filenames, e.g.:
+#           - core_runtime.py
+#           - run_tests.py
+#           - rebuild_notes_index.py
+#
+#   - Non-Python files (project-owned):
+#       - Where LillyCORE controls the filename, prefer
+#         lowercase_with_underscores, e.g.:
+#           - project_canon.md
+#           - tech_spec.md
+#           - notes_plugin_overview.md
+#
+#   - Allowed exceptions:
+#       - Tool- or ecosystem-standard filenames that are defined externally,
+#         for example (non-exhaustive):
+#           - pyproject.toml
+#           - .pre-commit-config.yaml
+#           - .editorconfig
+#           - .gitignore
+#           - .vscode/settings.json
+#       - Third-party generated or vendored files that arrive with fixed
+#         names MUST keep their upstream naming (even if they use hyphens
+#         or other styles).
+#
+#   - Display-only names:
+#       - Conceptual document names like PROJECT_CANON, TECH_SPEC, or
+#         LILLYCORE_ROADMAP are titles, not filenames; they do not override
+#         the snake_case rules for actual files in the repo.
+#
+# Per-folder naming expectations (Phase 0 layout):
+#   - core/:
+#       - Subfolders and Python modules use snake_case, e.g.:
+#           - core/runtime/
+#           - core/logging/
+#           - core/ai_pools/
+#           - core/system_doc/
+#       - Python files under core/ use snake_case, e.g.:
+#           - core/runtime/core_runtime.py
+#
+#   - engines/:
+#       - Each engine lives in a snake_case folder:
+#           - engines/drift_engine/
+#           - engines/helper_engine/
+#           - engines/plugin_engine/
+#           - engines/helpdesk_engine/
+#           - engines/dream_engine/
+#           - engines/script_engine/
+#       - Python modules inside these folders use snake_case filenames.
+#
+#   - plugins/:
+#       - Each plugin lives in a snake_case folder:
+#           - plugins/notes_plugin/
+#           - plugins/ux_interface/
+#           - plugins/project_management/
+#           - plugins/personal_assistant/
+#           - plugins/multi_user/
+#           - plugins/demos_and_corp/
+#       - Python modules inside these folders use snake_case filenames.
+#
+#   - config/:
+#       - Project-owned config files prefer lowercase_with_underscores,
+#         unless an external standard dictates otherwise (e.g. pyproject.toml).
+#
+#   - scripts/:
+#       - All scripts MUST use snake_case filenames, e.g.:
+#           - scripts/format_code.py
+#           - scripts/run_tests.py
+#           - scripts/check_types.py
+#
+#   - tests/:
+#       - Tests mirror the runtime layout and use snake_case, e.g.:
+#           - tests/core/test_core_runtime.py
+#           - tests/engines/test_drift_engine.py
+#           - tests/plugins/test_notes_plugin.py
+#           - tests/scripts/test_format_code.py
 #
 # Workflow expectations:
 #   - Developers SHOULD configure their editor to format-on-save with Black for .py files.
@@ -72,7 +155,6 @@
 # GPT RULE:
 #   - If any style or naming detail is unclear, ASK Andrew instead of guessing.
 #   - GPTs MUST assume that all Python examples and new files are Black-formatted.
-#
 #
 # Linting:
 #   - LillyCORE USES a Python linter for all runtime Python code.
