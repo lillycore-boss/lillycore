@@ -178,20 +178,31 @@
 # ========================================
 # (This is intentionally light for now; will grow with the project.)
 #
-# Likely top-level folders (example / TODO):
+# Top-level folders (initial standard for early phases):
 #   - core/        -> runtime loop, logging, core services
-#   - modules/     -> plug-in modules (Notes Engine, etc.)
+#   - modules/     -> plug-in modules (Notes Plugin, etc.)
 #   - scripts/     -> maintenance / helper / dev scripts
 #   - docs/        -> human-facing docs (optional)
-#   - tests/       -> tests (when they exist)
+#   - tests/       -> pytest-based automated tests
+#
+# Test layout:
+#   - All automated Python tests live under tests/.
+#   - Where practical, tests SHOULD mirror the runtime layout:
+#       - tests/core/     for tests of code in core/
+#       - tests/modules/  for tests of code in modules/
+#       - tests/scripts/  for tests of code in scripts/
+#   - Additional subdirectories under tests/ MAY be added to mirror new
+#     top-level folders as they are introduced, but MUST follow the same
+#     “mirror the runtime layout” pattern.
 #
 # GPT RULES:
-#   - Do NOT invent new folders without approval.
+#   - Do NOT invent new top-level folders without approval.
 #   - If unsure where something belongs, ASK Andrew:
 #       "Should this live in core/, modules/, or somewhere else?"
 #
 # TODO:
-#   - Fill in actual folder names once Phase 0 is implemented.
+#   - Fill in additional folder names once Phase 0 is implemented (e.g. where
+#     configs and environment definitions live).
 #   - Lock in a standard for where configs live (e.g. config/ or inside core/).
 
 
@@ -274,17 +285,45 @@
 # SECTION 8: TESTING
 # ========================================
 # General approach:
-#   - Tests are encouraged but not fully standardized yet.
-#   - Small, focused tests or usage examples are preferred.
+#   - LillyCORE uses automated tests to validate behaviour where practical.
+#   - Small, focused tests or usage examples are preferred over large,
+#     monolithic suites.
+#
+# Chosen test framework:
+#   - Python test framework: pytest.
+#   - Rationale:
+#       - Widely used, stable, and integrates well with Black, Ruff, and mypy.
+#       - Current pytest releases support all actively maintained Python
+#         versions in the LillyCORE target range (CPython 3.11–3.14).
+#   - Developers are expected to install a pytest version compatible with the
+#     supported Python versions defined in Section 1.
+#
+# Test layout and discovery:
+#   - All automated tests live under the top-level tests/ directory.
+#   - Where practical, tests SHOULD mirror the runtime layout:
+#       - tests/core/     for tests of code in core/
+#       - tests/modules/  for tests of code in modules/
+#       - tests/scripts/  for tests of code in scripts/
+#   - Test files MUST follow pytest’s default discovery pattern:
+#       - Python test modules are named: test_*.py
+#         (e.g. test_core_runtime.py, test_system_doc_storage.py).
+#   - Additional organisational subdirectories under tests/ MAY be created
+#     as the codebase grows, provided they follow the same “mirror the
+#     runtime layout” intent.
+#
+# Running tests:
+#   - From the repository root, the standard way to run the test suite is:
+#       - pytest
+#     or equivalently:
+#       - python -m pytest
+#   - All test-running examples and scripts SHOULD assume the repo root as
+#     the working directory unless otherwise specified.
 #
 # GPT RULE:
 #   - When implementing non-trivial behaviour, propose at least:
-#       - A unit-test skeleton, OR
-#       - A simple manual test procedure.
-#
-# TODO:
-#   - Agree on test framework (e.g. pytest).
-#   - Define folder/filename conventions for tests.
+#       - A pytest unit-test skeleton, OR
+#       - A simple manual test procedure, if writing a test is clearly out
+#         of scope for the current card.
 #
 # CI and static checks:
 #   - Once CI is configured for LillyCORE, the minimum expected checks are:
@@ -292,14 +331,14 @@
 #       - Ruff lint check under the configured rule set.
 #       - mypy type-checker for the configured strict set of modules
 #         (see Section 2: Typing & type checking).
-#       - The chosen test suite (once a framework is selected).
+#       - The pytest test suite (run via pytest from the repo root).
 #   - CI SHOULD fail if:
 #       - Black would reformat any committed Python file, OR
 #       - Ruff reports lint errors for the current codebase, OR
 #       - mypy reports type errors in the strict set of modules, OR
-#       - Tests fail.
-#   - Additional static analysis tools beyond Black/Ruff/mypy
-#     MAY be added in future tasks and will be documented here when chosen.
+#       - pytest tests fail.
+#   - Additional static analysis tools beyond Black/Ruff/mypy/pytest MAY be
+#     added in future tasks and will be documented here when chosen.
 
 
 # ========================================
