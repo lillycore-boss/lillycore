@@ -42,6 +42,13 @@
 # General style:
 #   - Follow Pythonic conventions (PEP8-ish, but Andrew is the final authority).
 #
+# Formatter:
+#   - LillyCORE USES an auto-formatter for all Python code.
+#   - Chosen formatter: Black.
+#   - All Python code committed to the repo MUST be formatted with Black.
+#   - We use Black's defaults; no custom style overrides beyond its standard behaviour.
+#   - Effective line length is Black's default (currently 88 characters).
+#
 # Comments:
 #   - Use "#" for line comments.
 #   - For larger logical blocks in config/docs, use this pattern:
@@ -53,8 +60,19 @@
 #   - snake_case for functions and variables.
 #   - lowercase_with_underscores or lowercase-hyphen for files/folders (Andrew to confirm).
 #
+# Workflow expectations:
+#   - Developers SHOULD configure their editor to format-on-save with Black for .py files.
+#   - If format-on-save is not used, developers MUST run Black manually before committing.
+#   - When git hooks/CI are introduced:
+#       - A pre-commit hook SHOULD run Black on staged Python files.
+#       - CI SHOULD include a check that fails if running Black would change the codebase.
+#   - Exact hook framework (e.g., shell scripts vs additional tooling) and script paths
+#     will be defined in a future task; this section only defines the formatter and policy.
+#
 # GPT RULE:
 #   - If any style or naming detail is unclear, ASK Andrew instead of guessing.
+#   - GPTs MUST assume that all Python examples and new files are Black-formatted.
+
 
 
 # ========================================
