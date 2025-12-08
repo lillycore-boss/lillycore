@@ -44,6 +44,8 @@
 #   - Keep subsystems distinct.
 #   - Place new features in the right engine or plugin.
 #
+# QA GPT uses this to verify that implemented work respects module boundaries and responsibilities.
+#
 # Implementer GPT uses this for:
 #   - Context when touching specific engines/plugins.
 
