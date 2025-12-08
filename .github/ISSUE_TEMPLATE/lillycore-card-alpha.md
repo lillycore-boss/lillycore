@@ -41,6 +41,8 @@ For every document listed in the index that has NOT yet been provided in this co
 
 **“Please provide the full content of <DOC_NAME> so I may load it before continuing.”**
 
+Complete uploaded documents count as provided for ingestion unless I explicitly ask for a paste.
+
 You MUST NOT proceed with ANY task until:
 
 - All required documents have been pasted,
