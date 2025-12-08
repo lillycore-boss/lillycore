@@ -162,6 +162,46 @@
 # GPT RULE:
 #   - NEVER assume this section is complete.
 #   - ALWAYS treat GitHub as the authoritative list of all work items.
+#
+#   ID: P0.2.6
+#   Title: Decide Tooling Config Placement (pyproject, Editorconfig, Pre-Commit) and Document Tradeoffs
+#   Phase: 0
+#   Engine/Plugin: (none)
+#   GitHub: (see canonical card in GitHub)
+#   Status: done
+#
+#   Purpose:
+#       - Freeze where core tooling configs live in the repo so humans and GPTs
+#         do not guess.
+#
+#   Context:
+#       - Python tooling (packaging, linters, formatters, pre-commit) generally
+#         assumes configuration at the repository root.
+#       - LillyCORE already uses Black, Ruff, mypy, pytest, and pre-commit as
+#         Phase 0 baseline tooling.
+#
+#   Deliverables:
+#       - Decision on config placement (root vs subdirectory).
+#       - TECH_SPEC updated to define:
+#           - "repository root" in the context of root-level tooling configs.
+#           - Exact list of core config files expected at the repository root:
+#               - pyproject.toml
+#               - .pre-commit-config.yaml
+#               - .editorconfig
+#               - .vscode/settings.json (and optionally .vscode/extensions.json)
+#
+#   Done When:
+#       - Andrew confirms Option A:
+#           - Core configs live at the repository root.
+#       - TECH_SPEC "Root-level configuration files" section reflects this
+#         decision and defines "repository root" explicitly.
+#
+#   Notes / Future:
+#       - Any future exceptions (tool configs that MUST live elsewhere) MUST be
+#         documented in TECH_SPEC so GPTs do not guess.
+#       - Additional tooling (task runners, extra linters, etc.) requires:
+#           - A feature card, AND
+#           - A corresponding TECH_SPEC update.
 
 
 # ========================================
