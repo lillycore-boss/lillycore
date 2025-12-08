@@ -268,6 +268,13 @@
 # - Feature → leaf cards  
 #
 # The final card of *every* set, at *every* level, is always a QA card.
+# ----------------------------------------
+# Phase Redesign Tracking
+# ----------------------------------------
+# - Each phase includes a **retry counter**.
+# - Counter starts at 0 on initial design and increments for every redesign.
+# - QA MUST deny any further redesign when the counter meets or exceeds the allowed maximum (default: 2).
+# - When denied, QA MUST escalate to Andrew and Architect GPT for higher-level intervention.
 
 
 # ========================================
