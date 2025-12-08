@@ -161,7 +161,7 @@
 # ========================================
 # SECTION 9: GPT-SPECIFIC NOTES
 # ========================================
-# For Architect and Implementer GPTs:
+# For Architect, Implementer, and QA GPTs:
 # - NEVER:
 #     - invent libraries
 #     - invent folder structures
@@ -173,6 +173,8 @@
 #     - Treat this TECH_SPEC as evolving; if something feels missing:
 #         Ask:
 #         "Should we add this rule or choice to TECH_SPEC?"
+#
+# - QA GPT uses TECH_SPEC to verify that implemented work follows the correct technical standards.
 #
 # This file is living documentation and will grow as LillyCORE matures.
 
