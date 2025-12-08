@@ -296,7 +296,16 @@
 #
 # Root-level configuration files
 # ------------------------------
+# For this section, "repository root" means the top-level LillyCORE Git
+# repository directory (the folder containing .git), not the filesystem root.
+#
 # The repository root is expected to contain:
+#
+#   - pyproject.toml
+#       - Defines Python package metadata and shared tool configuration
+#         for LillyCORE.
+#       - MUST live at the repository root to satisfy Python packaging
+#         and tooling expectations.
 #
 #   - .pre-commit-config.yaml
 #       - Defines the pre-commit hooks that run Black, Ruff, and mypy
@@ -627,55 +636,6 @@
 #     docs under docs/build/ with snake_case .md filenames.
 #   - Do NOT invent additional top-level docs subtrees (beyond docs/build/
 #     and reserved docs/user/, docs/api/) without Andrew’s explicit approval.
-#
-# 2.X Tooling Configuration Placement
-#
-# This section defines where core tooling configuration files live in the
-# LillyCORE repository, so that humans and GPTs do not guess.
-#
-# Definition: Project Root
-# ------------------------
-# For this document, "project root" (or simply "root") means:
-#
-# - The top-level directory of the LillyCORE Git repository.
-# - The directory that contains the primary project README and `.git` metadata.
-#
-# It does *not* mean the filesystem root (e.g. `/` on Unix-like systems or
-# `C:\` on Windows).
-#
-# Unless otherwise specified, any reference to "root" in this TECH_SPEC refers
-# to the repository root.
-#
-# Core Tooling Config Files
-# -------------------------
-# The following configuration files MUST live at the project repository root:
-#
-# - `pyproject.toml`
-# - `.pre-commit-config.yaml`
-# - `.editorconfig`
-#
-# Reasons for root placement:
-#
-# - Python packaging/build tools require `pyproject.toml` at the project root.
-# - Pre-commit hooks discover `.pre-commit-config.yaml` at the repository root.
-# - Editor/IDE tooling conventionally relies on `.editorconfig` at the root.
-#
-# This ensures:
-#
-# - Automatic discovery without extra configuration.
-# - Consistent behavior across local dev, CI, and automation.
-# - A single predictable lookup location for GPTs and humans.
-#
-# Exceptions and Additional Tool Configs
-# --------------------------------------
-# Currently, there are NO exceptions for core tooling configs.
-# If any tool in the future requires a different location, that exception MUST
-# be explicitly documented in this TECH_SPEC under its own subsection.
-#
-# Other tooling configs SHOULD default to living at the repository root unless:
-#
-# - A tool explicitly requires a different location, AND
-# - That exception is documented here.
 
 
 lillycore/
