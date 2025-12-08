@@ -429,7 +429,6 @@
 #       - pytest-based automated tests.
 #       - MUST mirror the runtime layout:
 #           tests/core/
-#           tests/engines/
 #           tests/plugins/
 #           tests/scripts/
 #           (Additional mirrors may be added as new top-level folders appear.)
@@ -580,15 +579,6 @@
 #   engines/drift_engine/xyz.py         → tests/core/test_drift_engine_xyz.py
 #   plugins/notes_plugin/abc.py         → tests/plugins/test_notes_plugin_abc.py
 #   scripts/run_tests.py                → tests/scripts/test_run_tests.py
-
-#
-# ----------------------------------------
-# MIRRORING RULE
-# ----------------------------------------
-# All runtime Python code must have a corresponding test root under tests/.
-# Example:
-#   engines/DRIFT_ENGINE/xyz.py  →  tests/engines/test_xyz.py
-#   plugins/NOTES_PLUGIN/abc.py  →  tests/plugins/test_abc.py
 #
 # ----------------------------------------
 # GPT RULES
