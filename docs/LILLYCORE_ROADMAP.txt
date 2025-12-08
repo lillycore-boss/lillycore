@@ -24,7 +24,10 @@
 #   - Dependencies between phases,
 #   - Scope boundaries for decomposition.
 #
+# QA GPT uses this to verify that implemented features align with the intended phase structure and subsystem sequence.
+#
 # Implementer GPT MUST NOT modify the Roadmap.
+# QA GPT MUST NOT modify the Roadmap; it only checks alignment of completed work to the intended phase.
 #
 # Outcomes of each phase represent architectural readiness,
 # not code-complete deliverables.
