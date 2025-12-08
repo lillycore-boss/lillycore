@@ -273,34 +273,81 @@
 # ========================================
 # SECTION 3: REPOSITORY LAYOUT
 # ========================================
-# (This is intentionally light for now; will grow with the project.)
+# This section defines the authoritative top-level repository structure
+# for LillyCORE in Phase 0. All contributors and GPTs MUST use this
+# structure when creating or referencing files.
 #
-# Top-level folders (initial standard for early phases):
-#   - core/        -> runtime loop, logging, core services
-#   - modules/     -> plug-in modules (Notes Plugin, etc.)
-#   - scripts/     -> maintenance / helper / dev scripts
-#   - docs/        -> human-facing docs (optional)
-#   - tests/       -> pytest-based automated tests
+# ----------------------------------------
+# TOP-LEVEL FOLDERS (PHASE 0 STANDARD)
+# ----------------------------------------
 #
-# Test layout:
-#   - All automated Python tests live under tests/.
-#   - Where practical, tests SHOULD mirror the runtime layout:
-#       - tests/core/     for tests of code in core/
-#       - tests/modules/  for tests of code in modules/
-#       - tests/scripts/  for tests of code in scripts/
-#   - Additional subdirectories under tests/ MAY be added to mirror new
-#     top-level folders as they are introduced, but MUST follow the same
-#     “mirror the runtime layout” pattern.
+#   core/
+#       - Runtime loop
+#       - Logging
+#       - Core services
+#       - AI pools
+#       - System DOC interfaces
+#       (Engines are conceptually part of the core system but live in a
+#        separate folder for clarity.)
 #
-# GPT RULES:
-#   - Do NOT invent new top-level folders without approval.
-#   - If unsure where something belongs, ASK Andrew:
-#       "Should this live in core/, modules/, or somewhere else?"
+#   engines/
+#       - All core subsystem engines:
+#           DRIFT_ENGINE
+#           HELPER_ENGINE
+#           PLUGIN_ENGINE
+#           HELP_DESK_ENGINE
+#           DREAM_ENGINE
+#           SCRIPT_ENGINE
 #
-# TODO:
-#   - Fill in additional folder names once Phase 0 is implemented (e.g. where
-#     configs and environment definitions live).
-#   - Lock in a standard for where configs live (e.g. config/ or inside core/).
+#   plugins/
+#       - All optional add-on subsystems:
+#           NOTES_PLUGIN
+#           UX_INTERFACE
+#           PROJECT_MANAGEMENT
+#           PERSONAL_ASSISTANT
+#           MULTI_USER
+#           DEMOS_AND_CORP
+#           (And any future plugins approved by Andrew)
+#
+#   config/
+#       - Central configuration files.
+#       - Content refined in later feature cards.
+#
+#   docs/
+#       - Required human-facing documentation.
+#       - Must contain:
+#           docs/build/
+#               - Engineering/build-docs home.
+#               - Auto-generated documentation may live here.
+#
+#   scripts/
+#       - All dev and runtime scripts (see Section 5).
+#
+#   tests/
+#       - pytest-based automated tests.
+#       - MUST mirror the runtime layout:
+#           tests/core/
+#           tests/engines/
+#           tests/plugins/
+#           tests/scripts/
+#           (Additional mirrors may be added as new top-level folders appear.)
+#
+# ----------------------------------------
+# MIRRORING RULE
+# ----------------------------------------
+# All runtime Python code must have a corresponding test root under tests/.
+# Example:
+#   engines/DRIFT_ENGINE/xyz.py  →  tests/engines/test_xyz.py
+#   plugins/NOTES_PLUGIN/abc.py  →  tests/plugins/test_abc.py
+#
+# ----------------------------------------
+# GPT RULES
+# ----------------------------------------
+# - Do NOT invent new top-level folders without Andrew’s approval.
+# - When unsure where something belongs, ASK:
+#       "Should this live in core/, engines/, plugins/, or elsewhere?"
+# - Engines are conceptually part of the core system but MUST remain in
+#   the engines/ folder for structural clarity.
 
 
 # ========================================
@@ -333,7 +380,15 @@
 # (top-level scripts/ folder).  All GPTs and contributors MUST
 # treat this as the single source of truth for script/CLI behaviour.
 #
-
+# Repository Path Assumptions:
+#   - Scripts may import from:
+#       core/
+#       engines/
+#       plugins/
+#       config/
+#   - All examples in this section assume these top-level folders exist
+#     as defined in Section 3.
+#
 # ----------------------------------------
 # 5.1 LOCATION & NAMING
 # ----------------------------------------
@@ -355,7 +410,7 @@
 #     the runtime rules in SECTION 1.  :contentReference[oaicite:3]{index=3}
 #   - Shell or other-language helpers MAY exist in the future but are
 #     NOT considered standard scripts until explicitly added here.
-
+#
 # ----------------------------------------
 # 5.2 INVOCATION MODEL
 # ----------------------------------------
@@ -388,7 +443,7 @@
 #     via setup tools) are defined in Phase 0–3.
 #   - If/when a branded CLI is introduced, this section MUST be
 #     updated with its invocation rules.
-
+#
 # ----------------------------------------
 # 5.3 CLI INTERFACE NORMS (FLAGS & HELP)
 # ----------------------------------------
@@ -421,7 +476,7 @@
 #   - Errors and warnings SHOULD go to stderr.
 #   - Scripts MUST avoid interactive prompts by default; they should be
 #     fully controllable via arguments so they work in automation.
-
+#
 # ----------------------------------------
 # 5.4 EXIT CODES
 # ----------------------------------------
@@ -444,7 +499,7 @@
 #   - Once a unified logging system exists (see SECTION 4), scripts
 #     SHOULD prefer that logging system instead of ad-hoc prints, but
 #     this is NOT required in Phase 0. :contentReference[oaicite:4]{index=4}
-
+#
 # ----------------------------------------
 # 5.5 DEVELOPER SCRIPTS VS RUNTIME SCRIPTS
 # ----------------------------------------
@@ -496,7 +551,7 @@
 #   - SCRIPT_ENGINE (Phase 8) will eventually reason about scripts,
 #     but its behaviour will be defined separately; this section only
 #     defines the human/GPT-facing conventions for now. :contentReference[oaicite:6]{index=6}
-
+#
 # ----------------------------------------
 # 5.6 TESTING SCRIPTS
 # ----------------------------------------
@@ -515,7 +570,7 @@
 #     needed, but SHOULD be limited to key flows.
 #
 # This is consistent with the general testing rules in SECTION 8. :contentReference[oaicite:7]{index=7}
-
+#
 # ----------------------------------------
 # 5.7 GPT RULES (SCRIPTS & CLI)
 # ----------------------------------------
@@ -607,9 +662,10 @@
 # Test layout and discovery:
 #   - All automated tests live under the top-level tests/ directory.
 #   - Where practical, tests SHOULD mirror the runtime layout:
-#       - tests/core/     for tests of code in core/
-#       - tests/modules/  for tests of code in modules/
-#       - tests/scripts/  for tests of code in scripts/
+#       -tests/core/
+#       -tests/engines/
+#       -tests/plugins/
+#       -tests/scripts/
 #   - Test files MUST follow pytest’s default discovery pattern:
 #       - Python test modules are named: test_*.py
 #         (e.g. test_core_runtime.py, test_system_doc_storage.py).
