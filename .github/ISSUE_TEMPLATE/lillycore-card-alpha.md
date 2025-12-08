@@ -23,3 +23,7 @@ When producing output:
 - Do NOT omit sections.
 - Do NOT write real code unless you are explicitly told you are the Implementer.
 - If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
+
+---
+Current work:
+You are required to review `GPT_RESOURCE_INDEX` and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
