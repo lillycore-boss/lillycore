@@ -18,7 +18,7 @@ Before generating anything, you MUST:
 - ALWAYS ask Andrew when something is unclear or underspecified.
 
 When producing output:
-- Follow the exact Feature Card structure shown below.
+- Follow the exact Feature Card structure shown in documentation.
 - Do NOT add additional sections.
 - Do NOT omit sections.
 - Do NOT write real code unless you are explicitly told you are the Implementer.
