@@ -72,7 +72,53 @@
 # GPT RULE:
 #   - If any style or naming detail is unclear, ASK Andrew instead of guessing.
 #   - GPTs MUST assume that all Python examples and new files are Black-formatted.
-
+#
+#
+# Linting:
+#   - LillyCORE USES a Python linter for all runtime Python code.
+#   - Chosen linter: Ruff.
+#   - Ruff is the single source of truth for lint checks; we do NOT run flake8 or pylint
+#     in addition to Ruff for early phases (0–3).
+#
+#   Scope:
+#   - All non-generated Python code in the repository is expected to be Ruff-clean
+#     under the agreed rule set.
+#   - Any exceptions (e.g., generated code or external vendored code) MUST be explicitly
+#     excluded via Ruff configuration in the repo.
+#
+#   Strictness philosophy (Phases 0–3):
+#   - Goal: catch real bugs and keep the codebase clean, without over-policing style.
+#   - We adopt a “standard” strictness in early phases:
+#       - ENABLE high-signal rule families:
+#           - Core correctness and hygiene (undefined names, unused imports/variables, etc.).
+#           - Style rules that are compatible with Black's formatting.
+#           - Import hygiene and ordering.
+#       - DO NOT enforce in early phases:
+#           - Docstring coverage / style (no pydocstyle-style requirements).
+#           - Project-wide mandatory type annotations.
+#           - Complexity / design metrics (e.g., cyclomatic complexity limits).
+#           - Hyper-pedantic style rules that create noise without clear benefit.
+#
+#   Enforcement model:
+#   - All active Ruff rules are treated as errors in CI once CI exists:
+#       - If Ruff reports an error on the current codebase, the lint job fails.
+#   - Developers SHOULD run Ruff locally (manually, via editor integration, or via scripts)
+#     before pushing changes.
+#   - When git hooks are introduced:
+#       - A pre-commit hook SHOULD run Ruff on staged Python files, alongside Black.
+#
+#   Rule configuration:
+#   - Ruff configuration (which rule families are enabled/disabled) MUST live in a
+#     central, version-controlled config file (e.g., pyproject.toml or equivalent),
+#     to be defined when the repository structure is finalized.
+#   - Any per-file or per-rule ignores:
+#       - MUST be justified with a short comment in-code or in the config.
+#       - SHOULD be as narrow as possible (e.g., specific rule on a specific line/file).
+#
+#   Future tightening:
+#   - As LillyCORE matures, additional rule families (e.g., docstring and type-annotation
+#     enforcement, complexity metrics) MAY be enabled in later phases, subject to
+#     explicit decisions and TECH_SPEC updates.
 
 
 # ========================================
@@ -187,6 +233,18 @@
 # TODO:
 #   - Agree on test framework (e.g. pytest).
 #   - Define folder/filename conventions for tests.
+#
+# CI and static checks:
+#   - Once CI is configured for LillyCORE, the minimum expected checks are:
+#       - Black formatting check (no changes when Black is run).
+#       - Ruff lint check under the configured rule set.
+#       - The chosen test suite (once a framework is selected).
+#   - CI SHOULD fail if:
+#       - Black would reformat any committed Python file, OR
+#       - Ruff reports lint errors for the current codebase, OR
+#       - Tests fail.
+#   - Additional static analysis tools (e.g., type checkers) MAY be added in future
+#     tasks and will be documented here when chosen.
 
 
 # ========================================
