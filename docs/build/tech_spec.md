@@ -435,6 +435,117 @@
 #           (Additional mirrors may be added as new top-level folders appear.)
 #
 # ----------------------------------------
+# FOLDER RESPONSIBILITIES & BOUNDARIES
+# ----------------------------------------
+# Purpose:
+#   Tie the top-level folders (core/, engines/, plugins/, config/, scripts/, tests/)
+#   to the system ontology from PROJECT_CANON (CORE, ENGINES, PLUGINS, DOC layers)
+#   and MODULES, and define clear "must never" rules so future work does not drift.
+#
+# General dependency rule:
+#   - core/ and engines/ together form the core runtime and engines.
+#   - plugins/ builds on top of core/ and engines/, never the other way around.
+#   - config/ and scripts/ may depend on core/, engines/, and plugins/ as described
+#     below, but runtime code MUST NEVER depend on scripts/.
+#   - tests/ may import from anywhere in the runtime tree, but runtime and scripts
+#     MUST NEVER import from tests/.
+#
+# These rules apply to all current and future engines/plugins unless explicitly
+# overridden by Andrew via updated docs.
+#
+# core/
+#     Responsibility:
+#       - Host the core runtime loop, logging, error envelopes, user preferences,
+#         AI pool definitions, and System DOC integration.
+#       - Provide shared infrastructure services used by engines and plugins.
+#       - Construct and orchestrate engines without owning their internal business logic.
+#
+#     Allowed:
+#       - Define reusable core services, utilities, and abstractions.
+#       - Create and wire engine instances and AI pools.
+#       - Read configuration from config/.
+#
+#     Must NEVER:
+#       - Import directly from plugins/ or depend on any concrete plugin module.
+#       - Contain plugin-specific behaviour, UX logic, or plugin schemas.
+#       - Implement engine-specific business logic.
+#
+# engines/
+#     Responsibility:
+#       - Implement all core subsystem engines defined in PROJECT_CANON & MODULES.
+#       - Each engine resides under engines/<engine_name>/ in snake_case folders.
+#       - Encapsulate cognitive/work/stability behaviour (DRIFT, HELPER, PLUGIN,
+#         HELP_DESK, DREAM, SCRIPT engines).
+#
+#     Allowed:
+#       - Import from core/ (runtime loop, logging, AI pools, System DOC).
+#       - Import other engines only where MODULES explicitly lists dependencies.
+#       - Interact with plugins *indirectly* through PLUGIN_ENGINE registries.
+#
+#     Must NEVER:
+#       - Import plugins/ directly or depend on concrete plugin code.
+#       - Own UX surfaces or UI behaviour.
+#       - Define or own System DOC schemas; engines *use* System DOC only.
+#
+# plugins/
+#     Responsibility:
+#       - Implement optional add-on modules (NOTES_PLUGIN, UX_INTERFACE, etc.).
+#       - Extend system behaviour without modifying core runtime.
+#       - Own plugin-specific behaviour, Plugin DOC, and per-plugin data.
+#
+#     Allowed:
+#       - Import from core/ and engines/ as consumers of those APIs.
+#       - Own their Plugin DOC schemas within DOC-layer boundaries.
+#       - Provide UX surfaces as needed.
+#
+#     Must NEVER:
+#       - Be imported directly by core/ or engines/ (only via PLUGIN_ENGINE routing).
+#       - Define or modify System DOC schemas.
+#       - Reconfigure global logging, AI pools, or the runtime loop.
+#
+# config/
+#     Responsibility:
+#       - Central configuration: environment definitions, templates, settings.
+#       - Provide structured configuration values for core/, engines/, plugins/, scripts/.
+#
+#     Allowed:
+#       - Define configuration objects and helpers.
+#       - Be imported broadly across the runtime and scripts/.
+#
+#     Must NEVER:
+#       - Contain business logic belonging to core/, engines/, plugins/, or scripts/.
+#       - Import plugins/ when determining configuration.
+#       - Define persistent storage schemas.
+#
+# scripts/
+#     Responsibility:
+#       - Dev/runtime scripts per TECH_SPEC Section 5.
+#       - Wrap automation tasks such as formatting, linting, type checking,
+#         running tests, seeding/migrating data.
+#
+#     Allowed:
+#       - Import from core/, engines/, plugins/, and config/ to orchestrate tasks.
+#       - Contain CLI logic and glue code.
+#
+#     Must NEVER:
+#       - Be imported by core/, engines/, or plugins/.
+#       - Implement long-lived APIs or business logic.
+#       - Own persistent storage.
+#
+# tests/
+#     Responsibility:
+#       - pytest-based automated tests mirroring runtime structure.
+#       - Validate behaviour across core/, engines/, plugins/, config/, scripts/.
+#
+#     Allowed:
+#       - Import any runtime code to test it.
+#       - Contain test-only helpers and fixtures.
+#
+#     Must NEVER:
+#       - Be imported by runtime or scripts/.
+#       - Host production logic (anything reused MUST be moved into runtime code).
+#
+# ----------------------------------------
 # MIRRORING RULE
 # ----------------------------------------
 # All runtime Python code must have a corresponding test root under tests/.
