@@ -45,10 +45,16 @@
 # ========================================
 # SECTION 3 — NAMING, STANDARDS & CONVENTIONS
 # ========================================
-# - Use snake_case or lowercase-hyphen as Andrew prefers.
-# - All new standards or conventions MUST be explicitly confirmed by Andrew.
+# - LillyCORE standard for project-owned files and folders is snake_case
+#   (lowercase_with_underscores).
+# - Technical naming details and explicit exceptions (e.g. tool-standard
+#   filenames and vendored third-party files) are defined in TECH_SPEC
+#   Section 2, which is the authoritative source for naming rules.
+# - Hyphens ("-") in names are only allowed where external tools,
+#   ecosystems, or third-party artefacts REQUIRE them (e.g.
+#   .pre-commit-config.yaml, pyproject.toml) or in non-filename titles.
 # - Files, folders, modules, and engines MUST follow the folder taxonomy
-#   defined in the Tools & Environment Spec.
+#   defined in the Tools & Environment Spec (TECH_SPEC).
 #
 # - Docs MUST mirror code structure:
 #       clear comment blocks
@@ -58,6 +64,7 @@
 # - Documentation version numbers are optional and symbolic.
 #   Git is the real version history. 
 #   AI MUST NOT depend on doc version numbers for logic.
+
 
 
 # ========================================
