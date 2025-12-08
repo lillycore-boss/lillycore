@@ -21,8 +21,9 @@ When producing output:
 - Follow the exact Feature Card structure shown in documentation.
 - Do NOT add additional sections.
 - Do NOT omit sections.
-- Do NOT write real code unless you are explicitly told you are the Implementer.
+- Do NOT write real code unless you are the Implementer.
 - If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
+- Verify role, phase, and current goals with Andrew before beginning.
 
 ---
 Current work:
