@@ -397,10 +397,30 @@
 #
 #   docs/
 #       - Required human-facing documentation.
+#       - docs/ is a REQUIRED top-level folder in LillyCORE.
 #       - Must contain:
 #           docs/build/
 #               - Engineering/build-docs home.
-#               - Auto-generated documentation may live here.
+#               - Physical storage location for system/build docs such as:
+#                   - PROJECT_CANON
+#                   - LILLYCORE_ROADMAP
+#                   - FEATURES
+#                   - TECH_SPEC
+#                   - MODULES
+#                   - GPT_RESOURCE_INDEX
+#               - Auto-generated technical documentation MAY also live here.
+#
+#       - Reserved for future user-facing layers (to be defined in later phases), e.g.:
+#           docs/user/
+#               - "Official" user-facing guides, onboarding docs, and narratives.
+#           docs/api/
+#               - Published API/SDK documentation.
+#
+#       - GPT RULE:
+#           - All build/system documentation lives under docs/build/ by default.
+#           - User-facing docs MUST NOT be mixed into docs/build/; they belong in
+#             dedicated user-facing subtrees (e.g. docs/user/, docs/api/) once created.
+
 #
 #   scripts/
 #       - All dev and runtime scripts (see Section 5).
