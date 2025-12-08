@@ -171,6 +171,103 @@
 #   - For strict-set files, GPTs MUST maintain mypy cleanliness.
 #   - If an ignore is required:
 #       - It MUST be justified and as narrow as possible.
+# ---------------------------------------------
+# BASELINE TOOLING (PHASE 0)
+# ---------------------------------------------
+# This subsection defines the minimal development tooling that all
+# contributors are expected to use for LillyCORE in Phase 0.
+#
+# These tools sit alongside the style and typing rules defined above
+# and the scripts / CI expectations defined elsewhere in this spec.
+#
+# Phase 0 REQUIRED tools
+# ----------------------
+# The following tools are REQUIRED for Phase 0 development:
+#
+#   - Black
+#       - Single source of truth for Python formatting.
+#       - All committed Python code MUST be Black-formatted.
+#
+#   - Ruff
+#       - Single source of truth for Python linting.
+#       - All non-generated Python code MUST be kept clean under the
+#         agreed Ruff configuration (see Section 2).
+#
+#   - mypy
+#       - Static type checker for Python.
+#       - STRICT for the core runtime and engine modules as defined in
+#         Section 2 (CORE_RUNTIME, AI_POOLS, SYSTEM_DOC, engines, etc.).
+#
+#   - pytest
+#       - Python test runner for all automated tests under tests/.
+#       - Standard invocation: `pytest` or `python -m pytest` from the
+#         repository root.
+#
+#   - pre-commit
+#       - Git hook manager used to run Black, Ruff, and mypy (and
+#         optionally pytest) on staged files.
+#       - All contributors SHOULD install pre-commit locally and enable
+#         hooks via:
+#             pre-commit install
+#       - Hooks MUST NOT introduce interactive prompts; they MUST be
+#         suitable for both local use and CI.
+#
+# Root-level configuration files
+# ------------------------------
+# The repository root is expected to contain:
+#
+#   - .pre-commit-config.yaml
+#       - Defines the pre-commit hooks that run Black, Ruff, and mypy
+#         (and optionally pytest) on staged files.
+#       - Exact hook set and ordering are defined by future scripting /
+#         CI tasks, but Black/Ruff/mypy MUST be present.
+#
+#   - .editorconfig
+#       - Captures basic formatting conventions (indentation, charset,
+#         line endings) for non-VS Code editors.
+#       - SAFE to add/extend at any time; CI and hooks do not depend on
+#         it in Phase 0.
+#
+#   - .vscode/settings.json (and optionally .vscode/extensions.json)
+#       - Provides recommended settings and extension suggestions for
+#         contributors using VS Code (e.g., format-on-save with Black,
+#         Ruff integration, mypy/pytest support).
+#       - These files are advisory only; they MUST NOT be treated as a
+#         hard requirement for non–VS Code editors.
+#
+# Repo-level task runner
+# ----------------------
+# Phase 0 explicitly does NOT adopt a dedicated repo-level task runner
+# such as a Makefile or justfile.
+#
+#   - Standard automation MUST use Python scripts under scripts/
+#     (see Section 5: SCRIPTS & CLI TOOLS) for tasks such as:
+#         - formatting (Black),
+#         - linting (Ruff),
+#         - type checking (mypy),
+#         - running tests (pytest).
+#
+#   - A future feature card MAY introduce a task runner once common
+#     workflows are stable and Andrew approves a specific choice.
+#
+# Relationship to CI and scripts
+# ------------------------------
+#   - CI is expected to run Black, Ruff, mypy, and pytest as described
+#     in Section 8 (Testing and CI). pre-commit hooks are a local
+#     enforcement/convenience mechanism and DO NOT replace CI.
+#
+#   - Developer scripts under scripts/ (e.g. format_code, run_tests,
+#     check_types) MAY wrap these tools, but the tools themselves are
+#     the canonical behaviour. Any such scripts MUST follow the rules
+#     in Section 5 (location, naming, CLI conventions).
+#
+# GPT RULE (Baseline tooling):
+#   - GPTs MUST assume that Black, Ruff, mypy, pytest, and pre-commit
+#     are available and SHOULD generate code that is compatible with
+#     these tools.
+#   - GPTs MUST NOT introduce new baseline tools without:
+#       - an explicit feature card, AND
+#       - a corresponding TECH_SPEC update approved by Andrew.
 
 
 # ========================================
