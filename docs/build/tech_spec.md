@@ -545,6 +545,43 @@
 #       - Be imported by runtime or scripts/.
 #       - Host production logic (anything reused MUST be moved into runtime code).
 #
+#     Default Phase 0 layout:
+#       - tests/core/
+#           - Tests for core/ runtime modules.
+#           - Tests for all engines/ modules (engines are treated as part of "core" for testing).
+#       - tests/plugins/
+#           - Tests for plugin modules under plugins/.
+#       - tests/scripts/
+#           - Tests for scripts/ wrappers and CLIs.
+#
+#     Substructure & density heuristics:
+#       - Additional subdirectories under tests/core/, tests/plugins/, or tests/scripts/ MAY be created
+#         as the codebase grows, provided they:
+#           - follow the same "mirror the runtime layout" intent, and
+#           - group clearly related tests.
+#       - As a rule of thumb:
+#           - Consider introducing a subfolder when a single tests/* folder approaches
+#             roughly 20–30 test modules or navigation becomes painful.
+#           - Avoid creating subfolders that are likely to remain at a single test file
+#             for a long time; aim for at least ~3 closely related tests per new subfolder,
+#             or a near-term plan to reach that density.
+#           - Treat any tests/* folder with ~50+ unrelated files as a signal to re-group
+#             tests or introduce structure.
+#       - These numbers are guidelines, not hard limits; Architect/Andrew may override
+#         them at any time.
+#
+# ----------------------------------------
+# MIRRORING RULE
+# ----------------------------------------
+# All runtime Python code must have a corresponding test root under tests/.
+#
+# Examples:
+#   core/runtime/core_runtime.py        → tests/core/test_core_runtime.py
+#   engines/drift_engine/xyz.py         → tests/core/test_drift_engine_xyz.py
+#   plugins/notes_plugin/abc.py         → tests/plugins/test_notes_plugin_abc.py
+#   scripts/run_tests.py                → tests/scripts/test_run_tests.py
+
+#
 # ----------------------------------------
 # MIRRORING RULE
 # ----------------------------------------
@@ -634,7 +671,6 @@ lillycore/
 │
 └── tests/
     ├── core/
-    ├── engines/
     ├── plugins/
     └── scripts/
 
@@ -891,6 +927,33 @@ lillycore/
 #
 # This section is the authoritative reference for script and CLI
 # behaviour until updated by Andrew.
+#
+# ----------------------------------------
+# 5.8 SUBSTRUCTURE & DENSITY (scripts/)
+# ----------------------------------------
+# Default Phase 0 layout:
+#   - scripts/ has no mandatory subfolders.
+#   - New scripts SHOULD, by default, live directly under scripts/ as single-module entrypoints.
+#
+# When to introduce subfolders:
+#   - Optional subdirectories under scripts/ (e.g. scripts/dev/, scripts/runtime/) MAY be introduced when:
+#       - there is a clear conceptual grouping (such as "developer tooling" vs "runtime orchestration"), AND
+#       - either scripts/ is approaching roughly 20–30 mixed-purpose scripts, OR
+#       - the new subgroup is expected to contain at least ~3–5 closely related scripts in the near term.
+#
+# Heuristics and cautions:
+#   - Avoid subfolders that are likely to stay at a single script for a long time.
+#   - Prefer shallow structure in Phase 0:
+#       - At most one level of subfolders under scripts/ (e.g. scripts/dev/, scripts/runtime/).
+#   - Treat any single scripts/ folder with ~50+ unrelated scripts as a signal to re-group and introduce structure.
+#   - These density numbers are guidelines, not hard numeric limits; Architect/Andrew can override them as needed.
+#
+# Relationship to tests/:
+#   - Tests for scripts/ continue to live under tests/scripts/ regardless of whether scripts are in subfolders.
+#   - Where subfolders exist (e.g. scripts/dev/format_code.py), tests SHOULD either:
+#       - stay flat under tests/scripts/ with clear names (e.g. test_dev_format_code.py), OR
+#       - use matching light substructure (e.g. tests/scripts/dev/test_format_code.py) when that improves navigation.
+#   - The choice of test substructure MUST still follow the tests/ density heuristics in SECTION 3 and SECTION 8.
 
 
 # ========================================
@@ -948,19 +1011,23 @@ lillycore/
 #   - Developers are expected to install a pytest version compatible with the
 #     supported Python versions defined in Section 1.
 #
-# Test layout and discovery:
-#   - All automated tests live under the top-level tests/ directory.
-#   - Where practical, tests SHOULD mirror the runtime layout:
-#       -tests/core/
-#       -tests/engines/
-#       -tests/plugins/
-#       -tests/scripts/
-#   - Test files MUST follow pytest’s default discovery pattern:
-#       - Python test modules are named: test_*.py
-#         (e.g. test_core_runtime.py, test_system_doc_storage.py).
-#   - Additional organisational subdirectories under tests/ MAY be created
-#     as the codebase grows, provided they follow the same “mirror the
-#     runtime layout” intent.
+# Test folder layout (tests/):
+#   - The default Phase 0 test roots are:
+#       - tests/core/     → tests for core/ and all engines/ modules
+#                          (engines are treated as part of "core" for testing).
+#       - tests/plugins/  → tests for plugins/.
+#       - tests/scripts/  → tests for scripts/.
+#   - This layout MUST remain the default unless Architect/Andrew explicitly revises it.
+#
+# Density heuristics (tests/):
+#   - Additional subdirectories under tests/core/, tests/plugins/, or tests/scripts/ MAY be added when:
+#       - a single folder is approaching roughly 20–30 test modules; OR
+#       - there is a clear conceptual grouping (e.g. tests/plugins/notes_plugin/) that
+#         makes navigation and targeted test runs meaningfully easier.
+#   - Avoid:
+#       - subfolders that are likely to remain at a single test file for a long time.
+#       - very large, flat folders with around 50+ unrelated tests.
+#   - These heuristics are guidelines only; Architect/Andrew can override them for specific cases.
 #
 # Running tests:
 #   - From the repository root, the standard way to run the test suite is:
