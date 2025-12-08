@@ -430,26 +430,45 @@
 #       "Should this live in core/, engines/, plugins/, or elsewhere?"
 # - Engines are conceptually part of the core system but MUST remain in
 #   the engines/ folder for structural clarity.
-
-
-# ========================================
-# SECTION 4: LOGGING & ERROR HANDLING
-# ========================================
-# Logging:
-#   - There will be a unified logging system (defined in Phase 1).
-#   - All new code that does meaningful work SHOULD log via that system once it exists.
 #
-# Errors:
-#   - Prefer explicit exceptions over silent failure.
-#   - Wrap external/IO calls where appropriate with clear error envelopes (as per design).
+# ----------------------------------------
+# DOCS LAYOUT RULES (PHASE 0)
+# ----------------------------------------
+# Purpose:
+#   - Ensure that "build/system" documentation and "user-facing" documentation
+#     stay structurally separate, even when they refer to the same concepts.
 #
-# GPT RULE:
-#   - If logging or error envelope APIs are not defined yet, do NOT invent them.
-#   - Instead, note in PLAN/DOC:
-#       "Logging/error handling integration TBD once core logging is defined."
+# Build/System docs (docs/build/):
+#   - docs/build/ is the canonical home for internal engineering and system docs.
+#   - The following conceptual documents are stored physically under docs/build/:
+#       - PROJECT_CANON          → docs/build/project_canon.md
+#       - LILLYCORE_ROADMAP      → docs/build/lillycore_roadmap.md
+#       - FEATURES               → docs/build/features.md
+#       - TECH_SPEC              → docs/build/tech_spec.md
+#       - MODULES                → docs/build/modules.md
+#       - GPT_RESOURCE_INDEX     → docs/build/gpt_resource_index.md
 #
-# TODO:
-#   - Define the actual logging interface once Phase 1 is built.
+#   - Filenames follow the standard non-Python naming rule:
+#       - lowercase_with_underscores, .md extension.
+#   - Conceptual names (PROJECT_CANON, etc.) remain the titles used in prompts
+#     and internal references; they do NOT override filename rules.
+#
+# User-facing docs (future):
+#   - Future "official" user docs (e.g., onboarding guides, how-tos) will live
+#     under dedicated subtrees such as docs/user/ and docs/api/.
+#   - These user-facing folders MUST NOT contain build/system docs:
+#       - PROJECT_CANON, TECH_SPEC, etc. remain in docs/build/ even if user
+#         docs reference their content.
+#   - User docs MAY quote or summarise build/system docs but should present
+#     them in a user-friendly form.
+#
+# GPT RULE (docs layout):
+#   - When referring to these core documents in prompts, always use their
+#     conceptual names (PROJECT_CANON, TECH_SPEC, etc.).
+#   - When suggesting or creating physical files, always place build/system
+#     docs under docs/build/ with snake_case .md filenames.
+#   - Do NOT invent additional top-level docs subtrees (beyond docs/build/
+#     and reserved docs/user/, docs/api/) without Andrew’s explicit approval.
 
 
 lillycore/
@@ -487,6 +506,26 @@ lillycore/
     ├── engines/
     ├── plugins/
     └── scripts/
+
+
+# ========================================
+# SECTION 4: LOGGING & ERROR HANDLING
+# ========================================
+# Logging:
+#   - There will be a unified logging system (defined in Phase 1).
+#   - All new code that does meaningful work SHOULD log via that system once it exists.
+#
+# Errors:
+#   - Prefer explicit exceptions over silent failure.
+#   - Wrap external/IO calls where appropriate with clear error envelopes (as per design).
+#
+# GPT RULE:
+#   - If logging or error envelope APIs are not defined yet, do NOT invent them.
+#   - Instead, note in PLAN/DOC:
+#       "Logging/error handling integration TBD once core logging is defined."
+#
+# TODO:
+#   - Define the actual logging interface once Phase 1 is built.
 
 
 # ========================================
