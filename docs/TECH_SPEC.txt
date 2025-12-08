@@ -229,18 +229,227 @@
 # ========================================
 # SECTION 5: SCRIPTS & CLI TOOLS
 # ========================================
-# Script expectations:
-#   - Scripts should be runnable via python3 from the repo root unless otherwise specified.
-#   - Prefer argument-based CLIs (e.g. argparse) over interactive prompts for automation.
+# This section defines where scripts live, how they are invoked,
+# and the CLI norms that all LillyCORE scripts MUST follow.
 #
-# Behaviour:
-#   - Scripts SHOULD:
-#       - Exit with non-zero status on failure.
-#       - Print clear error messages for humans if they fail.
+# It complements the repository layout rules in SECTION 3
+# (top-level scripts/ folder).  All GPTs and contributors MUST
+# treat this as the single source of truth for script/CLI behaviour.
 #
-# GPT RULE:
-#   - Do NOT assume a script name or path.
-#   - If a script is needed, propose a name and location, and ASK Andrew to confirm.
+
+# ----------------------------------------
+# 5.1 LOCATION & NAMING
+# ----------------------------------------
+# Where scripts live:
+#   - All Python scripts for LillyCORE live under the top-level:
+#       - scripts/
+#   - No additional top-level folders (e.g. tools/, bin/, etc.) are
+#     used for scripts unless explicitly approved and documented.
+#
+# File naming:
+#   - Script files MUST use snake_case:
+#       - examples: format_code.py, run_tests.py, seed_system_doc.py
+#   - Names MUST be descriptive of behaviour, not environment:
+#       - GOOD: rebuild_notes_index.py
+#       - BAD: script1.py, helper.py
+#
+# Python only (Phases 0–3):
+#   - All official scripts are Python 3.11+ scripts, consistent with
+#     the runtime rules in SECTION 1.  :contentReference[oaicite:3]{index=3}
+#   - Shell or other-language helpers MAY exist in the future but are
+#     NOT considered standard scripts until explicitly added here.
+
+# ----------------------------------------
+# 5.2 INVOCATION MODEL
+# ----------------------------------------
+# Working directory:
+#   - All examples and automation MUST assume the repository root as
+#     the working directory.
+#
+# Standard invocation:
+#   - The standard way to run a script is:
+#       - python scripts/<script_name>.py [ARGS...]
+#
+# Examples:
+#   - Run code formatter:
+#       - python scripts/format_code.py
+#   - Run tests:
+#       - python scripts/run_tests.py -v
+#
+# Python module imports:
+#   - Scripts SHOULD be written so they can be imported as modules:
+#       - import scripts.format_code as format_code
+#   - Each script SHOULD expose a main(argv: Sequence[str] | None) -> int
+#     function, and use:
+#       - if __name__ == "__main__":
+#             raise SystemExit(main())
+#     so tests and other scripts can reuse logic without executing the
+#     CLI side effects.
+#
+# Entry points:
+#   - No global console entrypoints (e.g. "lillycore" CLI installed
+#     via setup tools) are defined in Phase 0–3.
+#   - If/when a branded CLI is introduced, this section MUST be
+#     updated with its invocation rules.
+
+# ----------------------------------------
+# 5.3 CLI INTERFACE NORMS (FLAGS & HELP)
+# ----------------------------------------
+# Argument parsing:
+#   - Scripts MUST use the Python standard library for argument parsing
+#     (argparse or equivalent), not third-party CLI frameworks, unless
+#     explicitly approved.
+#
+# Help text:
+#   - Every script MUST support:
+#       - -h / --help
+#     which prints:
+#       - A one-line summary of what the script does.
+#       - A description of each argument/flag.
+#       - Defaults for key options (where applicable).
+#
+# Flag conventions:
+#   - Common flags SHOULD follow these patterns when applicable:
+#       - --dry-run
+#           - Perform all checks and logging but do NOT write changes.
+#       - -v / --verbose
+#           - Increase verbosity; multiple -v flags MAY increase level.
+#       - -q / --quiet
+#           - Reduce non-essential output.
+#       - --config PATH
+#           - Path to a config file, when the script supports configs.
+#
+# Input/Output norms:
+#   - Normal informational output SHOULD go to stdout.
+#   - Errors and warnings SHOULD go to stderr.
+#   - Scripts MUST avoid interactive prompts by default; they should be
+#     fully controllable via arguments so they work in automation.
+
+# ----------------------------------------
+# 5.4 EXIT CODES
+# ----------------------------------------
+# All scripts MUST exit with a meaningful status code:
+#
+#   - 0  → Success (script completed as intended).
+#   - 1  → Generic failure (unexpected error, unhandled exception).
+#   - 2  → CLI usage error (invalid arguments, missing required flags).
+#
+# Additional non-zero codes MAY be defined per script for specific
+# conditions, but they MUST be documented in that script’s module-level
+# docstring and/or help text.
+#
+# On failure:
+#   - Scripts MUST:
+#       - Print a clear, human-readable error message.
+#       - Exit with a non-zero status code.
+#
+# Logging:
+#   - Once a unified logging system exists (see SECTION 4), scripts
+#     SHOULD prefer that logging system instead of ad-hoc prints, but
+#     this is NOT required in Phase 0. :contentReference[oaicite:4]{index=4}
+
+# ----------------------------------------
+# 5.5 DEVELOPER SCRIPTS VS RUNTIME SCRIPTS
+# ----------------------------------------
+# Definitions:
+#
+#   Developer scripts ("dev"):
+#     - Scripts intended for contributors working on LillyCORE itself.
+#     - Examples:
+#         - format_code.py   (Black/Ruff helpers)
+#         - run_tests.py     (pytest runner)
+#         - check_types.py   (mypy wrapper)
+#     - MAY depend on dev-only tools (Black, Ruff, mypy, pytest, etc.).
+#
+#   Runtime scripts ("runtime"):
+#     - Scripts that interact directly with LillyCORE’s runtime,
+#       engines, or persistent data.
+#     - Examples (conceptual):
+#         - start_core_runtime.py
+#         - rebuild_system_doc_index.py
+#     - MUST restrict dependencies to the approved runtime environment
+#       and libraries documented elsewhere in TECH_SPEC.
+#
+# Location:
+#   - Both developer and runtime scripts live under scripts/.
+#   - Optional subdirectories (e.g. scripts/dev/, scripts/runtime/)
+#     MAY be introduced later, but are NOT required in Phase 0–3.
+#
+# Identification:
+#   - Each script MUST declare its type in the module-level docstring:
+#
+#       \"\"\"LillyCORE script (type: dev) — short description.\"\"\"
+#       or
+#       \"\"\"LillyCORE script (type: runtime) — short description.\"\"\"
+#
+#   - This distinction helps future automation (e.g., SCRIPT_ENGINE,
+#     CI helpers) understand how to treat each script. 
+#
+# Behavioural expectations:
+#   - Developer scripts:
+#       - MAY be more experimental, but SHOULD remain stable where used
+#         in automated workflows (e.g., pre-commit, CI).
+#   - Runtime scripts:
+#       - SHOULD be treated as part of the core runtime surface:
+#           - typed where practical,
+#           - tested where practical,
+#           - conservative about side effects.
+#
+# NOTE:
+#   - SCRIPT_ENGINE (Phase 8) will eventually reason about scripts,
+#     but its behaviour will be defined separately; this section only
+#     defines the human/GPT-facing conventions for now. :contentReference[oaicite:6]{index=6}
+
+# ----------------------------------------
+# 5.6 TESTING SCRIPTS
+# ----------------------------------------
+# Tests for scripts:
+#   - Tests live under:
+#       - tests/scripts/
+#   - Tests SHOULD mirror script names where practical:
+#       - scripts/format_code.py     → tests/scripts/test_format_code.py
+#
+# Invocation in tests:
+#   - Where possible, tests SHOULD import the script module and call its
+#     main() or underlying functions directly, rather than shelling out
+#     to subprocesses.  This keeps tests fast and type-checkable.
+#
+#   - Subprocess-based tests MAY be used for end-to-end behaviour if
+#     needed, but SHOULD be limited to key flows.
+#
+# This is consistent with the general testing rules in SECTION 8. :contentReference[oaicite:7]{index=7}
+
+# ----------------------------------------
+# 5.7 GPT RULES (SCRIPTS & CLI)
+# ----------------------------------------
+# For Architect, Implementer, and QA GPTs:
+#
+#   - When a feature requires a new script:
+#       - The script MUST live under scripts/ and follow the naming and
+#         invocation rules above.
+#       - Architect/Implementer MUST NOT introduce new top-level script
+#         folders without explicit approval.
+#
+#   - Implementer GPT:
+#       - MUST define:
+#           - script file name,
+#           - expected invocation (python scripts/<name>.py ...),
+#           - whether it is a "dev" or "runtime" script,
+#           - its exit code semantics.
+#       - MUST ensure at least a docstring and help text stub exist.
+#
+#   - QA GPT:
+#       - MUST verify that any script added or modified:
+#           - Lives under scripts/.
+#           - Conforms to the invocation and CLI norms above.
+#           - Uses non-zero exit codes on failure.
+#
+#   - If any script convention appears missing or ambiguous:
+#       - GPTs MUST flag this and propose a TECH_SPEC update, rather
+#         than silently inventing new behaviour.
+#
+# This section is the authoritative reference for script and CLI
+# behaviour until updated by Andrew.
 
 
 # ========================================
