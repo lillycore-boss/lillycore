@@ -34,6 +34,46 @@
 #   - Built on top of engines.
 #   - NOT part of the core runtime.
 #
+# Implementation layout (folder mapping):
+#   - All engines are implemented under:
+#       - engines/<engine_name>/
+#         e.g.:
+#           - engines/drift_engine/
+#           - engines/helper_engine/
+#           - engines/plugin_engine/
+#           - engines/helpdesk_engine/
+#           - engines/dream_engine/
+#           - engines/script_engine/
+#
+#   - All plugins are implemented under:
+#       - plugins/<plugin_name>/
+#         e.g.:
+#           - plugins/notes_plugin/
+#           - plugins/ux_interface/
+#           - plugins/project_management/
+#           - plugins/personal_assistant/
+#           - plugins/multi_user/
+#           - plugins/demos_and_corp/
+#
+#   - The folder taxonomy for these modules is defined in TECH_SPEC Section 3
+#     and MUST be kept in sync with this overview.
+#
+# Dependency and boundary rules:
+#   - Engines may depend on:
+#       - core/ (runtime loop, logging, AI pools, System DOC),
+#       - other engines where explicitly listed under "dependencies"
+#         in this MODULES file.
+#   - Engines MUST NOT import plugins directly; they see plugins only through
+#     PLUGIN_ENGINE / MODULE_ENGINE registries and capability interfaces.
+#
+#   - Plugins may depend on:
+#       - core/ and engines/, as clients of those APIs.
+#   - Plugins MUST NOT:
+#       - be imported directly by core/ or engines/ (except via plugin
+#         registration and routing interfaces),
+#       - own or redefine System DOC schemas (plugins operate within the
+#         DOC layer boundaries defined by core/System DOC).
+#
 # This file answers:
 #   - What engines and plugins exist?
 #   - When do they appear (which phase)?
