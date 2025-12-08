@@ -9,17 +9,30 @@
 # SECTION 1: RUNTIMES AND LANGUAGES
 # ========================================
 # Primary language:
-#   - Python 3.x
+#   - Python 3.11+ (CPython)
+#
+# Runtime support (Phases 1–3):
+#   - Minimum required version: CPython 3.11
+#   - Officially supported/tested range: CPython 3.11–3.14 (inclusive)
+#   - Recommended development version: CPython 3.13
+#
+# Notes (Python version rationale, Phases 1–3):
+#   - 3.10 is already in security-only support and will reach EOL during the
+#     Phase 1–3 timeline, so we do NOT target it as a minimum.
+#   - 3.11–3.14 have long support windows and are fully compatible with modern
+#     tooling (formatter, linter, test framework).
+#   - We recommend 3.13 for development to benefit from newer performance
+#     features while keeping the codebase compatible with 3.11+.
 #
 # Rules:
 #   - Always target python3, NEVER python2.
+#   - All runtime code for Phases 1–3 MUST run on CPython 3.11–3.14.
 #   - Prefer standard library unless a dependency is explicitly approved.
 #
 # Other languages (if any):
 #   - (e.g. shell scripts, TypeScript for UI, etc. — leave blank or TODO)
 #
 # TODO:
-#   - Confirm exact minimum Python version (e.g. 3.10, 3.11).
 #   - List any pre-approved third-party libraries once decided.
 
 
