@@ -119,6 +119,58 @@
 #   - As LillyCORE matures, additional rule families (e.g., docstring and type-annotation
 #     enforcement, complexity metrics) MAY be enabled in later phases, subject to
 #     explicit decisions and TECH_SPEC updates.
+#
+# ---------------------------------------------
+# TYPING & TYPE CHECKING
+# ---------------------------------------------
+# Typing Philosophy (Phases 0–3):
+#   - LillyCORE uses Python type hints (PEP 484+).
+#   - Type hints are ENCOURAGED for all new code.
+#   - Type hints are ENFORCED for core runtime and engine modules.
+#
+# Strict Typing Set:
+#   - The following modules MUST remain type-clean and fully annotated:
+#       - core/:
+#           - CORE_RUNTIME
+#           - AI_POOLS
+#           - SYSTEM_DOC
+#       - Engines:
+#           - DRIFT_ENGINE
+#           - HELPER_ENGINE
+#           - PLUGIN_ENGINE
+#           - HELP_DESK_ENGINE
+#           - DREAM_ENGINE
+#           - SCRIPT_ENGINE
+#
+# Non-strict Modules:
+#   - Plugins and experimental modules:
+#       - Type hints strongly encouraged.
+#       - Public APIs SHOULD be typed.
+#       - mypy may run in non-strict mode.
+#
+# Static Type Checker:
+#   - LillyCORE uses mypy for static type checking.
+#   - mypy configuration MUST live at repo root.
+#   - mypy MUST be configured for Python 3.11+.
+#
+# Enforcement Model:
+#   - Strict modules must:
+#       - Use type hints consistently.
+#       - Pass mypy with zero errors before merge.
+#   - Non-strict modules:
+#       - Allowed to have non-blocking mypy warnings during early phases.
+#
+# CI Expectations:
+#   - CI MUST fail if:
+#       - mypy reports errors in strict modules.
+#   - mypy MAY run in informational mode for the rest of the codebase.
+#
+# GPT RULE (Typing):
+#   - GPTs MUST add type hints to all public functions.
+#   - GPTs SHOULD add hints to internal helpers.
+#   - For strict-set files, GPTs MUST maintain mypy cleanliness.
+#   - If an ignore is required:
+#       - It MUST be justified and as narrow as possible.
 
 
 # ========================================
@@ -238,13 +290,16 @@
 #   - Once CI is configured for LillyCORE, the minimum expected checks are:
 #       - Black formatting check (no changes when Black is run).
 #       - Ruff lint check under the configured rule set.
+#       - mypy type-checker for the configured strict set of modules
+#         (see Section 2: Typing & type checking).
 #       - The chosen test suite (once a framework is selected).
 #   - CI SHOULD fail if:
 #       - Black would reformat any committed Python file, OR
 #       - Ruff reports lint errors for the current codebase, OR
+#       - mypy reports type errors in the strict set of modules, OR
 #       - Tests fail.
-#   - Additional static analysis tools (e.g., type checkers) MAY be added in future
-#     tasks and will be documented here when chosen.
+#   - Additional static analysis tools beyond Black/Ruff/mypy
+#     MAY be added in future tasks and will be documented here when chosen.
 
 
 # ========================================
@@ -266,6 +321,36 @@
 # - QA GPT uses TECH_SPEC to verify that implemented work follows the correct technical standards.
 #
 # This file is living documentation and will grow as LillyCORE matures.
+
+
+# ========================================
+# SECTION 10: EXAMPLES
+# ========================================
+#
+# Example Type Signatures (Python 3.11+)
+#
+#   from pathlib import Path
+#   from collections.abc import Sequence
+#   from typing import Any
+#
+#   def load_user_preferences(path: Path) -> dict[str, Any]:
+#       """Load user preferences from disk."""
+#       ...
+#
+#   def run_core_loop(config: CoreConfig, *, dry_run: bool = False) -> int:
+#       """Run the CORE_RUNTIME loop and return an exit code."""
+#       ...
+#
+#   def summarize_transcript(
+#       lines: Sequence[str],
+#       max_tokens: int | None = None,
+#   ) -> str:
+#       """Summarize transcript text for NOTES_PLUGIN."""
+#       ...
+#
+# Notes:
+#   - Examples here illustrate expected annotation style, not behavior.
+#   - All examples assume Python 3.11+ type syntax.
 
 
 # ========================================
