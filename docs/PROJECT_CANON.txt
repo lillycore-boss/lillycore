@@ -260,7 +260,6 @@
 #     - Description: validate all cards in this group
 #     - Steps: 3–10 verifying tasks
 #     - Done When: QA GPT returns PASS
-#
 # - Architect GPT must NEVER omit this QA end-cap.
 #
 # This rule applies at ALL decomposition levels:
@@ -394,8 +393,8 @@
 #
 # 4. Automatic Correction Card Creation:
 #    - When a failure is detected, QA GPT automatically generates a **new card in the same series**:
-#        - Example: If `P0.1.3` failed, QA GPT creates `P0.1.8` (next number) or  
-#                   `P0.1.3.1` if it must attach directly beneath it.
+#        - Example: If the QA card is `P0.1.8` and any part of `P0.1` failed, QA GPT 
+#          creates `P0.1.8.x` for each deficiency following decomposition rules.
 #    - The new card must:
 #        - Be an Implementer card (leaf), unless the fix is too large,  
 #          in which case it becomes an Architect card.
@@ -403,13 +402,10 @@
 #        - Cleanly fix the gap identified.
 #
 # 5. Card Naming Rules:
-#    - If the failure pertains to a specific card's output, attach new cards in the same branch:
-#        - Example: Card `P1.2.4` fails.  
-#          QA GPT creates: `P1.2.5` for the correction.
-#
-#    - If failure pertains to a sub-component:
-#        - Example: Card `P1.2.4` is huge and Implementer missed a chunk.  
-#          QA GPT creates: `P1.2.4.1`, `P1.2.4.2`, ... as decomposition corrections.
+#    - If the failure pertains to a specific card's output, attach new cards under the QA card in the same branch:
+#        - Example: Card `P1.2.4` fails when checking `P1.2` 
+#          and `P1.2.8` is the qa card for `P1.2` then  
+#          QA GPT creates: `P1.2.8.1` for the correction.
 #
 # 6. Documentation Integrity Requirement:
 # - QA GPT must always verify:
