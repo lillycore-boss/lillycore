@@ -53,6 +53,9 @@ This rule MUST be repeated whenever:
 - Switching between Architect / Implementer / QA roles,
 - Returning after long conversation context loss.
 
+Code Adendum: (directly from Andrew)
+If updating a code file, you MUST ask to see the file or relevent portion of the file before requesting any changes. You CANNOT replace ANY code without looking at the exsisting code first. 
+
 ---
 
 # Current Work
