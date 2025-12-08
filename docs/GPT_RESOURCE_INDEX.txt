@@ -20,6 +20,10 @@
 #   - this file, or
 #   - the documents named here
 #
+# QA GPT:
+#     - Uses this index to locate referenced documents when verifying work.
+#     - MUST request any missing document sections before evaluation.
+#
 # Rule:
 # If a new doc is created, it should be added here.
 # If a doc changes meaning, this index should be updated.
