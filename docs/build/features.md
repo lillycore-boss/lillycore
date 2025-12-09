@@ -386,6 +386,29 @@
 # - Phase 02 — Attempt 0
 #     Bundle: <reference or filename>
 
+ID: P0.3.5
+Title: Define Rules for Adding New Documents & GPT_RESOURCE_INDEX Integration
+Phase: 0
+Engine/Plugin: (none)
+Status: implemented
+
+Purpose:
+    Establish consistent rules for when new documentation types should exist
+    and define the process for adding them to GPT_RESOURCE_INDEX.
+
+Deliverables:
+    - New criteria section added to documentation_governance.md
+    - New procedural section added to documentation_protocol.md
+    - Clarified that runtime artifacts are not governed by GPT_RESOURCE_INDEX
+    - Ensured canonical-doc additions always require indexing
+
+Done When:
+    - Both documents include aligned rules
+    - Andrew confirms correctness
+
+Notes / Future:
+    - Next phase will refactor all documentation to conform to these new rules.
+
 
 # ========================================
 # END OF FEATURES
