@@ -202,6 +202,29 @@ access:
     doc.
 
 # ----------------------------------------
+# SECTION: DOCUMENT: GPT_BEHAVIOUR_SPEC
+# ----------------------------------------
+name: GPT_BEHAVIOUR_SPEC
+type: process_rules
+status: exists
+path: docs/build/gpt_behaviour_spec.md
+description:
+  Unified behaviour and ingestion standard for GPT roles used to build
+  LillyCORE (Architect, Implementer, QA, and future helper GPTs). Defines
+  role boundaries, ingestion rules, feature-card lifecycle, and how GPTs
+  interact with canonical docs and with Andrew.
+
+usage:
+  - MUST be loaded by any GPT participating in the LillyCORE build process.
+  - Used to determine how GPTs ingest docs, ask Andrew for clarification,
+    and coordinate between Architect, Implementer, and QA roles.
+
+access:
+  - When needed, Andrew can paste the full content of GPT_BEHAVIOUR_SPEC
+    or relevant sections.
+
+
+# ----------------------------------------
 # SECTION: DOCUMENT: OTHER
 # ----------------------------------------
 name: (future docs to be listed here)
