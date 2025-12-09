@@ -393,6 +393,114 @@ For each QA card:
   - Promoted through a card and indexed in GPT_RESOURCE_INDEX.  
 - [ ] There is no visible contradiction between Canon, Roadmap, Tech Spec, Modules, Features, and the new work.  
 
+## 9. Formatting & Replacement Standards
+
+This section defines how GPTs FORMAT and PRESENT updates to build/system documentation so that docs stay durable, non-fragile, and easy to redraw.
+
+These rules apply to:
+
+- Canonical build/system docs under `docs/build/` (PROJECT_CANON, LILLYCORE_ROADMAP, TECH_SPEC, MODULES, GPT_RESOURCE_INDEX, DOCUMENTATION_PROTOCOL, etc.).
+- System-level conceptual docs under `docs/` (such as `docs/documentation_governance.md`), when GPTs are asked to update them.
+
+They do **not** replace the comment-style rules for code/config files defined in TECH_SPEC §2 (e.g. `# ========================================` inside Python or config comments); those still apply there.
+
+### 9.1 Section Header Patterns (Markdown Docs)
+
+For canonical markdown docs, GPTs MUST follow these header patterns when using ASCII “SECTION” blocks.
+
+#### 9.1.1 Big Sections (1, 2, 3…)
+
+Use the full-bar pattern **without leading `#`** for major sections (top-level groups like OVERVIEW, DOCUMENT lists, core phases, etc.):
+
+========================================
+SECTION: <NAME>
+========================================
+
+Examples:
+
+- `SECTION: OVERVIEW`
+- `SECTION: DOCUMENT: PROJECT_CANON`
+- `SECTION: PHASE 0 — FOUNDATIONS`
+
+Big sections are used sparingly to mark major structural units in a file.
+
+#### 9.1.2 Smaller Sections (1.1, 1.2, …)
+
+Use the minimal underline style **without leading `#`** for smaller sections nested under a big section (per-doc semantics, e.g. individual document entries, module entries, or similar sub-blocks):
+
+SECTION: <NAME>
+----------------------------------------
+
+Examples:
+
+- `SECTION: DOCUMENT: TECH_SPEC`
+- `SECTION: MODULE: CORE_RUNTIME`
+- `SECTION: QA EXPECTATIONS`
+
+Rule of thumb:
+
+- Big section → full bar above and below (pattern 9.1.1).
+- Small section → title line + single underline bar (pattern 9.1.2).
+
+Docs MAY still use normal Markdown headings (`#`, `##`, `###`) where appropriate. These ASCII “SECTION” blocks are an additional structuring tool, typically used in index-like or highly structured spec files.
+
+### 9.2 No Leading `#` in Markdown SECTION Blocks
+
+For markdown-based build/system docs:
+
+- GPTs MUST NOT prefix these SECTION header lines with `#` characters.
+- The patterns in 9.1 are literal: they begin at column 0 with `=` or `-` or the word `SECTION:`, not `#`.
+
+The only exception is when a SECTION-like pattern legitimately lives **inside a code fence or comment** in another language (for example, demonstrating a pattern in documentation, or using TECH_SPEC’s comment-style examples inside Python). In those cases, TECH_SPEC §2’s comment rules control the leading `#`.
+
+### 9.3 Ready-to-Paste Block Updates
+
+When updating documentation, Implementer GPT MUST:
+
+- Provide changes as **standalone fenced code blocks** (e.g. ```markdown … ```), not as inline fragments buried inside prose.
+- Each fenced block MUST represent a **coherent replacement unit**:
+  - A whole section (e.g. an entire `## 4. Update Triggers` section),
+  - Or a clearly scoped sub-block (e.g. a single MODULE entry in `MODULES` or a single DOCUMENT entry in `GPT_RESOURCE_INDEX`).
+
+For each block, GPTs MUST:
+
+- Clearly identify the target file (e.g. `docs/build/gpt_resource_index.md`).
+- Clearly state whether the block should:
+  - **Replace** an existing section with the same heading, or
+  - **Be inserted** at a specific location (e.g. “insert after the SECTION: OVERVIEW block and before the first DOCUMENT entry”).
+
+Inline “edit this one line in the middle” instructions are forbidden for GPT-generated updates; humans may still make small local edits directly in the repo when appropriate.
+
+### 9.4 Full-Block Replacements and Partial Refactors
+
+PROJECT_CANON §4.2 already states that we prefer **full block replacements** over partial inline edits. This protocol makes that operational:
+
+- When the meaning or structure of a section changes, GPTs MUST replace the **entire section block** (from its SECTION header down to the line before the next SECTION header or the end of the file/parent section).
+- When multiple related sections change, GPTs SHOULD:
+  - Provide one fenced block per section, OR
+  - Provide a single fenced block containing the full, updated parent section (when that is clearer and still copy-pasteable).
+
+Partial refactors MUST NOT be expressed as “change just these two lines somewhere inside the section.” Instead:
+
+- Rewrite the smallest coherent block that produces a stable, future-proof result.
+- Present that entire block as a replacement in a code fence.
+
+Exception (human-only):
+
+- Human editors working directly in the repo MAY make trivial mechanical edits (typos, whitespace fixes) without going through full-section replacements, but GPTs MUST still present proposed changes as block replacements.
+
+### 9.5 Durability and Redrawability
+
+System docs must remain **durable and easy to redraw**:
+
+- Section boundaries (SECTION headers and their blocks) SHOULD remain stable across edits whenever possible.
+- GPTs SHOULD avoid formatting that depends on fragile alignment, inline spacing hacks, or ambiguous markers.
+- When in doubt about how to structure a block for future redraws, GPTs MUST:
+  - Choose the clearer, more atomic section boundary, and
+  - Ask Andrew before inventing new block patterns.
+
+If this section ever appears to conflict with PROJECT_CANON or TECH_SPEC (e.g. about comment styles or naming conventions), Andrew’s explicit instruction and those documents win, and this section MUST be updated to match.
+
 
 ---
 
