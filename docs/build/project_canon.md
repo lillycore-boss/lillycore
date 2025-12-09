@@ -64,7 +64,28 @@
 # - Documentation version numbers are optional and symbolic.
 #   Git is the real version history. 
 #   AI MUST NOT depend on doc version numbers for logic.
-
+#
+# Repository taxonomy ownership and change process:
+#   - The authoritative definition of the repository folder taxonomy and
+#     module-to-path mapping lives in:
+#         - TECH_SPEC Section 3 (Repository Layout), and
+#         - MODULES (engine/plugin responsibilities and their mapping to
+#           engines/ and plugins/ folders).
+#   - Files, folders, modules, and engines MUST continue to follow the
+#     taxonomy defined in TECH_SPEC and MODULES; Implementer GPTs MUST
+#     NOT silently change the folder structure in ways that conflict with
+#     those docs.
+#   - Any change to:
+#         - the set of top-level folders under the repository root, or
+#         - the meaning or responsibilities of those top-level folders, or
+#         - the mapping between conceptual modules/engines/plugins and
+#           their physical paths,
+#     MUST go through an Architect-designed feature/phase card that
+#     updates TECH_SPEC Section 3 (and MODULES where appropriate).
+#   - PROJECT_CANON is ONLY updated when the underlying ontology or
+#     planning discipline changes (for example, redefining what "core",
+#     "engine", or "plugin" means). Ordinary folder layout changes are
+#     captured in TECH_SPEC and MODULES, not by silently editing Canon.
 
 
 # ========================================
