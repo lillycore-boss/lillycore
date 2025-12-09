@@ -46,6 +46,12 @@ When this protocol appears to conflict with any of the above:
 2. Then PROJECT_CANON, LILLYCORE_ROADMAP, TECH_SPEC, MODULES, FEATURES, and GPT_RESOURCE_INDEX are updated as needed via feature cards.  
 3. This protocol is adjusted afterward to match.
 
+- GPT_BEHAVIOUR_SPEC
+  - Defines how GPT roles (Architect, Implementer, QA) behave, ingest docs, and
+    interact with Andrew and with each other during the build process.
+  - This protocol assumes GPT_BEHAVIOUR_SPEC for behavioural semantics and focuses
+    only on documentation procedures and update triggers.
+
 
 ## 3. Roles & Documentation Responsibilities
 
