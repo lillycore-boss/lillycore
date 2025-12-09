@@ -316,3 +316,182 @@ Without changing the existing TECH_SPEC rules, this document clarifies **intent*
   - All documents currently listed in GPT_RESOURCE_INDEX live here in Phase 0.  
 
 Any change to the **actual physical layout** (e.g. moving canonical docs from `docs/build/` to another location) remains a **taxonomy change** that must be designed via Architect cards and reflected in TECH_SPEC and GPT_RESOURCE_INDEX. This file only describes **how to think about the layers**, not the mechanical migration plan.  
+
+Documentation Hierarchy & Canonical Roles
+
+This section defines the conceptual hierarchy of LillyCORE documentation and clarifies the explicit role played by each major file listed in GPT_RESOURCE_INDEX.
+It complements TECH_SPEC §3, which remains the authoritative source for physical file layout and repository taxonomy.
+
+1. Hierarchy Overview
+
+LillyCORE documentation is organized into four conceptual layers:
+
+Core Build/System Docs
+
+Canon, Roadmap, Tech Spec, Modules, GPT_RESOURCE_INDEX, feature/phase bundles
+
+Define rules, standards, ontology, module boundaries, and roadmap evolution
+
+System-Level Conceptual Docs
+
+Narrative and conceptual explanations (including this file)
+
+Clarify relationships and mental models without redefining standards
+
+Plugin/Engine Docs
+
+Describe behaviour of individual plugins or engines
+
+Must align with Build/System Docs and MODULES
+
+User-Facing Docs
+
+Public guides and API references
+
+Follow the behaviour defined in Build/System Docs and plugin/engine docs
+
+All layers inherit constraints from PROJECT_CANON (ontology & rules) and TECH_SPEC (technical standards & layout).
+
+2. Canonical Document Roles
+
+Below are the major Build/System Docs and their conceptual responsibilities.
+
+PROJECT_CANON
+
+Layer: Core Build/System Doc
+Role:
+
+Defines the ontology of engines, plugins, DOC layers, pipelines, agents
+
+Defines AI behaviour rules and planning discipline
+
+Highest-level meaning and constraints
+
+Ownership: Andrew + Architect
+Notes: Overrides all other documents when conflicts arise.
+
+LILLYCORE_ROADMAP
+
+Layer: Core Build/System Doc
+Role:
+
+Defines the order and intent of phases
+
+Determines when subsystems appear and how major evolutions unfold
+
+Ownership: Andrew + Architect
+Notes: Must never be changed by Implementers.
+
+TECH_SPEC
+
+Layer: Core Build/System Doc
+Role:
+
+Defines the technical environment, coding standards, tools, and repository layout
+
+Section 3 is the authoritative declaration of the physical file structure
+
+All docs referencing file placement MUST defer to TECH_SPEC §3
+
+Ownership: Andrew + Architect + Implementers
+Notes: This governance doc must never contradict physical layout rules.
+
+MODULES
+
+Layer: Core Build/System Doc
+Role:
+
+Defines engines and plugins
+
+Sets boundaries, dependencies, and responsibilities of major subsystems
+
+Ownership: Architect (Implementers update details as modules become real)
+Notes: Serves as the map of the runtime ecosystem.
+
+FEATURES
+
+Layer: Core Build/System Doc
+Role:
+
+Defines the standard feature card format and GitHub integration rules
+
+(Optionally) mirrors selected high-value feature cards
+
+Ownership: Andrew + Architect
+Notes: Implementers rely on pasted cards; this file does not list all work items.
+
+GPT_RESOURCE_INDEX
+
+Layer: Core Build/System Doc
+Role:
+
+Master directory of all authoritative documents
+
+Defines which docs exist and must be checked/loaded
+
+Provides conceptual names for use in prompts
+
+Ownership: Andrew + Architect
+Notes: A document is not canonical until listed here.
+
+3. Allowed Future Doc Categories
+
+Only the following classes of future docs may be added, and only via feature cards that update GPT_RESOURCE_INDEX and optionally TECH_SPEC §3:
+
+Engine Specs
+
+Deeper structured documentation for individual engines
+
+Must align with MODULES and PROJECT_CANON ontology
+
+Plugin Specs
+
+Detailed behavioural specifications for plugins
+
+Must respect Plugin DOC boundaries and System DOC schemas
+
+DOC Schema Specs
+
+System DOC schema
+
+Plugin DOC schema
+
+Must follow the DOC layer ontology defined in PROJECT_CANON and existing System DOC docs
+
+User-Facing Documentation Sets
+
+docs/user/
+
+docs/api/
+
+Additional published surfaces
+
+Must follow UX and API semantics defined by engines/plugins
+
+Generated Docs
+
+Auto-generated API references, diagrams, schema dumps
+
+Allowed but always non-authoritative
+
+Any category not listed above is forbidden unless Andrew explicitly authorizes it.
+
+4. Relationships Between Major Docs
+
+PROJECT_CANON → defines meaning and ontology
+
+LILLYCORE_ROADMAP → defines phase sequencing
+
+TECH_SPEC → defines physical layout & technical rules
+
+MODULES → defines subsystem boundaries
+
+FEATURES → defines task structure and implementation workflow
+
+GPT_RESOURCE_INDEX → binds all canonical docs together
+
+System-level conceptual docs (such as this file) sit above the technical layout but below the ontology and rules, functioning as interpreters and guides.
+
+Changes to physical layout must be expressed in TECH_SPEC §3, not here.
+
+Changes to meaning/ontology must be expressed in PROJECT_CANON, not here.
