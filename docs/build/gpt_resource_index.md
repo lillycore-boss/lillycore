@@ -21,6 +21,17 @@ Architect, Implementer, and QA GPTs should treat this file as the
 directory of canonical docs. If a new canonical doc is created or an
 existing one changes meaning, this index must be updated.
 
+Mandatory-load set:
+- For any architectural reasoning, planning, implementation, or QA work
+  on LillyCORE, GPT roles MUST load and read, at minimum:
+    - GPT_RESOURCE_INDEX (this file)
+    - DOCUMENTATION_GOVERNANCE
+    - DOCUMENTATION_PROTOCOL
+- DOCUMENTATION_PROTOCOL is the procedural authority for how GPTs
+  behave when reading/updating docs.
+- DOCUMENTATION_GOVERNANCE is the conceptual authority for doc layers,
+  categories, and which docs are allowed or forbidden.
+
 Physical location (Phase 0):
 - All named documents listed in this index are stored under:
     docs/build/
@@ -36,6 +47,7 @@ Physical location (Phase 0):
 
 In prompts and AI instructions, documents should be referred to by
 their conceptual names (PROJECT_CANON, TECH_SPEC, etc.), not by path.
+
 
 # ----------------------------------------
 # SECTION: DOCUMENT: PROJECT_CANON
@@ -155,10 +167,14 @@ description:
 usage:
   - Used to reason about where new docs belong and which kinds of docs
     may be introduced or promoted.
+  - MUST be loaded as part of the mandatory-load set before any
+    reasoning, planning, or documentation updates involving canonical
+    docs.
 
 access:
   - When needed, Andrew can paste the full content of
     DOCUMENTATION_GOVERNANCE.
+
 
 # ----------------------------------------
 # SECTION: DOCUMENT: DOCUMENTATION_PROTOCOL
@@ -177,6 +193,9 @@ usage:
   - Used as the operational reference for when and how to update
     docs, which roles are responsible, and how QA verifies doc
     completeness.
+  - MUST be loaded and read as part of the mandatory-load set before
+    any reasoning, architectural planning, implementation, or QA that
+    reads or writes canonical docs.
 
 access:
   - When needed, Andrew can paste the DOCUMENTATION_PROTOCOL build
