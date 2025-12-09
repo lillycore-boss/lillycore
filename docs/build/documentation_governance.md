@@ -495,3 +495,47 @@ System-level conceptual docs (such as this file) sit above the technical layout 
 Changes to physical layout must be expressed in TECH_SPEC §3, not here.
 
 Changes to meaning/ontology must be expressed in PROJECT_CANON, not here.
+
+## Criteria for Introducing New Document Types
+
+This section defines **when new document types should exist** in LillyCORE and how they fit into the conceptual documentation model.
+
+### 1. Purpose of New Document Types
+New document types should be introduced only when:
+- They capture **system-level meaning** that cannot live inside existing canonical docs.
+- They define **persistent concepts**, not runtime data or ephemeral structures.
+- They support architectural clarity (e.g., a new spec describing a new subsystem).
+- They are needed for **cross-role coordination** between Architect, Implementer, and QA.
+
+A document type MUST NOT be introduced simply to store scratch notes, partial designs, or exploratory drafts. Those belong outside GPT_RESOURCE_INDEX and are not treated as canonical.
+
+### 2. Ownership and Authority
+- **Andrew** is the final authority on whether a new document type is warranted.
+- **Architect GPT** may propose new canonical document types but cannot approve them.
+- **Implementer GPT** may create or update such docs only after approval and with an explicit feature card.
+
+### 3. Relationship to GPT_RESOURCE_INDEX
+Once a new document type becomes canonical:
+- It MUST be added to **GPT_RESOURCE_INDEX**.
+- GPT_RESOURCE_INDEX becomes the authoritative directory for its meaning, purpose, and physical path.
+- GPTs MUST NOT treat a document as canonical unless it appears in GPT_RESOURCE_INDEX.
+
+### 4. Prohibited Document Types
+The following MUST NOT be treated as documents within GPT_RESOURCE_INDEX:
+- Runtime logs
+- Work event histories
+- Transcripts or summaries created by System DOC or Notes flows
+- Snapshots or temporary artifacts generated during execution
+
+These belong to runtime storage layers and **must not be reinterpreted as specification**.
+
+### 5. Lifecycle Expectations
+- Canonical docs are **persistent** and evolve through approved feature cards.
+- Conceptual and governance docs (e.g., documentation_governance, architectural narratives) must remain stable enough for long-term orientation.
+- A new canonical doc must have:
+  - A clear purpose
+  - A stable owner
+  - Defined relationships to the existing doc layers
+  - An explicit place in the repo according to TECH_SPEC
+
+Anything failing these criteria should remain non-canonical until clarified.
