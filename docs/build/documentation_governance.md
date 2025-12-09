@@ -66,6 +66,23 @@ For each layer:
 - Must stay consistent with PROJECT_CANON’s ontology and planning rules.:contentReference[oaicite:19]{index=19}  
 - **Authoritative specifications** for engines, plugins, DOC layers, and taxonomy belong here or in explicitly related specs, not in ad-hoc files.
 
+#### Build-Process vs Runtime Build Docs
+
+Within the Build/System Docs layer, LillyCORE distinguishes between:
+
+- **Runtime Build Docs**  
+  - Define the behaviour, architecture, and evolution of the runtime system itself.  
+
+- **Build-Process Docs**  
+  - Define how humans and GPTs collaborate to build and maintain LillyCORE, without
+    becoming part of the runtime system.  
+  - Examples: GPT_BEHAVIOUR_SPEC, future CONTRIBUTING-style process docs.  
+
+Both categories live under `docs/build/` in early phases, but build-process docs are
+explicitly about the development workflow (e.g. GPT roles, ingestion rules), not runtime
+behaviour. Runtime system specs MUST NEVER rely on build-process docs as behavioural
+authority.
+
 
 ### 2. System-Level Conceptual Docs
 
