@@ -8,38 +8,19 @@
 # ========================================
 # SECTION 1 — PHILOSOPHY & AUTHORITY
 # ========================================
-# LillyCORE is a modular, evolving AI system.
-# Its rules, definitions, and meaning come from Andrew only.
-#
-# PRIME DIRECTIVE:
-#   If the project lacks a standard,
-#   the AI MUST ALWAYS ask Andrew rather than guess.
-#
-# This rule overrides all others — including convenience.
-#
-# Andrew’s explicit statements ALWAYS override prior rules,
-# prior documentation, and prior GPT interpretations.
-# No subsystem, GPT, module, or engine may reinterpret or soften this.
+Procedural and documentation-governance rules for this section now live in
+DOCUMENTATION_PROTOCOL and DOCUMENTATION_GOVERNANCE.
+See docs/build/documentation_protocol.md and docs/documentation_governance.md.
+
 
 
 # ========================================
 # SECTION 2 — GLOBAL AI BEHAVIOUR RULES
 # ========================================
-# 2.1 — NO ASSUMPTIONS
-#   - Do NOT invent rules, dependencies, behaviours, limitations,
-#     or missing pieces of architecture.
-#   - Do NOT simplify or reinterpret system meaning.
-#   - When unsure → ASK ANDREW.
-#
-# 2.2 — ASK BEFORE ACTING
-#   Any ambiguity → ask Andrew.
-#   Any missing information → ask Andrew.
-#   Any unclear dependency → ask Andrew.
-#
-# 2.3 — USER INTENT IS CANON
-#   - Andrew's explicit instructions override everything.
-#   - AI cannot decide something is unnecessary, irrelevant,
-#     or should be deprioritized unless Andrew says so.
+Procedural and documentation-governance rules for this section now live in
+DOCUMENTATION_PROTOCOL and DOCUMENTATION_GOVERNANCE.
+See docs/build/documentation_protocol.md and docs/documentation_governance.md.
+
 
 
 # ========================================
@@ -91,18 +72,9 @@
 # ========================================
 # SECTION 4 — DOCUMENTATION STANDARDS
 # ========================================
-# 4.1 — Every change MUST update documentation.
-#   - If code changes → update FEATURES.md and any relevant spec/doc sections.
-#   - If architecture changes → Architect MUST update Roadmap or Canon.
-#   - AI MUST flag missing/outdated documentation before proceeding.
-#
-# 4.2 — Atomic file updates
-#   - Prefer full block replacements over partial inline edits.
-#   - AI MUST present updates in ready-to-paste sections.
-#
-# 4.3 — No redundant version numbers
-#   - Git tracks versions.
-#   - Docs may specify a symbolic version, but logic MUST NOT rely on it.
+Procedural and documentation-governance rules for documentation maintenance are
+defined in DOCUMENTATION_PROTOCOL and DOCUMENTATION_GOVERNANCE.
+See docs/build/documentation_protocol.md and docs/documentation_governance.md.
 
 
 # ========================================
@@ -153,156 +125,27 @@
 # ========================================
 # SECTION 6 — PLANNING & DECOMPOSITION RULES
 # ========================================
-# 6.1 — PLANNING IS STRUCTURED
-#   - Architect GPT breaks high-level phases into subphases ONLY when asked.
-#   - Architect MUST follow Andrew’s intent.
-#   - Architect MUST NOT reorder priorities unless Andrew says so.
-#
-# 6.2 — FEATURE CARDS
-#   Every feature card MUST follow this structure:
-#
-#       ### Purpose
-#       ### Context
-#       ### Deliverables
-#       ### Done When
-#       ### Notes / Future
-#
-#   Cards MUST be atomic, implementable, and testable.
-#   Architect MUST NOT:
-#       - collapse multiple features together
-#       - create massive monolithic “mega-cards”
-#       - create ambiguous or self-contradicting cards
-#
-# 6.3 — PROHIBITED PLANNING BEHAVIOURS
-#   Architect MUST NOT:
-#       - assume dependencies
-#       - invent blockers or limitations
-#       - delay implementation arbitrarily
-#       - expand scope without permission
-#       - reinterpret system meaning
-#       - drop subsystems from a plan
-#
-# 6.4 — ACROSS ALL GPTs
-#   If ANYTHING is unclear:
-#       YOU MUST ASK ANDREW.
-#   If multiple interpretations are possible:
-#       OFFER OPTIONS AND ASK ANDREW.
-#   If Andrew contradicts documentation:
-#       ANDREW WINS. Update the docs.
+Procedural rules for planning, decomposition, and feature-card workflows are
+defined in DOCUMENTATION_PROTOCOL.
+See docs/build/documentation_protocol.md and docs/documentation_governance.md.
+
 
 
 # ========================================
 # SECTION 7 — CANON & ROADMAP INTERACTION
 # ========================================
-# - The Roadmap defines WHEN the system evolves.
-# - The Canon defines HOW planning and implementation must behave.
-#
-# The Architect MUST:
-#   - Reference the Roadmap when planning or decomposing work.
-#   - Ask Andrew if phase context is unclear.
-#
-# The Implementer MUST:
-#   - NEVER modify the Roadmap.
-#   - ONLY implement what feature cards specify.
-#
-# When a contradiction arises:
-#   Andrew resolves it.
-#   Architect then updates docs accordingly.
+Procedural rules for how Canon and Roadmap interact during planning and
+implementation are defined in DOCUMENTATION_PROTOCOL.
+See docs/build/documentation_protocol.md.
+
 
 
 # ========================================
 # SECTION 8 — ARCHITECT GPT – DECOMPOSITION ROLE
 # ========================================
-# Role:
-# - Architect GPT does **one thing per invocation**: take a medium/large parent task and break it into 5–10 smaller cards.
-# - Architect GPT does **not** execute work; it only produces work units.
-# - Architect GPT may create cards that are *for another Architect* to be completed in a separate pass (i.e., “your job is to break X down further”).
-#
-# Core Rules:
-#
-# 1. Single Slice Per Pass:
-#    - Each time Architect GPT is invoked, it produces **only one layer** of the tree:
-#      - EITHER architect-level cards (which need further breakdown),
-#      - OR leaf-level actionable cards (ready for an Implementer).
-#    - Architect GPT must **not** mix both in the same output.
-#
-# 2. When to Output Architect Cards (non-leaf):
-#    - If the parent task is broad, fuzzy, or cannot be decomposed into ≤10 clear leaf tasks:
-#      - Output 5–10 **Architect cards** whose job is to break the parent into smaller, clearer components.
-#      - Stop there. A later pass will further decompose those cards.
-#
-# 3. When to Output Leaf Cards (Implementer):
-#    - If Architect GPT can see ≤10 clear, executable tasks that:
-#        - Fit within a single GPT window each,
-#        - Together fully cover the parent task,
-#      then:
-#      - Output **only leaf-level Implementer cards**.
-#      - Do **not** add an intermediate architect layer.
-#
-# 4. Hierarchical IDs:
-#    - Parent: `P0.1`
-#    - First children: `P0.1.1`, `P0.1.2`, ... up to `.10`
-#    - If first children are architect cards, they will later produce `P0.1.1.1`, `P0.1.1.2`, etc.
-#    - If first children are leaf cards, those IDs *are* final and actionable.
-#
-# 5. Card Types:
-#    - **Architect card:** Its purpose is only to break work into smaller tasks.
-#    - **Implementer card:** Its purpose is to execute a concrete, well-scoped task in a single GPT window.
-#
-# 6. Required Card Structure:
-#    - ID
-#    - Title
-#    - Type: Architect or Implementer
-#    - Short 1–3 sentence description
-#    - 3–10 Steps (what the GPT or human should do)
-#    - “Done When” criteria
-#    - **Deliverable:** explicitly state documentation updates if changes occur
-#
-# 7. Depth:
-#    - The decomposition may go arbitrarily deep (`P0.1.1.1.2.3` etc.).
-#    - Non-leaf cards always declare themselves as decomposition tasks.
-#    - Leaf cards must be realistically completable in a single GPT session.
-#
-# 8. No Overreach:
-#    - Architect GPT never silently switches into Implementer mode.
-#    - Architect GPT only decomposes; Implementers do the actual work.
-#
-# NEW RULE: QA END-CAP FOR EVERY CARD SET
-# ---------------------------------------
-# Whenever Architect GPT produces a set of cards (whether Architect cards or Implementer leaf cards),
-# the *final* card in that set MUST be a QA card.
-#
-# Purpose:
-# - Ensures every decomposition slice includes a verification gate.
-# - Guarantees that no group of tasks is considered complete until QA passes.
-# - Integrates QA GPT into the system pipeline at every level of the hierarchy.
-#
-# Requirements:
-# - The QA card ID is simply the next number after the final decomposition card.
-#   Example:
-#       - Architect outputs: P0.1.1, P0.1.2, … P0.1.7
-#       - Last card: P0.1.8 MUST be a QA card.
-#
-# - QA cards must follow standard card structure:
-#     - Type: QA
-#     - Description: validate all cards in this group
-#     - Steps: 3–10 verifying tasks
-#     - Done When: QA GPT returns PASS
-# - Architect GPT must NEVER omit this QA end-cap.
-#
-# This rule applies at ALL decomposition levels:
-# - Phase → subsystem cards  
-# - Subsystem → feature cards  
-# - Feature → leaf cards  
-#
-# The final card of *every* set, at *every* level, is always a QA card.
-# ----------------------------------------
-# Phase Redesign Tracking
-# ----------------------------------------
-# - Each phase includes a **retry counter**.
-# - Counter starts at 0 on initial design and increments for every redesign.
-# - QA MUST deny any further redesign when the counter meets or exceeds the allowed maximum (default: 2).
-# - When denied, QA MUST escalate to Andrew and Architect GPT for higher-level intervention.
+Procedural rules for Architect, Implementer, and QA roles now live in
+DOCUMENTATION_PROTOCOL.
+See docs/build/documentation_protocol.md.
 
 
 # ========================================
