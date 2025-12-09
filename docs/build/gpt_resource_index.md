@@ -38,6 +38,8 @@
 #       TECH_SPEC              → docs/build/tech_spec.md
 #       MODULES                → docs/build/modules.md
 #       GPT_RESOURCE_INDEX     → docs/build/gpt_resource_index.md
+#       docs/build/documentation_protocol.md
+#       docs/build/documentation_governance.md
 #
 # Prompt usage:
 #   - In prompts and AI instructions, continue to refer to documents by their
@@ -155,6 +157,69 @@
 #     "Please paste the MODULES section for <module_name>."
 
 # ----------------------------------------
+# SECTION: DOCUMENT: DOCUMENTATION_GOVERNANCE
+# ----------------------------------------
+# name: DOCUMENTATION_GOVERNANCE
+# type: system_rules
+# status: exists
+# path: docs/documentation_governance.md
+# description:
+#   System-level conceptual documentation governance for LillyCORE:
+#   defines documentation layers and categories, which docs are
+#   canonical vs exploratory, and which doc types are allowed or
+#   forbidden.
+#
+# usage:
+#   - Architect:
+#       - Uses this to reason about where new docs belong and which
+#         kinds of docs may be introduced.
+#   - Implementer:
+#       - Uses this to understand which docs are canonical, which are
+#         scratch/exploratory, and when a new doc must be promoted and
+#         indexed.
+#   - QA:
+#       - Uses this to verify that no forbidden doc categories are
+#         relied on and that canonical docs are kept in sync.
+#
+# access:
+#   - When needed, GPT should ask:
+#     "Please paste the full content of DOCUMENTATION_GOVERNANCE
+#      (docs/documentation_governance.md)."
+
+
+# ----------------------------------------
+# SECTION: DOCUMENT: DOCUMENTATION_PROTOCOL
+# ----------------------------------------
+# name: DOCUMENTATION_PROTOCOL
+# type: system_rules
+# status: exists
+# path: docs/build/documentation_protocol.md
+# description:
+#   Build/system documentation protocol defining roles, triggers, and
+#   procedures for updating canonical docs (PROJECT_CANON, ROADMAP,
+#   TECH_SPEC, MODULES, FEATURES, GPT_RESOURCE_INDEX, and related
+#   conceptual docs).
+#
+# usage:
+#   - Architect:
+#       - Uses this to ensure phase and feature bundles include proper
+#         documentation deliverables and flows.
+#   - Implementer:
+#       - Uses this as the operational checklist for which docs to
+#         update after implementing a card, and when to stop and ask
+#         Andrew.
+#   - QA:
+#       - Uses this alongside the QA System in FEATURES to decide
+#         whether documentation updates are complete for a card or
+#         phase.
+#
+# access:
+#   - When needed, GPT should ask:
+#     "Please paste the DOCUMENTATION_PROTOCOL build doc
+#      (docs/build/documentation_protocol.md)."
+
+
+# ----------------------------------------
 # SECTION: DOCUMENT: OTHER
 # ----------------------------------------
 # name: (future docs to be listed here)
@@ -172,3 +237,7 @@
 # - description:
 # - usage:
 # - access:
+
+
+
+
