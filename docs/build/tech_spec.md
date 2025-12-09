@@ -579,6 +579,106 @@
 #         them at any time.
 #
 # ----------------------------------------
+# TAXONOMY CHANGES & APPROVAL PROCESS
+# ----------------------------------------
+# Purpose:
+#   - Define how and when the repository folder taxonomy may change.
+#   - Prevent silent drift between the physical repository layout and the
+#     conceptual layout defined in PROJECT_CANON and MODULES.
+#
+# Definition (for this section):
+#   - "Repository taxonomy" means:
+#       - The set of top-level folders under the repository root (core/,
+#         engines/, plugins/, config/, docs/, scripts/, tests/).
+#       - The major subfolders explicitly called out in this section and
+#         in MODULES (e.g. engines/drift_engine/, plugins/notes_plugin/,
+#         docs/build/).
+#       - The mapping between conceptual modules/engines/plugins and their
+#         physical paths, as described in MODULES and this Section 3.
+#
+# Non-structural changes (no special taxonomy process):
+#   - Adding, modifying, or deleting files inside existing folders that do
+#     not change the folder tree shape (e.g., new Python modules under
+#     engines/helper_engine/, new tests under tests/core/).
+#   - Creating new subfolders that clearly sit "inside" an existing module
+#     or plugin and do not change the meaning of any top-level folder.
+#   - Adding tests under tests/ that mirror new runtime modules, provided
+#     the top-level folder set is unchanged and mirroring rules are
+#     respected.
+#
+# Structural / taxonomy changes (MUST follow this process):
+#   - Adding, renaming, or removing any top-level folder at the repository
+#     root (core/, engines/, plugins/, config/, docs/, scripts/, tests/).
+#   - Adding, renaming, or removing any major subfolder that is explicitly
+#     named in this Section 3 or in MODULES (e.g., engines/drift_engine/,
+#     plugins/notes_plugin/, docs/build/).
+#   - Changing the intended responsibilities or dependency rules of
+#     existing folders (for example, allowing plugins/ to import from
+#     tests/, or allowing runtime code to depend on scripts/).
+#   - Introducing new long-lived docs subtrees under docs/ (e.g. docs/api/)
+#     beyond those already listed, or changing which docs live in
+#     docs/build/.
+#
+# Implementer rules:
+#   - Implementer GPTs and human Implementers MUST NOT perform structural
+#     taxonomy changes under a normal feature card.
+#   - If work appears to require any structural/taxonomy change as defined
+#     above, the Implementer MUST:
+#       - Stop before editing the folder tree, and
+#       - Request an Architect card whose explicit purpose is to design
+#         the taxonomy change.
+#   - Implementers MAY proceed with non-structural changes (files inside
+#     existing folders, new mirrored tests, etc.) as part of normal
+#     implementation work, as long as they respect the existing taxonomy
+#     in this Section 3 and MODULES.
+#
+# Architect responsibilities:
+#   - Every structural/taxonomy change MUST have an explicit Architect-
+#     designed card in the relevant phase bundle.
+#   - For any structural/taxonomy change, the Architect MUST ensure:
+#       - This Section 3 is updated to reflect the new layout or folder
+#         responsibilities.
+#       - MODULES is updated if engines/plugins or their folder mappings
+#         are affected.
+#       - Tests/ and scripts/ mirroring expectations remain clear; if the
+#         change affects those mirrors, this Section 3 and any relevant
+#         scripting/CI sections MUST be updated.
+#   - PROJECT_CANON MUST ONLY be updated when the underlying ontology or
+#     planning discipline changes (for example, the meaning of "engine",
+#     "plugin", or the high-level role of core/ vs engines/). Ordinary
+#     layout tweaks are captured here in TECH_SPEC and in MODULES.
+#
+# When a dedicated "Repo Layout vN" Phase card is required:
+#   - A dedicated Phase-level card (e.g., "Repo Layout v2") is REQUIRED
+#     when any of the following are true:
+#       - The set of top-level folders changes.
+#       - The responsibilities/boundaries of multiple top-level folders
+#         are being revised (for example, moving major responsibilities
+#         from core/ into engines/ or vice versa).
+#       - Large-scale moves/renames are planned that will impact tests/
+#         mirroring, scripts/, and docs/ in more than one subsystem.
+#   - Localized structural changes that only affect the internal layout of
+#     a single engine or plugin (for example, splitting
+#     engines/helper_engine/ into internal subpackages) MAY be handled as
+#     part of that engine/plugin's feature card, provided that:
+#       - The top-level folder set is unchanged, and
+#       - The high-level responsibilities described above remain true.
+#
+# Interaction with Phase Bundles and QA:
+#   - Every structural/taxonomy change MUST appear as one or more explicit
+#     cards in the phase bundle for the phase in which it is implemented.
+#   - QA MUST treat these cards as first-class deliverables and MUST:
+#       - Verify that the implemented folder tree matches the updated
+#         description in this Section 3 and in MODULES.
+#       - FAIL the phase if structural changes are present in the repo but
+#         no corresponding cards exist in the phase bundle.
+#       - FAIL the phase if the repo layout disagrees with this Section 3
+#         or MODULES after the change.
+#   - QA SHOULD also verify that docs/build/ remains the canonical home
+#     for build/system docs and that any new docs subtrees under docs/
+#     follow the docs layout rules defined in this TECH_SPEC.
+#
+# ----------------------------------------
 # MIRRORING RULE
 # ----------------------------------------
 # All runtime Python code must have a corresponding test root under tests/.
