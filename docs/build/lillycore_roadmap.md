@@ -9,361 +9,361 @@
 # ========================================
 # SECTION: OVERVIEW
 # ========================================
-# This roadmap defines the ORDER in which LillyCORE’s subsystems come online.
-# It is deliberately high-level and MUST NOT be treated as a task list.
-#
-# This version aligns naming with:
-#   - DRIFT_ENGINE (2a)
-#   - HELPER_ENGINE (2b)
-#   - PLUGIN_ENGINE (formerly Module Handler)
-#   - NOTES_PLUGIN (formerly Notes Engine)
-#   - Plugins vs engines terminology
-#
-# Architect GPT uses this to determine:
-#   - Which subsystems exist at a given point in evolution,
-#   - Dependencies between phases,
-#   - Scope boundaries for decomposition.
-#
-# QA GPT uses this to verify that implemented features align with the intended phase structure and subsystem sequence.
-#
-# Implementer GPT MUST NOT modify the Roadmap.
-# QA GPT MUST NOT modify the Roadmap; it only checks alignment of completed work to the intended phase.
-#
-# Outcomes of each phase represent architectural readiness,
-# not code-complete deliverables.
+This roadmap defines the ORDER in which LillyCORE’s subsystems come online.
+It is deliberately high-level and MUST NOT be treated as a task list.
+
+This version aligns naming with:
+  - DRIFT_ENGINE (2a)
+  - HELPER_ENGINE (2b)
+  - PLUGIN_ENGINE (formerly Module Handler)
+  - NOTES_PLUGIN (formerly Notes Engine)
+  - Plugins vs engines terminology
+
+Architect GPT uses this to determine:
+  - Which subsystems exist at a given point in evolution,
+  - Dependencies between phases,
+  - Scope boundaries for decomposition.
+
+QA GPT uses this to verify that implemented features align with the intended phase structure and subsystem sequence.
+
+Implementer GPT MUST NOT modify the Roadmap.
+QA GPT MUST NOT modify the Roadmap; it only checks alignment of completed work to the intended phase.
+
+Outcomes of each phase represent architectural readiness,
+not code-complete deliverables.
 
 
 # ========================================
 # PHASE 0 — FOUNDATIONS & TOOLING
 # ========================================
-# Intent:
-#   Establish the skeleton the entire system relies on.
-#
-# Includes:
-#   - Repository setup
-#   - Folder taxonomy
-#   - Development environment (VS Code, GitHub Projects)
-#   - Documentation structure
-#   - High-level system canon
-#
-# Outcome:
-#   A clean workspace with stable rules.
+Intent:
+  Establish the skeleton the entire system relies on.
+
+Includes:
+  - Repository setup
+  - Folder taxonomy
+  - Development environment (VS Code, GitHub Projects)
+  - Documentation structure
+  - High-level system canon
+
+Outcome:
+  A clean workspace with stable rules.
 
 
 # ========================================
 # PHASE 1 — CORE LOOP, LOGGING, USER PREFERENCES
 # ========================================
-# Intent:
-#   Establish runtime heartbeat and persistent user identity.
-#
-# Includes:
-#   - Unified logging
-#   - Error envelopes
-#   - Core runtime loop
-#   - User preference loader + overrides
-#   - AI pool definitions (stubbed only)
-#
-# Outcome:
-#   LillyCORE can run and persist user settings.
+Intent:
+  Establish runtime heartbeat and persistent user identity.
+
+Includes:
+  - Unified logging
+  - Error envelopes
+  - Core runtime loop
+  - User preference loader + overrides
+  - AI pool definitions (stubbed only)
+
+Outcome:
+  LillyCORE can run and persist user settings.
 
 
 # ========================================
 # PHASE 2 — AI POOLS & EXECUTION FRAMEWORK
 # ========================================
-# Intent:
-#   Establish composable “brains” and safe execution wrappers.
-#
-# Includes:
-#   - Conversational AI pool
-#   - Deterministic lightweight pool
-#   - Worker/back-end pool
-#   - Execution envelopes
-#   - Retry / timeouts / wrappers
-#
-# Outcome:
-#   Any LLM backend can be attached safely.
+Intent:
+  Establish composable “brains” and safe execution wrappers.
+
+Includes:
+  - Conversational AI pool
+  - Deterministic lightweight pool
+  - Worker/back-end pool
+  - Execution envelopes
+  - Retry / timeouts / wrappers
+
+Outcome:
+  Any LLM backend can be attached safely.
 
 
 # ========================================
 # PHASE 3 — SYSTEM DOC MVP (DURABLE DATA LAYER)
 # ========================================
-# Intent:
-#   Create persistent storage with safe, corruption-resistant access.
-#
-# Includes:
-#   - Work event storage
-#   - Permanent logs
-#   - Snapshots
-#   - Final file output routing (pdf/txt/img)
-#
-# Outcome:
-#   Durable state with no corruption.
+Intent:
+  Create persistent storage with safe, corruption-resistant access.
+
+Includes:
+  - Work event storage
+  - Permanent logs
+  - Snapshots
+  - Final file output routing (pdf/txt/img)
+
+Outcome:
+  Durable state with no corruption.
 
 
 # ========================================
 # PHASE 4 — NOTES PLUGIN V0
 # ========================================
-# Intent:
-#   First plugin built atop System DOC; acts as a simple testbed.
-#
-# Includes:
-#   - Transcript summarization
-#   - Note accumulation
-#   - Querying
-#   - Lightweight testbed for DRIFT/HELPER flows
-#
-# Outcome:
-#   Cheap way to test memory flow.
+Intent:
+  First plugin built atop System DOC; acts as a simple testbed.
+
+Includes:
+  - Transcript summarization
+  - Note accumulation
+  - Querying
+  - Lightweight testbed for DRIFT/HELPER flows
+
+Outcome:
+  Cheap way to test memory flow.
 
 
 # ========================================
 # PHASE 5 — DRIFT ENGINE MVP (CONTEXT, EMOTION, PERCEPTION)
 # ========================================
-# Intent:
-#   “Lilly the Person.” Establish structured, emotionally aware input.
-#
-# Includes:
-#   - Work/personal/ephemeral split
-#   - Emotional weights
-#   - Personal memory entries
-#   - Ephemeral context (recent messages & tone)
-#   - Thread/context summaries
-#
-# Outcome:
-#   Structured input for HELPER_ENGINE.
+Intent:
+  “Lilly the Person.” Establish structured, emotionally aware input.
+
+Includes:
+  - Work/personal/ephemeral split
+  - Emotional weights
+  - Personal memory entries
+  - Ephemeral context (recent messages & tone)
+  - Thread/context summaries
+
+Outcome:
+  Structured input for HELPER_ENGINE.
 
 
 # ========================================
 # PHASE 6 — HELPER ENGINE MVP (WORK ENGINE)
 # ========================================
-# Intent:
-#   “Lilly the Worker.” Create the engine that performs structured work.
-#
-# Includes:
-#   - Accept WorkPackage + ContextBundle
-#   - Select appropriate work type
-#   - Call backend AI(s) or stubs
-#   - Return structured output
-#   - Log work event
-#
-# Outcome:
-#   Full engine for doing work with traceability.
+Intent:
+  “Lilly the Worker.” Create the engine that performs structured work.
+
+Includes:
+  - Accept WorkPackage + ContextBundle
+  - Select appropriate work type
+  - Call backend AI(s) or stubs
+  - Return structured output
+  - Log work event
+
+Outcome:
+  Full engine for doing work with traceability.
 
 
 # ========================================
 # PHASE 7 — PLUGIN ENGINE MVP
 # ========================================
-# Intent:
-#   Architectural pivot towards plugin-based expansion.
-#
-# Includes:
-#   - Register/load/unload plugins
-#   - Capability registry
-#   - Plugin DOC boundaries
-#   - Sandbox routing
-#   - Notes Plugin V1 moves here (plugin self-storage)
-#
-# Outcome:
-#   The system becomes expandable.
+Intent:
+  Architectural pivot towards plugin-based expansion.
+
+Includes:
+  - Register/load/unload plugins
+  - Capability registry
+  - Plugin DOC boundaries
+  - Sandbox routing
+  - Notes Plugin V1 moves here (plugin self-storage)
+
+Outcome:
+  The system becomes expandable.
 
 
 # ========================================
 # PHASE 8 — STABILITY SPINE
 # ========================================
-# Intent:
-#   Self-repair, maintenance, and internal evolution.
-#   These MUST remain adjacent:
-#     - HELP_DESK_ENGINE
-#     - DREAM_ENGINE
-#     - SCRIPT_ENGINE
-#
-# SUBPHASE 8a — HELP DESK ENGINE V0
-#   - Detect repeated failures
-#   - Attempt auto-repair or mitigation
-#   - Escalate issues to Andrew when needed
-#   - Validate fatal vs recoverable errors
-#   Outcome:
-#     System stays alive.
-#
-# SUBPHASE 8b — DREAM ENGINE V0
-#   - Memory degradation
-#   - DOC compression
-#   - Lateral reasoning passes
-#   - Drift evaluation
-#   - Optimization suggestions
-#   Outcome:
-#     Lilly learns and self-corrects.
-#
-# SUBPHASE 8c — SCRIPT ENGINE V0
-#   - Optimize internal scripts
-#   - Merge/split script units
-#   - Suggest improvements
-#   - Sandbox validation
-#   - Optional auto-approval
-#   Outcome:
-#     Procedural intelligence + autonomous maintenance.
+Intent:
+  Self-repair, maintenance, and internal evolution.
+  These MUST remain adjacent:
+    - HELP_DESK_ENGINE
+    - DREAM_ENGINE
+    - SCRIPT_ENGINE
+
+SUBPHASE 8a — HELP DESK ENGINE V0
+  - Detect repeated failures
+  - Attempt auto-repair or mitigation
+  - Escalate issues to Andrew when needed
+  - Validate fatal vs recoverable errors
+  Outcome:
+    System stays alive.
+
+SUBPHASE 8b — DREAM ENGINE V0
+  - Memory degradation
+  - DOC compression
+  - Lateral reasoning passes
+  - Drift evaluation
+  - Optimization suggestions
+  Outcome:
+    Lilly learns and self-corrects.
+
+SUBPHASE 8c — SCRIPT ENGINE V0
+  - Optimize internal scripts
+  - Merge/split script units
+  - Suggest improvements
+  - Sandbox validation
+  - Optional auto-approval
+  Outcome:
+    Procedural intelligence + autonomous maintenance.
 
 
 # ========================================
 # PHASE 9 — UX MVP
 # ========================================
-# Intent:
-#   First real external interface.
-#
-# Includes:
-#   - Chat panel
-#   - Output panel
-#   - Errors/debug view
-#   - Identity + personality hooks
-#
-# Outcome:
-#   External interaction begins.
+Intent:
+  First real external interface.
+
+Includes:
+  - Chat panel
+  - Output panel
+  - Errors/debug view
+  - Identity + personality hooks
+
+Outcome:
+  External interaction begins.
 
 
 # ========================================
 # PHASE 10 — PROJECT MANAGEMENT PLUGIN
 # ========================================
-# Intent:
-#   Lilly organizes work internally.
-#
-# Includes:
-#   - Task breakdown
-#   - Work tracking
-#   - Self-roadmapping
-#
-# Outcome:
-#   Autonomous internal PM.
+Intent:
+  Lilly organizes work internally.
+
+Includes:
+  - Task breakdown
+  - Work tracking
+  - Self-roadmapping
+
+Outcome:
+  Autonomous internal PM.
 
 
 # ========================================
 # PHASE 11 — PERSONAL ASSISTANT PLUGIN
 # ========================================
-# Intent:
-#   Functional personality optimized for user assistance.
-#
-# Includes:
-#   - Daily briefings
-#   - Summary generation
-#   - Routine tracking
-#   - Calendar-like memory
-#
-# Outcome:
-#   Lilly becomes a usable assistant.
+Intent:
+  Functional personality optimized for user assistance.
+
+Includes:
+  - Daily briefings
+  - Summary generation
+  - Routine tracking
+  - Calendar-like memory
+
+Outcome:
+  Lilly becomes a usable assistant.
 
 
 # ========================================
 # PHASE 12 — DEMONSTRATION PLUGINS
 # ========================================
-# Intent:
-#   Provide small showcases for validation and external viewers.
-#
-# Includes:
-#   - Calculator
-#   - Story helper
-#   - Mini-notes
-#   - Code explainer
-#   - File tagger
-#
-# Outcome:
-#   Public demos and validation.
+Intent:
+  Provide small showcases for validation and external viewers.
+
+Includes:
+  - Calculator
+  - Story helper
+  - Mini-notes
+  - Code explainer
+  - File tagger
+
+Outcome:
+  Public demos and validation.
 
 
 # ========================================
 # PHASE 13 — MULTI-USER PLUGIN
 # ========================================
-# Intent:
-#   Support for multiple human identities.
-#
-# Includes:
-#   - Per-user memory
-#   - Per-user plugin data
-#   - Thread routing
-#   - Identity switching
-#
-# Outcome:
-#   LillyCORE supports multiple humans.
+Intent:
+  Support for multiple human identities.
+
+Includes:
+  - Per-user memory
+  - Per-user plugin data
+  - Thread routing
+  - Identity switching
+
+Outcome:
+  LillyCORE supports multiple humans.
 
 
 # ========================================
 # PHASE 14 — IO & NETWORK LAYER
 # ========================================
-# Intent:
-#   Multi-device communication and presence.
-#
-# Includes:
-#   - Unified packet format
-#   - LAN endpoints
-#   - Voice/wake commands
-#   - Device sandbox coordination
-#
-# Outcome:
-#   Whole-home digital presence.
+Intent:
+  Multi-device communication and presence.
+
+Includes:
+  - Unified packet format
+  - LAN endpoints
+  - Voice/wake commands
+  - Device sandbox coordination
+
+Outcome:
+  Whole-home digital presence.
 
 
 # ========================================
 # PHASE 15 — APPLIANCE LAYER
 # ========================================
-# Intent:
-#   Hardware integration and lifecycle management.
-#
-# Includes:
-#   - Auto-start
-#   - Safe shutdown
-#   - Updates
-#   - Corruption recovery
-#
-# Outcome:
-#   Dedicated device compatibility.
+Intent:
+  Hardware integration and lifecycle management.
+
+Includes:
+  - Auto-start
+  - Safe shutdown
+  - Updates
+  - Corruption recovery
+
+Outcome:
+  Dedicated device compatibility.
 
 
 # ========================================
 # PHASE 16 — USER CONFIGURATION & FIRST-RUN EXPERIENCE
 # ========================================
-# Intent:
-#   Polished onboarding for new users.
-#
-# Includes:
-#   - Setup wizard
-#   - Model selection
-#   - Plugin selection
-#   - Device detection
-#   - Failsafe defaults
-#
-# Outcome:
-#   Refined entry experience.
+Intent:
+  Polished onboarding for new users.
+
+Includes:
+  - Setup wizard
+  - Model selection
+  - Plugin selection
+  - Device detection
+  - Failsafe defaults
+
+Outcome:
+  Refined entry experience.
 
 
 # ========================================
 # PHASE 17 — ENTERPRISE DEMO PLUGIN
 # ========================================
-# Intent:
-#   Professional-scale workload demonstration.
-#
-# Includes:
-#   - Multi-worker orchestration
-#   - Capability gating
-#   - High-volume processing
-#   - Enterprise configuration
-#
-# Outcome:
-#   Investor-ready demo.
+Intent:
+  Professional-scale workload demonstration.
+
+Includes:
+  - Multi-worker orchestration
+  - Capability gating
+  - High-volume processing
+  - Enterprise configuration
+
+Outcome:
+  Investor-ready demo.
 
 
 # ========================================
 # PHASE 18 — SYSTEM INTEGRATION + ALPHA RELEASE
 # ========================================
-# Intent:
-#   Final stitching, validation, and release preparation.
-#
-# Includes:
-#   - Full integration
-#   - System validation
-#   - Runtime optimization
-#   - Installer creation
-#   - Smoke tests
-#
-# Outcome:
-#   LillyCORE Alpha.
+Intent:
+  Final stitching, validation, and release preparation.
+
+Includes:
+  - Full integration
+  - System validation
+  - Runtime optimization
+  - Installer creation
+  - Smoke tests
+
+Outcome:
+  LillyCORE Alpha.
 
 
 # ========================================
