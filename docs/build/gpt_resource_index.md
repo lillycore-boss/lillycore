@@ -300,5 +300,72 @@
 #     "Please paste the DOCUMENTATION_PROTOCOL build doc
 #      (docs/build/documentation_protocol.md)."
 
+## Procedure for Adding New Document Types & Updating GPT_RESOURCE_INDEX
+
+This section defines the **operational rules** for proposing, approving, creating, and indexing new documents in LillyCORE.
+
+### 1. When the Procedure Applies
+This procedure is required whenever:
+- A new canonical documentation type is introduced.
+- An existing conceptual/system document changes meaning.
+- A document must be formally added to GPT_RESOURCE_INDEX.
+
+This procedure does NOT apply to runtime artifacts such as logs, work events, transcripts, or snapshots.  
+**Runtime artifacts are NOT governed by GPT_RESOURCE_INDEX.**
+
+### 2. Proposal Stage
+- Architect GPT (or Andrew directly) identifies the need for a new canonical document.
+- Architect GPT writes a feature card describing:
+  - Purpose of the new document
+  - Expected content
+  - How it fits within documentation_governance
+  - Required repo location per TECH_SPEC
+
+### 3. Approval Stage
+A new canonical document type MUST be approved by:
+1. **Andrew**  
+2. Architect GPT (confirming ontology and doc-layer correctness)
+
+No Implementer may create a new document type before explicit approval.
+
+### 4. Creation Stage
+After approval:
+- Implementer GPT creates the physical file at the path specified by TECH_SPEC.
+- Implementer ensures:
+  - Correct naming (snake_case where applicable)
+  - Correct folder location
+  - Clear section structure that matches established doc patterns
+
+### 5. Indexing Stage (Mandatory)
+Once the document exists:
+- Implementer GPT **must update GPT_RESOURCE_INDEX** with:
+  - name  
+  - type  
+  - status  
+  - path  
+  - description  
+  - usage and access rules
+
+A document does NOT become canonical until it appears in GPT_RESOURCE_INDEX.
+
+### 6. QA Verification
+QA GPT must verify:
+- The document exists in the correct physical location.
+- GPT_RESOURCE_INDEX accurately indexes it.
+- The new document aligns with PROJECT_CANON, TECH_SPEC, MODULES, and documentation_governance.
+
+If discrepancies are found, QA produces corrective cards.
+
+### 7. Modification of Canonical Document Types
+Any change to the meaning, purpose, or category of a canonical doc:
+- MUST follow the same proposal → approval → update → indexing cycle.
+- MUST include updates to GPT_RESOURCE_INDEX to reflect its new definition.
+
+### 8. Prohibited Actions
+- GPTs MUST NOT introduce new canonical docs informally.
+- GPTs MUST NOT treat runtime data or ephemeral artifacts as documentation.
+- GPTs MUST NOT store specification information in unindexed files.
+
+This keeps LillyCORE's documentation architecture coherent and prevents drift.
 
 
