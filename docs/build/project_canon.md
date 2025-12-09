@@ -4,9 +4,9 @@
 # VERSION: v1.0 (Engines/Plugins terminology update)
 # NOTE:
 #   Detailed GPT behavioural rules and documentation-governance procedures
-#   now live in DOCUMENTATION_PROTOCOL and DOCUMENTATION_GOVERNANCE.
-#   PROJECT_CANON focuses on LillyCORE’s philosophy, ontology, and planning
-#   discipline.
+#   now live in GPT_BEHAVIOUR_SPEC, DOCUMENTATION_PROTOCOL, and
+#   DOCUMENTATION_GOVERNANCE. PROJECT_CANON focuses on LillyCORE’s
+#   philosophy, ontology, and planning discipline.
 # ========================================
 
 
