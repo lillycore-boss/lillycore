@@ -425,3 +425,116 @@ DOCUMENTATION_UPDATES:
   - MODULES:
       • Must reflect correct placement of data layer, document handler, schemas, and mapping files.
 
+CARD_ID: P4
+CARD_TITLE: Notes Plugin V0 – Minimal Plugin & Memory-Flow Testbed
+
+EXECUTOR_ROLE: Architect
+
+PHASE_CONTEXT:
+  - Phase: P4
+  - Slice: P4
+  - Parent Card: none
+
+DELIVERABLES_SERVED:
+  - P4.D1 – Definition of minimal Notes Plugin V0 interface and responsibilities
+  - P4.D2 – Processing path capable of generating dummy/basic summaries
+  - P4.D3 – Accumulation and persistence rules for plugin outputs
+  - P4.D4 – User output folder definition + naming/organization conventions
+  - P4.D5 – Integration rules between Notes Plugin and:
+        • Data/document layer (system-owned content)
+        • User-output write path (user-owned artifacts)
+        • Runtime/logging visibility
+  - P4.D6 – Minimal invocation harness for running the plugin
+  - P4.D7 – Documentation describing plugin role, limits, and how future phases will use it
+
+---
+DESCRIPTION:
+  Phase 4 introduces LillyCORE’s first plugin-like subsystem: Notes Plugin V0.
+  It is intentionally minimal and serves as a safe “lab bench” for exercising the
+  memory flow established in earlier phases. The plugin accepts transcript-like content,
+  produces basic or dummy summaries, stores system-visible artifacts through the data layer,
+  and emits user-facing output files in a designated user-output folder.
+  
+  This milestone creates a complete, low-risk end-to-end test of:
+    • Data/document layer integration
+    • Plugin boundaries and storage rules
+    • Runtime/logging visibility
+    • Simple processing workflows that will later evolve
+
+INPUTS / PRECONDITIONS:
+  - Phase 1:
+      • Runtime loop
+      • Logging and error envelopes
+      • Preference system
+  - Phase 2:
+      • AI pools and execution framework (used minimally or stably stubbed)
+  - Phase 3:
+      • Durable data/document layer
+      • Any System DOC structures already defined
+  - Canon rules for:
+      • Plugin boundaries and system-vs-user data separation
+      • User output vs internal persistent storage
+      • Disk-write constraints and allowed bypasses
+  - Information required:
+      • Location of user-visible output directory
+      • Metadata structure for traceability (timestamps, source IDs, run IDs)
+      • Expectations for minimal transcript/notes behavior at this stage
+
+STEPS:
+  - Step 1: Define minimal Notes Plugin V0 interface:
+      • Input format (transcript-like content)
+      • Output structure (summary or dummy summary)
+      • Plugin metadata requirements (timestamps, IDs)
+  - Step 2: Specify the processing path:
+      • Accept input
+      • Generate summary/dummy output
+      • Store a persistent “note” version through the data/document layer
+  - Step 3: Define rules for accumulating plugin outputs:
+      • Naming conventions
+      • Storage paths and organization
+      • Linking outputs to sessions/inputs
+  - Step 4: Create user output folder conventions:
+      • Directory name
+      • File formats (text/markdown)
+      • Naming rules for user-visible artifacts
+  - Step 5: Specify integration rules:
+      • All system-owned data must go through the data/document layer
+      • Only user-output files may bypass it
+      • Runtime/logging must record plugin operations
+  - Step 6: Define a minimal invocation harness:
+      • Simple developer-oriented or runtime hook
+      • Does not require Plugin Engine (future phase)
+  - Step 7: Architect-level decomposition into P4.x cards:
+      • V0 interface and processing pipeline specification
+      • User-output folder definition
+      • Integration with data layer
+      • Logging/runtime wiring
+      • Testing harness specification
+      • Documentation updates
+  - Step 8: Identify unresolved questions to escalate:
+      • How transcripts should be represented in future phases
+      • Whether early heuristic summarization should exist now or remain dummy
+      • Metadata expansion rules for future plugin versions
+
+DONE_WHEN:
+  - Full decomposition into P4.x cards covers deliverables P4.D1–P4.D7.
+  - Minimal but functional plugin definition is complete.
+  - User output folder rules are documented and unambiguous.
+  - Rules for accumulating and storing notes are finalized.
+  - All write-path rules follow Phase 3 data/document conventions.
+  - Runtime/logging integration requirements are defined.
+  - No advanced DRIFT/HELPER or semantic querying logic appears.
+  - QA card for Phase 4 exists and correctly references all required outcomes.
+
+DOCUMENTATION_UPDATES:
+  - Canon:
+      • Plugin-boundary rules may require additions
+      • User-output vs system-owned data distinctions documented
+  - TECH_SPEC:
+      • File/output conventions
+      • Plugin storage mappings
+      • Notes Plugin integration with runtime/logging
+  - FEATURES:
+      • P4.x implementer and QA cards recorded
+  - MODULES:
+      • Placement of Notes Plugin directory and integration mapping defined
