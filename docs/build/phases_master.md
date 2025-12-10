@@ -1038,3 +1038,125 @@ DOCUMENTATION_UPDATES:
       • HELP_DESK, DREAM, SCRIPT engine definitions + contracts
 
 
+CARD_ID: P9
+CARD_TITLE: UX MVP — Local Web Interface (Chat Pane + Crate Stream)
+
+EXECUTOR_ROLE: Architect
+
+PHASE_CONTEXT:
+  - Phase: P9
+  - Slice: P9
+  - Parent Card: none
+
+DELIVERABLES_SERVED:
+  - P9.D1 – Full UX architecture (browser UI layout + packet routing model)
+  - P9.D2 – Chat Pane design (human channel)
+  - P9.D3 – Crate Stream design (system channel for structured output)
+  - P9.D4 – Packet interpretation contract for UX layer
+  - P9.D5 – Network interface + local web server architecture
+  - P9.D6 – Identity/personality hook render framework
+  - P9.D7 – UX routing for chat, crates, files, debug, metadata
+  - P9.D8 – Documentation of UX boundaries and constraints
+
+---
+DESCRIPTION:
+  Phase 9 creates LillyCORE’s first external interface: a local browser-based UX shell 
+  capable of rendering conversational output (Chat Pane) and structured system output 
+  (Crate Stream). The UX MVP is interpretive only: it displays exactly the packets 
+  emitted by engines without generating or altering system behavior.
+
+  The UX layer becomes the primary gateway for real-world use of LillyCORE, providing:
+    • A clean, voice-friendly conversational channel
+    • A crate stream for structured results, plugin outputs, file paths, and metadata
+    • Visual rendering of identity/personality cues from DRIFT
+    • Display of debug/error packets and crate metadata
+    • Natural-language plugin invocation through normal chat input
+
+  By separating human-facing communication (chat) from system-facing output (crates), 
+  Phase 9 defines the UX model used by all future interfaces, including mobile, voice, 
+  and remote clients.
+
+INPUTS / PRECONDITIONS:
+  - DRIFT packet structures:
+      • Identity/personality hooks
+      • Tone indicators
+      • Context summaries
+  - HELPER structured result packets:
+      • Work metadata
+      • File references
+      • Success/error results
+  - Plugin Engine outputs:
+      • Crate-compatible packets
+      • Plugin file outputs
+  - SYSTEM_DOC schemas for metadata crates
+  - Defined packet formats for:
+      • Chat output
+      • Crate output
+      • Debug/error packets
+      • Identity/personality packets
+  - Network interface layer capable of serving a local web front-end
+
+STEPS:
+  - Step 1: Architect UX shell layout:
+      • Two-pane interface (Chat Pane + Crate Stream)
+      • Optional identity/performance indicators
+      • Basic controls (input field, voice hook placeholder)
+  - Step 2: Architect packet routing model:
+      • Mapping packet types → UX regions
+      • Chat packets → Chat Pane
+      • Structured system packets → Crate Stream
+      • Debug/error packets → Debug panel
+      • Personality hooks → Chat Pane header or inline cues
+  - Step 3: Define UX packet interpretation contract:
+      • UX is renderer only
+      • UX must not invent personality or system behavior
+      • UX displays fields verbatim
+      • UX does not transform packets
+  - Step 4: Architect file output handling:
+      • Links to plugin output files
+      • Download/open controls
+      • Crate-based file metadata display
+  - Step 5: Architect network interface + local server:
+      • Serve static UX app
+      • Provide WebSocket or polling channel for packets
+      • Local-only security requirements
+  - Step 6: Architect natural-language plugin invocation pathways:
+      • Normal chat message → DRIFT → HELPER → Plugin Engine
+      • UX does not interpret or rewrite commands
+  - Step 7: Architect UX boundaries:
+      • UX cannot bypass packet system
+      • UX cannot access internal system state
+      • UX cannot modify DRIFT/HELPER behaviors
+  - Step 8: Produce P9.x implementer cards:
+      • UX frontend scaffold
+      • Packet router
+      • WebSocket/server transport
+      • Crate stream rendering engine
+      • Chat pane rendering engine
+      • Identity/personality renderer
+      • UX documentation + constraints
+
+DONE_WHEN:
+  - Complete UX architecture is defined with clear packet routing rules.
+  - Chat Pane layout and behavior are fully specified.
+  - Crate Stream layout, container model, and usage rules are finalized.
+  - UX packet interpretation contract is documented with no ambiguity.
+  - File output routing and crate metadata display rules are specified.
+  - Network interface + serving model are approved.
+  - UX boundaries and non-permitted actions are clearly documented.
+  - P9.x implementer cards are generated and validated.
+  - Documentation updated across Canon, TECH_SPEC, MODULES, and FEATURES.
+
+DOCUMENTATION_UPDATES:
+  - Canon:
+      • UX ontology (“chat is human, crates are system”)
+      • Packet interpretation rules
+      • UX boundaries and safety guarantees
+  - TECH_SPEC:
+      • Local server/network interface requirements
+      • Packet → UX routing specification
+  - FEATURES:
+      • P9.x implementer and QA cards
+  - MODULES:
+      • UX module definition + responsibilities
+
