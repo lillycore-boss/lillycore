@@ -783,3 +783,128 @@ DOCUMENTATION_UPDATES:
       • P6.x implementer + QA cards
   - MODULES:
       • HELPER module entry + responsibilities finalized
+
+
+CARD_ID: P7
+CARD_TITLE: Plugin Engine MVP – Safe Modular Expansion Layer
+
+EXECUTOR_ROLE: Architect
+
+PHASE_CONTEXT:
+  - Phase: P7
+  - Slice: P7
+  - Parent Card: none
+
+DELIVERABLES_SERVED:
+  - P7.D1 – Plugin Engine architecture + boundaries
+  - P7.D2 – Plugin manifest schema + plugin folder specification
+  - P7.D3 – Plugin discovery, registration, validation model
+  - P7.D4 – Plugin sandbox execution model
+  - P7.D5 – Plugin packet-routing rules (user-initiated + system-initiated)
+  - P7.D6 – Plugin result validation + SYSTEM_DOC logging
+  - P7.D7 – End-to-end Plugin Engine integration path
+  - P7.D8 – Documentation set covering manifests, packets, sandboxing
+
+---
+DESCRIPTION:
+  Phase 7 introduces the Plugin Engine—a high-boundary, controlled expansion mechanism
+  allowing LillyCORE to grow safely through modular, folder-based plugins.
+
+  Plugins are treated as black boxes.  
+  All communication occurs through validated packets.  
+  No plugin can bypass engine boundaries or touch internal subsystems directly.
+
+  Plugin Engine MVP provides:
+    • Plugin discovery (folder-as-plugin)
+    • Manifest validation + safety review
+    • Capability registration
+    • Structured packet-based execution
+    • Full sandboxing with restricted I/O
+    • Strict output validation
+    • Logging + metadata persistence via SYSTEM_DOC
+
+  Two packet types are supported:
+    • User-initiated (DRIFT → HELPER → Plugin Engine)
+    • System-initiated (backend tasks delegated by HELPER or engines)
+
+  This becomes the foundation for all future extensibility—UX plugins, reasoning plugins,
+  data plugins, and system automation scripts.
+
+INPUTS / PRECONDITIONS:
+  - From prior phases:
+      • P1: Runtime, logging, preferences
+      • P2: AI_POOLS for manifest checking and validation
+      • P3: SYSTEM_DOC for plugin metadata and logs
+      • P4: Notes Plugin as minimal testbed
+      • P5: DRIFT structured input (context + emotional metadata)
+      • P6: HELPER work engine + packet format
+  - From Canon + MODULES:
+      • Engine boundaries
+      • Plugin ontology
+      • Safety/permission rules
+  - Required decisions:
+      • Manifest schema (version, capabilities, permissions)
+      • Allowed plugin operations
+      • Plugin output directory rules
+      • Required return fields for packets
+
+STEPS:
+  - Step 1: Architect Plugin Engine core:
+      • Entry points and routing model
+      • Folder-discovery rules and scanning intervals
+      • Plugin lifecycle (load → validate → register → execute)
+  - Step 2: Define plugin manifest standard:
+      • Required fields (name, version, capabilities, permissions)
+      • Safety declarations
+      • Entrypoint definitions
+      • Optional metadata patterns
+  - Step 3: Architect plugin sandbox:
+      • Execution boundaries
+      • Allowed vs forbidden operations
+      • Output directory isolation
+      • Output validation protocol
+  - Step 4: Architect packet routing:
+      • User-initiated → DRIFT → HELPER → Plugin Engine
+      • System-initiated → HELPER → Plugin Engine
+      • Packet-to-plugin capability matching
+      • Error packet generation
+  - Step 5: Architect plugin registry:
+      • Capability index
+      • Plugin availability signals
+      • Version and compatibility management
+  - Step 6: Architect SYSTEM_DOC integration:
+      • Plugin activity logs
+      • Manifest storage
+      • Execution results + metadata persistence
+  - Step 7: Architect end-to-end test path:
+      • Use Notes Plugin V0 or dummy plugin
+      • Verify routing + sandboxing + output validation
+      • Validate logs and registry state
+  - Step 8: Identify open questions for P7.x implementation cards:
+      • Hot-reload behavior
+      • Plugin upgrade rules
+      • UI plugin permissions (future phase)
+      • Rich capability negotiation
+
+DONE_WHEN:
+  - Plugin Engine architecture fully decomposed into P7.x implementer cards.
+  - Manifest + folder specification finalized and documented.
+  - Sandbox boundaries defined and vetted.
+  - Packet routing rules fully aligned with HELPER packet spec.
+  - Plugin registry architecture stable.
+  - SYSTEM_DOC integration requirements complete.
+  - End-to-end test plan and pipeline defined.
+  - Complete documentation set prepared for implementers + QA.
+
+DOCUMENTATION_UPDATES:
+  - Canon:
+      • Engine/plugin boundary definitions
+      • Plugin ontology rules
+  - TECH_SPEC:
+      • Plugin Engine runtime integration
+      • Manifest schema + sandbox constraints
+      • Plugin directory structure
+  - FEATURES:
+      • P7.x implementer + QA cards
+  - MODULES:
+      • Plugin Engine entry, responsibilities, and contract definitions
