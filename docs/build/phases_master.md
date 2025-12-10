@@ -1160,3 +1160,119 @@ DOCUMENTATION_UPDATES:
   - MODULES:
       • UX module definition + responsibilities
 
+CARD_ID: P10
+CARD_TITLE: Project Management Plugin (Projects, Tasks, Progress Tracking)
+
+EXECUTOR_ROLE: Architect
+
+PHASE_CONTEXT:
+  - Phase: P10
+  - Slice: P10
+  - Parent Card: none
+
+DELIVERABLES_SERVED:
+  - P10.D1 – Project Management Plugin architecture
+  - P10.D2 – Project/Task data model + metadata spec
+  - P10.D3 – Plugin storage design + boundaries
+  - P10.D4 – HELPER integration design (push/pull tasks)
+  - P10.D5 – UX crate specifications for projects/tasks
+  - P10.D6 – Packet formats for PM operations (create/update/query)
+  - P10.D7 – Lifecycle rules + user/system workflows
+  - P10.D8 – Documentation across MODULES, Canon, TECH_SPEC
+
+---
+DESCRIPTION:
+  Phase 10 introduces the Project Management Plugin (PM Plugin), a plugin-layer module 
+  that provides durable, structured storage for large, long-term projects. It enables the 
+  system and the user to organize work into projects, tasks, subtasks, and progress states, 
+  relieving HELPER of the burden of handling everything in a single continuous run.
+
+  The PM Plugin becomes the central backlog system for internal and user-driven work. 
+  HELPER can push tasks into projects or retrieve tasks when requested. Users can create 
+  and manage projects through chat, while UX displays project/task states via crates.
+
+  This plugin thickens LillyCORE’s backend by giving the system a persistent workspace 
+  for big efforts without adding core-engine complexity or autonomy prematurely.
+
+INPUTS / PRECONDITIONS:
+  - Plugin Engine MVP (Phase 7):
+      • Capability registry
+      • Manifest + sandbox enforcement
+  - HELPER_ENGINE MVP (Phase 6):
+      • Work decomposition + execution
+      • Ability to reference project/task IDs
+  - SYSTEM_DOC data layer (Phase 3):
+      • Storage for project/task models and history references
+  - DRIFT_ENGINE metadata (Phase 5):
+      • Work/personal classification for contextual tagging
+  - UX MVP (Phase 9):
+      • Crate stream for projects + tasks
+  - Packet formats for:
+      • Project create/update/query
+      • Task create/update/query
+      • Status/progress reporting
+
+STEPS:
+  - Step 1: Architect PM Plugin data structures:
+      • Projects (IDs, names, metadata)
+      • Tasks/subtasks (IDs, parent references)
+      • Status markers (pending/in-progress/blocked/done)
+      • Optional metadata (deadlines, tags, file links)
+  - Step 2: Architect storage boundaries:
+      • Plugin-owned storage region only
+      • No writes to SYSTEM_DOC outside approved tables
+      • No interaction with DRIFT personal-context storage
+  - Step 3: Architect HELPER integration:
+      • HELPER pushes derived tasks into projects
+      • HELPER retrieves tasks for execution on user/system request
+      • Work packets reference project/task IDs
+  - Step 4: Architect UX crate models:
+      • Project listing crates
+      • Task list crates
+      • Progress summary crates (“X of Y tasks complete”)
+  - Step 5: Architect user workflows:
+      • Create project via chat
+      • Add tasks/subtasks
+      • Mark tasks complete
+      • Query status/progress
+      • Request summaries
+  - Step 6: Architect system workflows:
+      • System may create or update internal projects
+      • HELPER logs work references to tasks
+      • Tasks persist across sessions
+  - Step 7: Architect packet models for plugin calls:
+      • PM-create-project
+      • PM-create-task
+      • PM-update-task
+      • PM-progress-query
+      • PM-project-list
+  - Step 8: Produce P10.x implementer cards:
+      • Plugin manifest + folder structure
+      • Data model + interfaces
+      • Packet handlers
+      • UX crate renderers
+      • Integration tests between HELPER ↔ PM plugin ↔ UX
+
+DONE_WHEN:
+  - PM Plugin architecture is complete and fully documented.
+  - Data model for projects + tasks is finalized.
+  - Plugin storage rules and boundaries adhere to Plugin Engine constraints.
+  - HELPER integration pathways (push/pull) are specified.
+  - UX crate models for projects and tasks are defined.
+  - All packet schemas for PM operations are finalized.
+  - System/user workflows are clearly documented.
+  - P10.x implementation cards are generated for Implementer phase.
+
+DOCUMENTATION_UPDATES:
+  - Canon:
+      • Plugin ontology extension for PM plugin
+      • Rules for long-lived project/task structures
+  - TECH_SPEC:
+      • PM plugin storage model
+      • Packet schemas for PM operations
+  - FEATURES:
+      • P10.x implementer/QA cards
+  - MODULES:
+      • PM Plugin definition + responsibilities
+
+
