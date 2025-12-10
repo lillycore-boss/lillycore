@@ -1483,3 +1483,116 @@ Its role is purely interpretive: it displays packet contents without making deci
 - This phase reflects your design philosophy:  
   **Chat is human. Crates are system. UX displays both.**
 
+🧠 GPT Instructions (Do Not Delete)
+
+You are a GPT working with Andrew on the LillyCORE project.
+
+Before generating anything, you MUST:
+
+Ask which role you should assume (Architect or Implementer) if unclear.
+Verify role, phase, and current goals with Andrew before beginning.
+Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+NEVER invent system constraints, rules, or interpretations.
+ALWAYS ask Andrew when something is unclear or underspecified.
+When producing output:
+
+Follow the exact Feature Card structure shown in documentation.
+Do NOT add additional sections.
+Do NOT omit sections.
+Do NOT write real code unless you are the Implementer.
+If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
+DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
+
+You MUST inspect GPT_RESOURCE_INDEX.
+
+For every document listed in it that is not yet present in this conversation, you MUST say:
+
+“Please provide the full content of <DOC_NAME> so I may load it before continuing.”
+
+You MUST NOT proceed with any task until all such documents have been provided and you confirm you have read and ingested them.
+
+When starting a new phase or returning after long context loss, you MUST repeat this rule.
+
+Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+
+### Purpose
+Provide LillyCORE with an internal, AI-aware Project Management plugin that can safely handle large, long-lived projects without overloading the system. Phase 10 introduces a structured “project space” where both user-driven and system-driven work can be organized into projects, tasks, and progress states. It thickens the back end: giving Lilly a durable, queryable place to keep track of big efforts instead of trying to do everything in one continuous run.
+
+### Scope
+- Define the **Project Management Plugin** as a plugin-layer module (not a core engine), following Plugin Engine rules and packet contracts.
+- Introduce data structures and storage for:
+  - Projects (named, long-lived efforts).
+  - Tasks/subtasks (units of work within projects).
+  - Status and progress markers (e.g., pending, in-progress, blocked, completed).
+  - Metadata suitable for large-project handling (deadlines, tags, links to files/notes).
+- Integrate with HELPER_ENGINE:
+  - Allow HELPER to push work items into projects as tasks (e.g., “refactor X,” “summarize folder Y”).
+  - Allow HELPER to pull tasks from projects when the user or system chooses to run them.
+- Provide UX-visible crates for:
+  - Project listing and basic inspection.
+  - Task lists within projects.
+  - High-level progress summaries.
+- Support **user-driven project management** workflows:
+  - User can create projects and tasks via chat.
+  - User can mark tasks complete, adjust priorities, or request progress summaries.
+- Support **system-driven tracking** without requiring high autonomy:
+  - The system can store internal efforts as projects.
+  - The plugin keeps record of “what remains” even if the system can’t do everything in a single session.
+
+### System Impact
+- Gives LillyCORE a structured memory for large-scale work, rather than ephemeral “do it all now” sessions.
+- Serves as the central backlog for big internal and user projects.
+- Reduces risk of system overload by breaking work into manageable, callable units.
+- Provides an extensible base for later autonomy (scheduling, prioritization, automatic re-queuing), even if Phase 10 itself remains mostly user-driven.
+- Creates a clear integration point between HELPER’s work engine and long-running project structures.
+
+### Inputs Required
+- Plugin Engine MVP (Phase 7) with capability registry and sandboxed plugin execution.
+- HELPER_ENGINE MVP (Phase 6) for doing actual work on tasks.
+- SYSTEM_DOC / data layer schemas (Phase 3) for storing:
+  - Projects and tasks.
+  - Work-history references (links to HELPER logs, files, notes).
+- DRIFT_ENGINE context for minimal metadata (e.g., whether a project is work/personal), even though DRIFT does not deeply care about project details.
+- UX MVP (Phase 9) crate stream to display project/task information.
+- Packet formats for:
+  - Task creation/update.
+  - Project creation/update.
+  - Status/progress queries and responses.
+
+### Outputs Expected
+- A working **Project Management Plugin** that can:
+  - Create and manage multiple projects.
+  - Attach tasks/subtasks to projects.
+  - Track status, basic priorities, and progress.
+  - Link tasks to HELPER work items and outputs (files, notes).
+- UX-visible structures for:
+  - Listing projects and their states in crates.
+  - Showing task lists within a project.
+  - Presenting simple progress summaries (“X of Y tasks complete”).
+- Integration points such that:
+  - HELPER can reference project/task IDs in its work packets.
+  - The system can store “too big for one run” work as projects to be resumed later.
+- Documentation describing:
+  - Plugin data model (projects, tasks, metadata).
+  - How HELPER and UX interact with the PM plugin.
+  - How users are expected to create, manage, and review projects.
+
+### Constraints
+- The PM plugin does **not** need to own full scheduling autonomy in Phase 10:
+  - It can support basic queuing and tracking.
+  - It does not need to initiate work on its own without user/system prompts.
+- It must follow all plugin and packet rules:
+  - No direct access to core internals; interactions go through HELPER/Plugin Engine.
+  - Uses its own plugin-level storage, not DRIFT’s personal context or arbitrary system paths.
+- It is **not** a multi-user system yet; any multi-user semantics belong to later phases.
+- It must remain general-purpose:
+  - Not limited to code projects.
+  - Works for any large, structured effort (documents, research, refactors, etc.).
+
+### Notes
+- Conceptually, this is “Lilly’s GitHub for everything”: a project/workspace layer tuned to how Lilly and you work, not just software repos.
+- Phase 10 is intentionally more about structure and capability than deep automation:
+  - Big AI-driven scheduling decisions can be layered on later.
+  - The key is that large efforts can be stored, chunked, revisited, and tracked cleanly.
+- This plugin thickens the back end: it primarily benefits internal work orchestration and long-term efforts, even when your hardware can’t handle everything in one go.
+
