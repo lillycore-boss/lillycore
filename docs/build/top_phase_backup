@@ -114,8 +114,6 @@ Some items may be defined conceptually here but materially created during early 
 The focus is clarity, consistency, and readiness: the project must be in a state where GPTs can begin producing Phase 1 artifacts without ambiguity.
 
 
-=======================================================
-
 🧠 GPT Instructions (Do Not Delete)
 
 You are a GPT working with Andrew on the LillyCORE project.
@@ -411,8 +409,6 @@ Establish a robust, model-agnostic AI execution layer that sits beneath all high
 * The execution framework created here will be reused and extended, not replaced, in later phases; getting the contracts and safety behavior right is more important than supporting every advanced feature immediately.
 * This phase should leave the system in a state where attaching additional local or remote LLMs is straightforward and does not require revisiting the core loop or main application logic.
 
-=============================================
-
 🧠 GPT Instructions (Do Not Delete)
 
 You are a GPT working with Andrew on the LillyCORE project.
@@ -549,4 +545,182 @@ Create a unified, local-only persistence layer that becomes the single, consiste
 * Not all future tables or directories must be fully implemented now, but the **patterns and schemas** should be consistent and ready to extend as new features arrive.
 * The document handler and data layer are tightly linked; all future document-centric features (System DOC, Notes Plugin, etc.) should rely on this foundation rather than introducing new ad-hoc storage paths.
 * Clear documentation of the exceptions to the “data layer owns disk” rule (logs, sandbox, specific personal tables) is important so that later work doesn’t accidentally bypass safety and consistency.
+
+🧠 GPT Instructions (Do Not Delete)
+
+You are a GPT working with Andrew on the LillyCORE project.
+
+Before generating anything, you MUST:
+
+Ask which role you should assume (Architect or Implementer) if unclear.
+Verify role, phase, and current goals with Andrew before beginning.
+Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+NEVER invent system constraints, rules, or interpretations.
+ALWAYS ask Andrew when something is unclear or underspecified.
+When producing output:
+
+Follow the exact Feature Card structure shown in documentation.
+Do NOT add additional sections.
+Do NOT omit sections.
+Do NOT write real code unless you are the Implementer.
+If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
+DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
+
+You MUST inspect GPT_RESOURCE_INDEX.
+
+For every document listed in it that is not yet present in this conversation, you MUST say:
+
+“Please provide the full content of <DOC_NAME> so I may load it before continuing.”
+
+You MUST NOT proceed with any task until all such documents have been provided and you confirm you have read and ingested them.
+
+When starting a new phase or returning after long context loss, you MUST repeat this rule.
+
+Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+
+Phase 4 — Notes Plugin V0
+
+Milestone Description
+
+Purpose
+
+Create the first minimal plugin built on top of the existing document/data layer so LillyCORE has a cheap, low-risk testbed for “memory flow.” Phase 4 introduces a simple Notes Plugin that can receive transcript-like content, pass it through the current system stack, and emit user-facing artifacts (e.g., summary files) without requiring mature querying, UX, or full DRIFT/HELPER behavior.
+
+Scope
+
+Define a minimal Notes Plugin V0 that:
+
+Accepts transcript-style input (real or dummy).
+
+Produces basic summarized or processed output (dummy summaries are acceptable).
+
+Accumulates notes or outputs over time in a simple, traceable way.
+
+Integrate the plugin with the existing System DOC / document layer from earlier phases so that it:
+
+Uses established structures and conventions for content where appropriate.
+
+Does not bypass the durable data/document layer for any system-owned data.
+
+Introduce a user output path for plugin results:
+
+Define and use a “user output” folder or equivalent location on disk.
+
+Ensure plugin output is stored as user-visible files (e.g., text/markdown), not as core database tables.
+
+Provide a minimal harness or mechanism to invoke this plugin as part of normal system operation (e.g., via the runtime or a simple call path), using only the systems that currently exist by this phase.
+
+Use the Notes Plugin as a lightweight testbed for exercising:
+
+The data/document layer read/write behavior.
+
+The AI pool execution framework (once connected in later phases), starting with dummy behavior here.
+
+System Impact
+
+Introduces LillyCORE’s first real plugin-like component, even if the full Plugin Engine appears in a later phase.
+
+Establishes a concrete example of how system components can:
+
+Take structured or semi-structured input.
+
+Pass it through the system stack.
+
+Emit user-facing artifacts in a controlled, repeatable way.
+
+Validates the durability/document layer by routing real use-cases (notes/transcripts) through it, helping uncover gaps in schema, structure, or write-path rules from earlier phases.
+
+Provides a low-stakes environment for experimenting with memory flow and later DRIFT/HELPER integrations, without entangling those engines directly at this stage.
+
+Starts to shape expectations for how future plugins will interact with storage, output folders, and system boundaries.
+
+Inputs Required
+
+Outputs and contracts from:
+
+Phase 1 (runtime loop, logging, error handling).
+
+Phase 2 (AI pools and execution framework, even if used minimally or in stub form here).
+
+Phase 3 (durable data/document layer and any System DOC structures that exist).
+
+Knowledge of:
+
+Where user-visible outputs should live on disk (user output folder concept).
+
+What minimal metadata or structure is needed to keep plugin outputs traceable (e.g., timestamps, source IDs, run IDs).
+
+Any relevant Canon rules regarding:
+
+Plugin boundaries vs core system.
+
+What counts as “user output” vs “system-internal state.”
+
+Clarified expectations for:
+
+How much of the transcript/notes pipeline needs to be represented now vs left as future behavior.
+
+How the plugin should be triggered during development/testing (e.g., manual calls, simple runtime hooks).
+
+Outputs Expected
+
+A defined Notes Plugin V0 with:
+
+A minimal interface for receiving transcript-like content.
+
+A simple processing path that can generate dummy or basic summaries.
+
+A way to accumulate and store resulting “notes” or summaries over time.
+
+A user output folder (or equivalent) plus rules for how plugin output files are:
+
+Named.
+
+Organized.
+
+Related back to their source inputs or sessions.
+
+A thin integration between the plugin and:
+
+The document/data layer for any system-owned content it touches.
+
+The runtime/logging stack for visibility into when and how it runs.
+
+Documentation that describes:
+
+The role and limitations of Notes Plugin V0.
+
+How it uses the storage and document layer.
+
+How other phases can safely rely on it for testing memory flow.
+
+Constraints
+
+Notes Plugin V0 is deliberately minimal and disposable: it must be useful for testing, but not so entangled that the system depends on it for core functionality.
+
+No advanced querying is required at this phase:
+
+Rich search, semantic retrieval, or complex query interfaces are out of scope.
+
+Simple listing or inspection of outputs (via file system or basic tooling) is sufficient.
+
+No direct DRIFT/HELPER logic is implemented here:
+
+The plugin may produce data that future engines can use,
+
+But it does not simulate or implement their behavior.
+
+All system-level data interactions still respect the durable data/document layer rules; only user-facing outputs are written directly as files in the user output location.
+
+UX and frontend layers are out of scope; interaction can be backend-only or developer/test-oriented.
+
+The phase should focus on small, end-to-end testable steps that exercise the current stack, rather than polishing or expanding plugin capabilities.
+
+Notes
+
+Think of Notes Plugin V0 as a “lab bench” for LillyCORE: it grows over time, mirrors the system’s increasing capabilities, and remains a safe place to test how memory and documents move through the stack.
+
+The plugin is expected to start extremely simple—possibly generating dummy summaries—and only gradually become more intelligent as later phases introduce richer AI behavior and engines.
+
+By keeping this plugin thin, backend-focused, and grounded in the existing storage/doc layer, Phase 4 avoids re-inventing infrastructure while still providing a concrete way to observe and test memory flow end-to-end.
 
