@@ -660,3 +660,126 @@ DOCUMENTATION_UPDATES:
       • P5.x implementer and QA cards added
   - MODULES:
       • DRIFT Engine module location and data-region placement established
+
+CARD_ID: P6
+CARD_TITLE: HELPER Engine MVP – Work Orchestration Layer
+
+EXECUTOR_ROLE: Architect
+
+PHASE_CONTEXT:
+  - Phase: P6
+  - Slice: P6
+  - Parent Card: none
+
+DELIVERABLES_SERVED:
+  - P6.D1 – HELPER_ENGINE MVP architecture and orchestration model
+  - P6.D2 – Internal work packet specification (request → result)
+  - P6.D3 – Task-reasoning and decomposition framework for MVP
+  - P6.D4 – AI_POOL routing rules and backend selection logic
+  - P6.D5 – HELPER → SYSTEM_DOC storage mapping for events + results
+  - P6.D6 – End-to-end integration path (DRIFT → HELPER → output)
+  - P6.D7 – Documentation for HELPER boundaries, responsibilities, and packet APIs
+
+---
+DESCRIPTION:
+  Phase 6 introduces LillyCORE’s first fully functional work engine: HELPER_ENGINE MVP.
+  HELPER converts DRIFT’s structured perception into actionable tasks, executes them through
+  AI_POOLS, and returns structured result packets for downstream consumption.
+
+  HELPER does NOT generate user-facing messages.  
+  Its outputs are backend-only and become inputs for future conversational layers.
+
+  HELPER performs:
+    • Work-package interpretation (intent → task modes)
+    • Task reasoning and decomposition into primitives
+    • AI backend selection through AI_POOLS
+    • Managed execution with timeouts, retries, envelopes
+    • Logging + structured work-event persistence
+    • Return of a unified work-result packet
+
+  Phase 6 also establishes the canonical internal packet format that all future engines and plugins will rely on.
+
+INPUTS / PRECONDITIONS:
+  - From roadmap:
+      • HELPER defined as LillyCORE’s “worker brain”
+  - From PROJECT_CANON:
+      • Engine/plugin boundaries and ontological rules
+      • Pipeline structure expectations
+  - From MODULES:
+      • HELPER_ENGINE responsibilities, dependencies
+      • DRIFT_ENGINE output semantics
+      • NOTES_PLUGIN testbed usage
+  - From earlier phases:
+      • Phase 1 runtime loop, logging, prefs
+      • Phase 2 AI_POOLS + execution envelopes
+      • Phase 3 SYSTEM_DOC integrations for persistent logs/results
+      • Phase 4 Notes Plugin V0 as test surface
+      • Phase 5 DRIFT structured perception (WorkPackage + ContextBundle)
+  - Required decisions:
+      • MVP task modes (analysis, transformation, generation, lookup, etc.)
+      • Inline vs file-backed result patterns
+      • Work-event logging and retention granularity
+
+STEPS:
+  - Step 1: Define HELPER_ENGINE architecture:
+      • Entry points
+      • Routing logic
+      • MVP task-mode catalog
+      • Internal data structures
+  - Step 2: Define the internal work packet format:
+      • Required/optional fields
+      • Origin + context + metadata
+      • Result payload fields
+      • Error and completion structures
+      • Versioning rules
+  - Step 3: Design task reasoning + decomposition:
+      • Interpret DRIFT WorkPackage
+      • Identify primitive tasks
+      • Build execution sequences
+      • Pool-selection logic
+  - Step 4: Define execution pipeline:
+      • AI_POOL invocation path
+      • Timeout/retry rules
+      • Envelope wrapping
+      • Logging hooks
+  - Step 5: Define SYSTEM_DOC integration:
+      • Work-event persistence model
+      • Result-storage mapping
+      • Inspection/debugging needs
+  - Step 6: Define end-to-end test path:
+      • DRIFT → HELPER invocation
+      • Notes Plugin V0 as consumer
+      • CLI-based workflows
+  - Step 7: Architect P6.x implementer cards for:
+      • Work packet spec
+      • Reasoning/decomposition logic
+      • Routing and execution engine
+      • SYSTEM_DOC write-paths
+      • Test harness integration
+      • Documentation deliverables
+  - Step 8: Identify open architectural questions:
+      • Priority/queue semantics for future phases
+      • Multi-task parallelism expectations
+      • How much of HELPER’s future inference logic belongs in MVP
+
+DONE_WHEN:
+  - HELPER MVP architecture fully decomposed into P6.x cards.
+  - Work-packet spec is complete, stable, and documented.
+  - Reasoning/decomposition model for MVP finalized.
+  - AI_POOL routing rules and execution flow fully defined.
+  - SYSTEM_DOC storage mappings complete and aligned with Phase 3.
+  - End-to-end integration path (DRIFT → HELPER → output) validated.
+  - Documentation on HELPER boundaries, responsibilities, and APIs prepared.
+  - QA card for Phase 6 created and references P6.D1–P6.D7.
+
+DOCUMENTATION_UPDATES:
+  - Canon:
+      • Engine roles and boundaries
+      • Work packet ontology
+  - TECH_SPEC:
+      • HELPER module location + routing rules
+      • AI_POOL invocation constraints and safety
+  - FEATURES:
+      • P6.x implementer + QA cards
+  - MODULES:
+      • HELPER module entry + responsibilities finalized
