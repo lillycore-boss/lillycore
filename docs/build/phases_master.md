@@ -908,3 +908,133 @@ DOCUMENTATION_UPDATES:
       • P7.x implementer + QA cards
   - MODULES:
       • Plugin Engine entry, responsibilities, and contract definitions
+
+
+CARD_ID: P8
+CARD_TITLE: Stability Spine — HELP_DESK, DREAM, SCRIPT (Maintenance & Self-Repair Layer)
+
+EXECUTOR_ROLE: Architect
+
+PHASE_CONTEXT:
+  - Phase: P8
+  - Slice: P8
+  - Parent Card: none
+
+DELIVERABLES_SERVED:
+  - P8.D1 – Architecture for HELP_DESK_ENGINE (auto-repair + escalation)
+  - P8.D2 – Architecture for DREAM_ENGINE (memory degradation + DOC compression)
+  - P8.D3 – Architecture for SCRIPT_ENGINE (procedural optimization + regeneration)
+  - P8.D4 – Unified Stability Spine framework (packet formats, diagnostics, recovery)
+  - P8.D5 – Snapshot + integrity verification + restoration protocols
+  - P8.D6 – Maintenance cycle schedule (idle, shutdown, crash, timed)
+  - P8.D7 – System boundaries between stability engines and operational engines
+  - P8.D8 – Documentation covering full stability lifecycle and responsibilities
+
+---
+DESCRIPTION:
+  Phase 8 establishes the Stability Spine: the internal maintenance, self-repair, and 
+  long-term refinement layer that ensures LillyCORE remains reliable, healthy, and 
+  recoverable indefinitely.
+
+  This phase architects three major subsystems:
+    • HELP_DESK_ENGINE – first responder, automatic repair, escalation logic
+    • DREAM_ENGINE – long-term optimization, memory degradation, DOC compression
+    • SCRIPT_ENGINE – maintenance and regeneration of procedural scripts
+
+  The Spine introduces:
+    • Daily snapshots
+    • Integrity checks and correction
+    • Recovery protocols for pipeline crashes
+    • Shared diagnostic data and packet formats
+    • Scheduled maintenance cycles
+
+  After Phase 8, LillyCORE becomes a self-governing system capable of correcting drift, 
+  healing failures, optimizing itself, and sustaining long-term growth with minimal 
+  developer intervention.
+
+INPUTS / PRECONDITIONS:
+  - From prior phases:
+      • DRIFT_ENGINE MVP (perception data; emotional escalation signals)
+      • HELPER_ENGINE MVP (work decomposition + error contexts)
+      • SYSTEM_DOC (canonical schemas, durable storage foundations)
+      • Plugin Engine MVP (routing, capability registration)
+      • Packet standardization from P1–P7
+      • Snapshot + filesystem infrastructure from P3
+  - Required knowledge:
+      • Error classification rules (recoverable vs fatal)
+      • Memory degradation policies
+      • Script regeneration boundaries
+  - Required decisions:
+      • Snapshot schedule + retention rules
+      • Integrity-check conditions and thresholds
+      • Escalation rules for HELP_DESK
+      • Validation steps for destructive operations
+
+STEPS:
+  - Step 1: Architect HELP_DESK_ENGINE:
+      • Auto-repair pathways (worker → decomposition → root recovery)
+      • Failure pattern detection + root-cause analysis
+      • Escalation rules requiring user confirmation
+      • Error-envelope integration
+  - Step 2: Architect DREAM_ENGINE:
+      • Memory degradation (safe delete, compress, reorganize)
+      • DOC consolidation + historical log compaction
+      • Structural reasoning passes for topology improvement
+      • Tiered optimization governance (auto / batch / user-confirmed)
+  - Step 3: Architect SCRIPT_ENGINE:
+      • Script extraction, analysis, rewriting, and regeneration
+      • Sandbox validation before activation
+      • Versioning + diff metadata
+      • Strict boundaries (cannot modify runtime engines)
+  - Step 4: Architect unified Stability Spine:
+      • Shared packet structures
+      • Shared diagnostic tables + recovery metadata
+      • Cross-engine signaling pathways
+      • Reporting interfaces for CORE + SYSTEM_DOC
+  - Step 5: Architect snapshot + recovery model:
+      • Daily snapshots
+      • Crash-triggered snapshots
+      • Shutdown-cycle maintenance checks
+      • Full restoration algorithm
+  - Step 6: Architect maintenance cycle schedule:
+      • Idle maintenance cycles
+      • 24-hour forced maintenance cycles
+      • Recovery cycles after HELP_DESK intervention
+  - Step 7: Architect stability boundaries:
+      • DRIFT personal data isolation
+      • HELPER operational data isolation
+      • Plugin boundary restrictions
+      • Stability engines may not modify plugin code
+  - Step 8: Identify P8.x implementer cards needed:
+      • One per engine (HELP_DESK, DREAM, SCRIPT)
+      • One for unified packet spec
+      • One for snapshot system
+      • One for recovery procedures
+      • One for maintenance scheduler
+      • One for stability/operational boundaries
+
+DONE_WHEN:
+  - Architecture for all three stability engines is complete and internally consistent.
+  - Unified stability packet formats and diagnostic schemes are defined.
+  - Snapshot, integrity verification, and restoration protocols are finalized.
+  - Maintenance cycle schedule documented and approved.
+  - Boundaries between stability engines, operational engines, and plugins are fully specified.
+  - P8.x implementer cards generated and validated against Canon + TECH_SPEC.
+  - Documentation updated across Canon, TECH_SPEC, MODULES, and FEATURES.
+
+DOCUMENTATION_UPDATES:
+  - Canon:
+      • Stability engine ontology
+      • Rules for self-repair, degradation, and script regeneration
+      • Escalation + destructive-op validation rules
+  - TECH_SPEC:
+      • Snapshot system spec
+      • Integrity checks
+      • Stability packet formats
+      • Engine boundaries (stability vs operational)
+  - FEATURES:
+      • P8.x implementer + QA cards
+  - MODULES:
+      • HELP_DESK, DREAM, SCRIPT engine definitions + contracts
+
+
