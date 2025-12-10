@@ -195,3 +195,233 @@ DOCUMENTATION_UPDATES:
   - MODULES:
       - Add or refine high-level notes indicating how runtime, logging, preferences, and AI pools relate to core/ and engines/ layout if required by P1.x decomposition.
 
+CARD_ID: P2
+CARD_TITLE: AI Execution Layer – Pools and Safe Execution Envelopes
+
+EXECUTOR_ROLE: Architect
+
+PHASE_CONTEXT:
+  - Phase: P2
+  - Slice: P2
+  - Parent Card: none
+
+DELIVERABLES_SERVED:
+  - P2.D1 – Conversational AI Pool designed and implemented with backend adapter
+  - P2.D2 – Deterministic/Lightweight AI Pool designed and implemented with backend adapter
+  - P2.D3 – Worker/Back-end AI Pool designed and implemented with backend adapter
+  - P2.D4 – Unified execution envelopes (request/response, retries, timeouts, error wrapping)
+  - P2.D5 – Stable backend-agnostic AI API exposed to the rest of LillyCORE
+  - P2.D6 – System preference/configuration entries governing pool selection and execution limits
+  - P2.D7 – Documentation updates covering pool roles, contracts, execution behavior, and backend configuration
+
+---
+DESCRIPTION:
+  Define and implement the first fully-functional, model-agnostic AI execution layer.
+  Phase 2 introduces a strict abstraction boundary between LillyCORE and any LLM backend by
+  defining AI pools (conversational, deterministic, worker) and the safe execution envelopes
+  that wrap all LLM calls. This enables consistent AI behavior, backend swap capability,
+  and foundational safety mechanisms for all future system features.
+
+INPUTS / PRECONDITIONS:
+  - Phase 1 runtime loop, logging system, and error envelope semantics.
+  - Canon rules relating to execution safety, runtime integrity, and system identity.
+  - TECH_SPEC sections on:
+      - Repository layout
+      - Tooling and environment constraints
+      - Logging and error-handling rules
+  - Knowledge of available local LLM backends (CLI, API, SDK, HTTP endpoints).
+  - System preferences or global configuration patterns that influence:
+      - Execution limits
+      - Backend selection
+      - Timeouts and retry strategies
+  - Future-phase understanding of:
+      - DRIFT engine (conversational behavior)
+      - HELPER engine (worker/task semantics)
+      - Execution topology planned for plugins and UX
+
+STEPS:
+  - Step 1: Analyze Phase 1 runtime loop and identify integration points where AI pools will attach.
+  - Step 2: Define contracts/interfaces for three AI pools:
+      - Conversational Pool
+      - Deterministic/Lightweight Pool
+      - Worker/Back-end Pool
+    Specify required fields, methods, call patterns, and invariant guarantees.
+  - Step 3: Design backend adapters capable of routing pool requests to an actual LLM backend, with:
+      - Backend-agnostic abstraction layer
+      - Ability to swap model/provider without modifying callers
+  - Step 4: Design execution envelopes including:
+      - Request/response schemas
+      - Timeout and retry behavior
+      - Structured error wrapping (Phase 1 envelope rules)
+      - Logging of inputs/outputs/errors
+      - Resource guardrails
+  - Step 5: Establish the unified API surface that:
+      - Receives system-level AI requests
+      - Routes to the correct pool
+      - Never exposes raw model/provider details to higher layers
+  - Step 6: Determine system preferences/config entries controlling:
+      - Which backend each pool uses
+      - Default max tokens / timeout values
+      - Safety thresholds
+  - Step 7: Produce a complete set of Architect-decomposed P2.x cards for Implementer and QA, ensuring:
+      - Each deliverable (P2.D1–P2.D7) is traceably implemented
+      - No higher-level semantics (DRIFT/HELPER) leak into Phase 2
+      - Safety constraints from Canon are preserved
+      - Backend details remain encapsulated and swappable
+  - Step 8: Identify unresolved architectural questions (if any) such as:
+      - Multi-backend selection rules
+      - Long-term concurrency strategy
+      - Pool specialization evolution
+    Encode these into additional P2.x cards rather than assumptions.
+
+DONE_WHEN:
+  - Full decomposition into P2.x cards is complete and covers all deliverables (P2.D1–P2.D7).
+  - All three AI pools have clear documented interfaces and backend adapters.
+  - Execution envelopes are fully defined (timeouts, retries, error wrapping, logging).
+  - Unified AI API contract is documented and ready for implementation.
+  - All design work respects:
+      - Canon execution/safety rules
+      - TECH_SPEC constraints
+      - Phase 1 runtime conventions
+  - No Phase 3+ responsibilities appear in the design (e.g., no persistence engine work).
+  - At least one QA card exists to validate Phase 2 completion.
+  - Documentation references and update points (Canon/TECH_SPEC) are catalogued.
+
+DOCUMENTATION_UPDATES:
+  - Canon:
+      - May require additions for global AI execution invariants or safety guarantees.
+      - Architect must propose updates via separate cards if modifications are required.
+  - TECH_SPEC:
+      - Must gain sections for:
+          - AI pool architecture
+          - Backend adapter structure
+          - Execution envelopes
+          - System AI configuration rules
+      - Population of these sections is handled by Implementer P2.x cards.
+  - FEATURES:
+      - Must record P2.x implementation slices and their deliverables.
+  - MODULES:
+      - Add or refine notes regarding where AI pool code, adapters, and envelopes belong in the repo taxonomy.
+
+
+CARD_ID: P3
+CARD_TITLE: Durable Data & Document Layer – Unified Persistence Backbone
+
+EXECUTOR_ROLE: Architect
+
+PHASE_CONTEXT:
+  - Phase: P3
+  - Slice: P3
+  - Parent Card: none
+
+DELIVERABLES_SERVED:
+  - P3.D1 – Canonical data model skeleton covering all major future domains
+  - P3.D2 – Selection and standardization of persistence technologies and schema conventions
+  - P3.D3 – Initial working data layer implemented for:
+        • Preferences/config
+        • System/runtime state and tracking
+        • Document storage foundations
+  - P3.D4 – Document handler wired to the data layer
+  - P3.D5 – Security/validation step for all data-layer writes
+  - P3.D6 – Storage mappings (directories/tables) established for all in-scope data
+  - P3.D7 – Documentation defining the data layer, boundaries, exceptions, and write rules
+
+---
+DESCRIPTION:
+  Phase 3 creates LillyCORE’s unified, local-only persistence spine. This phase defines
+  the canonical data model skeleton, chooses the core storage technologies, implements
+  the initial data layer with full read/write control, and introduces the document handler
+  that ensures structured documents pass through the persistence layer rather than bypassing it.
+  The result is a consistent, secure, extensible system for recording state, preferences,
+  documents, and future subsystem data.
+
+INPUTS / PRECONDITIONS:
+  - Phase 1 runtime:
+      • Core loop
+      • Logging
+      • Error envelopes
+      • Preference system
+  - Phase 2 execution framework:
+      • AI pool structures and backend configuration needs
+  - Roadmap expectations regarding:
+      • Notes plugin
+      • Drift and Helper engines
+      • Multi-user evolution
+      • Plugin data models
+  - Canon rules:
+      • Privacy, safety, local-operation requirements
+      • Structured behavior for persistent system identity
+  - Existing data sources:
+      • Preferences
+      • Basic runtime markers
+      • Initial logs and configuration outputs
+  - Decisions needed:
+      • Primary storage technology (structured files vs database)
+      • Schema/directory/table conventions
+      • Approved direct-write exceptions (logs, sandbox, future Drift tables)
+
+STEPS:
+  - Step 1: Define the canonical data model skeleton, covering:
+      • Preferences/config
+      • System/runtime state and tracking
+      • Documents/notes
+      • AI artifact indexing
+      • Plugin and engine data domains (future placeholders included)
+  - Step 2: Select and standardize persistence technologies that are:
+      • Local-only
+      • Offline-first
+      • Long-term stable
+      • Abstracted behind interfaces for future backend swaps
+  - Step 3: Design the data layer module with:
+      • Centralized read/write API
+      • Internal mapping from conceptual entities → tables/directories/schemas
+      • Uniform conventions for structured storage
+  - Step 4: Implement initial persistence for:
+      • Preferences and config state
+      • Runtime/session tracking
+      • Basic document storage
+  - Step 5: Design and implement the document handler:
+      • Reads/writes documents via data layer
+      • Uses consistent formats, schemas, and directory/layout rules
+  - Step 6: Define the security/validation step for all writes:
+      • Structural validation
+      • Type/schema checks
+      • Suspicious-payload rejection behavior
+      • Error surfacing rules
+  - Step 7: Produce Architect-level decomposition into P3.x cards:
+      • Data model skeleton card(s)
+      • Persistence technology selection
+      • Data layer API architecture
+      • Document handler specification
+      • Validation/security rules
+      • Storage mapping specifications
+      • Documentation update tasks
+  - Step 8: Identify any unresolved architectural questions for escalation (e.g.,
+      directory taxonomy refinements, schema evolution strategy, future multi-user structures).
+
+DONE_WHEN:
+  - Full decomposition into P3.x cards fully covers deliverables P3.D1–P3.D7.
+  - Canonical data model skeleton is documented and complete.
+  - Persistence technology decisions are specified and justified.
+  - Data layer architecture is fully defined and ready for Implementer execution.
+  - Document handler behaviors, formats, and directory/table mappings are documented.
+  - Security/validation rules for writes are complete and consistent with Canon safety.
+  - No out-of-scope features (multi-user logic, Drift personal tables, plugin logic) are implemented.
+  - QA card for validating Phase 3 exists and references all required outcomes.
+
+DOCUMENTATION_UPDATES:
+  - Canon:
+      • May require updates for persistence security, privacy, and invariants.
+      • All updates must be proposed through dedicated cards.
+  - TECH_SPEC:
+      • Must gain sections for:
+          - Storage technology selection
+          - Schema/directory conventions
+          - Data layer API specification
+          - Document handler rules
+          - Validation/security details
+  - FEATURES:
+      • Must record P3.x implementer and QA tasks, ensuring traceability.
+  - MODULES:
+      • Must reflect correct placement of data layer, document handler, schemas, and mapping files.
+
