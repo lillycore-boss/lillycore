@@ -91,3 +91,107 @@ DOCUMENTATION_UPDATES:
   - TECH_SPEC: Capture any Phase-0-specific technical environment standards (tooling, language version, etc.).
   - FEATURES: None (Phase 0 is infrastructural, not feature-based).
   - MODULES: None (no functional modules in Phase 0).
+
+
+CARD_ID: P1
+CARD_TITLE: Core Loop, Logging, and User Preferences – Phase 1 Milestone
+
+EXECUTOR_ROLE: Architect
+
+PHASE_CONTEXT:
+  - Phase: P1
+  - Slice: P1
+  - Parent Card: none
+
+DELIVERABLES_SERVED:
+  - P1.D1 – Functional core runtime loop capable of continuous operation
+  - P1.D2 – Unified logging system with documented entry points and formatting rules
+  - P1.D3 – Implemented error envelope schema integrated into runtime and logging
+  - P1.D4 – Operational system preference loader with persistence and override capability
+  - P1.D5 – AI pool structural definitions (types, fields, relationships) defined and documented
+  - P1.D6 – Initial project infrastructure implemented (repo, config files, CI, tooling, developer automation)
+
+---
+DESCRIPTION:
+  Establish LillyCORE’s first functional runtime layer by introducing a stable execution loop, unified logging behaviour, structured error handling, and a minimal but extensible preference system. This card defines the overall goals and boundaries for Phase 1 and instructs the Architect to design a full set of P1.x cards that implement the runtime, logging, error envelopes, preference loader, AI pool structures, and the initial infrastructure setup defined in Phase 0.
+
+INPUTS / PRECONDITIONS:
+  - Completed Phase 0 foundations, including:
+    - Documentation structures and governance (P0.2, P0.3, P0.7)
+    - GPT behaviour and ingestion rules (P0.4)
+    - Minimum stable Canon subset for Phase 1 (P0.5)
+    - Repository taxonomy and naming standards (P0.2)
+    - Root-level file rules (P0.6)
+  - Roadmap definition for Phase 1 (Core Loop, Logging, User Preferences)
+  - Relevant Canon rules governing:
+    - Runtime behaviour
+    - Identity persistence
+    - System integrity / invariants
+  - TECH_SPEC sections covering:
+    - Repository layout and folder taxonomy
+    - Logging and error-handling baseline expectations
+    - Tooling and infrastructure decisions from P0.1
+  - Decisions required or partially defined:
+    - Preference persistence mechanism (file, object, or other)
+    - Logging channels (console, file, structured output)
+    - Error envelope schema details (fields, severity levels, propagation rules)
+
+STEPS:
+  - Step 1: Review all relevant Phase 0 outputs (Canon, TECH_SPEC, documentation governance, repo taxonomy, GPT behaviour rules) and the Phase 1 roadmap text to confirm constraints, dependencies, and expectations for the first runtime layer.
+  - Step 2: Define or refine the Phase 1 deliverables list (P1.D1–P1.D6) as the authoritative “done when” targets for the core loop, logging, error envelopes, preferences, AI pool structures, and infrastructure setup.
+  - Step 3: Design a decomposition plan for Phase 1 into P1.x Architect and Implementer cards:
+      - Separate runtime loop design vs implementation work.
+      - Separate logging schema and integration points.
+      - Separate error envelope format design vs wiring into the loop.
+      - Separate preference loader design vs storage/persistence details.
+      - Separate AI pool structural definitions (no execution yet).
+      - Separate infrastructure setup (repo, config files, CI, pre-commit, dev automation).
+  - Step 4: Encode all required constraints into the P1.x cards, including:
+      - No AI execution, scheduling, or chaining (AI pools are structural only).
+      - No module-level functionality beyond what runtime, logging, and prefs require.
+      - No Phase 2/3/4 architectural decisions leaked into Phase 1.
+      - Alignment with Phase 0 standards and documentation conventions.
+  - Step 5: Explicitly design the “infrastructure setup” slice so that Implementer cards:
+      - Detect if repo/CI/tooling already exist.
+      - Validate configuration against TECH_SPEC and Canon.
+      - Fix or create missing pieces as needed.
+  - Step 6: Produce a QA-ready P1.x card bundle that:
+      - Covers all P1.D1–P1.D6 deliverables.
+      - Includes at least one final QA card for Phase 1.
+      - Keeps each card non-trivial but bounded in scope.
+      - Respects card-count and decomposition rules from Architect behaviour spec.
+  - Step 7: Identify and document any open questions or risks (e.g., preference storage tradeoffs, logging backend options) that require Andrew’s decision, and encode them into targeted Architect/Implementer cards rather than leaving them implicit.
+
+DONE_WHEN:
+  - A complete set of P1.x cards exist in the new universal format, covering:
+    - Core runtime loop behaviour and implementation.
+    - Unified logging design and wiring.
+    - Error envelope schema and integration.
+    - System preference loader design and implementation.
+    - AI pool structural definitions (no execution yet).
+    - Initial infrastructure setup (repo, CI, pre-commit/tooling, developer automation).
+  - Each P1.x card is clearly assigned to Architect, Implementer, or QA, with:
+    - Explicit inputs and preconditions.
+    - Clear steps and DONE_WHEN criteria.
+    - Correct linkage to P1.D1–P1.D6 deliverables.
+  - Constraints from Phase 0 (Canon, TECH_SPEC, documentation governance, repo taxonomy, GPT behaviour) are explicitly reflected in the P1.x cards.
+  - There is at least one QA card at the end of the P1 bundle to validate Phase 1’s deliverables.
+  - No Phase 2+ responsibilities are silently embedded into Phase 1 cards.
+
+DOCUMENTATION_UPDATES:
+  - Canon:
+      - None directly from this milestone card.
+      - Architect must flag any Canon updates discovered during decomposition as separate Architect cards (e.g., runtime invariants, error-handling philosophy, identity persistence rules).
+  - TECH_SPEC:
+      - Identify required sections for later Implementer updates:
+        - Runtime loop architecture and contracts.
+        - Logging schema, channels, and usage patterns.
+        - Error envelope structure and semantics.
+        - Preference storage format and loading behaviour.
+        - Infrastructure and CI expectations (repo, tools, hooks).
+      - These updates will be executed by Implementer P1.x cards, not by this card directly.
+  - FEATURES:
+      - Ensure that P1.x cards and their relationship to P1.D1–P1.D6 are documented or mirrored as needed.
+  - MODULES:
+      - Add or refine high-level notes indicating how runtime, logging, preferences, and AI pools relate to core/ and engines/ layout if required by P1.x decomposition.
+
