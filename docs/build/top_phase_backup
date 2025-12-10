@@ -311,4 +311,242 @@ And no actual repository or automation —
 
 ======================================================
 
+🧠 GPT Instructions (Do Not Delete)
+
+You are a GPT working with Andrew on the LillyCORE project.
+
+Before generating anything, you MUST:
+
+Ask which role you should assume (Architect or Implementer) if unclear.
+Verify role, phase, and current goals with Andrew before beginning.
+Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+NEVER invent system constraints, rules, or interpretations.
+ALWAYS ask Andrew when something is unclear or underspecified.
+When producing output:
+
+Follow the exact Feature Card structure shown in documentation.
+Do NOT add additional sections.
+Do NOT omit sections.
+Do NOT write real code unless you are the Implementer.
+If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
+DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
+
+You MUST inspect GPT_RESOURCE_INDEX.
+
+For every document listed in it that is not yet present in this conversation, you MUST say:
+
+“Please provide the full content of <DOC_NAME> so I may load it before continuing.”
+
+You MUST NOT proceed with any task until all such documents have been provided and you confirm you have read and ingested them.
+
+When starting a new phase or returning after long context loss, you MUST repeat this rule.
+
+Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+
+### Purpose
+
+Establish a robust, model-agnostic AI execution layer that sits beneath all higher-level behavior in LillyCORE. Phase 2 defines and implements the AI pools and their safe execution wrappers so that any compatible LLM backend can be plugged in, while all future system code talks only to pools and never to specific models directly.
+
+### Scope
+
+* Define and implement three concrete AI pools:
+
+  * Conversational pool
+  * Deterministic lightweight pool
+  * Worker/back-end pool
+* Wire all pools to at least one real, locally available LLM backend (it can be the same model/endpoint for all three initially).
+* Design and implement execution envelopes that:
+
+  * Accept a request from the core system
+  * Route it through the appropriate pool
+  * Enforce safety (timeouts, retries, basic resource guarding)
+  * Return structured results and error states.
+* Provide a unified interface for the rest of LillyCORE to call “an AI” via pools rather than directly targeting a model or provider.
+* Integrate the execution framework conceptually with the Phase 1 core loop (APIs and call paths exist), while leaving higher-level orchestration and semantics to later phases.
+
+### System Impact
+
+* Introduces the abstraction boundary between “the system” and “the AIs”: from this point on, all higher-level code is written against pools, not raw models.
+* Creates a single, consistent execution framework capable of hosting multiple models and backends over time, without rewriting the rest of the system.
+* Establishes safety behavior around AI calls (timeouts, retries, failure handling) so that misbehaving models or prompts cannot easily stall or overwhelm the host environment.
+* Provides the underlying fabric that later phases (DRIFT_ENGINE, HELPER_ENGINE, plugins, UX) will assume for all AI interactions.
+* Begins the separation of concerns between conversational, deterministic/utility, and worker-style AI activities, even if they share a backend initially.
+
+### Inputs Required
+
+* Phase 1 runtime loop and logging/error envelope behavior.
+* Knowledge of which local LLM backend(s) are available and how they are invoked (CLI, HTTP, library, etc.).
+* Any existing preferences or configuration patterns that should influence pool selection or execution limits (e.g., global AI settings, resource constraints).
+* High-level understanding of future uses of each pool (from the roadmap and any relevant design notes) to ensure the pool interfaces are future-proof.
+* Decisions about baseline safety policies for execution (maximum runtime, concurrency expectations, failure handling strategy).
+
+### Outputs Expected
+
+* Three implemented AI pools (conversational, deterministic/lightweight, worker/back-end), each with:
+
+  * A defined interface/contract
+  * A working connection to at least one local LLM backend
+  * Logging and error handling using Phase 1 mechanisms.
+* Execution envelopes that encapsulate:
+
+  * Request/response structures
+  * Timeouts and retry logic
+  * Error wrapping and reporting.
+* A documented, stable API for other parts of LillyCORE to send AI work to pools without knowing model details.
+* Configuration or preference entries (system-level) that control which backend(s) each pool uses and any key limits (e.g., max tokens, timeout values).
+* Updated documentation explaining pool roles, execution behavior, and how future phases should use them.
+
+### Constraints
+
+* No higher-level reasoning orchestration, task typing, or helper semantics are introduced here; those belong to later phases (e.g., DRIFT/HELPER engines).
+* All AI interaction from this phase onward must go through pools; direct calls to a specific model/provider are considered out of bounds for new code.
+* Safety must be prioritized: execution envelopes must be designed so that misconfiguration or bad prompts cannot easily “melt” or lock up the machine (e.g., enforce hard timeouts and basic resource guards).
+* The design must remain backend-agnostic: swapping or adding an LLM provider should not require changes to callers, only to pool configuration or adapters.
+* Integration with the core loop is limited to exposing callable interfaces and basic wiring; complex routing, scheduling, or multi-step flows are deferred.
+
+### Notes
+
+* It is acceptable for all pools to initially point to the same underlying model/backend, as long as their interfaces and responsibilities are clearly separated for future divergence.
+* Phase 2 is the critical inflection point where LillyCORE stops thinking in terms of “this model” and starts thinking in terms of “this kind of AI work goes to this pool.”
+* The execution framework created here will be reused and extended, not replaced, in later phases; getting the contracts and safety behavior right is more important than supporting every advanced feature immediately.
+* This phase should leave the system in a state where attaching additional local or remote LLMs is straightforward and does not require revisiting the core loop or main application logic.
+
+=============================================
+
+🧠 GPT Instructions (Do Not Delete)
+
+You are a GPT working with Andrew on the LillyCORE project.
+
+Before generating anything, you MUST:
+
+Ask which role you should assume (Architect or Implementer) if unclear.
+Verify role, phase, and current goals with Andrew before beginning.
+Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+NEVER invent system constraints, rules, or interpretations.
+ALWAYS ask Andrew when something is unclear or underspecified.
+When producing output:
+
+Follow the exact Feature Card structure shown in documentation.
+Do NOT add additional sections.
+Do NOT omit sections.
+Do NOT write real code unless you are the Implementer.
+If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
+DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
+
+You MUST inspect GPT_RESOURCE_INDEX.
+
+For every document listed in it that is not yet present in this conversation, you MUST say:
+
+“Please provide the full content of <DOC_NAME> so I may load it before continuing.”
+
+You MUST NOT proceed with any task until all such documents have been provided and you confirm you have read and ingested them.
+
+When starting a new phase or returning after long context loss, you MUST repeat this rule.
+
+Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+
+# Phase 3 — Durable Data & Document Layer
+
+Milestone Description
+
+### Purpose
+
+Create a unified, local-only persistence layer that becomes the single, consistent gateway between LillyCORE and the physical disk. Phase 3 establishes the canonical data model skeleton, the document handler, and the rules by which all core system state, documents, and future data domains will be stored, read, and validated. By the end of this phase, the system can reliably remember what it needs across runs using a uniform, secure, and extensible structure.
+
+### Scope
+
+* Define a canonical data model **skeleton** that covers all major future domains (e.g., system/user preferences, runtime/state tracking, documents/notes, plugin data, AI artifacts indexes), even if many of these are only partially implemented now.
+* Choose and standardize the core persistence technologies (e.g., database vs files, schema conventions, directory layout) with the intent that they are:
+
+  * Local, offline-first.
+  * Suitable for long-term growth.
+  * Swappable with minimal disruption if needed later.
+* Implement the **initial working subset** of the data layer for what already exists or is immediately needed:
+
+  * System-wide preferences (and any existing config state from earlier phases).
+  * State/tracking structures that record what the system is doing and has done (e.g., sessions, runs, key events).
+  * A document handler that reads/writes structured documents via this layer rather than directly touching the filesystem.
+* Establish the data layer as the **primary in/out path to disk and tables**, with clearly defined exceptions (e.g., system logs, AI sandbox outputs, and future Drift/personal tables).
+* Introduce a security/validation step for all data-layer writes, to catch malformed or suspicious payloads before they touch disk or persistent storage.
+
+### System Impact
+
+* Introduces a **single persistence spine** for LillyCORE, decoupling higher-level logic from specific storage mechanisms and file layouts.
+* Provides a uniform way to define, evolve, and query data structures, reducing fragmentation and ad-hoc persistence patterns in later phases.
+* Enables the system to carry forward important state across runs in a consistent format, supporting more advanced behavior (personalization, history, context) in later phases.
+* Establishes the data layer as a security and integrity gate, reducing the risk of corrupted, malformed, or malicious data being written directly to disk.
+* Creates a foundation for future multi-user, notes, plugin, and engine-specific data without needing to redesign the core persistence story.
+
+### Inputs Required
+
+* Outputs and contracts from:
+
+  * Phase 1 (runtime loop, logging, error envelopes, system preferences).
+  * Phase 2 (AI pool structures and any configuration that needs persistence).
+* Roadmap expectations for future phases that will rely on persistent data (e.g., Notes Plugin, Drift Engine, Helper Engine, plugins, multi-user support), to inform the canonical model skeleton.
+* Any Canon rules or design decisions regarding:
+
+  * Privacy and security guarantees.
+  * Local-only operation and plugin-mediated external access.
+* Knowledge of what data is already being produced (preferences, state markers, basic logs, configuration) that should be tracked and/or persisted uniformly.
+* Decisions about:
+
+  * The primary storage technology family (e.g., SQL-style vs structured files).
+  * How documents and structured data are mapped into schemas, directories, and tables.
+  * Which write paths are allowed to bypass the data layer (logs, AI sandbox, specific future tables) and why.
+
+### Outputs Expected
+
+* A documented **canonical data model skeleton** covering:
+
+  * Preferences/config.
+  * System/runtime state and tracking.
+  * Documents/notes and similar artifacts.
+  * Future-facing slots for plugins, engines, and other subsystems.
+* A working **data layer component** that:
+
+  * Owns read/write operations to disk and/or database for the initial in-scope data.
+  * Exposes clear interfaces for higher-level code to store and retrieve data without touching the filesystem or DB directly.
+* A **document handler** that:
+
+  * Reads/writes documents through the data layer.
+  * Uses consistent formats and directory/table conventions.
+* Initial schemas/tables/directories created and wired up for:
+
+  * Preferences.
+  * Core system state/tracking.
+  * At least basic document storage used by early-phase features.
+* A defined and documented **security/validation step** for writes, specifying:
+
+  * What is checked.
+  * What is rejected.
+  * How errors are surfaced.
+* Updated documentation describing:
+
+  * The role and boundaries of the data layer.
+  * The mapping between conceptual entities and their storage.
+  * Which components are allowed to write directly to disk and under what conditions.
+
+### Constraints
+
+* The data layer is **local-only** and must function fully offline; any external storage or sync must be introduced later via plugins or other explicit mechanisms.
+* The data layer is the **exclusive path** for application-level reads/writes to disk and persistent tables, except for:
+
+  * System logs.
+  * AI sandboxing outputs.
+  * The specific personal/Drift-related tables planned for later phases, which have their own carefully defined handling.
+* Multi-user semantics and complex user-level data models are **not implemented** here; at most, the canonical model and schemas may include placeholders or patterns that anticipate them.
+* Technology choices should be:
+
+  * Stable enough for long-term use.
+  * Abstracted behind interfaces so that swapping backends later is possible with minimal refactoring.
+* Performance tuning is secondary to clarity, safety, and consistency: correctness, uniformity, and extensibility come first.
+* No high-level business logic (plugins, engines, UX flows) is implemented in this phase; only the persistence backbone and document handling that those future pieces will rely on.
+
+### Notes
+
+* This phase is where LillyCORE’s “memory” stops being informal and becomes a structured, intentional system. Even if not all data domains are fully used yet, the way they will be stored is defined here.
+* Not all future tables or directories must be fully implemented now, but the **patterns and schemas** should be consistent and ready to extend as new features arrive.
+* The document handler and data layer are tightly linked; all future document-centric features (System DOC, Notes Plugin, etc.) should rely on this foundation rather than introducing new ad-hoc storage paths.
+* Clear documentation of the exceptions to the “data layer owns disk” rule (logs, sandbox, specific personal tables) is important so that later work doesn’t accidentally bypass safety and consistency.
 
