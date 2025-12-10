@@ -307,7 +307,6 @@ And no actual repository or automation —
 
 —this note ensures Phase 1 builds the real foundations and nothing quietly slips through the cracks.
 
-======================================================
 
 🧠 GPT Instructions (Do Not Delete)
 
@@ -1596,3 +1595,121 @@ Provide LillyCORE with an internal, AI-aware Project Management plugin that can 
   - The key is that large efforts can be stored, chunked, revisited, and tracked cleanly.
 - This plugin thickens the back end: it primarily benefits internal work orchestration and long-term efforts, even when your hardware can’t handle everything in one go.
 
+🧠 GPT Instructions (Do Not Delete)
+
+You are a GPT working with Andrew on the LillyCORE project.
+
+Before generating anything, you MUST:
+
+Ask which role you should assume (Architect or Implementer) if unclear.
+Verify role, phase, and current goals with Andrew before beginning.
+Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+NEVER invent system constraints, rules, or interpretations.
+ALWAYS ask Andrew when something is unclear or underspecified.
+When producing output:
+
+Follow the exact Feature Card structure shown in documentation.
+Do NOT add additional sections.
+Do NOT omit sections.
+Do NOT write real code unless you are the Implementer.
+If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
+DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
+
+You MUST inspect GPT_RESOURCE_INDEX.
+
+For every document listed in it that is not yet present in this conversation, you MUST say:
+
+“Please provide the full content of <DOC_NAME> so I may load it before continuing.”
+
+You MUST NOT proceed with any task until all such documents have been provided and you confirm you have read and ingested them.
+
+When starting a new phase or returning after long context loss, you MUST repeat this rule.
+
+Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+
+### Purpose
+Provide LillyCORE with a Personal Assistant plugin that gives her the “day planner” tools needed to act as a usable assistant in daily life. Phase 11 introduces calendar, task, and reminder capabilities as plugin-level features, so DRIFT + HELPER can use them to produce assistant-like behavior. The plugin itself is a capability provider and data store; the AI (engines) decide how and when to use those capabilities.
+
+### Scope
+- Define the **Personal Assistant Plugin** as a plugin-layer module focused on:
+  - Calendar-style events (appointments, time blocks).
+  - Tasks/todos (with optional due dates and tags).
+  - Reminders (time-based or event-based).
+- Implement plugin-level data storage:
+  - PA-specific tables or files for events, tasks, and reminders.
+  - Clear separation from DRIFT’s personal context storage.
+- Expose operations via packets for:
+  - Creating/updating/deleting events and tasks.
+  - Marking tasks complete, snoozed, or rescheduled.
+  - Registering reminders and retrieving “what’s upcoming.”
+- Integrate with DRIFT and HELPER via capabilities:
+  - DRIFT interprets user requests like “remind me tomorrow at 10” and maps them to PA plugin calls.
+  - HELPER can use PA data when assembling work plans or briefings.
+- Support **daily/weekly briefing flows**:
+  - Provide structured “today/this week” data packets that DRIFT/HELPER can turn into natural language briefings.
+- Allow user configuration of proactivity level:
+  - From reactive-only (“tell me when I ask”) to mild proactivity (occasional reminders and nudges), controlled via preferences.
+
+### System Impact
+- Thickens the front end: Lilly can now help manage your days, not just process isolated tasks.
+- Enables assistant behaviors such as:
+  - “What does my week look like?”
+  - “Remind me to check X tomorrow.”
+  - “Add a task to follow up on Y.”
+- Provides a clean, capability-oriented model:
+  - The plugin handles storage and simple operations.
+  - DRIFT/HELPER decide how to talk to you about it, using existing context/emotion modeling.
+- Creates a foundation for later integrations (email, external calendars, etc.) without requiring them at MVP.
+
+### Inputs Required
+- Plugin Engine MVP (Phase 7) for loading, routing, and sandboxing the PA plugin.
+- DRIFT_ENGINE MVP (Phase 5) for:
+  - Interpreting user PA-related intent.
+  - Classifying events/tasks as work vs personal vs ephemeral.
+- HELPER_ENGINE MVP (Phase 6) for:
+  - Calling PA plugin capabilities as part of work orchestration (e.g., scheduling follow-ups).
+- SYSTEM_DOC / data layer for:
+  - Storing references or summaries of PA data if needed.
+  - Logging PA-related operations.
+- UX MVP (Phase 9) for:
+  - Displaying briefings, task lists, and event summaries via chat + crates.
+- Packet schemas for:
+  - PA operations (create/update/list).
+  - Briefing payloads (structured “agenda” data).
+
+### Outputs Expected
+- A functioning **Personal Assistant Plugin** that:
+  - Can store and manage events, tasks, and reminders.
+  - Exposes operations that DRIFT/HELPER can call.
+  - Returns structured data for daily/weekly briefings.
+- UX-visible assistant behavior, such as:
+  - A daily agenda crate.
+  - A task list crate.
+  - Natural-language briefings synthesized from PA data.
+- Ability to:
+  - Add/modify tasks via chat.
+  - Request “what’s up today/this week.”
+  - Snooze/complete/reschedule items via natural language.
+- Configurable proactivity:
+  - Simple preference(s) controlling how often the assistant surfaces reminders unprompted (e.g., off / low / normal).
+- Documentation covering:
+  - PA data model (events, tasks, reminders).
+  - How engines should use the PA plugin.
+  - How UX should present PA-related information.
+
+### Constraints
+- The PA plugin is a capability provider, not a behavior/identity engine:
+  - It stores and manages PA data.
+  - DRIFT/HELPER/UX decide how that data is used and displayed.
+- All operations must respect plugin and packet boundaries:
+  - No direct writes to DRIFT’s personal context.
+  - No direct changes to core engines.
+- External integrations (real email, external calendars, etc.) are out of scope for Phase 11:
+  - May be simulated or stubbed.
+  - Real external I/O happens in later phases.
+- Multi-user semantics are not required yet; PA is focused on a single primary user.
+
+### Notes
+- Phase 11 is where Lilly first feels like a “real assistant” instead of just a powerful backend stack.
+- The mental model: this plugin is you handing Lilly a well-structured day planner; she still talks to you through the existing UX, but now has tools to remember and organize your life.
+- DRIFT’s emotional and contextual modeling will influence how PA data is presented (e.g., prioritization, tone), but the data itself lives in the PA plugin’s storage.
