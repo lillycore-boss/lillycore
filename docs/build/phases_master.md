@@ -538,3 +538,125 @@ DOCUMENTATION_UPDATES:
       • P4.x implementer and QA cards recorded
   - MODULES:
       • Placement of Notes Plugin directory and integration mapping defined
+
+CARD_ID: P5
+CARD_TITLE: DRIFT Engine MVP – Context, Emotion, Perception Layer
+
+EXECUTOR_ROLE: Architect
+
+PHASE_CONTEXT:
+  - Phase: P5
+  - Slice: P5
+  - Parent Card: none
+
+DELIVERABLES_SERVED:
+  - P5.D1 – Structured perceptual parsing model (emotional metadata, context classification, memory extraction)
+  - P5.D2 – Ephemeral-context engine specification and update rules
+  - P5.D3 – Long-term personal-memory structures and schemas
+  - P5.D4 – DRIFT-specific storage region (“personal tables”) and multi-user layout
+  - P5.D5 – Real-time update pipeline integrating DRIFT into the runtime loop
+  - P5.D6 – DRIFT → HELPER (Phase 6) structured handoff schema
+  - P5.D7 – Documentation of emotional scales, classification rules, schema definitions, boundaries, lifecycle expectations
+
+---
+DESCRIPTION:
+  Phase 5 introduces LillyCORE’s first perceptual engine: DRIFT MVP.  
+  DRIFT transforms raw user input into structured emotional metadata, short-term context,
+  and long-term personal memory. It establishes the perceptual backbone that the HELPER
+  Engine (Phase 6) will rely on for reasoning, workflow extraction, and personalized behavior.
+
+  DRIFT performs:
+    • Emotional interpretation
+    • Work/personal/ephemeral classification
+    • Extraction of personal-memory candidates
+    • Maintenance of an ephemeral “rolling context window”
+    • Maintenance of long-term personal memory entries
+    • Real-time updates per incoming message
+    • Delivery of a structured perceptual payload to downstream systems
+
+  DRIFT’s storage must remain isolated from system-level data and plugin layers.  
+  DRIFT owns all personal/emotional/perceptual memory.
+
+INPUTS / PRECONDITIONS:
+  - From Phase 1:
+      • Runtime loop
+      • Logging/error envelopes
+  - From Phase 2:
+      • AI pools and extraction wrappers (optional but available)
+  - From Phase 3:
+      • Durable data/document layer
+      • Schemas and write-path rules needed for DRIFT tables/folders
+  - From Phase 4:
+      • Notes Plugin V0 (for validating memory-flow interactions)
+  - From Canon/architecture:
+      • Emotional-weight semantics
+      • Personal memory entry structure
+      • Rules for personal vs ephemeral vs system-level data boundaries
+      • Classification meaning and downstream expectations
+  - Required decisions:
+      • Emotional scale definitions (valence, intensity, tone range)
+      • Criteria for personal-memory entry acceptance
+      • Folder/table layout for multi-user future support
+
+STEPS:
+  - Step 1: Define structured perceptual parsing:
+      • Emotional metadata model
+      • Input classification (work/personal/ephemeral)
+      • Entity + personal-memory extraction specification
+  - Step 2: Design ephemeral context engine:
+      • Rolling-window update rules
+      • Mini-summaries and short-term tone tracking
+      • Message-by-message update workflow
+  - Step 3: Design long-term personal-memory subsystem:
+      • Stable identity traits
+      • Persistent facts (relationships, preferences)
+      • Social/interaction metadata
+      • Storage schemas and indexing rules
+  - Step 4: Specify DRIFT storage region:
+      • Personal-memory tables/folders
+      • Ephemeral-context tables/folders
+      • Multi-user structure (user/UID namespacing)
+  - Step 5: Integrate DRIFT into runtime:
+      • User message → DRIFT parsing
+      • DRIFT output → downstream consumption
+      • Logging/error handling through Phase 1 infrastructure
+  - Step 6: Define DRIFT→HELPER handoff schema:
+      • Emotional metadata structure
+      • Extracted entities
+      • Memory candidates
+      • Thread-level ephemeral summaries
+  - Step 7: Architect decomposition into P5.x cards:
+      • Perceptual model definition
+      • Ephemeral engine specification
+      • Long-term memory model + schemas
+      • Storage folder/table implementation spec
+      • Runtime integration mapping
+      • Handoff schema spec
+      • Documentation updates
+  - Step 8: Identify unresolved architectural questions:
+      • Whether personal-memory degradation should begin here or later
+      • Handling conflicting emotional signals
+      • Granularity of ephemeral summaries
+
+DONE_WHEN:
+  - DRIFT MVP design fully decomposed into P5.x cards covering P5.D1–P5.D7.
+  - Emotional metadata, classification rules, memory extraction, and update behaviors are defined.
+  - Ephemeral-context model and long-term personal-memory schemas are stable.
+  - DRIFT-specific storage region is documented, isolated, and aligned with Phase 3 conventions.
+  - DRIFT→HELPER handoff structure is finalized.
+  - Runtime integration requirements are clear, complete, and testable.
+  - No HELPER or advanced DRIFT-lifecycle features included prematurely.
+  - QA card for Phase 5 exists and references all required outcomes.
+
+DOCUMENTATION_UPDATES:
+  - Canon:
+      • Emotional semantics
+      • Personal vs ephemeral vs system-state distinctions
+      • DRIFT storage boundaries and guarantees
+  - TECH_SPEC:
+      • DRIFT storage mappings and schema layout
+      • Perceptual pipeline integration in runtime stack
+  - FEATURES:
+      • P5.x implementer and QA cards added
+  - MODULES:
+      • DRIFT Engine module location and data-region placement established
