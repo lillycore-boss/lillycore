@@ -1098,3 +1098,188 @@ Establish HELPER_ENGINE as LillyCORE’s first fully functional **work engine an
 * Notes Plugin remains the primary cheap testbed for HELPER’s behavior but should not become a dependency that constrains HELPER’s generality.
 * As with DRIFT, HELPER may eventually be separable into its own process or machine; this phase should avoid tight coupling that would prevent that.
 
+🧠 GPT Instructions (Do Not Delete)
+
+You are a GPT working with Andrew on the LillyCORE project.
+
+Before generating anything, you MUST:
+
+Ask which role you should assume (Architect or Implementer) if unclear.
+Verify role, phase, and current goals with Andrew before beginning.
+Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+NEVER invent system constraints, rules, or interpretations.
+ALWAYS ask Andrew when something is unclear or underspecified.
+When producing output:
+
+Follow the exact Feature Card structure shown in documentation.
+Do NOT add additional sections.
+Do NOT omit sections.
+Do NOT write real code unless you are the Implementer.
+If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
+DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
+
+You MUST inspect GPT_RESOURCE_INDEX.
+
+For every document listed in it that is not yet present in this conversation, you MUST say:
+
+“Please provide the full content of <DOC_NAME> so I may load it before continuing.”
+
+You MUST NOT proceed with any task until all such documents have been provided and you confirm you have read and ingested them.
+
+When starting a new phase or returning after long context loss, you MUST repeat this rule.
+
+Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+
+# Phase 7 — Plugin Engine
+
+Milestone Description
+
+### Purpose
+
+Introduce the Plugin Engine as LillyCORE’s controlled, high-boundary expansion gateway. Phase 7 establishes the system’s ability to load, validate, execute, and supervise plugins—allowing new capabilities to be added without modifying core engines. This provides the architectural foundation for modular growth, safe experimentation, and the eventual ecosystem of user- or system-provided extensions.
+
+The Plugin Engine becomes the *gatekeeper*: every plugin is a black box, every request going in and every result coming out is validated, monitored, and routed through standardized system packet formats.
+
+---
+
+### Scope
+
+* Define and implement the **Plugin Engine** as a standalone system component responsible for:
+
+  * Discovering plugin folders.
+  * Validating plugin manifests + safety claims.
+  * Registering available plugin capabilities.
+  * Executing plugin work in fully sandboxed contexts.
+  * Mediating all I/O between plugins and the system via structured packets.
+* Implement support for **two packet types** at MVP:
+
+  * **User-initiated packets** (enter via DRIFT → HELPER → Plugin Engine).
+  * **System-initiated packets** (backend work triggered by HELPER or other engines).
+* Provide a minimal but complete **plugin folder format**:
+
+  * Folder = plugin; deletion removes plugin cleanly.
+  * Must contain required metadata (manifest describing capabilities, version, and type).
+  * Must contain one or more entrypoints for execution.
+  * Must specify allowed operations (inputs/outputs).
+* Implement plugin registration & routing:
+
+  * HELPER_ENGINE can route backend tasks to plugins based on capabilities.
+  * Plugin Engine selects the appropriate plugin based on manifest-defined actions.
+* Implement **plugin sandboxing**:
+
+  * Plugins cannot access system internals directly.
+  * Plugins see only what the system passes to them through packets.
+  * All outputs are validated before returning to HELPER or saving to disk.
+* Provide **plugin-level storage boundaries**:
+
+  * Each plugin owns its own output directory/folder.
+  * Plugin results are either inline packet payloads or pointers to sandboxed files.
+  * Plugins cannot write into system-owned directories (except where explicitly allowed).
+* Integrate plugin validation:
+
+  * AI-assisted validation checks plugin intent, manifest correctness, and safety claims.
+  * New UI-facing plugins require explicit user confirmation.
+  * Backend-only plugins require only system validation.
+
+---
+
+### System Impact
+
+* Establishes the **mechanism by which LillyCORE grows**—new capabilities can be added simply by placing folders into the plugin directory.
+* Creates a **safe execution boundary** around untrusted or arbitrary code/logic:
+
+  * Plugins become black boxes with tightly controlled interfaces.
+  * Unexpected output patterns result in rejection and error packets.
+* Simplifies future feature development:
+
+  * HELPER no longer needs bespoke logic for every new capability.
+  * Plugins become new “tools” that HELPER can call automatically based on registered capabilities.
+* Ensures user safety and system stability:
+
+  * Plugin Engine prevents unauthorized disk writes or system contamination.
+  * All plugin interactions are mediated and logged.
+* Enables future UX plugins (e.g., visual interfaces, dashboards) without modifying core engines.
+
+---
+
+### Inputs Required
+
+* All prior phase outputs, especially:
+
+  * **DRIFT Engine MVP** for structured user context.
+  * **HELPER Engine MVP** for work decomposition and plugin invocation.
+  * **AI_POOLS** for validating plugin claims or performing manifest analysis.
+  * **SYSTEM_DOC** from Phase 3 for storing plugin metadata and execution logs.
+* Canon & Modules docs defining engine boundaries and plugin ontology.
+* Decisions regarding:
+
+  * Plugin manifest schema (version, permissions, capabilities).
+  * Packet fields required for plugin routing.
+  * What fields plugins must return (task result, file path, error codes, metadata).
+  * Allowed plugin output directories.
+
+---
+
+### Outputs Expected
+
+* A fully functional **Plugin Engine MVP**, capable of:
+
+  * Discovering plugin folders dynamically.
+  * Validating plugin manifests.
+  * Registering plugin capabilities.
+  * Accepting work packets from HELPER.
+  * Routing work to appropriate plugins.
+  * Returning validated result packets.
+  * Logging plugin activity into SYSTEM_DOC.
+* A **plugin folder specification**, including:
+
+  * Required files: manifest, entrypoint(s), capability definitions.
+  * Optional files: helper scripts, assets, data resources.
+  * Rules for versioning, safety flags, UI permission flags.
+* A **plugin sandbox** environment:
+
+  * Plugins may only write to their own output folder.
+  * All output (inline or file-based) is validated by Plugin Engine before returning upstream.
+  * Malformed output triggers errors instead of corrupting the system.
+* An operational **plugin registry**:
+
+  * Lists available capabilities.
+  * Enables HELPER to dynamically select plugins during task execution.
+  * Supports both system- and user-initiated requests.
+* A functioning **end-to-end test path**:
+
+  * User → DRIFT → HELPER → Plugin Engine → Notes Plugin → Plugin Engine → HELPER → Conversational Output.
+* Documentation covering:
+
+  * Plugin folder and manifest formats.
+  * Work packet structure for plugin calls.
+  * Allowed plugin operations.
+  * How plugin results flow back through the system.
+
+---
+
+### Constraints
+
+* Plugins cannot bypass the Plugin Engine under any circumstances.
+* Plugins do not access DRIFT, HELPER, AI pools, or SYSTEM_DOC directly—only through structured packets.
+* Plugins must not generate UI activity unless explicitly declared as a UI plugin (future phases).
+* User-facing plugins require explicit user consent before activation.
+* Plugin Engine must treat plugins as untrusted black boxes:
+
+  * Validate all inputs and outputs.
+  * Enforce directory boundaries.
+  * Reject unexpected or malformed packets.
+* Performance is not a priority; correctness, safety, and control are.
+
+---
+
+### Notes
+
+* The Plugin Engine is the **centerpiece of LillyCORE’s extensibility**. Every major subsystem after this relies on its guarantees.
+* The “plugin as folder” model keeps installation/removal trivial and intuitive.
+* AI-assisted validation ensures a high-safety baseline without requiring human inspection for every plugin.
+* Phase 7 marks the point where the system becomes *truly modular*: new abilities can be added without modifying engines or core code.
+* Thorough packet logging and isolation make debugging plugins straightforward and prevent system corruption.
+
+---
+
