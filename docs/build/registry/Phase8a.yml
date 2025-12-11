@@ -1,0 +1,108 @@
+# Phase Registry – Phase 8.HD (HELP_DESK_ENGINE)
+# This file defines the authoritative structure for the HELP_DESK_ENGINE subphase.
+# Card source: P8.HD — HELP_DESK_ENGINE — Automated Recovery & Error Repair Layer
+# This registry stores all structural information about this subphase independently
+# of any GitHub issue card instances.
+
+phase:
+  id: P8.HD
+  name: "HELP_DESK_ENGINE — Automated Recovery & Error Repair Layer"
+  milestone: "Phase 8 — Stability Spine"
+  order: 8.1
+
+  description: |
+    HELP_DESK_ENGINE is LillyCORE’s automated first responder, stabilization layer,
+    and continuous error-recovery subsystem. It maintains high system uptime,
+    automatically repairs transient or recurring failures, escalates only when
+    necessary, and generates structured recovery packets for DREAM and SCRIPT engines.
+
+    HELP_DESK performs:
+      • Multi-level automatic repair (worker, decomposition, root-level retries)
+      • Pattern detection for recurrent failures and systemic issues
+      • Root-cause analysis and targeted remediation attempts
+      • Controlled escalation when automation is exhausted or explicitly required
+      • Error classification into recoverable vs fatal categories
+      • Structured recovery and optimization signals for maintenance engines
+
+    HELP_DESK acts as the operational shield between fast-moving engines (DRIFT, HELPER)
+    and long-term maintenance engines (DREAM, SCRIPT). It ensures uninterrupted
+    operation and protects system integrity.
+
+  inputs:
+    incoming_data:
+      - "Error envelopes from HELPER"
+      - "Work decomposition tree state"
+      - "Packet history from SYSTEM_DOC"
+      - "Plugin-engine results and signals"
+      - "Internal snapshots and integrity-verification outputs"
+    system_knowledge:
+      - "Error classification rules (recoverable vs fatal)"
+      - "System invariants and non-negotiable constraints"
+      - "Canonical recovery strategies defined by architecture"
+    dependencies:
+      - "DRIFT_ENGINE (emotional escalation signals)"
+      - "HELPER_ENGINE (error contexts + packet lineage)"
+      - "DREAM_ENGINE (long-term optimization targets)"
+      - "SCRIPT_ENGINE (procedural regeneration triggers)"
+      - "SYSTEM_DOC durable storage foundations"
+
+  deliverables:
+    - id: P8.HD.D1
+      name: "Automated multi-level repair pathways"
+      description: |
+        Worker-level retries, decomposition-level retries, and root-level recovery
+        using structured rules and safe execution envelopes.
+
+    - id: P8.HD.D2
+      name: "Root-cause analysis module"
+      description: |
+        Detection of recurrent failure signatures, systemic patterns, and
+        classification of structural vs transient failures.
+
+    - id: P8.HD.D3
+      name: "User escalation rules"
+      description: |
+        Deterministic rules for when HELP_DESK must ask for user confirmation,
+        including destructive operations or unresolved systemic issues.
+
+    - id: P8.HD.D4
+      name: "Error validation and classification"
+      description: |
+        Mapping raw errors into structured packets, distinguishing recoverable from
+        fatal errors, and generating standardized escalation packets.
+
+    - id: P8.HD.D5
+      name: "HELP_DESK feedback loop"
+      description: |
+        Structured signals directing DREAM and SCRIPT engines toward optimization,
+        remediation, or correction tasks.
+
+    - id: P8.HD.D6
+      name: "SYSTEM_DOC integration for recovery logging"
+      description: |
+        Recording all recovery attempts, escalations, state transitions, and
+        post-repair verification results.
+
+  constraints:
+    - "HELP_DESK may not alter user-facing behavior directly."
+    - "HELP_DESK may not modify DRIFT, HELPER, or Plugin code."
+    - "HELP_DESK must not violate data invariants or corrupt persistent state."
+    - "Destructive or irreversible operations require DREAM validation and potentially user confirmation."
+    - "HELP_DESK cannot override explicit user preferences."
+
+  structure:
+    slices:
+      # Will be filled when P8.HD.x implementer cards are produced.
+      []
+
+  qa:
+    expectations:
+      - "All HELP_DESK behaviors are testable via synthetic error streams."
+      - "Recovery pathways preserve invariants and avoid data corruption."
+      - "Root-cause classification produces consistent vocabulary and severity categories."
+      - "Escalation only occurs when automation is exhausted."
+      - "SYSTEM_DOC retains full recovery logs and verification records."
+
+    notes: |
+      QA verifies safety, correctness, and determinism of all repair pathways.
+      Registry defines structural expectations only, not execution results.
