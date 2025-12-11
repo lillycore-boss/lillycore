@@ -1,0 +1,121 @@
+# Phase Registry – Phase 7
+# This file defines the authoritative structure for Phase 7.
+# Card source: P7 – Phase 7 — Plugin Engine MVP – Safe Modular Expansion Layer
+# This registry stores all structural information about Phase 7 independently
+# of any GitHub issue card instances.
+
+phase:
+  id: P7
+  name: "Phase 7 — Plugin Engine MVP – Safe Modular Expansion Layer"
+  milestone: "Phase 7 — Plugin Engine MVP – Safe Modular Expansion Layer"
+  order: 7
+
+  description: |
+    Phase 7 introduces LillyCORE’s Plugin Engine—a high-boundary, controlled subsystem
+    enabling safe modular expansion via folder-based plugins. Plugins are treated as opaque
+    modules that communicate exclusively through validated packets. No plugin may bypass engine
+    boundaries or touch internal system subsystems directly.
+
+    Plugin Engine MVP provides:
+      • Plugin discovery and manifest scanning
+      • Manifest validation + capability registration
+      • Sandbox-based execution with strict I/O constraints
+      • Structured packet routing for user-initiated and system-initiated tasks
+      • Output validation and SYSTEM_DOC persistence
+      • End-to-end integration with DRIFT, HELPER, and runtime logging
+
+    This forms the foundation for all future extensibility, including UX plugins,
+    reasoning extensions, data utilities, and autonomous workflow modules.
+
+  inputs:
+    phase_dependencies:
+      - "Phase 1: runtime, logging, preferences."
+      - "Phase 2: AI_POOLS for manifest checking and validation."
+      - "Phase 3: SYSTEM_DOC for plugin metadata and logs."
+      - "Phase 4: Notes Plugin V0 as minimal plugin testbed."
+      - "Phase 5: DRIFT structured perception (context + emotional metadata)."
+      - "Phase 6: HELPER Engine packet structures and routing expectations."
+    canon_rules:
+      - "Engine and plugin boundary definitions."
+      - "Plugin ontology and capability rules."
+      - "System safety and permission constraints."
+    required_decisions:
+      - "Manifest schema fields, capabilities, permissions."
+      - "Allowed plugin behaviours and I/O boundaries."
+      - "Plugin output folder rules."
+      - "Required return fields for Plugin Engine packets."
+
+  deliverables:
+    - id: P7.D1
+      name: "Plugin Engine architecture and boundaries"
+      description: |
+        High-level architecture, lifecycle boundaries, routing model, and subsystem
+        responsibilities defining how plugins interact with LillyCORE.
+
+    - id: P7.D2
+      name: "Plugin manifest schema + plugin folder specification"
+      description: |
+        The validated manifest structure defining capabilities, permissions, metadata,
+        and the required folder layout for plugin modules.
+
+    - id: P7.D3
+      name: "Plugin discovery, registration, and validation model"
+      description: |
+        Rules for discovering plugins, performing safety and manifest validation,
+        registering capabilities, and managing plugin availability.
+
+    - id: P7.D4
+      name: "Plugin sandbox execution model"
+      description: |
+        Strict sandboxing boundaries defining which operations are allowed or prohibited,
+        including output isolation and validated I/O paths.
+
+    - id: P7.D5
+      name: "Plugin packet-routing rules"
+      description: |
+        User-initiated and system-initiated packet routing, capability matching,
+        error packet generation, and lifecycle flow control.
+
+    - id: P7.D6
+      name: "Plugin result validation + SYSTEM_DOC logging"
+      description: |
+        Validation of plugin outputs, SYSTEM_DOC persistence of execution metadata,
+        manifest updates, and audit-friendly result storage.
+
+    - id: P7.D7
+      name: "End-to-end Plugin Engine integration path"
+      description: |
+        Full integration pipeline allowing DRIFT → HELPER → Plugin Engine workflows,
+        plus sandboxed testing with Notes Plugin or dummy plugins.
+
+    - id: P7.D8
+      name: "Documentation set for manifests, packets, sandboxing, and plugin rules"
+      description: |
+        Documentation explaining plugin boundaries, manifest schema, execution rules,
+        routing logic, validation behaviours, and Plugin Engine APIs.
+
+  constraints:
+    - "Plugins operate as black boxes; direct system access is prohibited."
+    - "All communication must occur via validated packet interfaces."
+    - "Manifest schema must prevent unsafe capabilities or escalations."
+    - "Sandbox boundaries must strictly control all file access, process execution, and I/O."
+    - "SYSTEM_DOC must record plugin activity, metadata, and results."
+    - "Routing must align with HELPER packet specifications from Phase 6."
+    - "No Phase 8+ extensibility or autonomous behaviour may appear."
+
+  structure:
+    # Will be populated after P7.x decomposed cards are created.
+    slices:
+      []
+
+  qa:
+    expectations:
+      - "QA verifies that all deliverables P7.D1–P7.D8 are fully addressed."
+      - "Manifest schema is enforceable and validated correctly."
+      - "Plugin Engine boundaries and sandbox constraints are respected."
+      - "Packet routing behaves correctly for both user-initiated and system-initiated flows."
+      - "SYSTEM_DOC logging is complete, structured, and queryable."
+      - "The Plugin Engine MVP is testable using Notes Plugin V0 or dummy plugins."
+    notes: |
+      QA outcomes are stored in LillyCORE QA issues and appended QA blocks.
+      This registry defines structural expectations only, not runtime QA results.
