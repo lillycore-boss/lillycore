@@ -83,11 +83,17 @@ phase:
     - "Phase 0 outputs must not conflict with the roadmap; they act as prerequisites, not prescriptive architecture."
 
   structure:
-    # Phase 0 is decomposed into multiple slices (P0.1–P0.10, including QA) and
-    # potentially sub-slices (e.g., P0.4.1–P0.4.7). These will be added here as
-    # they are normalized into the registry.
     slices:
-      []
+      - id: "P0.1"
+        title: "Select Technical Baseline Standards (Python Version, Formatter, Linter, Tooling)"
+        executor_role: "Architect"
+        parent: "P0"
+        delivers:
+          - "P0.D2"
+          - "P0.D6"
+        qa_status: "PASS"   # from your appended QA block
+        subslices: []
+
 
   qa:
     expectations:
