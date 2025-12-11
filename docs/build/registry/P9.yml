@@ -1,0 +1,116 @@
+# Phase Registry – Phase 9
+# This file defines the authoritative structure for Phase 9 (UX MVP).
+# Card source: P9 – Phase 9 UX MVP — Local Web Interface (Chat Pane + Crate Stream)
+# This registry stores all structural information about Phase 9 independently
+# of any GitHub issue card instances.
+
+phase:
+  id: P9
+  name: "Phase 9 UX MVP — Local Web Interface (Chat Pane + Crate Stream)"
+  milestone: "Phase 9 UX MVP — Local Web Interface (Chat Pane + Crate Stream)"
+  order: 9
+
+  description: |
+    Phase 9 creates LillyCORE’s first external interface: a local browser-based UX shell
+    capable of rendering conversational output (Chat Pane) and structured system output
+    (Crate Stream). The UX MVP is interpretive only: it displays packets emitted by
+    engines without generating or altering system behaviour.
+
+    The UX layer becomes the primary human gateway to LillyCORE, providing:
+      • A clean, voice-friendly conversational channel (Chat Pane)
+      • A crate stream for structured results, plugin outputs, file paths, and metadata
+      • Visual rendering of identity/personality cues from DRIFT
+      • Display of debug/error packets and crate metadata
+      • Natural-language plugin invocation through normal chat input
+
+    By separating human-facing communication (chat) from system-facing output (crates),
+    Phase 9 defines the UX model for future interfaces (desktop, mobile, voice, remote).
+
+  inputs:
+    phase_dependencies:
+      - "DRIFT packet structures: identity/personality hooks, tone indicators, context summaries."
+      - "HELPER structured result packets: work metadata, file references, success/error results."
+      - "Plugin Engine outputs: crate-compatible packets and plugin file outputs."
+      - "SYSTEM_DOC schemas for metadata crates."
+      - "Defined packet formats for chat, crates, debug/error, and identity/personality."
+      - "A network interface layer capable of serving a local web front-end."
+    canon_rules:
+      - "UX ontology: chat is human-facing, crates are system-facing."
+      - "Packet interpretation rules and safety guarantees."
+    required_decisions:
+      - "Exact packet → UX mapping conventions."
+      - "Local server / network exposure rules."
+      - "How identity/personality hooks should be visually rendered."
+
+  deliverables:
+    - id: P9.D1
+      name: "Full UX architecture (layout + packet routing model)"
+      description: |
+        Overall UX shell structure, including UI layout, pane structure, and the packet
+        routing model from internal engines to UX regions.
+
+    - id: P9.D2
+      name: "Chat Pane design (human channel)"
+      description: |
+        Design for the conversational pane, including message rendering, tone cues,
+        and basic controls for user input.
+
+    - id: P9.D3
+      name: "Crate Stream design (system channel)"
+      description: |
+        Design for the structured system-output area, defining crate container layout,
+        scrolling behaviour, and grouping rules.
+
+    - id: P9.D4
+      name: "Packet interpretation contract for UX layer"
+      description: |
+        Contract specifying that UX acts as a renderer only: it interprets packet fields
+        deterministically, does not invent content, and does not modify system behaviour.
+
+    - id: P9.D5
+      name: "Network interface + local web server architecture"
+      description: |
+        Architecture for the local web server and network interface, including transport
+        (WebSocket/polling), security expectations, and serving of the static UX app.
+
+    - id: P9.D6
+      name: "Identity/personality hook render framework"
+      description: |
+        Rules and components for displaying identity/personality cues from DRIFT in the
+        UX, such as headers, inline cues, or subtle indicators.
+
+    - id: P9.D7
+      name: "UX routing for chat, crates, files, debug, and metadata"
+      description: |
+        Routing and rendering logic that maps different packet types to Chat Pane,
+        Crate Stream, debug panel, and file output components.
+
+    - id: P9.D8
+      name: "Documentation of UX boundaries and constraints"
+      description: |
+        Documentation specifying what UX may and may not do, including forbidden
+        behaviours such as rewriting system packets or bypassing engine pipelines.
+
+  constraints:
+    - "UX must be a pure renderer of packets, not a generator of behaviour."
+    - "UX cannot invent personality, content, or system states."
+    - "UX must not bypass packet-based routing or access internal engine state directly."
+    - "UX cannot modify DRIFT, HELPER, or Plugin Engine behaviour."
+    - "All file outputs must be surfaced via crates and consistent metadata."
+
+  structure:
+    # Will be filled when Architect decomposes Phase 9 into P9.x cards.
+    slices:
+      []
+
+  qa:
+    expectations:
+      - "Packet → UX routing behaves deterministically and matches the defined contract."
+      - "Chat Pane and Crate Stream layouts are consistent with Phase 9 architecture."
+      - "UX never mutates packets or injects untracked behaviour."
+      - "File outputs and metadata crates are rendered correctly and safely."
+      - "UX boundaries and constraints are enforceable and documented."
+    notes: |
+      QA validates that the UX layer acts strictly as an interpretive renderer of
+      engine packets. This registry defines structural expectations only, not UX
+      implementation details.
