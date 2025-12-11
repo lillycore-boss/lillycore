@@ -1,0 +1,115 @@
+# Phase Registry – Phase 6
+# This file defines the authoritative structure for Phase 6.
+# Card source: P6 – Phase 6 — HELPER Engine MVP – Work Orchestration Layer
+# This registry stores all structural information about Phase 6 independently
+# of any GitHub issue card instances.
+
+phase:
+  id: P6
+  name: "Phase 6 — HELPER Engine MVP – Work Orchestration Layer"
+  milestone: "Phase 6 — HELPER Engine MVP – Work Orchestration Layer"
+  order: 6
+
+  description: |
+    Phase 6 introduces LillyCORE’s first fully functional work engine: HELPER_ENGINE MVP.
+    HELPER converts DRIFT’s structured perception into actionable tasks, executes them using
+    AI_POOLS, and returns structured work-result packets. HELPER’s outputs are not user-facing:
+    they are internal artifacts consumed by downstream layers and future engines.
+
+    HELPER performs:
+      • Work-package interpretation and task-mode selection
+      • Task reasoning and decomposition into primitives
+      • AI_POOL routing and backend selection
+      • Managed execution with envelopes, timeouts, retries
+      • Logging + SYSTEM_DOC persistence of work events
+      • Production of a unified work-result packet
+
+    Phase 6 establishes the canonical internal packet format used by all future engines.
+
+  inputs:
+    phase_dependencies:
+      - "Phase 1 runtime loop, logging, preferences."
+      - "Phase 2 AI_POOLS and execution envelopes."
+      - "Phase 3 SYSTEM_DOC integrations and storage mappings."
+      - "Phase 4 Notes Plugin V0 test surface."
+      - "Phase 5 DRIFT output structures (WorkPackage, ContextBundle)."
+    roadmap_context:
+      - "HELPER defined as LillyCORE’s 'worker brain'."
+    canon_rules:
+      - "Engine/plugin boundaries and ontological rules."
+      - "Pipeline structure expectations across subsystems."
+    modules_references:
+      - "HELPER_ENGINE dependencies and responsibilities."
+      - "DRIFT output semantics."
+      - "NOTES_PLUGIN usage for trace testing."
+    required_decisions:
+      - "MVP task modes (analysis, transformation, generation, lookup, etc.)."
+      - "Inline vs file-backed result patterns."
+      - "Work-event logging and retention granularity."
+
+  deliverables:
+    - id: P6.D1
+      name: "HELPER_ENGINE MVP architecture and orchestration model"
+      description: |
+        Definition of HELPER’s high-level architecture, entry points, orchestration rules,
+        and dependency boundaries.
+
+    - id: P6.D2
+      name: "Internal work packet specification"
+      description: |
+        Complete request→result packet structure including metadata, context, errors,
+        and versioning rules.
+
+    - id: P6.D3
+      name: "Task-reasoning and decomposition framework for MVP"
+      description: |
+        Reasoning model transforming DRIFT WorkPackages into primitive tasks, including
+        decomposition logic and execution sequencing rules.
+
+    - id: P6.D4
+      name: "AI_POOL routing rules and backend selection logic"
+      description: |
+        Rules that determine how HELPER selects AI pools, switches models, and routes work
+        using Phase 2 envelopes.
+
+    - id: P6.D5
+      name: "HELPER → SYSTEM_DOC storage mapping"
+      description: |
+        Persistent storage rules for work events, result packets, and debugging artifacts
+        using the SYSTEM_DOC layer.
+
+    - id: P6.D6
+      name: "End-to-end integration path (DRIFT → HELPER → output)"
+      description: |
+        Full integration path definition for ingestion, orchestration, and output, including
+        compatibility with Notes Plugin V0.
+
+    - id: P6.D7
+      name: "Documentation for HELPER boundaries, responsibilities, and packet APIs"
+      description: |
+        Documentation covering HELPER’s role, boundaries, task modes, packet APIs, and
+        interactions with DRIFT, AI_POOLS, and SYSTEM_DOC.
+
+  constraints:
+    - "HELPER must not generate user-facing messages (handled in later phases)."
+    - "Work packets must follow canonical packet-format rules with strict versioning."
+    - "Reasoning/decomposition must be minimal; advanced inference belongs to future phases."
+    - "AI_POOL routing must comply with Phase 2 envelope and backend-selection rules."
+    - "All storage writes must align with Phase 3 SYSTEM_DOC conventions."
+    - "No Phase 7+ behaviours (workflows, planning engines, autonomous jobs) may appear."
+
+  structure:
+    # Will be completed by Architect once P6.x cards are generated.
+    slices:
+      []
+
+  qa:
+    expectations:
+      - "A QA card validates all deliverables P6.D1–P6.D7."
+      - "Work-packet format is complete, stable, and testable."
+      - "Reasoning → routing → execution → persistence flows are coherent and traceable."
+      - "Integration with DRIFT and SYSTEM_DOC is correct and safe."
+      - "No HELPER_lifecycle or autonomous behaviours appear prematurely."
+    notes: |
+      QA outcomes are documented on LillyCORE QA issues and appended QA blocks.
+      The registry defines structural expectations only, not execution results.
