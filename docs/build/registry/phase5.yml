@@ -1,0 +1,112 @@
+# Phase Registry – Phase 5
+# This file defines the authoritative structure for Phase 5.
+# Card source: P5 – Phase 5 — DRIFT Engine MVP – Context, Emotion, Perception Layer
+# This registry stores all structural information about Phase 5 independently
+# of any GitHub issue card instances.
+
+phase:
+  id: P5
+  name: "Phase 5 — DRIFT Engine MVP – Context, Emotion, Perception Layer"
+  milestone: "Phase 5 — DRIFT Engine MVP – Context, Emotion, Perception Layer"
+  order: 5
+
+  description: |
+    Phase 5 introduces LillyCORE’s first perceptual engine: DRIFT MVP.
+    DRIFT transforms raw user input into structured emotional metadata,
+    short-term context, and long-term personal memory. It establishes the
+    perceptual backbone that the HELPER Engine (Phase 6) will rely on for
+    reasoning, workflow extraction, and personalized behaviour.
+
+    DRIFT produces:
+      • Emotional interpretation
+      • Work/personal/ephemeral classification
+      • Personal-memory candidate extraction
+      • Rolling ephemeral context updates per message
+      • Long-term personal memory entries and indexing
+      • A structured perceptual payload for downstream systems
+
+    DRIFT owns all personal/emotional/perceptual memory. All DRIFT storage
+    regions must remain isolated from system-level and plugin data.
+
+  inputs:
+    phase_dependencies:
+      - "Phase 1: runtime loop, logging, error envelopes."
+      - "Phase 2: AI pools and extraction wrappers."
+      - "Phase 3: durable data/document layer and schema conventions."
+      - "Phase 4: Notes Plugin V0 for validating memory-flow interactions."
+    canon_rules:
+      - "Emotional-weight semantics."
+      - "Personal-memory entry rules."
+      - "Boundaries between personal vs ephemeral vs system-state data."
+      - "Classification expectations and downstream responsibilities."
+    required_decisions:
+      - "Emotional scale definitions (valence, intensity, tone range)."
+      - "Acceptance criteria for personal-memory entries."
+      - "Folder/table layout for multi-user (future) support."
+
+  deliverables:
+    - id: P5.D1
+      name: "Structured perceptual parsing model"
+      description: |
+        A perceptual parsing model that generates emotional metadata, work/personal/
+        ephemeral classification, and personal-memory extraction candidates.
+
+    - id: P5.D2
+      name: "Ephemeral-context engine specification and update rules"
+      description: |
+        Rolling-window context engine including tone tracking, mini-summaries, and
+        message-by-message update behaviour.
+
+    - id: P5.D3
+      name: "Long-term personal-memory structures and schemas"
+      description: |
+        Schema definitions and indexing rules for persistent personal memory,
+        including identity traits, relationship metadata, and stable preferences.
+
+    - id: P5.D4
+      name: "DRIFT-specific storage region and multi-user layout"
+      description: |
+        Dedicated storage region for DRIFT memory (personal + ephemeral), including
+        folder/table layout and multi-user namespacing.
+
+    - id: P5.D5
+      name: "Real-time update pipeline integrating DRIFT into the runtime loop"
+      description: |
+        The processing pipeline from message arrival → DRIFT perceptual pass →
+        structured output delivery → logging/error handling.
+
+    - id: P5.D6
+      name: "DRIFT → HELPER handoff schema"
+      description: |
+        Structured representation including emotional metadata, extracted entities,
+        memory candidates, and ephemeral summaries for consumption by HELPER (Phase 6).
+
+    - id: P5.D7
+      name: "Documentation for emotional scales, classification rules, memory schema, and lifecycle"
+      description: |
+        Documentation covering DRIFT boundaries, emotional scales, classification
+        rules, personal-memory schemas, update lifecycle, and integration behaviour.
+
+  constraints:
+    - "No HELPER Engine or Phase 6 reasoning behaviour may appear in Phase 5."
+    - "DRIFT memory must be isolated from system/plugin layers except by defined interfaces."
+    - "All storage must follow Phase 3 data/document conventions; personal memory may require special bypass rules but must remain explicitly documented."
+    - "Emotional semantics and classification must align with Canon definitions."
+    - "Runtime integration must use Phase 1 logging and error envelopes."
+
+  structure:
+    # Will be populated when the Architect creates P5.x cards.
+    slices:
+      []
+
+  qa:
+    expectations:
+      - "A QA card must validate all DRIFT deliverables (P5.D1–P5.D7)."
+      - "Perceptual parsing, ephemeral context logic, and long-term memory schemas must be testable."
+      - "DRIFT-specific storage region must be properly isolated and documented."
+      - "DRIFT → HELPER handoff schema must be structurally complete."
+      - "Phase 5 must not leak Phase 6+ semantics."
+
+    notes: |
+      QA results live on LillyCORE QA issues and appended QA blocks on P5/P5.x cards.
+      The registry defines structural expectations only, not QA outcomes.
