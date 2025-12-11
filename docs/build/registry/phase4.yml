@@ -1,0 +1,102 @@
+# Phase Registry – Phase 4
+# This file defines the authoritative structure for Phase 4.
+# Card source: P4 – Phase 4 — Notes Plugin V0 – Minimal Plugin & Memory-Flow Testbed
+# This registry stores all structural information about Phase 4 independently
+# of any GitHub issue card instances.
+
+phase:
+  id: P4
+  name: "Phase 4 — Notes Plugin V0 – Minimal Plugin & Memory-Flow Testbed"
+  milestone: "Phase 4 — Notes Plugin V0 – Minimal Plugin & Memory-Flow Testbed"
+  order: 4
+
+  description: |
+    Phase 4 introduces LillyCORE’s first plugin-like subsystem: Notes Plugin V0.
+    This minimal plugin acts as a controlled testbed for the system’s complete
+    memory and data flow, exercising the Phase 1 runtime, Phase 2 execution
+    layer, and Phase 3 persistence/document layer. It processes transcript-like
+    content, generates basic or dummy summaries, stores persistent artifacts through
+    the data/document layer, and emits user-facing files to a dedicated user-output
+    directory. This phase validates plugin boundaries, storage routing rules, and
+    runtime/logging visibility before more advanced engines (DRIFT/HELPER) are built.
+
+  inputs:
+    phase_dependencies:
+      - "Phase 1: runtime loop, logging, error envelopes, preference system."
+      - "Phase 2: AI pools and execution framework (minimal usage or stable stubs)."
+      - "Phase 3: durable data/document layer and any System DOC structures."
+    canon_rules:
+      - "Plugin boundaries and system-vs-user data separation."
+      - "User-output versus internal storage conventions."
+      - "Disk-write constraints and approved bypass rules."
+    required_information:
+      - "Location of user-visible output directory."
+      - "Metadata structure for traceability (timestamps, source IDs, run IDs)."
+      - "Expectations for minimal transcript/notes behaviour at this early phase."
+
+  deliverables:
+    - id: P4.D1
+      name: "Definition of minimal Notes Plugin V0 interface and responsibilities"
+      description: |
+        Specifies input formats, output structure, and required metadata fields for the
+        minimal Notes Plugin, establishing boundaries and behavioural expectations.
+
+    - id: P4.D2
+      name: "Processing path capable of generating dummy/basic summaries"
+      description: |
+        A minimal processing pipeline that accepts transcript-like input and produces a
+        basic or dummy summary, without invoking higher-level engines or AI complexity.
+
+    - id: P4.D3
+      name: "Accumulation and persistence rules for plugin outputs"
+      description: |
+        Rules governing how plugin outputs are named, organized, linked to input sessions,
+        and stored persistently through the data/document layer.
+
+    - id: P4.D4
+      name: "User output folder definition and naming/organization conventions"
+      description: |
+        Definition of user-visible output directory, supported file formats, naming
+        patterns, and conventions for user-owned artifacts.
+
+    - id: P4.D5
+      name: "Integration rules with data layer, user-output path, and runtime/logging"
+      description: |
+        Specification of how plugin operations interact with the data/document layer,
+        where user output is permitted to bypass the system, and what runtime/logging
+        visibility is required for traceability and debugging.
+
+    - id: P4.D6
+      name: "Minimal invocation harness for running the plugin"
+      description: |
+        A simple execution path for invoking the plugin, suitable for developer testing
+        or early runtime integration, without requiring the full Plugin Engine.
+
+    - id: P4.D7
+      name: "Documentation describing plugin role, limits, and future evolution"
+      description: |
+        Documentation covering plugin boundaries, responsibilities, allowed behaviours,
+        future expansion expectations, and integration points with the rest of LillyCORE.
+
+  constraints:
+    - "No advanced DRIFT or HELPER logic may appear in Phase 4."
+    - "Plugin must follow Phase 3 data/document routing rules: system-owned writes through data layer."
+    - "Only user-output files may bypass the data layer."
+    - "Plugin must remain minimal and safe with no semantic reasoning or complex summarization."
+    - "Logging must capture plugin operations for traceability."
+    - "User-output folder structure must be strictly defined and consistent."
+
+  structure:
+    # Will be populated by Architect once P4.x cards are created.
+    slices:
+      []
+
+  qa:
+    expectations:
+      - "At least one QA card validates P4.D1–P4.D7 deliverables."
+      - "Plugin behaviour is minimal, safe, and adheres to Phase 3 data/document conventions."
+      - "All P4.x cards contain explicit DONE_WHEN criteria and correct deliverable mapping."
+      - "No DRIFT/HELPER engine logic or Phase 5+ semantics appear."
+    notes: |
+      QA results live on LillyCORE QA issues and in appended QA blocks on P4/P4.x cards.
+      The registry describes structural expectations only, not QA outcomes.
