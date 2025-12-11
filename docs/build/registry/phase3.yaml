@@ -1,0 +1,107 @@
+# Phase Registry – Phase 3
+# This file defines the authoritative structure for Phase 3.
+# Card source: P3 – Phase 3 — Durable Data & Document Layer – Unified Persistence Backbone
+# This registry stores all structural information about Phase 3 independently
+# of any GitHub issue card instances.
+
+phase:
+  id: P3
+  name: "Phase 3 — Durable Data & Document Layer – Unified Persistence Backbone"
+  milestone: "Phase 3 — Durable Data & Document Layer – Unified Persistence Backbone"
+  order: 3
+
+  description: |
+    Phase 3 creates LillyCORE’s unified, local-only persistence spine. It defines the
+    canonical data model skeleton, selects and standardizes storage technologies, designs
+    the data layer API and mapping rules, and implements initial persistence for preferences,
+    runtime state, and foundational documents. A document handler is introduced to ensure
+    all document operations pass through the data layer with full validation and consistency
+    rules. The result is a durable, secure, extensible backbone for all future system data.
+
+  inputs:
+    phase_dependencies:
+      - "Phase 1 runtime: core loop, logging, error envelopes, preference system."
+      - "Phase 2 execution framework: AI pools and backend configuration needs."
+    roadmap_expectations:
+      - "Notes plugin behaviour."
+      - "Drift and Helper engines."
+      - "Future multi-user considerations."
+      - "Plugin/engine data model growth."
+    canon_rules:
+      - "Privacy, safety, and local-only operation requirements."
+      - "Structured behaviour for persistent system identity."
+    existing_data_sources:
+      - "Preferences"
+      - "Runtime markers"
+      - "Initial logs and configuration outputs"
+    decisions_required:
+      - "Primary storage technology (structured files vs database)."
+      - "Schema/directory/table conventions."
+      - "Approved direct-write exceptions (logs, sandbox, Drift tables)."
+
+  deliverables:
+    - id: P3.D1
+      name: "Canonical data model skeleton"
+      description: |
+        System-wide data model skeleton covering preferences/config, runtime state,
+        documents/notes, AI artifacts, and future plugin/engine domains.
+
+    - id: P3.D2
+      name: "Persistence technology selection and schema conventions"
+      description: |
+        Final decision on storage technology (structured files vs database), along with
+        unified conventions for schemas, tables, directories, and file layouts.
+
+    - id: P3.D3
+      name: "Initial working data layer implementation"
+      description: |
+        First-pass implementation of the data layer: preferences/config, runtime/session
+        tracking, and foundational document storage with consistent read/write behaviour.
+
+    - id: P3.D4
+      name: "Document handler wired to the data layer"
+      description: |
+        Document handler that reads/writes structured documents exclusively through
+        the data layer and enforces consistent formats, schemas, and directory structure.
+
+    - id: P3.D5
+      name: "Security/validation step for all data-layer writes"
+      description: |
+        Write-time validation rules including schema checks, structural integrity,
+        suspicious payload detection, and error reporting.
+
+    - id: P3.D6
+      name: "Storage mappings established for in-scope data"
+      description: |
+        Mappings between conceptual entities and physical tables/directories/schemas,
+        ensuring predictable, extensible long-term storage organization.
+
+    - id: P3.D7
+      name: "Documentation of data layer, boundaries, and write rules"
+      description: |
+        Canon/TECH_SPEC/MODULES updates documenting the data layer, its boundaries,
+        exceptions, schema rules, and lifecycle behaviours.
+
+  constraints:
+    - "Phase 3 must not implement multi-user functionality or higher-level engines."
+    - "No Drift personal tables or plugin execution logic may appear."
+    - "Storage technology must be local-only and offline-first."
+    - "Data layer API must abstract underlying storage technology."
+    - "Document handler must route all reads/writes through the data layer."
+    - "Write-security and validation rules must align with Canon privacy/safety invariants."
+
+  structure:
+    # Will be populated by the Architect when P3.x cards are created.
+    slices:
+      []
+
+  qa:
+    expectations:
+      - "At least one QA card exists to validate Phase 3 deliverables (P3.D1–P3.D7)."
+      - "All P3.x cards contain explicit DONE_WHEN, correct deliverable linkage, and clear constraints."
+      - "Data layer API, storage mappings, and validation rules are fully defined and testable."
+      - "Phase 3 design does not leak Phase 4+ semantics."
+
+    notes: |
+      QA results live on LillyCORE QA issues and as appended QA blocks on P3/P3.x cards.
+      This registry records structural expectations only, not QA outcomes.
