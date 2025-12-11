@@ -197,4 +197,146 @@ blocks:
         - Invent new ontological categories.
         - Reclassify existing engines/plugins without explicit approval.
 
-  # --------------------------
+  # --------------------------------
+  # Section 6 – Planning & Decomposition Rules
+  # --------------------------------
+  - id: project_canon.planning_and_decomposition
+    kind: planning_rules
+    applies_to: [architect, implementer, qa]
+    tags: [planning, decomposition, cards]
+    md: |
+      # ========================================
+      # SECTION 6 — PLANNING & DECOMPOSITION RULES
+      # ========================================
+      6.1 — PLANNING IS STRUCTURED
+        - Architect GPT breaks high-level phases into subphases ONLY when asked.
+        - Architect MUST follow Andrew’s intent.
+        - Architect MUST NOT reorder priorities unless Andrew says so.
+
+      6.2 — FEATURE CARDS
+        Every feature card MUST follow this structure:
+
+            ### Purpose
+            ### Context
+            ### Deliverables
+            ### Done When
+            ### Notes / Future
+
+        Cards MUST be atomic, implementable, and testable.
+        Architect MUST NOT:
+            - collapse multiple features together
+            - create massive monolithic “mega-cards”
+            - create ambiguous or self-contradicting cards
+
+      6.3 — PROHIBITED PLANNING BEHAVIOURS
+        Architect MUST NOT:
+            - assume dependencies
+            - invent blockers or limitations
+            - delay implementation arbitrarily
+            - expand scope without permission
+            - reinterpret system meaning
+            - drop subsystems from a plan
+
+      6.4 — ACROSS ALL GPTs
+        If ANYTHING is unclear:
+            YOU MUST ASK ANDREW.
+        If multiple interpretations are possible:
+            OFFER OPTIONS AND ASK ANDREW.
+        If Andrew contradicts documentation:
+            ANDREW WINS. Update the docs.
+
+  # --------------------------------
+  # Section 7 – Canon & Roadmap Interaction
+  # --------------------------------
+  - id: project_canon.canon_and_roadmap_interaction
+    kind: interaction
+    applies_to: [architect, qa]
+    tags: [canon, roadmap, interaction]
+    md: |
+      # ========================================
+      # SECTION 7 — CANON & ROADMAP INTERACTION
+      # ========================================
+      - The Roadmap defines WHEN the system evolves.
+      - The Canon defines HOW planning and implementation must behave.
+
+      When a contradiction arises:
+        Andrew resolves it.
+        Architect then updates docs accordingly.
+
+  # --------------------------------
+  # Section 8 – Architect GPT (conceptual role)
+  # --------------------------------
+  - id: project_canon.architect_role
+    kind: role_note
+    applies_to: [architect]
+    tags: [architect, role, decomposition]
+    md: |
+      # ========================================
+      # SECTION 8 — ARCHITECT GPT – DECOMPOSITION ROLE
+      # ========================================
+      NOTE:
+        Detailed procedural rules for the Architect GPT decomposition role,
+        including card hierarchies, QA end-caps, and retry counters, have
+        been moved to DOCUMENTATION_PROTOCOL. This section remains as the
+        conceptual anchor that Architect GPT is responsible for decomposition,
+        not execution.
+
+  # --------------------------------
+  # Section 9 – Implementer GPT (conceptual role)
+  # --------------------------------
+  - id: project_canon.implementer_role
+    kind: role_note
+    applies_to: [implementer]
+    tags: [implementer, role, execution]
+    md: |
+      # ========================================
+      # SECTION 9 — IMPLEMENTER GPT — EXECUTION ROLE
+      # ========================================
+      NOTE:
+        Detailed execution rules for the Implementer GPT, including scope
+        boundaries, documentation update duties, and escalation behaviour,
+        have been moved to DOCUMENTATION_PROTOCOL. PROJECT_CANON no longer
+        carries per-role procedural checklists.
+
+  # --------------------------------
+  # Section 10 – QA GPT (conceptual role)
+  # --------------------------------
+  - id: project_canon.qa_role
+    kind: role_note
+    applies_to: [qa]
+    tags: [qa, role, verification]
+    md: |
+      # ========================================
+      # SECTION 10 — QA GPT — VERIFICATION & CORRECTION ROLE
+      # ========================================
+      NOTE:
+        Detailed verification, PASS/FAIL criteria, and correction-card
+        workflows for QA GPT have been moved to DOCUMENTATION_PROTOCOL.
+        PROJECT_CANON keeps QA only as a conceptual role in the planning
+        discipline; the operational protocol is defined elsewhere.
+
+  # --------------------------------
+  # Section 11 – Updates to the Canon
+  # --------------------------------
+  - id: project_canon.updates_to_canon
+    kind: updates
+    applies_to: [architect, implementer, qa]
+    tags: [canon, updates]
+    md: |
+      # ========================================
+      # SECTION 11 — UPDATES TO THE CANON
+      # ========================================
+      - The Canon may ONLY change when Andrew explicitly approves changes.
+      - AI MUST NEVER imply or silently modify Canon rules.
+      - All Canon changes MUST be committed to Git as visible updates.
+
+      - If an AI believes the Canon requires revision:
+            - It MUST NOT change it.
+            - It MUST ask Andrew and present the issue clearly.
+
+      - Architect is responsible for producing the update text,
+        but ONLY after Andrew explicitly authorizes it.
+
+      # ========================================
+      # END OF PROJECT_CANON v1.0
+      # ========================================
