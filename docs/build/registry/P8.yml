@@ -1,0 +1,136 @@
+# Phase Registry – Phase 8
+# This file defines the authoritative structure for Phase 8 (Stability Spine).
+# Card source: P8 – PHASE 8 — Stability Spine — HELP_DESK, DREAM, SCRIPT (Maintenance & Self-Repair Layer)
+# This registry stores all structural information about Phase 8 as a whole,
+# while detailed engine behaviour lives in separate subphase registry files:
+#   - P8.HD – HELP_DESK_ENGINE
+#   - P8.DR – DREAM_ENGINE
+#   - P8.SC – SCRIPT_ENGINE
+
+phase:
+  id: P8
+  name: "PHASE 8 — Stability Spine — HELP_DESK, DREAM, SCRIPT (Maintenance & Self-Repair Layer)"
+  milestone: "PHASE 8 — Stability Spine — HELP_DESK, DREAM, SCRIPT (Maintenance & Self-Repair Layer)"
+  order: 8
+
+  description: |
+    Phase 8 establishes the Stability Spine: the internal maintenance, self-repair,
+    and long-term refinement layer that keeps LillyCORE reliable, healthy, and
+    recoverable over time.
+
+    This phase architects three major subsystems:
+      • HELP_DESK_ENGINE – first responder, automatic repair, escalation logic
+      • DREAM_ENGINE – long-term optimization, memory degradation, DOC compression
+      • SCRIPT_ENGINE – maintenance and regeneration of procedural scripts
+
+    The Stability Spine introduces:
+      • Daily snapshots and integrity checks
+      • Recovery protocols for crashes and degraded states
+      • Shared diagnostic data, packet formats, and maintenance cycles
+      • Clear boundaries between stability engines and operational engines
+
+    After Phase 8, LillyCORE becomes a self-governing system capable of correcting drift,
+    healing failures, optimizing internal structures, and sustaining long-term growth
+    with minimal developer intervention.
+
+  inputs:
+    phase_dependencies:
+      - "DRIFT_ENGINE MVP (perception data; emotional escalation signals)."
+      - "HELPER_ENGINE MVP (work decomposition and error contexts)."
+      - "SYSTEM_DOC (canonical schemas and durable storage)."
+      - "Plugin Engine MVP (routing and capability registration)."
+      - "Packet standards and conventions from Phases P1–P7."
+      - "Snapshot/filesystem infrastructure decisions from Phase 3."
+    required_knowledge:
+      - "Error classification rules (recoverable vs fatal)."
+      - "Memory degradation and DOC compression policies."
+      - "Script regeneration and safety boundaries."
+    required_decisions:
+      - "Snapshot schedule and retention rules."
+      - "Integrity-check conditions and thresholds."
+      - "Escalation rules and user-confirmation policies for HELP_DESK."
+      - "Validation steps for destructive or irreversible operations."
+
+  deliverables:
+    - id: P8.D1
+      name: "Architecture for HELP_DESK_ENGINE"
+      description: |
+        High-level architecture for HELP_DESK as the automated recovery and error-repair
+        subsystem, including pathways, escalation rules, and integration points.
+
+    - id: P8.D2
+      name: "Architecture for DREAM_ENGINE"
+      description: |
+        High-level architecture for DREAM as the long-term maintenance, memory-degradation,
+        DOC-compression, and structural-optimization subsystem.
+
+    - id: P8.D3
+      name: "Architecture for SCRIPT_ENGINE"
+      description: |
+        High-level architecture for SCRIPT as the procedural logic maintenance, optimization,
+        and validation subsystem.
+
+    - id: P8.D4
+      name: "Unified Stability Spine framework"
+      description: |
+        Shared packet formats, diagnostic structures, and recovery protocols used by
+        HELP_DESK, DREAM, and SCRIPT.
+
+    - id: P8.D5
+      name: "Snapshot, integrity verification, and restoration protocols"
+      description: |
+        Snapshot schedule, integrity-check routines, and full restoration flows used
+        by the Stability Spine.
+
+    - id: P8.D6
+      name: "Maintenance cycle schedule"
+      description: |
+        Definition of idle, shutdown, crash, and timed maintenance cycles, including
+        triggers and operational boundaries.
+
+    - id: P8.D7
+      name: "Boundaries between stability engines and operational engines"
+      description: |
+        Explicit rules describing what stability engines may and may not modify, with
+        clear segregation from DRIFT, HELPER, Plugin Engine, and user-facing paths.
+
+    - id: P8.D8
+      name: "Stability Spine documentation set"
+      description: |
+        Canon, TECH_SPEC, FEATURES, and MODULES updates documenting stability engines,
+        lifecycle responsibilities, schedules, and escalation rules.
+
+  constraints:
+    - "Stability engines must not violate Canon safety, privacy, or identity invariants."
+    - "Destructive or irreversible operations require explicit validation pathways."
+    - "Stability engines must not modify plugin code or runtime engine implementations."
+    - "DRIFT personal data, HELPER operational data, and plugin domains must remain isolated, with well-defined interfaces."
+    - "Snapshots and recovery logic must be deterministic and testable."
+
+  structure:
+    # Phase 8 is a container phase for three major engines.
+    # Detailed behaviour for each engine lives in separate subphase registries.
+    engines:
+      - id: P8.HD
+        name: "HELP_DESK_ENGINE — Automated Recovery & Error Repair Layer"
+        registry_file: "phase8_helpdesk.yml"      # or "phase8/helpdesk.yml" depending on layout
+      - id: P8.DR
+        name: "DREAM_ENGINE — Long-Term Maintenance, Memory Degradation, and Structural Optimization"
+        registry_file: "phase8_dream.yml"         # or "phase8/dream.yml"
+      - id: P8.SC
+        name: "SCRIPT_ENGINE — Procedural Logic Maintenance, Optimization, and Validation"
+        registry_file: "phase8_script.yml"        # or "phase8/script.yml"
+
+  qa:
+    expectations:
+      - "Architectural designs for HELP_DESK, DREAM, and SCRIPT are internally consistent and non-overlapping."
+      - "Unified Stability Spine packet formats and diagnostic structures are clearly defined and testable."
+      - "Snapshot, integrity verification, and restoration protocols can be exercised via QA."
+      - "Maintenance cycle schedule is implementable and safe under worst-case conditions."
+      - "Boundaries between stability engines, operational engines, and plugins are explicit and enforceable."
+      - "At least one QA card exists to validate Phase 8 completion and references P8.D1–P8.D8."
+
+    notes: |
+      QA outcomes for Phase 8 live on LillyCORE QA issues and in appended QA blocks
+      on P8/P8.x cards. This registry captures the structural and architectural
+      expectations for the Stability Spine as a whole.
