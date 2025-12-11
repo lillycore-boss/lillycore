@@ -1,0 +1,106 @@
+# Phase Registry – Phase 8.DR (DREAM_ENGINE)
+# This file defines the authoritative structure for the DREAM_ENGINE subphase.
+# Card source: P8.DR — DREAM_ENGINE — Long-Term Maintenance, Memory Degradation, and Structural Optimization
+# This registry stores all structural information about this subphase independently
+# of any GitHub issue card instances.
+
+phase:
+  id: P8.DR
+  name: "DREAM_ENGINE — Long-Term Maintenance, Memory Degradation, and Structural Optimization"
+  milestone: "Phase 8 — Stability Spine"
+  order: 8.2
+
+  description: |
+    DREAM_ENGINE is LillyCORE’s long-term maintenance and structural optimization layer.
+    It manages controlled memory degradation, DOC compression, structural reorganization,
+    and multi-tier optimization decisions. DREAM ensures the system’s internal memory
+    and document archives remain lean, coherent, and adaptive as LillyCORE grows.
+
+    DREAM performs:
+      • Identification and degradation of low-value or stale memory
+      • Compression and consolidation of DOC archives and historical logs
+      • Lateral reasoning over internal structures to improve topology
+      • Long-term evaluation of DRIFT patterns and bias tendencies
+      • Tiered optimization decisions ranging from auto-approved to user-confirmed
+
+    DREAM is central to LillyCORE’s long-term health, identity stability, and
+    structural self-correction.
+
+  inputs:
+    incoming_data:
+      - "Memory tables and structured persistent state."
+      - "DOC archives and historical logs."
+      - "DRIFT perceptual logs and emotional histories."
+      - "HELP_DESK root-cause analysis reports."
+      - "SCRIPT_ENGINE outputs relevant to structural or procedural changes."
+      - "Periodic system snapshots and integrity-check outputs."
+    system_knowledge:
+      - "Memory degradation policies and invariants."
+      - "Data criticality classifications."
+      - "Schema and topology definitions from SYSTEM_DOC."
+    dependencies:
+      - "DRIFT_ENGINE for emotional/behavioural trend evaluation."
+      - "HELP_DESK_ENGINE for recurrent failure and root-cause signals."
+      - "SCRIPT_ENGINE for script-level evolution and regeneration."
+      - "SYSTEM_DOC for storage schemas, DOC layouts, and archives."
+
+  deliverables:
+    - id: P8.DR.D1
+      name: "Memory degradation model and rules"
+      description: |
+        Definitions and policies for identifying low-value, stale, duplicated, or noisy
+        entries, along with safe degradation, compression, or deletion rules.
+
+    - id: P8.DR.D2
+      name: "DOC compression and consolidation framework"
+      description: |
+        Mechanisms for merging redundant summaries, compacting historical logs, and
+        reorganizing document storage for efficiency and clarity.
+
+    - id: P8.DR.D3
+      name: "Structural optimization and topology-improvement model"
+      description: |
+        Lateral reasoning passes over internal knowledge structures, including
+        cross-linking, schema updates, and conceptual topology improvements.
+
+    - id: P8.DR.D4
+      name: "DRIFT evaluation and bias detection over time"
+      description: |
+        Processes for analyzing long-term DRIFT logs to detect emotional and behavioural
+        patterns, biases, and contextual drifts that require correction.
+
+    - id: P8.DR.D5
+      name: "Tiered optimization governance rules"
+      description: |
+        Policy framework defining which optimizations are auto-approved, which require
+        batch review, and which demand explicit user confirmation.
+
+    - id: P8.DR.D6
+      name: "Execution and reporting pipeline for optimizations"
+      description: |
+        Execution path for approved optimizations, plus reporting structures to
+        HELP_DESK and SCRIPT_ENGINE and long-term status reports.
+
+  constraints:
+    - "DREAM must not delete critical user data without explicit approval."
+    - "All memory degradation and DOC compression must be validated and reversible where possible."
+    - "DREAM may not modify plugin directories or user-owned files."
+    - "All optimization actions must follow tiered permission rules."
+    - "DREAM must respect Canon privacy, safety, and identity invariants."
+
+  structure:
+    slices:
+      # Will be populated when P8.DR.x implementer cards are created.
+      []
+
+  qa:
+    expectations:
+      - "Memory degradation behaviours are safe, predictable, and testable."
+      - "DOC compression and consolidation preserve essential information."
+      - "Structural optimizations improve coherence and do not break invariants."
+      - "Tiered governance rules are correctly enforced in all write paths."
+      - "Reports to HELP_DESK and SCRIPT_ENGINE are complete and actionable."
+    notes: |
+      QA validates that DREAM’s optimizations reduce bloat without harming critical
+      user or system data. This registry defines structural expectations only, not the
+      specific optimization outcomes.
