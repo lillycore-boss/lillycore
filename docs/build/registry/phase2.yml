@@ -1,0 +1,107 @@
+# Phase Registry – Phase 2
+# This file defines the authoritative structure for Phase 2.
+# Card source: P2 – Phase 2 — AI Execution Layer – Pools and Safe Execution Envelopes
+# This registry stores all structural information about Phase 2 independently
+# of any GitHub issue card instances.
+
+phase:
+  id: P2
+  name: "Phase 2 — AI Execution Layer – Pools and Safe Execution Envelopes"
+  milestone: "Phase 2 — AI Execution Layer – Pools and Safe Execution Envelopes"
+  order: 2
+
+  description: |
+    Define and implement the first fully-functional, model-agnostic AI execution layer.
+    Phase 2 introduces a strict abstraction boundary between LillyCORE and any LLM backend
+    by defining AI pools (conversational, deterministic, worker) and the safe execution
+    envelopes that wrap all LLM calls. This enables consistent AI behaviour, backend
+    swap capability, and foundational safety mechanisms for future system features.
+
+  inputs:
+    phase_dependencies:
+      - "Phase 1 runtime loop, logging system, and error envelope semantics."
+    canon_topics:
+      - "Execution safety"
+      - "Runtime integrity"
+      - "System identity"
+    tech_spec_topics:
+      - "Repository layout"
+      - "Tooling and environment constraints"
+      - "Logging and error-handling rules"
+    backend_knowledge:
+      - "Available local LLM backends (CLI, API, SDK, HTTP endpoints)."
+    configuration_patterns:
+      - "Execution limits"
+      - "Backend selection"
+      - "Timeouts"
+      - "Retry strategies"
+    future_phase_context:
+      - "DRIFT engine (conversational behaviour)"
+      - "HELPER engine (worker/task semantics)"
+      - "Execution topology for plugins and UX"
+
+  deliverables:
+    - id: P2.D1
+      name: "Conversational AI Pool designed and implemented with backend adapter"
+      description: |
+        Conversational AI pool with a clearly defined interface and backend adapter,
+        supporting interactive conversational tasks while enforcing Phase 2 safety,
+        abstraction, and logging rules.
+
+    - id: P2.D2
+      name: "Deterministic/Lightweight AI Pool designed and implemented with backend adapter"
+      description: |
+        Deterministic or lightweight AI pool for predictable or low-cost calls, with a
+        backend adapter that routes requests without exposing backend details.
+
+    - id: P2.D3
+      name: "Worker/Back-end AI Pool designed and implemented with backend adapter"
+      description: |
+        Worker/back-end AI pool optimised for heavier or task-oriented workloads,
+        encapsulated cleanly behind an adapter layer.
+
+    - id: P2.D4
+      name: "Unified execution envelopes"
+      description: |
+        Execution envelopes defining request/response schemas, timeouts, retries,
+        structured error wrapping (reusing Phase 1 envelope structure), logging of
+        inputs/outputs/errors, and resource guardrails.
+
+    - id: P2.D5
+      name: "Stable backend-agnostic AI API"
+      description: |
+        A unified AI API that receives system-level requests, selects the appropriate
+        pool, and prevents backend/provider details from leaking upward.
+
+    - id: P2.D6
+      name: "System preferences/config controlling pool selection and execution limits"
+      description: |
+        Preference/config entries that specify which backend each pool uses, execution
+        limits, default timeouts, and safety thresholds.
+
+    - id: P2.D7
+      name: "Documentation updates for AI pools, envelopes, backend configuration"
+      description: |
+        Documentation and TECH_SPEC updates covering pool roles, contracts, envelope
+        behaviour, backend configuration rules, and interactions for higher layers.
+
+  constraints:
+    - "Phase 2 covers AI execution only; no Phase 3+ semantics (e.g., persistence engine) may appear."
+    - "Backend details must remain encapsulated behind adapters."
+    - "All AI calls must pass through execution envelopes implementing safety and logging."
+    - "Design must align with Canon execution/safety rules."
+    - "Integrate cleanly with Phase 1 runtime loop, logging, and error envelopes."
+
+  structure:
+    # Will be populated by Architect when P2.x cards are created.
+    slices:
+      []
+
+  qa:
+    expectations:
+      - "At least one QA card exists to validate Phase 2 deliverables (P2.D1–P2.D7)."
+      - "All P2.x cards contain explicit DONE_WHEN, correct deliverable linkage, and clean constraints."
+      - "No Phase 3+ behaviour leaks into Phase 2 design."
+    notes: |
+      QA results live on LillyCORE QA issues and as appended QA blocks on P2/P2.x cards.
+      This registry records structural expectations only, not QA outcomes.
