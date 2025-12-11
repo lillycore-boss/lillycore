@@ -1,0 +1,103 @@
+# Phase Registry – Phase 8.SC (SCRIPT_ENGINE)
+# This file defines the authoritative structure for the SCRIPT_ENGINE subphase.
+# Card source: P8.SC — SCRIPT_ENGINE — Procedural Logic Maintenance, Optimization, and Validation
+# This registry stores all structural information about this subphase independently
+# of any GitHub issue card instances.
+
+phase:
+  id: P8.SC
+  name: "SCRIPT_ENGINE — Procedural Logic Maintenance, Optimization, and Validation"
+  milestone: "Phase 8 — Stability Spine"
+  order: 8.3
+
+  description: |
+    SCRIPT_ENGINE is LillyCORE’s procedural intelligence maintenance layer.
+    It manages all system-generated procedural scripts—workflows, prompt templates,
+    micro-scripts, and utility routines—ensuring that they remain correct, efficient,
+    validated, and aligned with the system’s rules and invariants.
+
+    SCRIPT_ENGINE performs:
+      • System-wide analysis of generated scripts
+      • Merging, rewriting, splitting, and optimizing procedural logic
+      • Tiered approval governance (auto, batch, user-confirmed)
+      • Verification of safety and correctness via sandbox validation
+      • Emission of refined scripts back into SYSTEM_DOC and HELPER_SHORTCUTS
+
+    SCRIPT_ENGINE increases system efficiency, reduces LLM load, and improves HELPER’s
+    deterministic capabilities. It is the final component of the Stability Spine,
+    working alongside HELP_DESK and DREAM to ensure long-term self-optimization.
+
+  inputs:
+    incoming_data:
+      - "Script libraries and archives from SYSTEM_DOC"
+      - "Optimization suggestions from DREAM_ENGINE"
+      - "Root-cause and failure reports from HELP_DESK_ENGINE"
+      - "Historical execution packets and failure logs"
+    system_knowledge:
+      - "Procedural script schema definitions"
+      - "Tiered approval rules and constraints"
+      - "Helper-shortcut execution expectations"
+    dependencies:
+      - "DREAM_ENGINE for structural guidance and topology improvements"
+      - "HELP_DESK_ENGINE for failure and inefficiency patterns"
+      - "SYSTEM_DOC for script storage and versioning"
+
+  deliverables:
+    - id: P8.SC.D1
+      name: "System-wide script analysis framework"
+      description: |
+        A complete framework for inspecting procedural templates, workflows, micro-scripts,
+        and utility routines, identifying inefficiencies and improvement opportunities.
+
+    - id: P8.SC.D2
+      name: "Script optimization and regeneration model"
+      description: |
+        Rules and mechanisms for merging similar scripts, splitting large scripts,
+        rewriting inefficient ones, and producing system-aligned improvements.
+
+    - id: P8.SC.D3
+      name: "Tiered approval governance"
+      description: |
+        Policies defining which script updates are auto-approved, batch-approved,
+        or require explicit user confirmation.
+
+    - id: P8.SC.D4
+      name: "Sandbox validation system"
+      description: |
+        Testing environment for verifying correctness, safety, determinism, and compliance
+        before scripts are activated or updated in SYSTEM_DOC.
+
+    - id: P8.SC.D5
+      name: "SYSTEM_DOC script archival and update pipeline"
+      description: |
+        Storage, diffing, metadata annotation, and versioning rules for procedural scripts,
+        including the emission of HELPER_SHORTCUTS.
+
+    - id: P8.SC.D6
+      name: "Full reporting and integration signals"
+      description: |
+        Structured diff reports, validation summaries, and optimization signals sent
+        to DREAM_ENGINE and HELP_DESK_ENGINE.
+
+  constraints:
+    - "SCRIPT_ENGINE may not modify runtime engines or operational engine code."
+    - "It operates only on system-generated procedural scripts."
+    - "All script changes must pass sandbox validation before activation."
+    - "Scripts must remain transparent, inspectable, reversible, and versioned."
+    - "All optimizations must follow tiered approval rules."
+
+  structure:
+    slices:
+      # Will be populated when P8.SC.x implementer cards are generated.
+      []
+
+  qa:
+    expectations:
+      - "Optimized scripts must match or exceed the correctness of originals."
+      - "Sandbox validation catches unsafe or incorrect transformations."
+      - "Tiered approval rules are strictly enforced."
+      - "SYSTEM_DOC script archives include clear diffs and metadata."
+      - "Procedural shortcuts for HELPER are validated, logged, and reversible."
+    notes: |
+      QA ensures that SCRIPT_ENGINE preserves correctness while improving efficiency.
+      This registry defines structural expectations only, not the execution results.
