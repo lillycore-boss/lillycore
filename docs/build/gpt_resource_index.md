@@ -1,247 +1,377 @@
-# ========================================
-# FILE: GPT_RESOURCE_INDEX
-# ROLE: Master index of project resources for LillyCORE
-# NOTE: All other docs are referenced here by NAME only.
-# ========================================
+# docs/registry/gpt_resource_index.yml
 
-# ----------------------------------------
-# SECTION: OVERVIEW
-# ----------------------------------------
-This file is the single source of truth for:
-- What project documents exist
-- What each document is for
-- Where they live in the repository
+version: 1
+root_dir: "docs/build"
 
-Procedural rules for how GPTs load, use, and update these documents
-are defined in DOCUMENTATION_PROTOCOL and DOCUMENTATION_GOVERNANCE.
-See docs/build/documentation_protocol.md and
-docs/documentation_governance.md.
+blocks:
+  # --------------------------------
+  # Overview / mandatory-load
+  # --------------------------------
+  - id: gpt_resources.overview
+    kind: overview
+    applies_to: [architect, implementer, qa]
+    tags: [index, canonical_docs, mandatory_load]
+    md: |
+      # GPT_RESOURCE_INDEX – Overview
 
-Architect, Implementer, and QA GPTs should treat this file as the
-directory of canonical docs. If a new canonical doc is created or an
-existing one changes meaning, this index must be updated.
+      This file is the single source of truth for:
+      - What project documents exist
+      - What each document is for
+      - Where they live in the repository
 
-Mandatory-load set:
-- For any architectural reasoning, planning, implementation, or QA work
-  on LillyCORE, GPT roles MUST load and read, at minimum:
-    - GPT_RESOURCE_INDEX (this file)
-    - DOCUMENTATION_GOVERNANCE
-    - DOCUMENTATION_PROTOCOL
-- DOCUMENTATION_PROTOCOL is the procedural authority for how GPTs
-  behave when reading/updating docs.
-- DOCUMENTATION_GOVERNANCE is the conceptual authority for doc layers,
-  categories, and which docs are allowed or forbidden.
+      Procedural rules for how GPTs load, use, and update these documents
+      are defined in DOCUMENTATION_PROTOCOL and DOCUMENTATION_GOVERNANCE.
+      See docs/build/documentation_protocol.md and
+      docs/documentation_governance.md.
 
-Physical location (Phase 0):
-- All named documents listed in this index are stored under:
-    docs/build/
-- Filenames follow snake_case with a .md extension, for example:
-    PROJECT_CANON          → docs/build/project_canon.md
-    LILLYCORE_ROADMAP      → docs/build/lillycore_roadmap.md
-    FEATURES               → docs/build/features.md
-    TECH_SPEC              → docs/build/tech_spec.md
-    MODULES                → docs/build/modules.md
-    GPT_RESOURCE_INDEX     → docs/build/gpt_resource_index.md
-    DOCUMENTATION_PROTOCOL → docs/build/documentation_protocol.md
-    DOCUMENTATION_GOVERNANCE → docs/documentation_governance.md
+      Architect, Implementer, and QA GPTs should treat this file as the
+      directory of canonical docs. If a new canonical doc is created or an
+      existing one changes meaning, this index must be updated.
 
-In prompts and AI instructions, documents should be referred to by
-their conceptual names (PROJECT_CANON, TECH_SPEC, etc.), not by path.
+      ## Mandatory-load set
 
+      For any architectural reasoning, planning, implementation, or QA work
+      on LillyCORE, GPT roles MUST load and read, at minimum:
+      - GPT_RESOURCE_INDEX (this index)
+      - DOCUMENTATION_GOVERNANCE
+      - DOCUMENTATION_PROTOCOL
 
-# ----------------------------------------
-# SECTION: DOCUMENT: PROJECT_CANON
-# ----------------------------------------
-name: PROJECT_CANON
-type: system_rules
-status: exists
-path: docs/build/project_canon.md
-description:
-  Core philosophy, global AI behaviour principles, ontology of
-  components, and high-level planning discipline.
+      Additional rules:
+      - DOCUMENTATION_PROTOCOL is the **procedural authority** for how GPTs
+        behave when reading/updating docs.
+      - DOCUMENTATION_GOVERNANCE is the **conceptual authority** for doc
+        layers, categories, and which docs are allowed or forbidden.
 
-usage:
-  - Used to ensure new work aligns with LillyCORE’s meaning and
-    ontological categories.
+  # --------------------------------
+  # Central load-path map (authoritative)
+  # --------------------------------
+  - id: gpt_resources.load_paths
+    kind: paths
+    applies_to: [architect, implementer, qa, tooling]
+    tags: [paths, filesystem, loadmap]
+    paths:
+      PROJECT_CANON: "docs/build/project_canon.md"
+      LILLYCORE_ROADMAP: "docs/build/lillycore_roadmap.md"
+      FEATURES: "docs/build/features.md"
+      TECH_SPEC: "docs/build/tech_spec.md"
+      MODULES: "docs/build/modules.md"
+      GPT_RESOURCE_INDEX: "docs/build/gpt_resource_index.md"
+      DOCUMENTATION_PROTOCOL: "docs/build/documentation_protocol.md"
+      DOCUMENTATION_GOVERNANCE: "docs/documentation_governance.md"
+      GPT_BEHAVIOUR_SPEC: "docs/build/gpt_behaviour_spec.md"
+    md: |
+      ## GPT Resource Load Paths
 
-access:
-  - When needed, Andrew can paste the relevant Canon section into chat.
+      Authoritative mapping from conceptual document names to on-disk paths.
 
-# ----------------------------------------
-# SECTION: DOCUMENT: LILLYCORE_ROADMAP
-# ----------------------------------------
-name: LILLYCORE_ROADMAP
-type: roadmap
-status: exists
-path: docs/build/lillycore_roadmap.md
-description:
-  High-level phases (0..N) for LillyCORE evolution, defining when
-  subsystems appear and their intent.
+      - This block is the single source of truth for where GPT resource files live.
+      - When files are moved or renamed, update this mapping.
+      - Other blocks (PROJECT_CANON, TECH_SPEC, etc.) may repeat the path as
+        convenience metadata, but this mapping wins if there is a conflict.
 
-usage:
-  - Used to understand phase context and when subsystems are expected
-    to exist.
+      Tools or GPTs that need to locate a file SHOULD read `paths` in this block
+      rather than hardcoding paths elsewhere.
 
-access:
-  - When needed, Andrew can paste the relevant roadmap phases.
+  # --------------------------------
+  # PROJECT_CANON
+  # --------------------------------
+  - id: gpt_resources.document.project_canon
+    kind: document
+    name: PROJECT_CANON
+    type: system_rules
+    status: exists
+    path: "docs/build/project_canon.md"
+    tags: [canon, philosophy, ontology]
+    md: |
+      ## PROJECT_CANON
 
-# ----------------------------------------
-# SECTION: DOCUMENT: FEATURES
-# ----------------------------------------
-name: FEATURES
-type: feature_cards
-status: exists
-path: docs/build/features.md
-description:
-  Defines the standard feature card structure for LillyCORE and
-  optionally mirrors a small subset of important features.
+      **Type:** system_rules  
+      **Status:** exists  
+      **Path:** `docs/build/project_canon.md`
 
-truth_source:
-  - Canonical feature list lives in GitHub Issues / Project Board.
-  - FEATURES is a template and optional mirror.
+      ### Description
 
-usage:
-  - Used to design, read, and reference feature cards.
+      Core philosophy, global AI behaviour principles, ontology of
+      components, and high-level planning discipline.
 
-access:
-  - When needed, Andrew can paste the relevant feature card(s) from
-    GitHub or FEATURES.
+      ### Usage
 
-# ----------------------------------------
-# SECTION: DOCUMENT: TECH_SPEC
-# ----------------------------------------
-name: TECH_SPEC
-type: tools_environment
-status: exists
-path: docs/build/tech_spec.md
-description:
-  Technical standards and environment details, such as:
-  - Python versions
-  - naming conventions
-  - repository layout
-  - script conventions
-  - tooling and CI expectations
+      - Used to ensure new work aligns with LillyCORE’s meaning and
+        ontological categories.
 
-usage:
-  - Used to understand and obey technical constraints and environment
-    rules.
+      ### Access
 
-access:
-  - When needed, Andrew can paste the relevant TECH_SPEC section
-    (e.g. Python, DB, scripts).
+      - When needed, Andrew can paste the relevant Canon section into chat.
 
-# ----------------------------------------
-# SECTION: DOCUMENT: MODULES
-# ----------------------------------------
-name: MODULES
-type: module_overview
-status: exists
-path: docs/build/modules.md
-description:
-  Overview of major modules, engines, and handlers:
-  - responsibilities
-  - boundaries
-  - dependencies
+  # --------------------------------
+  # LILLYCORE_ROADMAP
+  # --------------------------------
+  - id: gpt_resources.document.lillycore_roadmap
+    kind: document
+    name: LILLYCORE_ROADMAP
+    type: roadmap
+    status: exists
+    path: "docs/build/lillycore_roadmap.md"
+    tags: [roadmap, phases]
+    md: |
+      ## LILLYCORE_ROADMAP
 
-usage:
-  - Used to understand where module responsibilities live and how they
-    relate.
+      **Type:** roadmap  
+      **Status:** exists  
+      **Path:** `docs/build/lillycore_roadmap.md`
 
-access:
-  - When needed, Andrew can paste the MODULES entry for a given
-    module or engine.
+      ### Description
 
-# ----------------------------------------
-# SECTION: DOCUMENT: DOCUMENTATION_GOVERNANCE
-# ----------------------------------------
-name: DOCUMENTATION_GOVERNANCE
-type: system_rules
-status: exists
-path: docs/documentation_governance.md
-description:
-  System-level conceptual documentation governance for LillyCORE:
-  defines documentation layers and categories, which docs are
-  canonical vs exploratory, and which doc types are allowed or
-  forbidden.
+      High-level phases (0..N) for LillyCORE evolution, defining when
+      subsystems appear and their intent.
 
-usage:
-  - Used to reason about where new docs belong and which kinds of docs
-    may be introduced or promoted.
-  - MUST be loaded as part of the mandatory-load set before any
-    reasoning, planning, or documentation updates involving canonical
-    docs.
+      ### Usage
 
-access:
-  - When needed, Andrew can paste the full content of
-    DOCUMENTATION_GOVERNANCE.
+      - Used to understand phase context and when subsystems are expected
+        to exist.
 
+      ### Access
 
-# ----------------------------------------
-# SECTION: DOCUMENT: DOCUMENTATION_PROTOCOL
-# ----------------------------------------
-name: DOCUMENTATION_PROTOCOL
-type: system_rules
-status: exists
-path: docs/build/documentation_protocol.md
-description:
-  Build/system documentation protocol defining roles, triggers, and
-  procedures for updating canonical docs (PROJECT_CANON, ROADMAP,
-  TECH_SPEC, MODULES, FEATURES, GPT_RESOURCE_INDEX, and related
-  conceptual docs).
+      - When needed, Andrew can paste the relevant roadmap phases.
 
-usage:
-  - Used as the operational reference for when and how to update
-    docs, which roles are responsible, and how QA verifies doc
-    completeness.
-  - MUST be loaded and read as part of the mandatory-load set before
-    any reasoning, architectural planning, implementation, or QA that
-    reads or writes canonical docs.
+  # --------------------------------
+  # FEATURES
+  # --------------------------------
+  - id: gpt_resources.document.features
+    kind: document
+    name: FEATURES
+    type: feature_cards
+    status: exists
+    path: "docs/build/features.md"
+    tags: [features, cards, template]
+    md: |
+      ## FEATURES
 
-access:
-  - When needed, Andrew can paste the DOCUMENTATION_PROTOCOL build
-    doc.
+      **Type:** feature_cards  
+      **Status:** exists  
+      **Path:** `docs/build/features.md`
 
-# ----------------------------------------
-# SECTION: DOCUMENT: GPT_BEHAVIOUR_SPEC
-# ----------------------------------------
-name: GPT_BEHAVIOUR_SPEC
-type: process_rules
-status: exists
-path: docs/build/gpt_behaviour_spec.md
-description:
-  Unified behaviour and ingestion standard for GPT roles used to build
-  LillyCORE (Architect, Implementer, QA, and future helper GPTs). Defines
-  role boundaries, ingestion rules, feature-card lifecycle, and how GPTs
-  interact with canonical docs and with Andrew.
+      ### Description
 
-usage:
-  - MUST be loaded by any GPT participating in the LillyCORE build process.
-  - Used to determine how GPTs ingest docs, ask Andrew for clarification,
-    and coordinate between Architect, Implementer, and QA roles.
+      Defines the standard feature card structure for LillyCORE and
+      optionally mirrors a small subset of important features.
 
-access:
-  - When needed, Andrew can paste the full content of GPT_BEHAVIOUR_SPEC
-    or relevant sections.
+      **Truth source:**
+      - Canonical feature list lives in GitHub Issues / Project Board.
+      - `FEATURES` is a template and optional mirror.
 
+      ### Usage
 
-# ----------------------------------------
-# SECTION: DOCUMENT: OTHER
-# ----------------------------------------
-name: (future docs to be listed here)
-type: extension
-status: future
-description:
-  Placeholder for additional docs that may be added later, such as:
-  - NOTES_PLUGIN_SPEC
-  - DREAM_ENGINE_SPEC
-  - or other subsystem-specific documents.
+      - Used to design, read, and reference feature cards.
 
-When new docs are added, they should follow this pattern:
-- SECTION header
-- name:
-- type:
-- status:
-- path: (if applicable)
-- description:
-- usage:
-- access:
+      ### Access
+
+      - When needed, Andrew can paste the relevant feature card(s) from
+        GitHub or `FEATURES`.
+
+  # --------------------------------
+  # TECH_SPEC
+  # --------------------------------
+  - id: gpt_resources.document.tech_spec
+    kind: document
+    name: TECH_SPEC
+    type: tools_environment
+    status: exists
+    path: "docs/build/tech_spec.md"
+    tags: [tech_spec, environment, tooling]
+    md: |
+      ## TECH_SPEC
+
+      **Type:** tools_environment  
+      **Status:** exists  
+      **Path:** `docs/build/tech_spec.md`
+
+      ### Description
+
+      Technical standards and environment details, such as:
+      - Python versions
+      - naming conventions
+      - repository layout
+      - script conventions
+      - tooling and CI expectations
+
+      ### Usage
+
+      - Used to understand and obey technical constraints and environment
+        rules.
+
+      ### Access
+
+      - When needed, Andrew can paste the relevant TECH_SPEC section
+        (e.g. Python, DB, scripts).
+
+  # --------------------------------
+  # MODULES
+  # --------------------------------
+  - id: gpt_resources.document.modules
+    kind: document
+    name: MODULES
+    type: module_overview
+    status: exists
+    path: "docs/build/modules.md"
+    tags: [modules, architecture]
+    md: |
+      ## MODULES
+
+      **Type:** module_overview  
+      **Status:** exists  
+      **Path:** `docs/build/modules.md`
+
+      ### Description
+
+      Overview of major modules, engines, and handlers:
+      - responsibilities
+      - boundaries
+      - dependencies
+
+      ### Usage
+
+      - Used to understand where module responsibilities live and how they
+        relate.
+
+      ### Access
+
+      - When needed, Andrew can paste the MODULES entry for a given
+        module or engine.
+
+  # --------------------------------
+  # DOCUMENTATION_GOVERNANCE
+  # --------------------------------
+  - id: gpt_resources.document.documentation_governance
+    kind: document
+    name: DOCUMENTATION_GOVERNANCE
+    type: system_rules
+    status: exists
+    path: "docs/documentation_governance.md"
+    tags: [docs, governance, mandatory_load]
+    md: |
+      ## DOCUMENTATION_GOVERNANCE
+
+      **Type:** system_rules  
+      **Status:** exists  
+      **Path:** `docs/documentation_governance.md`
+
+      ### Description
+
+      System-level conceptual documentation governance for LillyCORE:
+      defines documentation layers and categories, which docs are
+      canonical vs exploratory, and which doc types are allowed or
+      forbidden.
+
+      ### Usage
+
+      - Used to reason about where new docs belong and which kinds of docs
+        may be introduced or promoted.
+      - MUST be loaded as part of the mandatory-load set before any
+        reasoning, planning, or documentation updates involving canonical
+        docs.
+
+      ### Access
+
+      - When needed, Andrew can paste the full content of
+        DOCUMENTATION_GOVERNANCE.
+
+  # --------------------------------
+  # DOCUMENTATION_PROTOCOL
+  # --------------------------------
+  - id: gpt_resources.document.documentation_protocol
+    kind: document
+    name: DOCUMENTATION_PROTOCOL
+    type: system_rules
+    status: exists
+    path: "docs/build/documentation_protocol.md"
+    tags: [docs, protocol, mandatory_load]
+    md: |
+      ## DOCUMENTATION_PROTOCOL
+
+      **Type:** system_rules  
+      **Status:** exists  
+      **Path:** `docs/build/documentation_protocol.md`
+
+      ### Description
+
+      Build/system documentation protocol defining roles, triggers, and
+      procedures for updating canonical docs (`PROJECT_CANON`, ROADMAP,
+      `TECH_SPEC`, `MODULES`, `FEATURES`, `GPT_RESOURCE_INDEX`, and related
+      conceptual docs).
+
+      ### Usage
+
+      - Used as the operational reference for when and how to update
+        docs, which roles are responsible, and how QA verifies doc
+        completeness.
+      - MUST be loaded and read as part of the mandatory-load set before
+        any reasoning, architectural planning, implementation, or QA that
+        reads or writes canonical docs.
+
+      ### Access
+
+      - When needed, Andrew can paste the DOCUMENTATION_PROTOCOL build
+        doc.
+
+  # --------------------------------
+  # GPT_BEHAVIOUR_SPEC
+  # --------------------------------
+  - id: gpt_resources.document.gpt_behaviour_spec
+    kind: document
+    name: GPT_BEHAVIOUR_SPEC
+    type: process_rules
+    status: exists
+    path: "docs/build/gpt_behaviour_spec.md"
+    tags: [gpt_behaviour, roles, process_rules, mandatory]
+    md: |
+      ## GPT_BEHAVIOUR_SPEC
+
+      **Type:** process_rules  
+      **Status:** exists  
+      **Path:** `docs/build/gpt_behaviour_spec.md`
+
+      ### Description
+
+      Unified behaviour and ingestion standard for GPT roles used to build
+      LillyCORE (Architect, Implementer, QA, and future helper GPTs). Defines
+      role boundaries, ingestion rules, feature-card lifecycle, and how GPTs
+      interact with canonical docs and with Andrew.
+
+      ### Usage
+
+      - MUST be loaded by any GPT participating in the LillyCORE build process.
+      - Used to determine how GPTs ingest docs, ask Andrew for clarification,
+        and coordinate between Architect, Implementer, and QA roles.
+
+      ### Access
+
+      - When needed, Andrew can paste the full content of GPT_BEHAVIOUR_SPEC
+        or relevant sections.
+
+  # --------------------------------
+  # Placeholder for future docs
+  # --------------------------------
+  - id: gpt_resources.document.other
+    kind: document_placeholder
+    name: FUTURE_DOCS
+    type: extension
+    status: future
+    tags: [placeholder, extension]
+    md: |
+      ## Future Documents Placeholder
+
+      Used as a placeholder for additional docs that may be added later, such as:
+      - `NOTES_PLUGIN_SPEC`
+      - `DREAM_ENGINE_SPEC`
+      - Other subsystem-specific documents.
+
+      When new docs are added, they should follow this pattern:
+      - SECTION-style logical grouping
+      - `name:`
+      - `type:`
+      - `status:`
+      - `path:` (if applicable)
+      - `description:`
+      - `usage:`
+      - `access:`
