@@ -1,0 +1,101 @@
+# Phase Registry – Phase 0
+# This file defines the authoritative structure for Phase 0 (Foundations & Tooling).
+# Card source: P0 – Phase 0 — Foundations & Tooling
+# This registry stores structural information about Phase 0 independently
+# of any GitHub issue card instances.
+
+phase:
+  id: P0
+  name: "Phase 0 — Foundations & Tooling"
+  milestone: "Phase 0 — Foundations & Tooling"
+  order: 0
+
+  description: |
+    Phase 0 establishes the foundational environment, standards, and documentation
+    structures required for all subsequent phases of LillyCORE. Before any functional
+    architecture or implementation begins, the project must have a coherent, stable,
+    and uniform base that both GPTs and humans can operate within reliably.
+
+    This phase defines:
+      • Documentation structures, formats, and ingestion rules GPTs must follow.
+      • Technical standards required to begin programming (tooling, Python version,
+        linters/formatters, testing baseline, etc.).
+      • Core repository organization at a conceptual level (folder taxonomy, naming
+        conventions, document layout).
+      • Minimal PROJECT_CANON foundations required to begin Phase 1 cleanly.
+      • Processes for maintaining and updating standards, docs, and canon as the
+        system evolves.
+      • Workspace preparation required for consistent execution, even if some
+        elements are only defined conceptually here and instantiated later.
+
+  inputs:
+    roadmap:
+      - "Roadmap definitions indicating the role and boundaries of Phase 0."
+    canon:
+      - "Minimal PROJECT_CANON subset required to start (system-wide rules and philosophy)."
+    environment:
+      - "Existing repository or workspace conditions to be normalized."
+      - "Decisions on tooling requirements (Python version, formatter, linter, testing framework)."
+      - "Documentation format structures required for GPT comprehension and update consistency."
+
+  deliverables:
+    - id: P0.D1
+      name: "Documentation structures, formats, and ingestion rules"
+      description: |
+        Defined structures and formats for documentation, plus ingestion rules that GPTs
+        must follow when reading or updating docs.
+
+    - id: P0.D2
+      name: "Technical environment and programming standards"
+      description: |
+        Technical standards required to begin programming, including tooling choices,
+        Python version, formatter/linter rules, and testing baseline.
+
+    - id: P0.D3
+      name: "Core repository organization and taxonomy"
+      description: |
+        Conceptual repository layout defining folder taxonomy, naming conventions, and
+        documentation placement.
+
+    - id: P0.D4
+      name: "Minimal PROJECT_CANON foundations for Phase 1"
+      description: |
+        The subset of PROJECT_CANON required to allow Phase 1 to begin cleanly, including
+        system-wide rules and invariants that must already be in place.
+
+    - id: P0.D5
+      name: "Standards and documentation maintenance rules"
+      description: |
+        Rules and processes for how standards, docs, and canon are maintained, updated,
+        and versioned as LillyCORE evolves.
+
+    - id: P0.D6
+      name: "Workspace preparation for consistent execution"
+      description: |
+        Definition of the baseline workspace and execution assumptions (folders, config
+        files, initial tooling hooks) required for consistent behaviour across phases.
+
+  constraints:
+    - "Phase 0 must not introduce functional runtime, engines, or module logic."
+    - "Definitions must remain high-level and avoid premature architecture for later phases."
+    - "No module, engine, or functional code may be designed beyond establishing the environment they will later inhabit."
+    - "All documentation and standards must be maintainable by GPTs and align with PROJECT_CANON and GPT_RESOURCE_INDEX."
+    - "Phase 0 outputs must not conflict with the roadmap; they act as prerequisites, not prescriptive architecture."
+
+  structure:
+    # Phase 0 is decomposed into multiple slices (P0.1–P0.10, including QA) and
+    # potentially sub-slices (e.g., P0.4.1–P0.4.7). These will be added here as
+    # they are normalized into the registry.
+    slices:
+      []
+
+  qa:
+    expectations:
+      - "A clear, normalized Phase 0 definition exists and is sufficient for Phase 1 to begin."
+      - "Foundational environment, documentation structures, and constraints are fully described."
+      - "Phase 0 rules do not conflict with later roadmap phases."
+      - "Outputs are understandable and usable by both GPTs and humans."
+    notes: |
+      QA for Phase 0 focuses on completeness and coherence of foundations, not
+      functional behaviour. All later phases assume Phase 0’s rules and structures
+      exist and are stable.
