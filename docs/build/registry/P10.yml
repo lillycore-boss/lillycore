@@ -1,0 +1,113 @@
+# Phase Registry – Phase 10
+# This file defines the authoritative structure for Phase 10 (Project Management Plugin).
+# Card source: P10 – Phase 10 — Project Management Plugin (Projects, Tasks, Progress Tracking)
+# This registry stores all structural information about Phase 10 independently
+# of any GitHub issue card instances.
+
+phase:
+  id: P10
+  name: "Phase 10 — Project Management Plugin (Projects, Tasks, Progress Tracking)"
+  milestone: "Phase 10 — Project Management Plugin (Projects, Tasks, Progress Tracking)"
+  order: 10
+
+  description: |
+    Phase 10 introduces the Project Management Plugin (PM Plugin), a plugin-layer module
+    providing durable, structured storage for long-term projects and tasks. It enables
+    both the system and the user to organize work into projects, tasks, subtasks, and
+    progress states, offloading long-lived planning concerns from HELPER.
+
+    The PM Plugin becomes the central backlog and tracking system for internal and
+    user-driven work. HELPER can push derived tasks into projects or pull tasks when
+    requested, while users can create and manage projects through chat. The UX layer
+    represents project and task state via crates in the Crate Stream.
+
+    This thickens LillyCORE’s backend by adding a persistent workspace for big efforts
+    without increasing core-engine complexity or autonomy prematurely.
+
+  inputs:
+    phase_dependencies:
+      - "Plugin Engine MVP (Phase 7): capability registry, manifest + sandbox enforcement."
+      - "HELPER_ENGINE MVP (Phase 6): work decomposition, execution, project/task ID usage."
+      - "SYSTEM_DOC data layer (Phase 3): storage for project/task models and history."
+      - "DRIFT_ENGINE metadata (Phase 5): work/personal classification for contextual tagging."
+      - "UX MVP (Phase 9): crate stream and UX display conventions for projects/tasks."
+    packet_requirements:
+      - "Project create/update/query formats."
+      - "Task create/update/query formats."
+      - "Status/progress reporting schemas."
+    canon_rules:
+      - "Plugin ontology for long-lived PM plugins."
+      - "Rules for durable project/task structures."
+
+  deliverables:
+    - id: P10.D1
+      name: "Project Management Plugin architecture"
+      description: |
+        High-level architecture for the PM Plugin, including plugin boundaries, entry
+        points, and integration with Plugin Engine and HELPER.
+
+    - id: P10.D2
+      name: "Project/Task data model and metadata specification"
+      description: |
+        Canonical data model for projects and tasks, including IDs, parent relationships,
+        status markers, and optional metadata (deadlines, tags, file links).
+
+    - id: P10.D3
+      name: "Plugin storage design and boundaries"
+      description: |
+        Storage model for project/task data, including plugin-owned regions, SYSTEM_DOC
+        integration points, and strict boundaries with DRIFT and other personal data.
+
+    - id: P10.D4
+      name: "HELPER integration design (push/pull tasks)"
+      description: |
+        Design for how HELPER pushes tasks into projects, pulls tasks for execution,
+        and references project/task IDs in work packets.
+
+    - id: P10.D5
+      name: "UX crate specifications for projects and tasks"
+      description: |
+        Crate schemas and UX expectations for project listings, task lists, progress
+        summaries, and status views.
+
+    - id: P10.D6
+      name: "Packet formats for PM operations"
+      description: |
+        Packet-level schema definitions for PM operations: create/update/query for
+        projects and tasks, progress reporting, and listing.
+
+    - id: P10.D7
+      name: "Lifecycle rules and user/system workflows"
+      description: |
+        Workflows for both user-initiated and system-initiated project/task management,
+        including creation, updates, completion, querying, and summarization.
+
+    - id: P10.D8
+      name: "Documentation across MODULES, Canon, TECH_SPEC"
+      description: |
+        Documentation entries describing the PM Plugin’s role, storage model, packet
+        schemas, and integration with HELPER, UX, and SYSTEM_DOC.
+
+  constraints:
+    - "PM Plugin must operate within Plugin Engine sandbox and manifest rules."
+    - "Plugin-owned storage must be clearly separated from DRIFT personal-context storage."
+    - "No direct writes to SYSTEM_DOC outside approved tables/regions."
+    - "HELPER must not depend on PM Plugin for core operation (only for extended workflows)."
+    - "UX may only interact with PM Plugin via packets and crates, not direct internal calls."
+
+  structure:
+    # Will be filled when Architect decomposes Phase 10 into P10.x cards.
+    slices:
+      []
+
+  qa:
+    expectations:
+      - "Data model supports realistic project/task hierarchies and progress tracking."
+      - "Plugin storage boundaries respect Plugin Engine and SYSTEM_DOC constraints."
+      - "HELPER push/pull integration is deterministic and traceable."
+      - "UX crate specifications accurately reflect project/task state."
+      - "Packet schemas for PM operations are complete and consistent."
+      - "User and system workflows are unambiguous and testable."
+    notes: |
+      QA verifies plugin architecture, boundaries, and packet-level correctness.
+      This registry defines structural expectations only, not implementation outcomes.
