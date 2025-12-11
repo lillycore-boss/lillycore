@@ -1,0 +1,121 @@
+# Phase Registry – Phase 11
+# This file defines the authoritative structure for Phase 11 (Personal Assistant Plugin).
+# Card source: P11 – Phase 11 — Personal Assistant Plugin (Calendar, Tasks, Reminders)
+# This registry stores all structural information about Phase 11 independently
+# of any GitHub issue card instances.
+
+phase:
+  id: P11
+  name: "Phase 11 — Personal Assistant Plugin (Calendar, Tasks, Reminders)"
+  milestone: "Phase 11 — Personal Assistant Plugin (Calendar, Tasks, Reminders)"
+  order: 11
+
+  description: |
+    Phase 11 introduces the Personal Assistant Plugin (PA Plugin), a plugin-layer module
+    that provides calendar events, tasks/todos, and reminders. It is not a core engine,
+    but a structured and durable “day planner” that DRIFT and HELPER can use to produce
+    real assistant behaviours.
+
+    The PA plugin:
+      • Stores events, tasks, and reminders in sandboxed plugin-level storage
+      • Exposes operations via packet-based calls
+      • Receives structured instructions via DRIFT → HELPER → Plugin Engine
+      • Surfaces agendas and lists to UX via crates and summaries
+
+    UX displays daily/weekly agenda data using crates and natural-language summaries
+    produced downstream, while the PA plugin itself remains a packet-and-storage layer.
+
+  inputs:
+    phase_dependencies:
+      - "Plugin Engine MVP (Phase 7): discovery, sandboxing, capability routing."
+      - "DRIFT_ENGINE MVP (Phase 5): user-intent interpretation (dates, reminders, tasks), work/personal tags."
+      - "HELPER_ENGINE MVP (Phase 6): scheduling follow-ups and referencing PA IDs."
+      - "SYSTEM_DOC (Phase 3): logging PA operations and cross-links where appropriate."
+      - "UX MVP (Phase 9): crate rendering for agendas, tasks, reminders."
+    packet_requirements:
+      - "PA-create / PA-update / PA-delete."
+      - "PA-list / PA-agenda / PA-reminder-register."
+      - "PA-briefing-payload formats."
+    canon_rules:
+      - "Plugin ontology for assistant-style capabilities."
+      - "Rules for assistant workflows and user-facing commitments."
+
+  deliverables:
+    - id: P11.D1
+      name: "PA plugin architecture and plugin manifest specification"
+      description: |
+        Architecture for the Personal Assistant Plugin, including manifest structure,
+        capabilities, permissions, and integration via Plugin Engine.
+
+    - id: P11.D2
+      name: "Data model for events, tasks, and reminders"
+      description: |
+        Canonical schemas for events (IDs, timestamps, durations, metadata), tasks/todos
+        (due dates, tags, priorities), and reminders (time-based or event-triggered).
+
+    - id: P11.D3
+      name: "Plugin-level storage boundaries and schemas"
+      description: |
+        Storage model for PA data, including PA-specific tables/files, sandboxed
+        boundaries, and explicit separation from DRIFT personal-context storage.
+
+    - id: P11.D4
+      name: "Packet formats for PA operations and briefings"
+      description: |
+        Packet schemas supporting create/update/delete operations, listing/agenda
+        retrieval, reminder registration, and briefing payloads.
+
+    - id: P11.D5
+      name: "DRIFT + HELPER capability integration design"
+      description: |
+        Integration rules where DRIFT translates natural-language PA requests into
+        structured work, and HELPER routes those as PA operation packets.
+
+    - id: P11.D6
+      name: "Briefing data model (daily/weekly agenda)"
+      description: |
+        Structured representation of daily and weekly briefings, including agenda
+        contents and summary payloads for downstream engines/UX.
+
+    - id: P11.D7
+      name: "UX crate formats for agenda and task lists"
+      description: |
+        Crate schemas describing how agendas, tasks, and reminders are displayed in UX,
+        including grouping, ordering, and key metadata fields.
+
+    - id: P11.D8
+      name: "Proactivity configuration rules"
+      description: |
+        Preference-driven configuration model describing proactivity levels (off/low/
+        normal) and how often reminders or briefings surface.
+
+    - id: P11.D9
+      name: "P11.x implementer task cards"
+      description: |
+        The complete set of Implementer P11.x cards required to build the PA plugin
+        end-to-end, including manifest, data model, packet handlers, UX integration,
+        and tests.
+
+  constraints:
+    - "PA plugin must operate fully within Plugin Engine sandbox and manifest rules."
+    - "PA storage must be clearly separated from DRIFT’s personal-context memory."
+    - "PA operations must be exposed exclusively through packet interfaces."
+    - "UX must only interact with PA via crates and packets, not direct internal calls."
+    - "Proactivity must respect user preferences and not spam or over-notify."
+
+  structure:
+    # Will be populated once Architect decomposes Phase 11 into P11.x cards.
+    slices:
+      []
+
+  qa:
+    expectations:
+      - "Data model correctly supports realistic event/task/reminder workflows."
+      - "Packet schemas for PA operations and briefings are complete and consistent."
+      - "DRIFT and HELPER integration contracts are precisely defined and testable."
+      - "UX crates accurately reflect agenda and task/reminder state."
+      - "Proactivity rules behave according to user preferences."
+      - "All P11.x implementer cards cover the full scope of P11.D1–P11.D9."
+    notes: |
+      QA validates PA plugin behaviour as a structured, sandboxed plugin. The registry
+      defines structural expectations only, not runtime outcomes.
