@@ -1,0 +1,135 @@
+# Phase Registry – Phase 1
+# Authoritative structural record for Phase 1.
+# Card source: P1 – Phase 1 — Core Loop, Logging, User Preferences
+
+phase:
+  id: P1
+  name: "Phase 1 — Core Loop, Logging, User Preferences"
+  milestone: "Phase 1 — Core Loop, Logging, User Preferences"
+  order: 1
+
+  description: |
+    Establish LillyCORE’s first functional runtime layer by introducing a stable execution
+    loop, unified logging behaviour, structured error handling, and a minimal but extensible
+    preference system. Phase 1 defines the goals and boundaries for core runtime, logging,
+    error envelopes, preference loading, AI pool structures, and initial infrastructure
+    setup, based on constraints and standards established in Phase 0.
+
+  inputs:
+    phase_zero_dependencies:
+      - "Documentation structures and governance (P0.2, P0.3, P0.7)"
+      - "GPT behaviour and ingestion rules (P0.4)"
+      - "Minimum stable Canon subset for Phase 1 (P0.5)"
+      - "Repository taxonomy and naming standards (P0.2)"
+      - "Root-level file rules (P0.6)"
+    roadmap:
+      - "Core Loop"
+      - "Logging"
+      - "User Preferences"
+    canon_topics:
+      - "Runtime behaviour"
+      - "Identity persistence"
+      - "System integrity / invariants"
+    tech_spec_topics:
+      - "Repository layout and folder taxonomy"
+      - "Logging and error-handling baseline expectations"
+      - "Tooling and infrastructure decisions from P0.1"
+    decisions_required:
+      - "Preference persistence mechanism (file, object, or other)"
+      - "Logging channels (console, file, structured output)"
+      - "Error envelope schema details (fields, severity levels, propagation rules)"
+
+  deliverables:
+    - id: P1.D1
+      name: "Functional core runtime loop capable of continuous operation"
+      description: |
+        A stable, repeatable runtime loop that can execute continuously within LillyCORE,
+        respecting Phase 0 invariants and Phase 1 constraints.
+
+    - id: P1.D2
+      name: "Unified logging system with documented entry points and formatting rules"
+      description: |
+        A centralised logging system with consistent formatting, clearly defined entry points,
+        and documentation of how and where logs are emitted.
+
+    - id: P1.D3
+      name: "Implemented error envelope schema integrated into runtime and logging"
+      description: |
+        A structured error envelope format (fields, severity, propagation rules) implemented
+        and wired into both the runtime loop and logging system.
+
+    - id: P1.D4
+      name: "Operational system preference loader with persistence and override capability"
+      description: |
+        A preference loader that can read, persist, and override system/user preferences,
+        aligned with the chosen storage mechanism and Canon constraints.
+
+    - id: P1.D5
+      name: "AI pool structural definitions (types, fields, relationships) defined and documented"
+      description: |
+        Structural definitions for AI pools (types, fields, relationships) without execution
+        or scheduling behaviour; purely schema/structure at this phase.
+
+    - id: P1.D6
+      name: "Initial project infrastructure implemented (repo, config files, CI, tooling, developer automation)"
+      description: |
+        Repository-level infrastructure including config files, CI, pre-commit/tooling, and
+        basic developer automation, consistent with Phase 0 TECH_SPEC and Canon.
+
+  constraints:
+    - "No AI execution, scheduling, or chaining in Phase 1 (AI pools are structural only)."
+    - "No module-level functionality beyond what runtime, logging, and preferences require."
+    - "No Phase 2/3/4 architectural responsibilities embedded into Phase 1 cards."
+    - "All P1.x cards must align with Phase 0 standards and documentation conventions."
+    - "Infrastructure setup must detect and reconcile existing repo/CI/tooling where present."
+
+  structure:
+    # This section will be populated once the Architect decomposes Phase 1 into P1.x cards.
+    slices:
+      # Example structure (to be filled by Architect when P1.x cards exist):
+      # - id: P1.1
+      #   name: "Runtime loop architecture and contracts"
+      #   executor_role: "Architect"
+      #   serves_deliverables: [P1.D1, P1.D3]
+      # - id: P1.2
+      #   name: "Runtime loop implementation"
+      #   executor_role: "Implementer"
+      #   serves_deliverables: [P1.D1]
+      # - id: P1.3
+      #   name: "Logging schema and integration points"
+      #   executor_role: "Architect"
+      #   serves_deliverables: [P1.D2, P1.D3]
+      # - id: P1.4
+      #   name: "Logging implementation and wiring"
+      #   executor_role: "Implementer"
+      #   serves_deliverables: [P1.D2, P1.D3]
+      # - id: P1.5
+      #   name: "Preference loader design and storage choice"
+      #   executor_role: "Architect"
+      #   serves_deliverables: [P1.D4]
+      # - id: P1.6
+      #   name: "Preference loader implementation"
+      #   executor_role: "Implementer"
+      #   serves_deliverables: [P1.D4]
+      # - id: P1.7
+      #   name: "AI pool structural definitions"
+      #   executor_role: "Architect"
+      #   serves_deliverables: [P1.D5]
+      # - id: P1.8
+      #   name: "Infrastructure setup and validation"
+      #   executor_role: "Implementer"
+      #   serves_deliverables: [P1.D6]
+      # - id: P1.9
+      #   name: "Phase 1 QA and verification"
+      #   executor_role: "QA"
+      #   serves_deliverables: [P1.D1, P1.D2, P1.D3, P1.D4, P1.D5, P1.D6]
+      []
+
+  qa:
+    expectations:
+      - "There is at least one QA card at the end of the P1.x bundle to validate P1.D1–P1.D6."
+      - "All P1.x cards have clear DONE_WHEN criteria, explicit inputs, and correct deliverable linkage."
+      - "No Phase 2+ responsibilities are silently embedded into P1.x cards."
+    notes: |
+      QA results themselves live on issues in LillyCORE QA and as appended QA blocks
+      on P1.x and P1 cards. The registry only encodes structural expectations, not outcomes.
