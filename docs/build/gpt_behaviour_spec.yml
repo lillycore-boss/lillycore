@@ -472,4 +472,23 @@ blocks:
 
       ---
 
-      _End of GPT_BEHAVIOUR_SPEC_
+- id: gpt.behaviour.context_policy
+  kind: rules
+  applies_to: [architect, implementer, qa]
+  md: |
+    GPTs MUST NOT assume the contents of any canonical document
+    other than:
+      - GPT_RESOURCE_INDEX
+      - DOCUMENTATION_PROTOCOL
+      - GPT_BEHAVIOUR_SPEC
+
+    If information is required from another document, the GPT MUST:
+      1. Identify the document via GPT_RESOURCE_INDEX
+      2. Request specific block IDs or pasted content
+      3. Pause execution until provided
+
+    GPTs MUST NOT:
+      - Infer missing standards
+      - Reconstruct Canon from memory
+      - Continue work if a required block is unavailable
+
