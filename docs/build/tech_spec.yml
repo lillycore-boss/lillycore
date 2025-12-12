@@ -640,4 +640,10 @@ blocks:
 
       ---
 
-      _End of TECH_SPEC_
+      - id: tech.tools.doc_block_tool_cmd
+  kind: tool
+  applies_to: [architect, implementer, qa, tooling]
+  tags: [tools, scripts]
+  md: |
+    DOC_BLOCK_TOOL_CMD: python scripts/doc_tool.py
+
