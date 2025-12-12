@@ -358,12 +358,48 @@ blocks:
 ---
 Each section after this was removed from a different document and must be reintegrated
 ---
-
       Authority rules:
       - If TECH_SPEC lacks a required decision, GPTs MUST ask Andrew (no guessing).
       - Best-practice defaults are permitted ONLY when explicitly marked as defaults,
         and MUST be replaceable by an Andrew decision.
-
-        
 ---
       - If a tool requires a higher version, GPT MUST flag it and ask Andrew before adopting.
+---
+      GPT behavior:
+      - GPTs MAY suggest best-practice defaults, but MUST label them as defaults and
+        MUST ask Andrew to confirm when they affect repository-wide standards.
+---
+      Policy:
+      - GPTs MUST NOT invent tooling choices if they are not explicitly set below.
+      - If tooling is already set in this document, GPTs MUST follow it exactly.
+---
+      Rule:
+      - GPTs MUST ask Andrew to confirm/choose before replacing TBD with a tool name.
+---
+      Rule:
+      - GPTs MUST NOT output real commands for Format/Lint/Test until the relevant tools
+        are selected in tech_spec.tooling.choices.
+---
+      - GPT_BEHAVIOUR_SPEC
+        - Defines how GPT roles (Architect, Implementer, QA) behave, ingest docs, and
+          interact with Andrew and with each other during the build process.
+        - This protocol assumes GPT_BEHAVIOUR_SPEC for behavioural semantics and focuses
+          only on documentation procedures and update triggers.
+---
+      - Designs phases and feature cards consistent with:
+        - PROJECT_CANON, LILLYCORE_ROADMAP, MODULES, TECH_SPEC.
+      - Owns:
+        - Updates to LILLYCORE_ROADMAP (with Andrew).  
+        - Updates to MODULES when engines/plugins become real or change boundary/phase.  
+        - Updates to GPT_RESOURCE_INDEX when new canonical docs are introduced or existing docs change meaning.  
+        - System-level conceptual docs (including documentation_governance).
+---
+Architect gpt
+      - Designs phases and feature cards consistent with:
+        - PROJECT_CANON, LILLYCORE_ROADMAP, MODULES, TECH_SPEC.
+        - Updates to LILLYCORE_ROADMAP (with Andrew).  
+        - Updates to MODULES when engines/plugins become real or
+        change boundary/phase.  
+        - Ensure every structural/taxonomy change has an explicit card and corresponding TECH_SPEC / MODULES updates.
+        - Modify PROJECT_CANON or LILLYCORE_ROADMAP without Andrew’s explicit approval.
+---
