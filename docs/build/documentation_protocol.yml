@@ -530,3 +530,10 @@ blocks:
       Owner: Andrew
       Status: open | resolved
       Notes:
+---
+      - Docs MUST mirror code structure:
+            clear comment blocks
+            no fragile formatting
+            easy to overwrite entire sections
+---
+
