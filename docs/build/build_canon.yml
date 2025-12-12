@@ -356,8 +356,14 @@ blocks:
       - Do not proceed as if a choice has been made.
 
 ---
+Each section after this was removed from a different document and must be reintegrated
+---
 
       Authority rules:
       - If TECH_SPEC lacks a required decision, GPTs MUST ask Andrew (no guessing).
       - Best-practice defaults are permitted ONLY when explicitly marked as defaults,
         and MUST be replaceable by an Andrew decision.
+
+        
+---
+      - If a tool requires a higher version, GPT MUST flag it and ask Andrew before adopting.
