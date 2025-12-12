@@ -4,6 +4,34 @@ version: 1
 root_dir: "docs/build"
 
 blocks:
+- id: gpt_resources.freeze_contract
+  kind: control
+  applies_to: [architect, implementer, qa]
+  tags: [freeze, stabilization, authority_override]
+  md: |
+    # GPT Resource Freeze Contract (Phase 0 Stabilization)
+
+    Until this block is explicitly removed or replaced:
+
+    - GPT_RESOURCE_INDEX is the **only authoritative entry point**
+      for determining which documents exist and may be relied upon.
+
+    - The presence of a document in the repository does **not**
+      imply authority, correctness, or applicability unless it is
+      explicitly listed and described in this index.
+
+    - If documents conflict, overlap, or appear ambiguous:
+        → GPTs MUST NOT attempt to reconcile, reinterpret, or invent rules.
+        → GPTs MUST defer to explicit instructions given by Andrew in-chat.
+
+    - No new canonical documents, rules, schemas, or behaviors may be
+      introduced implicitly during this stabilization period.
+
+    Purpose:
+    This contract exists to halt documentation-driven drift while
+    the project is stabilized. Correctness is secondary to predictability.
+
+
   # --------------------------------
   # Overview / mandatory-load
   # --------------------------------
