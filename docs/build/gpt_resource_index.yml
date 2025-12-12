@@ -50,15 +50,15 @@ blocks:
     applies_to: [architect, implementer, qa, tooling]
     tags: [paths, filesystem, loadmap]
     paths:
-      PROJECT_CANON: "docs/build/project_canon.md"
-      LILLYCORE_ROADMAP: "docs/build/lillycore_roadmap.md"
-      FEATURES: "docs/build/features.md"
-      TECH_SPEC: "docs/build/tech_spec.md"
+      PROJECT_CANON: "docs/build/project_canon.yml"
+      LILLYCORE_ROADMAP: "docs/build/lillycore_roadmap.yml"
+      FEATURES: "docs/build/features.yml"
+      TECH_SPEC: "docs/build/tech_spec.yml"
       MODULES: "docs/build/modules.md"
-      GPT_RESOURCE_INDEX: "docs/build/gpt_resource_index.md"
-      DOCUMENTATION_PROTOCOL: "docs/build/documentation_protocol.md"
-      DOCUMENTATION_GOVERNANCE: "docs/documentation_governance.md"
-      GPT_BEHAVIOUR_SPEC: "docs/build/gpt_behaviour_spec.md"
+      GPT_RESOURCE_INDEX: "docs/build/gpt_resource_index.yml"
+      DOCUMENTATION_PROTOCOL: "docs/build/documentation_protocol.ymld"
+      DOCUMENTATION_GOVERNANCE: "docs/documentation_governance.yml"
+      GPT_BEHAVIOUR_SPEC: "docs/build/gpt_behaviour_spec.yml"
     md: |
       ## GPT Resource Load Paths
 
