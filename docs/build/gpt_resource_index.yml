@@ -54,7 +54,7 @@ blocks:
       LILLYCORE_ROADMAP: "docs/build/lillycore_roadmap.yml"
       FEATURES: "docs/build/features.yml"
       TECH_SPEC: "docs/build/tech_spec.yml"
-      MODULES: "docs/build/modules.md"
+      MODULES: "docs/build/modules.yml"
       GPT_RESOURCE_INDEX: "docs/build/gpt_resource_index.yml"
       DOCUMENTATION_PROTOCOL: "docs/build/documentation_protocol.ymld"
       DOCUMENTATION_GOVERNANCE: "docs/documentation_governance.yml"
