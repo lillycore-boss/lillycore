@@ -1,0 +1,183 @@
+version: "1.0"
+
+blocks:
+  - id: tech_spec.overview
+    kind: overview
+    name: TECH_SPEC
+    applies_to: [architect, implementer, qa, tooling]
+    tags: [tech_spec, environment, tooling, repo]
+    md: |
+      # TECH_SPEC
+
+      Purpose:
+      - Define the technical environment and baseline engineering standards for LillyCORE.
+      - Prevent guessing, drift, and cross-platform nonsense.
+
+      Scope:
+      - Python runtime baseline
+      - Tooling baseline (formatter, linter, tests)
+      - Repository-root conventions (where configs live)
+      - Minimal execution conventions (how to run checks)
+
+      Out of scope (explicit):
+      - Runtime architecture and engine/plugin behavior (see PROJECT_CANON / MODULES)
+      - GPT role behavior rules (see GPT_BEHAVIOUR_SPEC)
+      - Documentation update procedures (see DOCUMENTATION_PROTOCOL)
+
+      Authority rules:
+      - If TECH_SPEC lacks a required decision, GPTs MUST ask Andrew (no guessing).
+      - Best-practice defaults are permitted ONLY when explicitly marked as defaults,
+        and MUST be replaceable by an Andrew decision.
+
+  - id: tech_spec.platform.assumptions
+    kind: platform
+    applies_to: [architect, implementer, qa, tooling]
+    tags: [linux, popos, local_dev]
+    md: |
+      ## Platform Assumptions
+
+      Primary development platform:
+      - Linux (Pop!_OS).
+
+      GPT constraint:
+      - GPTs MUST NOT provide Windows/Mac-specific instructions unless Andrew explicitly asks.
+      - If cross-platform behavior matters, GPTs MUST ask what targets are required.
+
+  - id: tech_spec.python.baseline
+    kind: baseline
+    applies_to: [architect, implementer, qa, tooling]
+    tags: [python, runtime]
+    md: |
+      ## Python Baseline
+
+      Minimum supported Python:
+      - Python 3.11+
+
+      Notes:
+      - All code, scripts, and tooling choices MUST be compatible with the minimum version.
+      - If a tool requires a higher version, GPT MUST flag it and ask Andrew before adopting.
+
+  - id: tech_spec.best_practice.policy
+    kind: policy
+    applies_to: [architect, implementer, qa, tooling]
+    tags: [best_practice, defaults, anti_drift]
+    md: |
+      ## Best-Practice Policy (Default)
+
+      Default stance:
+      - Use widely accepted Python best practices to reduce context load and drift.
+
+      Constraint:
+      - Best practice MUST be treated as a default, not a law.
+      - If best practice conflicts with a LillyCORE requirement, the requirement wins,
+        but the exception MUST be documented here.
+
+      GPT behavior:
+      - GPTs MAY suggest best-practice defaults, but MUST label them as defaults and
+        MUST ask Andrew to confirm when they affect repository-wide standards.
+
+  - id: tech_spec.repo.root_definition
+    kind: repo
+    applies_to: [architect, implementer, qa, tooling]
+    tags: [repo_root, layout]
+    md: |
+      ## Repository Root Definition
+
+      Definition:
+      - "Repository root" = the top-level directory of the lillycore repository
+        (the folder containing .git and the main project files).
+
+      Policy:
+      - Repository-wide configuration files live at repository root unless explicitly stated otherwise.
+
+  - id: tech_spec.tooling.baseline
+    kind: tooling
+    applies_to: [architect, implementer, qa, tooling]
+    tags: [formatter, linter, tests, ci]
+    md: |
+      ## Tooling Baseline (Conceptual)
+
+      Purpose:
+      - Keep code consistent and catch obvious mistakes early.
+
+      Definitions (plain English):
+      - Formatter:
+          Automatically rewrites code layout (spacing, wrapping) to a consistent style.
+      - Linter:
+          Checks code for likely bugs, suspicious patterns, and rule violations.
+      - Test framework:
+          Runs automated checks to confirm behavior.
+      - CI gate:
+          A rule that says: "Changes are not considered valid unless required checks pass."
+
+      Policy:
+      - GPTs MUST NOT invent tooling choices if they are not explicitly set below.
+      - If tooling is already set in this document, GPTs MUST follow it exactly.
+
+  - id: tech_spec.tooling.choices
+    kind: decisions
+    applies_to: [architect, implementer, qa, tooling]
+    tags: [decisions, tooling]
+    md: |
+      ## Tooling Choices (Authoritative)
+
+      Status:
+      - This section is the authoritative list of tooling selections.
+      - If a choice is not listed here, it is not selected.
+
+      Current selections:
+      - Formatter: TBD (best-practice default recommendation: Black)
+      - Linter: TBD (best-practice default recommendation: Ruff)
+      - Test framework: TBD (best-practice default recommendation: Pytest)
+
+      Rule:
+      - GPTs MUST ask Andrew to confirm/choose before replacing TBD with a tool name.
+
+  - id: tech_spec.execution.local_checks
+    kind: workflow
+    applies_to: [architect, implementer, qa, tooling]
+    tags: [commands, checks]
+    md: |
+      ## Local Check Commands (Authoritative Once Filled)
+
+      Purpose:
+      - Provide copy-paste commands Andrew can run on Linux to validate work.
+
+      Status:
+      - These commands remain placeholders until tooling is selected.
+
+      Placeholders (DO NOT TREAT AS REAL UNTIL UPDATED):
+      - Format: TBD
+      - Lint: TBD
+      - Test: TBD
+
+      Rule:
+      - GPTs MUST NOT output real commands for Format/Lint/Test until the relevant tools
+        are selected in tech_spec.tooling.choices.
+
+  - id: tech_spec.no_guessing.rule
+    kind: rule
+    applies_to: [architect, implementer, qa, tooling]
+    tags: [no_assumptions, anti_drift]
+    md: |
+      ## No-Guessing Rule (Hard)
+
+      GPTs MUST NOT:
+      - invent tooling selections
+      - invent OS-specific instructions
+      - invent repository layout rules
+      - invent "standard" commands
+
+      When missing info:
+      - Ask Andrew a concrete question.
+      - Offer 1–2 best-practice options clearly labeled as options.
+      - Do not proceed as if a choice has been made.
+
+  - id: tech_spec.change_log
+    kind: meta
+    applies_to: [architect, implementer, qa, tooling]
+    tags: [changelog]
+    md: |
+      ## Change Log (Lightweight)
+
+      - v1.0: Clean baseline rewrite. Python 3.11+ established. No-guessing + best-practice policy defined.
