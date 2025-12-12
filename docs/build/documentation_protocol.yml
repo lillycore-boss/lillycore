@@ -95,12 +95,6 @@ blocks:
       2. Then PROJECT_CANON, LILLYCORE_ROADMAP, TECH_SPEC, MODULES, FEATURES, and GPT_RESOURCE_INDEX are updated as needed via feature cards.  
       3. This protocol is adjusted afterward to match.
 
-      - GPT_BEHAVIOUR_SPEC
-        - Defines how GPT roles (Architect, Implementer, QA) behave, ingest docs, and
-          interact with Andrew and with each other during the build process.
-        - This protocol assumes GPT_BEHAVIOUR_SPEC for behavioural semantics and focuses
-          only on documentation procedures and update triggers.
-
   # --------------------------------
   # Section 3 – Roles & Documentation Responsibilities
   # --------------------------------
@@ -130,17 +124,12 @@ blocks:
 
       ### 3.2 Architect GPT
 
-      - Designs phases and feature cards consistent with:
-        - PROJECT_CANON, LILLYCORE_ROADMAP, MODULES, TECH_SPEC.
       - Owns:
-        - Updates to LILLYCORE_ROADMAP (with Andrew).  
-        - Updates to MODULES when engines/plugins become real or change boundary/phase.  
         - Updates to GPT_RESOURCE_INDEX when new canonical docs are introduced or existing docs change meaning.  
         - System-level conceptual docs (including documentation_governance).
 
       Architect MUST:
-
-      - Ensure every structural/taxonomy change has an explicit card and corresponding TECH_SPEC / MODULES updates.
+      
       - Ensure new canonical docs are:
         - Added to GPT_RESOURCE_INDEX.
         - Placed in locations allowed by TECH_SPEC and documentation_governance.
@@ -148,7 +137,6 @@ blocks:
 
       Architect MUST NOT:
 
-      - Modify PROJECT_CANON or LILLYCORE_ROADMAP without Andrew’s explicit approval.
       - Invent new doc layers or categories outside documentation_governance.
 
       ### 3.3 Implementer GPT
