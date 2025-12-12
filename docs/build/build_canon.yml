@@ -1,4 +1,4 @@
-# docs/registry/project_canon.yml
+# docs/registry/build_canon.yml
 
 version: "1.0"
 
@@ -6,9 +6,9 @@ blocks:
   # --------------------------------
   # Overview / file meta
   # --------------------------------
-  - id: project_canon.overview
+  - id: build_canon.overview
     kind: overview
-    name: PROJECT_CANON
+    name: BUILD_CANON
     applies_to: [architect, implementer, qa]
     tags: [canon, philosophy, ontology]
     md: |
@@ -336,7 +336,21 @@ blocks:
 
       - Architect is responsible for producing the update text,
         but ONLY after Andrew explicitly authorizes it.
+        
+  - id: tech_spec.no_guessing.rule
+    kind: rule
+    applies_to: [architect, implementer, qa, tooling]
+    tags: [no_assumptions, anti_drift]
+    md: |
+      ## No-Guessing Rule (Hard)
 
-      # ========================================
-      # END OF PROJECT_CANON v1.0
-      # ========================================
+      GPTs MUST NOT:
+      - invent tooling selections
+      - invent OS-specific instructions
+      - invent repository layout rules
+      - invent "standard" commands
+
+      When missing info:
+      - Ask Andrew a concrete question.
+      - Offer 1–2 best-practice options clearly labeled as options.
+      - Do not proceed as if a choice has been made.
