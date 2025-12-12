@@ -607,3 +607,41 @@ blocks:
         --doc docs/build/tech_spec.yml \
         --id tech.python.baseline \
         --id tech.repo.root_rules
+
+- id: doc_protocol.conflicts.ledger
+  kind: ledger
+  applies_to: [architect, implementer, qa]
+  tags: [conflicts, unresolved]
+  md: |
+    ## Conflict Ledger (Unresolved)
+
+    Purpose:
+    - Single place to park conflicting rules/standards so they stop causing drift.
+
+    Format:
+    - ID: CL-XXX
+      Topic:
+      Conflict:
+      Temporary rule (until resolved):
+      Owner: Andrew
+      Status: open | resolved
+      Notes:
+
+- id: doc_protocol.helpers.block_fetch
+  kind: helper
+  applies_to: [architect, implementer, qa]
+  tags: [script, blocks]
+  md: |
+    ## Helper: Fetch specific doc blocks via local command
+
+    When a GPT needs specific block IDs from canonical docs, it SHOULD:
+    1) list the required block IDs (doc + block id)
+    2) provide the command pattern below
+    3) ask Andrew to paste the output
+
+    Command pattern:
+      ${DOC_BLOCK_TOOL_CMD} get --doc <path> --id <block_id> [--id <block_id>...]
+
+    NOTE:
+    - DOC_BLOCK_TOOL_CMD is defined in TECH_SPEC.
+    - GPTs MUST NOT invent script paths. They must use the TECH_SPEC-defined command.
