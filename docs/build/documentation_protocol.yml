@@ -590,11 +590,20 @@ blocks:
       for future reuse, GPTs MUST ask Andrew which form will be easiest to
       copy/paste and redraw later.
 
-  # --------------------------------
-  # End marker
-  # --------------------------------
-  - id: documentation_protocol.meta.end
-    kind: meta
-    tags: [end, marker]
-    md: |
-      _End of DOCUMENTATION_PROTOCOL v1.0_
+- id: doc_protocol.helpers.request_blocks_via_script
+  kind: helper
+  applies_to: [architect, implementer, qa]
+  tags: [script, paste_to_user]
+  md: |
+    ## Helper: request docs/blocks via local script
+
+    When the GPT needs specific block IDs from canonical docs, it SHOULD:
+    1) list the required block IDs
+    2) provide this command for Andrew to run
+    3) ask Andrew to paste the output
+
+    Example command (adjust path if needed):
+      python scripts/doc_blocks.py get \
+        --doc docs/build/tech_spec.yml \
+        --id tech.python.baseline \
+        --id tech.repo.root_rules
