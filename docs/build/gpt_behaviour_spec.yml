@@ -519,3 +519,15 @@ blocks:
     - The GPT MUST add an entry to Conflict Ledger (or ask Andrew to)
     - The GPT MUST NOT invent a resolution
     - The GPT MUST propose 1–2 options and ask Andrew to pick
+
+- id: gpt_behaviour.conflicts.stop_and_ask
+  kind: rule
+  applies_to: [architect, implementer, qa]
+  tags: [conflicts, no_assumptions]
+  md: |
+    If required information is missing, ambiguous, or conflicting:
+    - GPT MUST STOP and ask Andrew a concrete question.
+    - GPT MUST NOT invent a resolution.
+    - GPT SHOULD reference the Conflict Ledger in DOCUMENTATION_PROTOCOL.
+
+    
