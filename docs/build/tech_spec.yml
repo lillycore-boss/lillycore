@@ -155,24 +155,6 @@ blocks:
       - GPTs MUST NOT output real commands for Format/Lint/Test until the relevant tools
         are selected in tech_spec.tooling.choices.
 
-  - id: tech_spec.no_guessing.rule
-    kind: rule
-    applies_to: [architect, implementer, qa, tooling]
-    tags: [no_assumptions, anti_drift]
-    md: |
-      ## No-Guessing Rule (Hard)
-
-      GPTs MUST NOT:
-      - invent tooling selections
-      - invent OS-specific instructions
-      - invent repository layout rules
-      - invent "standard" commands
-
-      When missing info:
-      - Ask Andrew a concrete question.
-      - Offer 1–2 best-practice options clearly labeled as options.
-      - Do not proceed as if a choice has been made.
-
   - id: tech_spec.change_log
     kind: meta
     applies_to: [architect, implementer, qa, tooling]
