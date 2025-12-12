@@ -74,6 +74,10 @@ blocks:
         - Andrew's explicit instructions override everything.
         - AI cannot decide something is unnecessary, irrelevant,
           or should be deprioritized unless Andrew says so.
+          
+      AI MAY NOT:
+        - Invent new ontological categories.
+        - Reclassify existing engines/plugins without explicit approval.
 
   # --------------------------------
   # Section 3 – Naming, Standards & Conventions
@@ -97,36 +101,9 @@ blocks:
       - Files, folders, modules, and engines MUST follow the folder taxonomy
         defined in the Tools & Environment Spec (TECH_SPEC).
 
-      - Docs MUST mirror code structure:
-            clear comment blocks
-            no fragile formatting
-            easy to overwrite entire sections
-
       - Documentation version numbers are optional and symbolic.
         Git is the real version history.
         AI MUST NOT depend on doc version numbers for logic.
-
-      Repository taxonomy ownership and change process:
-        - The authoritative definition of the repository folder taxonomy and
-          module-to-path mapping lives in:
-              - TECH_SPEC Section 3 (Repository Layout), and
-              - MODULES (engine/plugin responsibilities and their mapping to
-                engines/ and plugins/ folders).
-        - Files, folders, modules, and engines MUST continue to follow the
-          taxonomy defined in TECH_SPEC and MODULES; Implementer GPTs MUST
-          NOT silently change the folder structure in ways that conflict with
-          those docs.
-        - Any change to:
-              - the set of top-level folders under the repository root, or
-              - the meaning or responsibilities of those top-level folders, or
-              - the mapping between conceptual modules/engines/plugins and
-                their physical paths,
-          MUST go through an Architect-designed feature/phase card that
-          updates TECH_SPEC Section 3 (and MODULES where appropriate).
-        - PROJECT_CANON is ONLY updated when the underlying ontology or
-          planning discipline changes (for example, redefining what "core",
-          "engine", or "plugin" means). Ordinary folder layout changes are
-          captured in TECH_SPEC and MODULES, not by silently editing Canon.
 
   # --------------------------------
   # Section 4 – Documentation Standards (pointer)
@@ -144,58 +121,6 @@ blocks:
         and governance now live in DOCUMENTATION_PROTOCOL and
         DOCUMENTATION_GOVERNANCE. PROJECT_CANON no longer defines per-role
         documentation procedures.
-
-  # --------------------------------
-  # Section 5 – System Ontology
-  # --------------------------------
-  - id: project_canon.system_ontology
-    kind: ontology
-    applies_to: [architect, implementer, qa]
-    tags: [ontology, core, engines, plugins, doc_layers]
-    md: |
-      # ========================================
-      # SECTION 5 — SYSTEM ONTOLOGY (THE MEANING OF COMPONENTS)
-      # ========================================
-      LillyCORE uses a precise vocabulary to prevent GPT drift.
-
-      CORE:
-        - Runtime loop, logging, preferences
-        - AI pools
-        - System DOC (durable storage)
-        - Engines (core subsystems)
-
-      ENGINES (Core Subsystems):
-        - DRIFT_ENGINE     → Context/emotion/perception processor (formerly 2a)
-        - HELPER_ENGINE    → Work engine / backend orchestrator (formerly 2b)
-        - PLUGIN_ENGINE    → Loads and routes external plugins
-        - HELP_DESK_ENGINE → Failure detection and self-repair
-        - DREAM_ENGINE     → Optimization, degradation, drift management
-        - SCRIPT_ENGINE    → Internal script optimizer & validator
-
-      PLUGINS:
-        - Optional add-ons that extend behaviour without modifying the core.
-        - Examples:
-            UX Plugin
-            Notes Plugin
-            Project Management Plugin
-            Personal Assistant Plugin
-            Multi-User Plugin
-            Demo Plugins
-
-      PIPELINES:
-        - Named multi-step processes involving engines, plugins, or pools.
-
-      AGENTS:
-        - LLM-driven reasoning entities used by engines or plugins.
-
-      DOC LAYERS:
-        - System DOC → durable system-level storage
-        - Plugin DOC → per-plugin storage boundary
-        - User DOC   → user-generated content
-
-      AI MAY NOT:
-        - Invent new ontological categories.
-        - Reclassify existing engines/plugins without explicit approval.
 
   # --------------------------------
   # Section 6 – Planning & Decomposition Rules
@@ -280,6 +205,7 @@ blocks:
         been moved to DOCUMENTATION_PROTOCOL. This section remains as the
         conceptual anchor that Architect GPT is responsible for decomposition,
         not execution.
+- Ensure every structural/taxonomy change has an explicit card and corresponding TECH_SPEC / MODULES updates.
 
   # --------------------------------
   # Section 9 – Implementer GPT (conceptual role)
@@ -314,6 +240,7 @@ blocks:
         workflows for QA GPT have been moved to DOCUMENTATION_PROTOCOL.
         PROJECT_CANON keeps QA only as a conceptual role in the planning
         discipline; the operational protocol is defined elsewhere.
+- Redesign architecture or rewrite cards (except via corrective-task creation).
 
   # --------------------------------
   # Section 11 – Updates to the Canon
@@ -336,7 +263,9 @@ blocks:
 
       - Architect is responsible for producing the update text,
         but ONLY after Andrew explicitly authorizes it.
-        
+---
+NEW SECTIONS - possible duplicates portions within
+---
   - id: tech_spec.no_guessing.rule
     kind: rule
     applies_to: [architect, implementer, qa, tooling]
@@ -354,69 +283,6 @@ blocks:
       - Ask Andrew a concrete question.
       - Offer 1–2 best-practice options clearly labeled as options.
       - Do not proceed as if a choice has been made.
-
----
-Each section after this was removed from a different document and must be reintegrated
----
-      Authority rules:
-      - If TECH_SPEC lacks a required decision, GPTs MUST ask Andrew (no guessing).
-      - Best-practice defaults are permitted ONLY when explicitly marked as defaults,
-        and MUST be replaceable by an Andrew decision.
----
-      - If a tool requires a higher version, GPT MUST flag it and ask Andrew before adopting.
----
-      GPT behavior:
-      - GPTs MAY suggest best-practice defaults, but MUST label them as defaults and
-        MUST ask Andrew to confirm when they affect repository-wide standards.
----
-      Policy:
-      - GPTs MUST NOT invent tooling choices if they are not explicitly set below.
-      - If tooling is already set in this document, GPTs MUST follow it exactly.
----
-      Rule:
-      - GPTs MUST ask Andrew to confirm/choose before replacing TBD with a tool name.
----
-      Rule:
-      - GPTs MUST NOT output real commands for Format/Lint/Test until the relevant tools
-        are selected in tech_spec.tooling.choices.
----
-      - GPT_BEHAVIOUR_SPEC
-        - Defines how GPT roles (Architect, Implementer, QA) behave, ingest docs, and
-          interact with Andrew and with each other during the build process.
-        - This protocol assumes GPT_BEHAVIOUR_SPEC for behavioural semantics and focuses
-          only on documentation procedures and update triggers.
----
-      - Designs phases and feature cards consistent with:
-        - PROJECT_CANON, LILLYCORE_ROADMAP, MODULES, TECH_SPEC.
-      - Owns:
-        - Updates to LILLYCORE_ROADMAP (with Andrew).  
-        - Updates to MODULES when engines/plugins become real or change boundary/phase.  
-        - Updates to GPT_RESOURCE_INDEX when new canonical docs are introduced or existing docs change meaning.  
-        - System-level conceptual docs (including documentation_governance).
----
-Architect gpt
-      - Designs phases and feature cards consistent with:
-        - PROJECT_CANON, LILLYCORE_ROADMAP, MODULES, TECH_SPEC.
-        - Updates to LILLYCORE_ROADMAP (with Andrew).  
-        - Updates to MODULES when engines/plugins become real or
-        change boundary/phase.  
-        - Ensure every structural/taxonomy change has an explicit card and corresponding TECH_SPEC / MODULES updates.
-        - Modify PROJECT_CANON or LILLYCORE_ROADMAP without Andrew’s explicit approval.
----
-Impimentor gpt
-      - Executes **one leaf-level card** at a time (PROJECT_CANON §9).
-      - Modify PROJECT_CANON or LILLYCORE_ROADMAP unless the card explicitly says so and Andrew has confirmed that intent in this conversation.
-      - Perform structural/taxonomy changes forbidden by TECH_SPEC §3.
----
-QA gpt
-      - Redesign architecture or rewrite cards (except via corrective-task creation).
----
-      If in doubt about whether a behavioural change affects TECH_SPEC or MODULES, Implementer MUST ask Andrew.
----
-      5. **Ask if uncertain**
-         - If you are unsure whether a doc should be edited, or which one:
-           - Stop and ask Andrew, or
-           - Ask for an Architect clarification card.
 ---
   # --------------------------------
   # Section 6 – Ask-Before-Acting Rules
@@ -466,15 +332,7 @@ QA gpt
 
       In all such cases, QA MUST escalate to Andrew and/or Architect and request corrective cards rather than making unilateral interpretation changes.
 ---
-From various checklists in documentation govornance
-      - [ ] I did **not** touch PROJECT_CANON or LILLYCORE_ROADMAP unless Andrew explicitly said to.  
-      - [ ] If something felt ambiguous, I asked Andrew or requested a clarifying card.
-      - [ ] I did not introduce new doc categories without Andrew’s approval.
----
-      If there is any doubt about how a block’s markdown should be structured
-      for future reuse, GPTs MUST ask Andrew which form will be easiest to
-      copy/paste and redraw later.
----
+
 - id: doc_protocol.helpers.request_blocks_via_script
   kind: helper
   applies_to: [architect, implementer, qa]
