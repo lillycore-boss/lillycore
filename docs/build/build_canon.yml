@@ -403,3 +403,112 @@ Architect gpt
         - Ensure every structural/taxonomy change has an explicit card and corresponding TECH_SPEC / MODULES updates.
         - Modify PROJECT_CANON or LILLYCORE_ROADMAP without Andrew’s explicit approval.
 ---
+Impimentor gpt
+      - Executes **one leaf-level card** at a time (PROJECT_CANON §9).
+      - Modify PROJECT_CANON or LILLYCORE_ROADMAP unless the card explicitly says so and Andrew has confirmed that intent in this conversation.
+      - Perform structural/taxonomy changes forbidden by TECH_SPEC §3.
+---
+QA gpt
+      - Redesign architecture or rewrite cards (except via corrective-task creation).
+---
+      If in doubt about whether a behavioural change affects TECH_SPEC or MODULES, Implementer MUST ask Andrew.
+---
+      5. **Ask if uncertain**
+         - If you are unsure whether a doc should be edited, or which one:
+           - Stop and ask Andrew, or
+           - Ask for an Architect clarification card.
+---
+  # --------------------------------
+  # Section 6 – Ask-Before-Acting Rules
+  # --------------------------------
+  - id: documentation_protocol.section.6_ask_before_acting
+    kind: spec_section
+    md: |
+      ## 6. Ask-Before-Acting Rules (Documentation Edition)
+
+      The following are explicit cases where GPTs MUST stop and ask Andrew before editing docs or proceeding.
+
+      ### 6.1 Canon, Roadmap, and Ontology
+
+      - Editing **PROJECT_CANON** in any way.
+      - Editing **LILLYCORE_ROADMAP**.
+      - Introducing new ontological categories (new meanings of “engine”, “plugin”, “DOC layer”, etc.).
+      - Reinterpreting Canon’s definitions for engines, plugins, pipelines, agents, DOC layers.
+
+      ### 6.2 Repository Taxonomy and Docs Layout
+
+      - Adding, renaming, or removing:
+        - Any top-level folder in the repo.
+        - Any major docs subtrees under `docs/` (e.g. new `docs/api/`-like trees).
+        - Any canonical file listed in GPT_RESOURCE_INDEX.
+      - Moving canonical docs out of `docs/build/` or changing where canonical docs live, beyond what TECH_SPEC §3 already states.
+
+      These require Architect cards and Andrew’s approval.
+
+      ### 6.3 New Canonical Docs or Categories
+
+      - Creating a new document and intending it to be **canonical** (e.g. an engine spec, plugin spec, or DOC schema spec) when it is not yet mentioned in documentation_governance.
+      - Introducing a new category of documentation not listed in documentation_governance (e.g. a new persistent doc layer type).
+
+      ### 6.4 Ambiguous Authority
+
+      - When two or more docs appear to contradict each other.
+      - When it is unclear which doc is the **source of truth**:
+        - e.g. a README inside an engine folder vs MODULES vs TECH_SPEC.
+      - When a “scratch” or “exploratory” doc appears to have drifted into de-facto spec status.
+
+      In these cases, GPTs MUST ask Andrew which doc should win and then bring the rest in line via cards.
+
+      ### 6.5 QA Edge Cases
+
+      - When QA would be forced to pass or fail a phase based on unclear or conflicting doc rules.
+      - When the QA System’s requirements appear to contradict TECH_SPEC or documentation_governance.
+
+      In all such cases, QA MUST escalate to Andrew and/or Architect and request corrective cards rather than making unilateral interpretation changes.
+---
+From various checklists in documentation govornance
+      - [ ] I did **not** touch PROJECT_CANON or LILLYCORE_ROADMAP unless Andrew explicitly said to.  
+      - [ ] If something felt ambiguous, I asked Andrew or requested a clarifying card.
+      - [ ] I did not introduce new doc categories without Andrew’s approval.
+---
+      If there is any doubt about how a block’s markdown should be structured
+      for future reuse, GPTs MUST ask Andrew which form will be easiest to
+      copy/paste and redraw later.
+---
+- id: doc_protocol.helpers.request_blocks_via_script
+  kind: helper
+  applies_to: [architect, implementer, qa]
+  tags: [script, paste_to_user]
+  md: |
+    ## Helper: request docs/blocks via local script
+
+    When the GPT needs specific block IDs from canonical docs, it SHOULD:
+    1) list the required block IDs
+    2) provide this command for Andrew to run
+    3) ask Andrew to paste the output
+
+    Example command (adjust path if needed):
+      python scripts/doc_blocks.py get \
+        --doc docs/build/tech_spec.yml \
+        --id tech.python.baseline \
+        --id tech.repo.root_rules
+---
+- id: doc_protocol.helpers.block_fetch
+  kind: helper
+  applies_to: [architect, implementer, qa]
+  tags: [script, blocks]
+  md: |
+    ## Helper: Fetch specific doc blocks via local command
+
+    When a GPT needs specific block IDs from canonical docs, it SHOULD:
+    1) list the required block IDs (doc + block id)
+    2) provide the command pattern below
+    3) ask Andrew to paste the output
+
+    Command pattern:
+      ${DOC_BLOCK_TOOL_CMD} get --doc <path> --id <block_id> [--id <block_id>...]
+
+    NOTE:
+    - DOC_BLOCK_TOOL_CMD is defined in TECH_SPEC.
+    - GPTs MUST NOT invent script paths. They must use the TECH_SPEC-defined command.
+---
