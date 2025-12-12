@@ -492,3 +492,30 @@ blocks:
       - Reconstruct Canon from memory
       - Continue work if a required block is unavailable
 
+
+- id: build_conflicts.ledger
+  kind: ledger
+  applies_to: [architect, implementer, qa]
+  tags: [conflicts, unresolved]
+  md: |
+    ## Conflict Ledger (Unresolved)
+
+    Rules in conflict MUST be listed here instead of “patched” ad-hoc.
+
+    Format:
+    - ID: CL-XXX
+      Topic:
+      Conflict:
+      Current temporary rule (until resolved):
+      Owner: Andrew
+      Status: open | resolved
+
+- id: build_conflicts.rule.stop_and_ask
+  kind: rule
+  applies_to: [architect, implementer, qa]
+  tags: [conflicts]
+  md: |
+    If a required decision/rule is conflicting or unclear:
+    - The GPT MUST add an entry to Conflict Ledger (or ask Andrew to)
+    - The GPT MUST NOT invent a resolution
+    - The GPT MUST propose 1–2 options and ask Andrew to pick
