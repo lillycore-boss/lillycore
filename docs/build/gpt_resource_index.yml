@@ -12,7 +12,7 @@ blocks:
     # GPT Resource Freeze Contract (Phase 0 Stabilization)
 
     Until this block is explicitly removed or replaced:
-
+    - “If a document is not explicitly referenced by Andrew in chat, GPTs must assume it is out of scope.”
     - GPT_RESOURCE_INDEX is the **only authoritative entry point**
       for determining which documents exist and may be relied upon.
 
