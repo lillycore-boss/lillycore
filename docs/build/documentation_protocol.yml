@@ -141,7 +141,6 @@ blocks:
 
       ### 3.3 Implementer GPT
 
-      - Executes **one leaf-level card** at a time (PROJECT_CANON §9).
       - Is **always responsible** for documentation updates that follow from that card’s changes.
 
       Implementer MUST:
@@ -161,8 +160,6 @@ blocks:
 
       Implementer MUST NOT:
 
-      - Modify PROJECT_CANON or LILLYCORE_ROADMAP unless the card explicitly says so and Andrew has confirmed that intent in this conversation.
-      - Perform structural/taxonomy changes forbidden by TECH_SPEC §3.
       - Treat unindexed spec files as canonical.
 
       When unsure whether a doc should be updated, Implementer MUST:
@@ -187,7 +184,6 @@ blocks:
       QA MUST NOT:
 
       - Edit docs directly.
-      - Redesign architecture or rewrite cards (except via corrective-task creation).
 
   # --------------------------------
   # Section 4 – Update Triggers
@@ -223,8 +219,6 @@ blocks:
 
       4. **System-Level Conceptual Docs**
          - Update documentation_governance or other high-level conceptual docs **only** when the card explicitly includes that as a deliverable.
-
-      If in doubt about whether a behavioural change affects TECH_SPEC or MODULES, Implementer MUST ask Andrew.
 
       ### 4.2 Architecture or Planning Change (Architect)
 
@@ -322,64 +316,11 @@ blocks:
            - Any new or changed responsibilities still respect MODULES and TECH_SPEC boundaries.
            - You are not accidentally introducing a new canonical doc type without going through GPT_RESOURCE_INDEX.
 
-      5. **Ask if uncertain**
-         - If you are unsure whether a doc should be edited, or which one:
-           - Stop and ask Andrew, or
-           - Ask for an Architect clarification card.
-
       6. **Report in output**
          - In the Implementer response, clearly list:
            - Which docs you changed (with snippets).
            - Which docs you considered but did not change (with a brief justification).
            - If no docs changed, why that is safe.
-
-  # --------------------------------
-  # Section 6 – Ask-Before-Acting Rules
-  # --------------------------------
-  - id: documentation_protocol.section.6_ask_before_acting
-    kind: spec_section
-    md: |
-      ## 6. Ask-Before-Acting Rules (Documentation Edition)
-
-      The following are explicit cases where GPTs MUST stop and ask Andrew before editing docs or proceeding.
-
-      ### 6.1 Canon, Roadmap, and Ontology
-
-      - Editing **PROJECT_CANON** in any way.
-      - Editing **LILLYCORE_ROADMAP**.
-      - Introducing new ontological categories (new meanings of “engine”, “plugin”, “DOC layer”, etc.).
-      - Reinterpreting Canon’s definitions for engines, plugins, pipelines, agents, DOC layers.
-
-      ### 6.2 Repository Taxonomy and Docs Layout
-
-      - Adding, renaming, or removing:
-        - Any top-level folder in the repo.
-        - Any major docs subtrees under `docs/` (e.g. new `docs/api/`-like trees).
-        - Any canonical file listed in GPT_RESOURCE_INDEX.
-      - Moving canonical docs out of `docs/build/` or changing where canonical docs live, beyond what TECH_SPEC §3 already states.
-
-      These require Architect cards and Andrew’s approval.
-
-      ### 6.3 New Canonical Docs or Categories
-
-      - Creating a new document and intending it to be **canonical** (e.g. an engine spec, plugin spec, or DOC schema spec) when it is not yet mentioned in documentation_governance.
-      - Introducing a new category of documentation not listed in documentation_governance (e.g. a new persistent doc layer type).
-
-      ### 6.4 Ambiguous Authority
-
-      - When two or more docs appear to contradict each other.
-      - When it is unclear which doc is the **source of truth**:
-        - e.g. a README inside an engine folder vs MODULES vs TECH_SPEC.
-      - When a “scratch” or “exploratory” doc appears to have drifted into de-facto spec status.
-
-      In these cases, GPTs MUST ask Andrew which doc should win and then bring the rest in line via cards.
-
-      ### 6.5 QA Edge Cases
-
-      - When QA would be forced to pass or fail a phase based on unclear or conflicting doc rules.
-      - When the QA System’s requirements appear to contradict TECH_SPEC or documentation_governance.
-
-      In all such cases, QA MUST escalate to Andrew and/or Architect and request corrective cards rather than making unilateral interpretation changes.
 
   # --------------------------------
   # Section 7 – QA Expectations
@@ -440,9 +381,7 @@ blocks:
       - [ ] I checked whether **TECH_SPEC** needs updates (tools, layout, technical rules).  
       - [ ] I checked whether **MODULES** needs updates (status, responsibilities, dependencies).  
       - [ ] If I created or promoted a doc to canonical, I ensured a plan exists to update **GPT_RESOURCE_INDEX**.  
-      - [ ] I did **not** touch PROJECT_CANON or LILLYCORE_ROADMAP unless Andrew explicitly said to.  
       - [ ] All doc edits are provided as **ready-to-paste blocks**.  
-      - [ ] If something felt ambiguous, I asked Andrew or requested a clarifying card.
 
       ### 8.2 Architect “When Designing Cards”
 
@@ -453,7 +392,6 @@ blocks:
       - [ ] If new canonical docs are needed, I included tasks to:
         - Create them under allowed locations, and  
         - Add them to GPT_RESOURCE_INDEX.  
-      - [ ] I did not introduce new doc categories without Andrew’s approval.
 
       ### 8.3 QA “Doc-Focused Sanity Pass”
 
@@ -574,28 +512,6 @@ blocks:
         - Ask for surgical line edits in those files.
         - Depend on fragile alignment or spacing tricks.
 
-      If there is any doubt about how a block’s markdown should be structured
-      for future reuse, GPTs MUST ask Andrew which form will be easiest to
-      copy/paste and redraw later.
-
-- id: doc_protocol.helpers.request_blocks_via_script
-  kind: helper
-  applies_to: [architect, implementer, qa]
-  tags: [script, paste_to_user]
-  md: |
-    ## Helper: request docs/blocks via local script
-
-    When the GPT needs specific block IDs from canonical docs, it SHOULD:
-    1) list the required block IDs
-    2) provide this command for Andrew to run
-    3) ask Andrew to paste the output
-
-    Example command (adjust path if needed):
-      python scripts/doc_blocks.py get \
-        --doc docs/build/tech_spec.yml \
-        --id tech.python.baseline \
-        --id tech.repo.root_rules
-
 - id: doc_protocol.conflicts.ledger
   kind: ledger
   applies_to: [architect, implementer, qa]
@@ -614,22 +530,3 @@ blocks:
       Owner: Andrew
       Status: open | resolved
       Notes:
-
-- id: doc_protocol.helpers.block_fetch
-  kind: helper
-  applies_to: [architect, implementer, qa]
-  tags: [script, blocks]
-  md: |
-    ## Helper: Fetch specific doc blocks via local command
-
-    When a GPT needs specific block IDs from canonical docs, it SHOULD:
-    1) list the required block IDs (doc + block id)
-    2) provide the command pattern below
-    3) ask Andrew to paste the output
-
-    Command pattern:
-      ${DOC_BLOCK_TOOL_CMD} get --doc <path> --id <block_id> [--id <block_id>...]
-
-    NOTE:
-    - DOC_BLOCK_TOOL_CMD is defined in TECH_SPEC.
-    - GPTs MUST NOT invent script paths. They must use the TECH_SPEC-defined command.
