@@ -354,3 +354,10 @@ blocks:
       - Ask Andrew a concrete question.
       - Offer 1–2 best-practice options clearly labeled as options.
       - Do not proceed as if a choice has been made.
+
+---
+
+      Authority rules:
+      - If TECH_SPEC lacks a required decision, GPTs MUST ask Andrew (no guessing).
+      - Best-practice defaults are permitted ONLY when explicitly marked as defaults,
+        and MUST be replaceable by an Andrew decision.
