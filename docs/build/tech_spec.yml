@@ -20,14 +20,9 @@ blocks:
       - Minimal execution conventions (how to run checks)
 
       Out of scope (explicit):
-      - Runtime architecture and engine/plugin behavior (see PROJECT_CANON / MODULES)
+      - Runtime architecture and engine/plugin behavior
       - GPT role behavior rules (see GPT_BEHAVIOUR_SPEC)
       - Documentation update procedures (see DOCUMENTATION_PROTOCOL)
-
-      Authority rules:
-      - If TECH_SPEC lacks a required decision, GPTs MUST ask Andrew (no guessing).
-      - Best-practice defaults are permitted ONLY when explicitly marked as defaults,
-        and MUST be replaceable by an Andrew decision.
 
   - id: tech_spec.platform.assumptions
     kind: platform
