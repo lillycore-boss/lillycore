@@ -50,7 +50,6 @@ blocks:
 
       Notes:
       - All code, scripts, and tooling choices MUST be compatible with the minimum version.
-      - If a tool requires a higher version, GPT MUST flag it and ask Andrew before adopting.
 
   - id: tech_spec.best_practice.policy
     kind: policy
@@ -66,10 +65,6 @@ blocks:
       - Best practice MUST be treated as a default, not a law.
       - If best practice conflicts with a LillyCORE requirement, the requirement wins,
         but the exception MUST be documented here.
-
-      GPT behavior:
-      - GPTs MAY suggest best-practice defaults, but MUST label them as defaults and
-        MUST ask Andrew to confirm when they affect repository-wide standards.
 
   - id: tech_spec.repo.root_definition
     kind: repo
@@ -105,10 +100,6 @@ blocks:
       - CI gate:
           A rule that says: "Changes are not considered valid unless required checks pass."
 
-      Policy:
-      - GPTs MUST NOT invent tooling choices if they are not explicitly set below.
-      - If tooling is already set in this document, GPTs MUST follow it exactly.
-
   - id: tech_spec.tooling.choices
     kind: decisions
     applies_to: [architect, implementer, qa, tooling]
@@ -124,31 +115,6 @@ blocks:
       - Formatter: TBD (best-practice default recommendation: Black)
       - Linter: TBD (best-practice default recommendation: Ruff)
       - Test framework: TBD (best-practice default recommendation: Pytest)
-
-      Rule:
-      - GPTs MUST ask Andrew to confirm/choose before replacing TBD with a tool name.
-
-  - id: tech_spec.execution.local_checks
-    kind: workflow
-    applies_to: [architect, implementer, qa, tooling]
-    tags: [commands, checks]
-    md: |
-      ## Local Check Commands (Authoritative Once Filled)
-
-      Purpose:
-      - Provide copy-paste commands Andrew can run on Linux to validate work.
-
-      Status:
-      - These commands remain placeholders until tooling is selected.
-
-      Placeholders (DO NOT TREAT AS REAL UNTIL UPDATED):
-      - Format: TBD
-      - Lint: TBD
-      - Test: TBD
-
-      Rule:
-      - GPTs MUST NOT output real commands for Format/Lint/Test until the relevant tools
-        are selected in tech_spec.tooling.choices.
 
   - id: tech_spec.change_log
     kind: meta
