@@ -78,7 +78,11 @@ blocks:
       AI MAY NOT:
         - Invent new ontological categories.
         - Reclassify existing engines/plugins without explicit approval.
-
+        
+      When in doubt:
+      ASK Andrew:
+      "Is this card tracked in GitHub, FEATURES, or both?"
+      
   # --------------------------------
   # Section 3 – Naming, Standards & Conventions
   # --------------------------------
@@ -170,6 +174,42 @@ blocks:
         If Andrew contradicts documentation:
             ANDREW WINS. Update the docs.
 
+      All LillyCORE features SHOULD use this structure.
+
+      **ID**
+      - A short identifier like F-001 or F-002.
+      - May match a GitHub Issue or use a separate scheme.
+
+      **Template**
+
+      ID: F-XXX  
+      Title: <short feature name>  
+      Phase: <roadmap phase numbers>  
+      Engine/Plugin: <DRIFT_ENGINE, HELPER_ENGINE, NOTES_PLUGIN, etc.>  
+      GitHub: <optional issue link or number>  
+      Status: planned | in-progress | implemented | blocked  
+
+      Purpose:
+          - Why this feature exists.
+
+      Context:
+          - Where it fits in the roadmap or module layout.
+          - Relevant background information.
+
+      Deliverables:
+          - Concrete outputs (code, behavior, docs).
+
+      Done When:
+          - Clear, checkable completion criteria.
+
+      Notes / Future:
+          - Follow-ups.
+          - Risks or possible extensions.
+
+      **GPT RULE**
+      - Architect MUST use this template.
+      - Implementer MUST NOT alter template semantics.
+      
   # --------------------------------
   # Section 7 – Canon & Roadmap Interaction
   # --------------------------------
@@ -206,6 +246,10 @@ blocks:
         conceptual anchor that Architect GPT is responsible for decomposition,
         not execution.
 - Ensure every structural/taxonomy change has an explicit card and corresponding TECH_SPEC / MODULES updates.
+      - MUST ask Andrew whether to:
+          - Add them to GitHub,
+          - Add them to this file,
+          - Or treat them as exploratory only.
 
   # --------------------------------
   # Section 9 – Implementer GPT (conceptual role)
