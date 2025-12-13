@@ -1,242 +1,129 @@
-# docs/build/features.yml
+- id: formatting_and_replacement_standards.overview
+  kind: overview
+  md: |
+    ## 9. Formatting & Replacement Standards
 
-version: "1.0"
+    This section defines how GPTs format **documentation updates** now that
+    canonical structure lives in `docs/*.yml` files.
 
-blocks:
-  # --------------------------------
-  # Overview
-  # --------------------------------
-  - id: features.overview
-    kind: overview
-    name: FEATURES
-    applies_to: [architect, implementer, qa]
-    tags: [features, cards, template, canonical]
-    md: |
-      # FEATURES
+    - The **registry YAML** (IDs, kinds) is the structural authority.
+    - The `md` fields inside blocks hold **human-readable markdown only**.
+    - We do **not** repeat “FILE: … / ROLE: … / VERSION: …” headers in markdown
+      where the same information is already present as YAML metadata.
 
-      **ROLE:** Feature card structure + optional mirror of key work items  
-      **NOTE:** GitHub Issues / Project Board is the primary tracker.
+    These rules apply whenever GPTs are:
+    - Proposing changes to registry docs (`docs/registry/*.yml`), or
+    - Emitting markdown that will live in `md:` fields inside those registry blocks.
 
-      Procedural and workflow rules for feature card creation, QA processing,
-      correction tasks, and phase bundles live in DOCUMENTATION_PROTOCOL.
-      See:
-      - `docs/build/documentation_protocol.yml`
-      - `docs/build/documentation_governance.yml`
+- id: formatting_and_replacement_standards.section_9_0_canonical_file_block_format
+  kind: section
+  md: |
+    ### 9.0  Canonical File Block Format
 
-      This file defines:
-      - The standard shape of a LillyCORE feature card.
-      - How GPTs should think about feature cards.
-      - (Optionally) a curated set of mirrored features from GitHub.
+    - id: <required>
+      kind: <required>
+      md: |
+        <required markdown>
 
-      The GitHub Project Board remains the authoritative source of truth
-      for actual work items.
+    Required blocks per canonical file
+    - One overview block (kind: overview)
+    - One allowed_kinds block (kind: meta)
 
-      This file does NOT need to contain every feature. It can contain:
-      - Just the template, OR
-      - Template + a curated subset of important cards.
+- id: formatting_and_replacement_standards.section_9_1_yaml_vs_markdown_responsibilities
+  kind: section
+  md: |
+    ### 9.1 YAML vs Markdown Responsibilities
 
-  # --------------------------------
-  # Source of Truth
-  # --------------------------------
-  - id: features.source_of_truth
-    kind: rules
-    applies_to: [architect, implementer, qa]
-    tags: [source_of_truth, github]
-    md: |
-      ## Source of Truth
+    YAML defines:
+    - Block IDs (`id`)
+    - Block kinds (`kind`)
 
-      Canonical feature list:
-      - GitHub Project Board and GitHub Issues.
+    Markdown (`md:`) defines:
+    - The text humans read (explanations, lists, examples, checklists).
+    - Local headings inside that block only.
 
-      For GPTs:
-      - Architect:
-          - Designs feature cards and may propose their contents.
-          - MUST NOT assume GitHub state; Andrew decides what actually exists.
-      - Implementer:
-          - Only works from card bodies explicitly pasted into chat.
+    GPTs MUST NOT:
+    - Recreate file-level banners like `FILE: TECH_SPEC`, `ROLE: …`, `VERSION: …`
+      inside `md` if that information is already present in YAML metadata.
+    - Invent new file-level markers that conflict with the registry format.
 
-      When a GPT needs a feature card, it MUST ask Andrew to:
-      - Paste the GitHub issue text, OR
-      - Paste the FEATURES entry if mirrored here.
+    GPTs MAY:
+    - Include small inline reminders or labels inside `md` when it helps readability
+      (e.g. “This block describes Section 4 – Update Triggers”),
+      as long as that does not conflict with the registry metadata.
 
-      Example GPT request:
-      "Please paste the GitHub card body or FEATURES entry for F-XXX."
+- id: formatting_and_replacement_standards.section_9_2_markdown_style_inside_md_fields
+  kind: section
+  md: |
+    ### 9.2 Markdown Style Inside `md` Fields
 
-  # --------------------------------
-  # Feature Card Template
-  # --------------------------------
-  - id: features.card_template
-    kind: template
-    applies_to: [architect, implementer, qa]
-    tags: [template, card_format]
-    md: |
-      ## Feature Card Template
+    When writing markdown inside a block’s `md:`:
 
-      All LillyCORE features SHOULD use this structure.
+    - **Headings**
+      - Use normal markdown headings (`#`, `##`, `###`) for structure.
+      - Keep heading levels shallow and consistent within a block.
+      - Do **not** try to recreate a “top of file” heading; the block itself is
+        the unit of meaning.
 
-      **ID**
-      - A short identifier like F-001 or F-002.
-      - May match a GitHub Issue or use a separate scheme.
+    - **Lists**
+      - Use standard `-` bullet lists or numbered lists.
+      - Keep items short and atomic where possible.
 
-      **Template**
+    - **Code & Examples**
+      - Use fenced code blocks for examples and paste-ready content, e.g.:
 
-      ID: F-XXX  
-      Title: <short feature name>  
-      Phase: <roadmap phase numbers>  
-      Engine/Plugin: <DRIFT_ENGINE, HELPER_ENGINE, NOTES_PLUGIN, etc.>  
-      GitHub: <optional issue link or number>  
-      Status: planned | in-progress | implemented | blocked  
+        ```markdown
+        ```markdown
+        ## 4. Update Triggers
+        ...
+        ```
+        ```
 
-      Purpose:
-          - Why this feature exists.
+      - Choose a language hint (`markdown`, `yaml`, `python`, `text`) when useful.
 
-      Context:
-          - Where it fits in the roadmap or module layout.
-          - Relevant background information.
+    - **ASCII SECTION Patterns**
+      - Do not use the older `SECTION: ...` ASCII bars.
 
-      Deliverables:
-          - Concrete outputs (code, behavior, docs).
+- id: formatting_and_replacement_standards.section_9_3_block_level_replacement
+  kind: section
+  md: |
+    ### 9.3 Block-Level Replacement (Not Line-Level Surgery)
 
-      Done When:
-          - Clear, checkable completion criteria.
+    For documentation changes, the **atomic unit of change** is a single registry block:
 
-      Notes / Future:
-          - Follow-ups.
-          - Risks or possible extensions.
+    - One `blocks[…]` entry with its `id`, `kind`, and `md`.
 
-      **GPT RULE**
-      - Architect MUST use this template.
-      - Implementer MUST NOT alter template semantics.
+    GPTs MUST:
+    - Replace the entire `md` field for that block when updating it.
+    - Avoid “change just these two lines” style instructions.
 
-  # --------------------------------
-  # GPT Interaction Rules
-  # --------------------------------
-  - id: features.gpt_interaction_rules
-    kind: rules
-    applies_to: [architect, implementer, qa]
-    tags: [gpt_rules, workflow]
-    md: |
-      ## GPT Interaction Rules
+    In chat, GPTs SHOULD:
 
-      **Architect**
-      - May propose new features.
-      - MUST label them with an ID and Phase.
-      - MUST ask Andrew whether to:
-          - Add them to GitHub,
-          - Add them to this file,
-          - Or treat them as exploratory only.
+    - Present updates as fenced blocks that show the **full new content**:
+      - Either the full YAML block, or
+      - The full markdown body that should become the new `md:` content.
+    - Clearly label what is being replaced, for example:
+      - “Replace `documentation_protocol.section.4_update_triggers` md with: …”
 
-      **Implementer**
-      - MUST request the full card text before implementing.
-      - MUST NOT infer missing fields or invent “Done When” criteria.
+- id: formatting_and_replacement_standards.section_9_4_markdown_chunks_used_in_md_files
+  kind: section
+  md: |
+    ### 9.4 Markdown Chunks Used in `.md` Files
 
-      **QA**
-      - Validates work after implementation.
-      - MUST NOT modify feature cards.
-      - Creates corrective tasks if needed, following DOCUMENTATION_PROTOCOL.
+    When markdown from a registry block is meant to be pasted back into a
+    `.md` file (e.g. `docs/build/documentation_protocol.md`):
 
-      When in doubt:
-      ASK Andrew:
-      "Is this card tracked in GitHub, FEATURES, or both?"
+    - The chunk MUST:
+      - Start at a logical heading boundary (e.g. `## 4. Update Triggers`).
+      - Include the full section down to (but not including) the next heading
+        of the same level, or the end of the parent section.
+    - GPTs MUST NOT:
+      - Ask for surgical line edits in those files.
+      - Depend on fragile alignment or spacing tricks.
 
-  # --------------------------------
-  # Example Feature Card Placeholder
-  # --------------------------------
-  - id: features.example_card_placeholder
-    kind: example
-    applies_to: [architect, implementer, qa]
-    tags: [example, placeholder]
-    md: |
-      ## Example Feature Card (Placeholder)
-
-      This is an example only. It does NOT represent real work unless Andrew adopts it.
-
-      ID: F-000  
-      Title: Example Feature Card Template  
-      Phase: 0  
-      Engine/Plugin: (none)  
-      Status: planned  
-
-      Purpose:
-          - Demonstrate the feature card structure.
-
-      Context:
-          - Reference used by GPTs and Andrew when authoring real cards.
-
-      Deliverables:
-          - Template stored in FEATURES.
-          - Shared understanding of card fields.
-
-      Done When:
-          - Architect + Implementer consistently follow this structure.
-
-      Notes / Future:
-          - Replace with real examples as system matures.
-
-  # --------------------------------
-  # Optional Mirrored Features
-  # --------------------------------
-  - id: features.mirrored_features
-    kind: registry
-    applies_to: [architect, implementer, qa]
-    tags: [mirror, github]
-    md: |
-      ## Optional Mirrored Features
-
-      Andrew may mirror selected GitHub features here for convenience.
-
-      Mirrored cards MUST be direct normalizations of the GitHub source.
-
-      Example mirrored card:
-
-      ID: P0.2.6  
-      Title: Decide Tooling Config Placement (pyproject, Editorconfig, Pre-Commit)  
-      Phase: 0  
-      Engine/Plugin: (none)  
-      Status: implemented  
-
-      Purpose:
-          - Freeze location of baseline tooling configs so GPTs do not guess.
-
-      Deliverables:
-          - Decision on config placement.
-          - TECH_SPEC updates describing:
-              - "repository root" definition,
-              - root-level config files.
-
-      Done When:
-          - Andrew confirms Option A (configs live at repository root).
-          - TECH_SPEC reflects this decision.
-
-      Notes / Future:
-          - Any future exceptions MUST be documented in TECH_SPEC.
-
-  # --------------------------------
-  # Phase Bundles Index
-  # --------------------------------
-  - id: features.phase_bundles_index
-    kind: index
-    applies_to: [architect, implementer, qa]
-    tags: [phase_bundles, index]
-    md: |
-      ## Phase Bundles Index
-
-      This index lists phase card bundles generated by Architect.
-
-      Procedural rules for phase bundles, retry counters, QA flows, and escalation
-      live in DOCUMENTATION_PROTOCOL.
-
-      Architect MUST update this index when a new phase bundle is created.
-
-      Example Format:
-
-      - Phase 01 — Attempt 0  
-          Bundle: <reference or filename>  
-          Notes: Initial design  
-
-      - Phase 01 — Attempt 1  
-          Bundle: <reference or filename>  
-          Notes: Redesign after QA  
-
-      - Phase 02 — Attempt 0  
-          Bundle: <reference or filename>
+- id: formatting_and_replacement_standards.allowed_kinds
+  kind: meta
+  md: |
+    Required blocks per canonical file
+    - One overview block (kind: overview)
+    - One allowed_kinds block (kind: meta)
