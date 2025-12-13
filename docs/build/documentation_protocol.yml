@@ -413,9 +413,9 @@ blocks:
       ## 9. Formatting & Replacement Standards
 
       This section defines how GPTs format **documentation updates** now that
-      canonical structure lives in `docs/registry/*.yml` files.
+      canonical structure lives in `docs/*.yml` files.
 
-      - The **registry YAML** (IDs, kinds, paths, versions) is the structural authority.
+      - The **registry YAML** (IDs, kinds) is the structural authority.
       - The `md` fields inside blocks hold **human-readable markdown only**.
       - We do **not** repeat “FILE: … / ROLE: … / VERSION: …” headers in markdown
         where the same information is already present as YAML metadata.
@@ -424,14 +424,22 @@ blocks:
       - Proposing changes to registry docs (`docs/registry/*.yml`), or
       - Emitting markdown that will live in `md:` fields inside those registry blocks.
 
+      ### 9.0  Canonical File Block Format
 
+     - id: <required>
+      kind: <required>
+      md: |
+        <required markdown>
+
+      Required blocks per canonical file
+      - One overview block (kind: overview)
+      - One allowed_kinds block (kind: meta)
+      
       ### 9.1 YAML vs Markdown Responsibilities
 
       YAML defines:
       - Block IDs (`id`)
       - Block kinds (`kind`)
-      - File names and paths
-      - Version or other meta fields (name, tags, applies_to, etc.)
 
       Markdown (`md:`) defines:
       - The text humans read (explanations, lists, examples, checklists).
@@ -475,9 +483,7 @@ blocks:
         - Choose a language hint (`markdown`, `yaml`, `python`, `text`) when useful.
 
       - **ASCII SECTION Patterns**
-        - The older `SECTION: ...` ASCII bars are optional.
-        - If used, they live entirely inside `md` and have **no special meaning**
-          to the registry; they’re just formatting for humans.
+        - Do not use the older `SECTION: ...` ASCII bars.
 
 
       ### 9.3 Block-Level Replacement (Not Line-Level Surgery)
