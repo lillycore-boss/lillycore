@@ -499,7 +499,4 @@
         - Enterprise demo orchestration
         - Any future engines/plugins not yet described.
 
-      NOTE:
-        Procedural rules for introducing new engines and plugins, including
-        when they become canonical and how they are indexed, are defined in
-        DOCUMENTATION_GOVERNANCE and DOCUMENTATION_PROTOCOL.
+
