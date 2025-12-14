@@ -78,20 +78,6 @@
     ```text
     docs/build/registry/
       p0.yml
-      p1.yml
-      p2.yml
-      p3.yml
-      p4.yml
-      p5.yml
-      p6.yml
-      p7.yml
-      p8.yml
-      p8_hd.yml
-      p8_dr.yml
-      p8_sc.yml
-      p9.yml
-      p10.yml
-      p11.yml
       ...
       phase_registry_index.yml
       registry_sync_from_github.py
@@ -228,3 +214,5 @@
     Constraints:
     - Registry entries must remain minimal and non-authoritative.
     - If registry and GitHub disagree, GitHub wins unless Andrew explicitly overrides.
+    - Registry phase files SHOULD NOT be pre-created as empty shells.
+      They are created/updated by sync when the first card for that phase appears in GitHub.
