@@ -76,9 +76,8 @@
     md: |
       NOTE:
         Detailed rules for documentation maintenance, update responsibilities,
-        and governance now live in DOCUMENTATION_PROTOCOL and
-        DOCUMENTATION_GOVERNANCE. PROJECT_CANON no longer defines per-role
-        documentation procedures.
+        and governance now live in DOCUMENTATION_PROTOCOL.
+        PROJECT_CANON no longer defines per-role documentation procedures.
 
   - id: project_canon.planning_and_decomposition
     kind: planning_rules
