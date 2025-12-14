@@ -53,12 +53,12 @@
       ask Andrew what to do.
 
       BUILD_CANON: "docs/build/build_canon.yml"
-      LILLYCORE_ROADMAP: "docs/build/lillycore_roadmap.yml"
       TECH_SPEC: "docs/build/tech_spec.yml"
       GPT_RESOURCE_INDEX: "docs/build/gpt_resource_index.yml"
       DOCUMENTATION_PROTOCOL: "docs/build/documentation_protocol.yml"
       QA_REFERENCE: "docs/build/optional/qa_reference.yml"
       REGISTRY_SYSTEM: "docs/build/optional/registry_system.yml"
+      LILLYCORE_ROADMAP: "docs/build/optional/lillycore_roadmap.yml"
       
   - id: gpt_resources.document.project_canon
     kind: document
