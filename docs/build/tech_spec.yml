@@ -193,3 +193,30 @@
     - System ontology and authority (see BUILD_CANON)
     - Documentation governance (see DOCUMENTATION_PROTOCOL)
     - Phase intent and sequencing (see ROADMAP)
+
+- id: tech_spec.proof_outputs_convention
+  kind: rules
+  md: |
+    ## Proof Output Convention (Execution Evidence)
+
+    Any card/phase that requires execution proof MUST store raw proof artefacts under:
+
+    - `builds/outputs/<phase_id>/`
+
+    Where `<phase_id>` is the phase or slice identifier (e.g. `p1`, `p1_runtime`, etc.).
+
+    ### Rules
+    - Proof artefacts MUST be raw outputs (stdout/stderr captures, logs, test output, JSON dumps, etc.).
+    - Proof artefacts are evidence only and are non-authoritative.
+    - GPTs MUST NOT “pretty format” proof unless the deliverable explicitly requires a formatted output.
+
+    ### Minimal Manifest (Recommended)
+    Each proof folder SHOULD include a minimal manifest file (inventory only), e.g.:
+    - `builds/outputs/<phase_id>/manifest.txt`
+
+    The manifest SHOULD list:
+    - command(s) executed
+    - filenames generated
+    - timestamp (optional)
+
+    QA may use the manifest to locate evidence quickly.
