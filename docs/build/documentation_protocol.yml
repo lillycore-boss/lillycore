@@ -1,25 +1,11 @@
-# docs/registry/documentation_protocol.yml
-
-version: "1.0"
-
-blocks:
-  # --------------------------------
-  # Overview
-  # --------------------------------
   - id: documentation_protocol.overview
     kind: overview
-    name: DOCUMENTATION_PROTOCOL
-    applies_to: [architect, implementer, qa]
-    tags: [docs, protocol, build_system]
     md: |
       # LillyCORE Build Documentation Protocol
 
       This protocol defines **how build/system documentation is kept in sync with actual behaviour** in LillyCORE
       and how documentation is treated during planning, implementation, and QA.
 
-  # --------------------------------
-  # Per-file kind list
-  # --------------------------------
   - id: documentation_protocol.meta.kinds
     kind: meta
     kinds:
@@ -38,9 +24,6 @@ blocks:
       - Scripts and GPTs MUST NOT introduce new `kind` values here
         without updating this block.
 
-  # --------------------------------
-  # Section 1 – Purpose & Scope
-  # --------------------------------
   - id: documentation_protocol.section.1_purpose_scope
     kind: spec_section
     md: |
@@ -67,9 +50,6 @@ blocks:
 
       Those documents remain authoritative for ontology, technical standards, roadmap, and taxonomy. This protocol **does not redefine** any of them; it only describes **how to behave** when updating documentation.
 
-  # --------------------------------
-  # Section 2 – Relationship to Other Docs
-  # --------------------------------
   - id: documentation_protocol.section.2_relationship
     kind: spec_section
     md: |
@@ -95,9 +75,6 @@ blocks:
       2. Then PROJECT_CANON, LILLYCORE_ROADMAP, TECH_SPEC, MODULES, FEATURES, and GPT_RESOURCE_INDEX are updated as needed via feature cards.  
       3. This protocol is adjusted afterward to match.
 
-  # --------------------------------
-  # Section 3 – Roles & Documentation Responsibilities
-  # --------------------------------
   - id: documentation_protocol.section.3_roles_responsibilities
     kind: spec_section
     md: |
@@ -185,9 +162,6 @@ blocks:
 
       - Edit docs directly.
 
-  # --------------------------------
-  # Section 4 – Update Triggers
-  # --------------------------------
   - id: documentation_protocol.section.4_update_triggers
     kind: spec_section
     md: |
@@ -279,9 +253,6 @@ blocks:
 
       If QA determines that docs are wrong because the **behaviour** is wrong, Architect may need to create redesign cards; documentation then follows the corrected design.
 
-  # --------------------------------
-  # Section 5 – Standard Implementer Flow
-  # --------------------------------
   - id: documentation_protocol.section.5_implementer_flow
     kind: spec_section
     md: |
@@ -322,9 +293,6 @@ blocks:
            - Which docs you considered but did not change (with a brief justification).
            - If no docs changed, why that is safe.
 
-  # --------------------------------
-  # Section 7 – QA Expectations
-  # --------------------------------
   - id: documentation_protocol.section.7_qa_expectations
     kind: spec_section
     md: |
@@ -365,9 +333,6 @@ blocks:
       - Return **FAIL**.
       - Generate corrective Implementer card(s) and a QA card per the QA System rules.
 
-  # --------------------------------
-  # Section 8 – Quick Checklists
-  # --------------------------------
   - id: documentation_protocol.section.8_checklists
     kind: spec_section
     md: |
@@ -404,9 +369,6 @@ blocks:
         - Promoted through a card and indexed in GPT_RESOURCE_INDEX.  
       - [ ] There is no visible contradiction between Canon, Roadmap, Tech Spec, Modules, Features, and the new work.  
 
-  # --------------------------------
-  # Section 9 – Formatting & Replacement Standards
-  # --------------------------------
   - id: documentation_protocol.section.9_formatting_replacement
     kind: spec_section
     md: |
