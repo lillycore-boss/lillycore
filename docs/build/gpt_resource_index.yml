@@ -43,7 +43,7 @@
       elsewhere but does not appear on this list, treat it as a retired document and
       ask Andrew what to do.
 
-      PROJECT_CANON: "docs/build/project_canon.yml"
+      BUILD_CANON: "docs/build/build_canon.yml"
       LILLYCORE_ROADMAP: "docs/build/lillycore_roadmap.yml"
       TECH_SPEC: "docs/build/tech_spec.yml"
       GPT_RESOURCE_INDEX: "docs/build/gpt_resource_index.yml"
