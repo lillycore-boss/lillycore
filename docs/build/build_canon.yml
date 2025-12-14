@@ -228,52 +228,130 @@
   md: |
     ## BUILD_CANON Block Index
 
-    BUILD_CANON defines LillyCORE’s authority model, core planning discipline,
-    and global behavioural constraints for GPT roles building LillyCORE.
+    BUILD_CANON defines LillyCORE’s highest-authority rules:
+    philosophy, authority, invariants, and planning discipline.
+
+    It governs **how work must be done**, not how systems are implemented.
 
     ### Blocks in this file
 
     - `build_canon.overview`
-      High-level purpose and conflict resolution priority.
-
-    - `build_canon.allowed_kinds`
-      List of permitted block kinds for this file.
+      High-level purpose and authority statement.
 
     - `build_canon.philosophy_and_authority`
-      Prime Directive, authority model, and “Andrew wins” rules.
+      Prime directive and Andrew’s authority.
 
     - `build_canon.global_ai_behaviour_rules`
-      Global GPT behavioural constraints (no assumptions, ask-before-acting, etc.).
+      Global AI behavior constraints (ask-before-acting, no assumptions).
 
     - `build_canon.naming_standards_and_conventions`
-      Naming conventions and references to TECH_SPEC as the technical authority.
+      Naming and casing rules for project-owned artefacts.
 
     - `build_canon.documentation_standards`
-      Pointer to DOCUMENTATION_PROTOCOL for documentation procedures and governance.
+      Pointer to DOCUMENTATION_PROTOCOL as the procedural authority.
 
     - `build_canon.planning_and_decomposition`
-      Planning discipline rules and decomposition constraints (rules only; template is separate).
+      Planning rules and decomposition discipline.
 
     - `build_canon.feature_card_template`
-      Canonical feature card template referenced by planning rules and used by Architect GPT.
+      Canonical template for feature and phase cards.
 
     - `build_canon.canon_and_roadmap_interaction`
-      Relationship between BUILD_CANON and the roadmap.
+      Relationship between Canon authority and roadmap sequencing.
 
     - `build_canon.architect_role`
-      Conceptual scope of the Architect role (decomposition, not execution).
+      Conceptual responsibility of the Architect role.
 
     - `build_canon.implementer_role`
-      Conceptual scope of the Implementer role (execution within constraints).
+      Conceptual responsibility of the Implementer role.
 
     - `build_canon.qa_role`
-      Conceptual scope of QA role (verification and corrective card generation).
+      Conceptual responsibility of the QA role.
+
+    - `build_canon.invariant_no_silent_deferral`
+      Invariant #1 — no silent deferrals or hidden stubs.
+
+    - `build_canon.invariant_no_stub_victory`
+      Invariant #2 — runtime claims require execution proof.
 
     - `build_canon.updates_to_canon`
-      Rules governing when and how BUILD_CANON may be changed.
+      Rules governing how and when Canon may change.
 
     ### Explicitly not defined here
 
-    - Technical environment/tooling/layout specifics (see TECH_SPEC)
-    - Documentation update procedures and enforcement mechanics (see DOCUMENTATION_PROTOCOL)
-    - Phase sequencing and subsystem rollout intentions (see ROADMAP)
+    - Repository layout (see TECH_SPEC)
+    - Documentation procedures (see DOCUMENTATION_PROTOCOL)
+    - Phase sequencing (see ROADMAP)
+
+
+- id: build_canon.invariant_no_silent_deferral
+  kind: rules
+  md: |
+    ## Invariant: No Silent Deferral (No Hidden Stubs)
+
+    LillyCORE work MUST NOT silently defer, stub, or “leave placeholders” for required behavior.
+
+    ### Definition
+    A deferral includes any of the following:
+    - Leaving a function/class/module as a stub while claiming the deliverable is complete
+    - Returning placeholder values (e.g. `pass`, `TODO`, `return None`) where real behavior is required
+    - Skipping integration/wiring work while claiming the system works
+    - “We’ll do it later” decisions that are not explicitly tracked
+
+    ### Rule
+    If a card’s requirement cannot be implemented *now* (for any reason), the GPT MUST:
+    1) STOP and tell Andrew exactly what is being deferred
+    2) State the concrete dependency (what must happen first)
+    3) Propose the tracking action:
+       - add a blocking card/slice, OR
+       - mark the current card as blocked
+
+    GPTs MUST NOT:
+    - Quietly ship a stub
+    - Quietly downgrade a deliverable
+    - Quietly reinterpret scope to make a deliverable “go away”
+
+    ### Tracking Requirement
+    Any approved deferral MUST be explicitly recorded as one of:
+    - a new card/slice with clear DONE WHEN criteria, OR
+    - an explicit “BLOCKED BY” note on an existing card that prevents forward phase progression
+
+    If it is not tracked, it is not allowed.
+
+- id: build_canon.invariant_no_stub_victory
+  kind: rules
+  md: |
+    ## Invariant: No Stub Victory (Proof Required for Runtime Claims)
+
+    Any phase/card that introduces or modifies runtime behavior MUST include proof that the behavior executes in the real environment.
+
+    “Runs” or “works” claims without proof are not acceptable.
+
+    ### What requires proof
+    Proof is required for any claim that:
+    - a runtime loop operates
+    - logging emits as specified
+    - preferences load/save/override
+    - error envelopes are produced/propagated
+    - scripts execute successfully
+    - CI checks pass
+    - any deliverable is “implemented” in a way that depends on execution
+
+    ### Minimum Proof Standard
+    For a deliverable to be marked complete, the Implementer MUST provide:
+    1) A runnable command (exact invocation)
+    2) Raw output artefacts from running it (not paraphrased)
+    3) At least one negative-path result when applicable (a controlled failure that proves error handling works)
+
+    “When applicable” means:
+    - If the deliverable includes error handling, validation, or envelope behavior,
+      a negative-path demonstration is mandatory.
+    - If it truly cannot have a negative-path, the Implementer MUST explain why.
+
+    ### QA Enforcement
+    QA MUST FAIL any card/phase that claims runtime behavior without:
+    - a runnable command, and
+    - raw output evidence.
+
+    If proof is missing, the work is incomplete regardless of how correct the code appears.
+
