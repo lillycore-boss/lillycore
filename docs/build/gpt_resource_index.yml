@@ -41,6 +41,7 @@
     qa_reference: "docs/build/optional/qa_reference.yml"
     registry_system: "docs/build/optional/registry_system.yml"
     roadmap: "docs/build/optional/roadmap.yml"
+    build_github_reference: "docs/build/optional/build_github_reference.yml"
 
 - id: gpt_resource_index.build_canon
   kind: reference
@@ -176,6 +177,10 @@
     - `gpt_resource_index.registry_system`
       Entry describing REGISTRY_SYSTEM (phase/slice registry schema and automation support).
 
+    - `gpt_resource_index.build_github_reference`
+      Entry describing BUILD_GITHUB_REFERENCE (main GitHub board layout + CLI templates).
+
+
     ### Explicitly not defined here
 
     - Procedural governance (see DOCUMENTATION_PROTOCOL)
@@ -218,3 +223,23 @@
     ### Access
 
     - When needed, Andrew can paste the relevant registry_system section into chat.
+
+- id: gpt_resource_index.build_github_reference
+  kind: reference
+  md: |
+    ## build_github_reference
+
+    ### Description
+
+    Build-time reference for managing LillyCORE’s main GitHub project board
+    (columns, custom fields, and command templates).
+
+    ### Usage
+
+    - Used by Architect, Implementer, and QA roles when creating, moving, updating,
+      or archiving main project cards.
+    - Used as a tooling/automation template library (GitHub CLI), not as governance.
+
+    ### Access
+
+    - When needed, Andrew can paste the relevant build_github_reference section into chat.
