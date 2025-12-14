@@ -84,19 +84,19 @@
       - CI gate:
           A rule that says: "Changes are not considered valid unless required checks pass."
 
-  - id: tech_spec.tooling.choices
-    kind: decisions
-    md: |
-      ## Tooling Choices (Authoritative)
+- id: tech_spec.tooling.choices
+  kind: decisions
+  md: |
+    ## Tooling Choices (Authoritative)
 
-      Status:
-      - This section is the authoritative list of tooling selections.
-      - If a choice is not listed here, it is not selected.
+    Status:
+    - This section is the authoritative list of tooling selections.
+    - If a choice is not listed here, it is not selected.
 
-      Current selections:
-      - Formatter: TBD (best-practice default recommendation: Black)
-      - Linter: TBD (best-practice default recommendation: Ruff)
-      - Test framework: TBD (best-practice default recommendation: Pytest)
+    Current selections:
+    - Formatter: Black
+    - Linter: Ruff
+    - Test framework: Pytest
 
   - id: tech_spec.change_log
     kind: meta
