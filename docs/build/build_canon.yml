@@ -154,7 +154,7 @@
       **GPT RULE**
       - Architect MUST use this template.
       - Implementer MUST NOT alter template semantics.
-      
+
   - id: build_canon.canon_and_roadmap_interaction
     kind: interaction
     md: |
