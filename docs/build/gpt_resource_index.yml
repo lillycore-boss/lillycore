@@ -60,7 +60,7 @@
       REGISTRY_SYSTEM: "docs/build/optional/registry_system.yml"
       LILLYCORE_ROADMAP: "docs/build/optional/lillycore_roadmap.yml"
       
-  - id: gpt_resources.document.build_canon
+  - id: gpt_resources.build_canon
     kind: document
     md: |
       ## BUILD_CANON
@@ -79,7 +79,7 @@
 
       - When needed, Andrew can paste the relevant Canon section into chat.
       
-  - id: gpt_resources.document.lillycore_roadmap
+  - id: gpt_resources.lillycore_roadmap
     kind: document
     md: |
       ## LILLYCORE_ROADMAP
@@ -98,7 +98,7 @@
 
       - When needed, Andrew can paste the relevant roadmap phases.
 
-  - id: gpt_resources.document.tech_spec
+  - id: gpt_resources.tech_spec
     kind: document
     md: |
       ## TECH_SPEC
@@ -122,7 +122,7 @@
       - When needed, Andrew can paste the relevant TECH_SPEC section
         (e.g. Python, DB, scripts).
 
-  - id: gpt_resources.document.documentation_protocol
+  - id: gpt_resources.documentation_protocol
     kind: document
     md: |
       ## DOCUMENTATION_PROTOCOL
@@ -148,7 +148,7 @@
       - When needed, Andrew can paste the DOCUMENTATION_PROTOCOL build
         doc.
 
-  - id: gpt_resources.document.other
+  - id: gpt_resources.placeholder
     kind: document_placeholder
     md: |
       ## Future Documents Placeholder
