@@ -6,7 +6,7 @@
     This protocol defines **how build/system documentation is kept in sync with actual behaviour** in LillyCORE
     and how documentation is treated during planning, implementation, and QA.
 
-- id: documentation_protocol.kinds
+- id: documentation_protocol.allowed_kinds
   kind: meta
   md: |
     Allowed `kind` values for this file:
@@ -24,9 +24,8 @@
     - Scripts and GPTs MUST NOT introduce new `kind` values here
       without updating this block.
 
-
 - id: documentation_protocol.purpose_scope
-  kind: spec_section
+  kind: reference
   md: |
     ## 1. Purpose & Scope
 
@@ -49,7 +48,7 @@
     This protocol **does not redefine** any of them; it only describes **how to behave** when updating documentation.
 
 - id: documentation_protocol.relationship
-  kind: spec_section
+  kind: reference
   md: |
     ## 2. Relationship to Other Docs
 
@@ -72,7 +71,7 @@
     3. This protocol is adjusted afterward to match.
 
 - id: documentation_protocol.responsibilities
-  kind: spec_section
+  kind: rules
   md: |
     ## 3. Roles & Documentation Responsibilities
 
@@ -158,7 +157,7 @@
     - Edit docs directly.
 
 - id: documentation_protocol.update_triggers
-  kind: spec_section
+  kind: rules
   md: |
     ## 4. Update Triggers
 
@@ -242,7 +241,7 @@
     If QA determines that docs are wrong because the **behaviour** is wrong, Architect may need to create redesign cards; documentation then follows the corrected design.
 
 - id: documentation_protocol.implementer_flow
-  kind: spec_section
+  kind: process
   md: |
     ## 5. Standard Implementer Documentation Flow (Per Card)
 
@@ -282,7 +281,7 @@
           - If no docs changed, why that is safe.
 
 - id: documentation_protocol.qa_expectations
-  kind: spec_section
+  kind: rules
   md: |
     ## 7. QA Expectations for Documentation
 
@@ -323,7 +322,7 @@
     - Generate corrective Implementer card(s) and a QA card per the QA System rules.
 
 - id: documentation_protocol.Checklists
-  kind: spec_section
+  kind: checklist
   md: |
     ## 8. Quick Checklists
 
@@ -359,7 +358,7 @@
     - [ ] There is no visible contradiction between Canon, Roadmap, Tech Spec, modules, Features, and the new work.  
 
 - id: documentation_protocol.formatting_replacement
-  kind: spec_section
+  kind: rules
   md: |
     ## 9. Formatting & Replacement Standards
 
@@ -539,20 +538,20 @@
       2) be promoted via a feature card and properly indexed (and reflected in
          tech_spec if placement changes are required).
 
-  - id: documentation_protocol.docs_vs_docs_build
-    kind: concept
-    md: |
-      ## docs/ vs docs/build/ (Conceptual Guidance)
+- id: documentation_protocol.docs_vs_docs_build
+  kind: concept
+  md: |
+    ## docs/ vs docs/build/ (Conceptual Guidance)
 
-      This document clarifies intent (not mechanical migration rules):
+    This document clarifies intent (not mechanical migration rules):
 
-      - `docs/`
-        - Home for persistent, system-level and shareable documentation (like this file and future high-level narratives)
+    - `docs/`
+      - Home for persistent, system-level and shareable documentation (like this file and future high-level narratives)
 
-      - `docs/build/`
-        - Home for build/system docs and engineering-time artefacts required to build and maintain LillyCORE
+    - `docs/build/`
+      - Home for build/system docs and engineering-time artefacts required to build and maintain LillyCORE
 
-      Any change to physical layout must be designed via Architect cards and reflected in tech_spec and gpt_resource_index.
+    Any change to physical layout must be designed via Architect cards and reflected in tech_spec and gpt_resource_index.
 
 - id: documentation_protocol.canonical_doc_relationships
   kind: reference
@@ -651,3 +650,91 @@
 
     If unsure whether a new kind is permitted:
     STOP and ask Andrew.
+
+- id: documentation_protocol.allowed_kinds
+  kind: meta
+  md: |
+    Allowed kinds for DOCUMENTATION_PROTOCOL:
+
+    - overview
+    - meta
+    - index
+    - rules
+    - process
+    - checklist
+    - reference
+    - ledger
+
+    If no existing kind fits a new block, follow
+    `documentation_protocol.kind_governance`.
+
+- id: documentation_protocol.index
+  kind: index
+  md: |
+    ## DOCUMENTATION_PROTOCOL Block Index
+
+    DOCUMENTATION_PROTOCOL defines the procedural governance for keeping
+    build/system documentation in sync with actual behaviour in LillyCORE.
+
+    It specifies:
+    - who updates which docs
+    - when updates are required
+    - formatting and replacement standards for registry-style YAML docs
+    - QA expectations for documentation completeness and drift detection
+
+    ### Blocks in this file
+
+    - `documentation_protocol.overview`
+      Overview of purpose, scope, and how this protocol is used.
+
+    - `documentation_protocol.allowed_kinds`
+      List of permitted block kinds for this file.
+
+    - `documentation_protocol.purpose_scope`
+      Purpose and scope detail (may be merged into `documentation_protocol.overview`).
+
+    - `documentation_protocol.relationship`
+      Relationship to other canonical documents and conflict resolution order.
+
+    - `documentation_protocol.responsibilities`
+      Role responsibilities for documentation (Andrew, Architect, Implementer, QA).
+
+    - `documentation_protocol.update_triggers`
+      When documentation must be considered/updated based on work type.
+
+    - `documentation_protocol.implementer_flow`
+      Standard per-card documentation flow for Implementers.
+
+    - `documentation_protocol.qa_expectations`
+      QA expectations and PASS/FAIL criteria for documentation.
+
+    - `documentation_protocol.checklists`
+      Quick checklists for Architect / Implementer / QA.
+
+    - `documentation_protocol.formatting_replacement`
+      Registry block formatting and atomic replacement rules.
+
+    - `documentation_protocol.doc_categories`
+      Permitted documentation categories and constraints (must/should/may/must-not).
+
+    - `documentation_protocol.docs_vs_docs_build`
+      Conceptual guidance on docs/ vs docs/build/.
+
+    - `documentation_protocol.canonical_doc_relationships`
+      Summary of canonical doc roles and how they interact.
+
+    - `documentation_protocol.new_doc_type_criteria`
+      Rules and criteria for introducing new canonical document types.
+
+    - `documentation_protocol.kind_governance`
+      Governance rules for adding/modifying block kinds.
+
+    - `documentation_protocol.conflicts_ledger`
+      Conflict ledger for unresolved contradictions and temporary rules.
+
+    ### Explicitly not defined here
+
+    - System ontology and highest-level meaning (see BUILD_CANON)
+    - Technical environment and repository layout rules (see TECH_SPEC)
+    - Phase sequencing and subsystem rollout intent (see ROADMAP)
+    - Canonical doc inventory and file locations (see GPT_RESOURCE_INDEX)
