@@ -1,11 +1,3 @@
-# docs/registry/build_canon.yml
-
-version: "1.0"
-
-blocks:
-  # --------------------------------
-  # Overview / file meta
-  # --------------------------------
   - id: build_canon.overview
     kind: overview
     name: BUILD_CANON
@@ -24,17 +16,9 @@ blocks:
       >   DOCUMENTATION_GOVERNANCE. PROJECT_CANON focuses on LillyCORE’s
       >   philosophy, ontology, and planning discipline.
 
-  # --------------------------------
-  # Section 1 – Philosophy & Authority
-  # --------------------------------
   - id: project_canon.philosophy_and_authority
     kind: philosophy
-    applies_to: [architect, implementer, qa]
-    tags: [philosophy, authority, prime_directive]
     md: |
-      # ========================================
-      # SECTION 1 — PHILOSOPHY & AUTHORITY
-      # ========================================
       LillyCORE is a modular, evolving AI system.
       Its rules, definitions, and meaning come from Andrew only.
 
@@ -48,17 +32,9 @@ blocks:
       prior documentation, and prior GPT interpretations.
       No subsystem, GPT, module, or engine may reinterpret or soften this.
 
-  # --------------------------------
-  # Section 2 – Global AI Behaviour Rules
-  # --------------------------------
   - id: project_canon.global_ai_behaviour_rules
     kind: behaviour_rules
-    applies_to: [architect, implementer, qa]
-    tags: [behaviour, no_assumptions, user_intent]
     md: |
-      # ========================================
-      # SECTION 2 — GLOBAL AI BEHAVIOUR RULES
-      # ========================================
       2.1 — NO ASSUMPTIONS
         - Do NOT invent rules, dependencies, behaviours, limitations,
           or missing pieces of architecture.
@@ -83,17 +59,9 @@ blocks:
       ASK Andrew:
       "Is this card tracked in GitHub, FEATURES, or both?"
       
-  # --------------------------------
-  # Section 3 – Naming, Standards & Conventions
-  # --------------------------------
   - id: project_canon.naming_standards_and_conventions
     kind: standards
-    applies_to: [architect, implementer]
-    tags: [naming, standards, taxonomy]
     md: |
-      # ========================================
-      # SECTION 3 — NAMING, STANDARDS & CONVENTIONS
-      # ========================================
       - LillyCORE standard for project-owned files and folders is snake_case
         (lowercase_with_underscores).
       - Technical naming details and explicit exceptions (e.g. tool-standard
@@ -109,34 +77,18 @@ blocks:
         Git is the real version history.
         AI MUST NOT depend on doc version numbers for logic.
 
-  # --------------------------------
-  # Section 4 – Documentation Standards (pointer)
-  # --------------------------------
   - id: project_canon.documentation_standards
     kind: docs_pointer
-    applies_to: [architect, implementer, qa]
-    tags: [docs, governance, pointer]
     md: |
-      # ========================================
-      # SECTION 4 — DOCUMENTATION STANDARDS
-      # ========================================
       NOTE:
         Detailed rules for documentation maintenance, update responsibilities,
         and governance now live in DOCUMENTATION_PROTOCOL and
         DOCUMENTATION_GOVERNANCE. PROJECT_CANON no longer defines per-role
         documentation procedures.
 
-  # --------------------------------
-  # Section 6 – Planning & Decomposition Rules
-  # --------------------------------
   - id: project_canon.planning_and_decomposition
     kind: planning_rules
-    applies_to: [architect, implementer, qa]
-    tags: [planning, decomposition, cards]
     md: |
-      # ========================================
-      # SECTION 6 — PLANNING & DECOMPOSITION RULES
-      # ========================================
       6.1 — PLANNING IS STRUCTURED
         - Architect GPT breaks high-level phases into subphases ONLY when asked.
         - Architect MUST follow Andrew’s intent.
@@ -210,17 +162,9 @@ blocks:
       - Architect MUST use this template.
       - Implementer MUST NOT alter template semantics.
       
-  # --------------------------------
-  # Section 7 – Canon & Roadmap Interaction
-  # --------------------------------
   - id: project_canon.canon_and_roadmap_interaction
     kind: interaction
-    applies_to: [architect, qa]
-    tags: [canon, roadmap, interaction]
     md: |
-      # ========================================
-      # SECTION 7 — CANON & ROADMAP INTERACTION
-      # ========================================
       - The Roadmap defines WHEN the system evolves.
       - The Canon defines HOW planning and implementation must behave.
 
@@ -228,17 +172,9 @@ blocks:
         Andrew resolves it.
         Architect then updates docs accordingly.
 
-  # --------------------------------
-  # Section 8 – Architect GPT (conceptual role)
-  # --------------------------------
   - id: project_canon.architect_role
     kind: role_note
-    applies_to: [architect]
-    tags: [architect, role, decomposition]
     md: |
-      # ========================================
-      # SECTION 8 — ARCHITECT GPT – DECOMPOSITION ROLE
-      # ========================================
       NOTE:
         Detailed procedural rules for the Architect GPT decomposition role,
         including card hierarchies, QA end-caps, and retry counters, have
@@ -251,34 +187,18 @@ blocks:
           - Add them to this file,
           - Or treat them as exploratory only.
 
-  # --------------------------------
-  # Section 9 – Implementer GPT (conceptual role)
-  # --------------------------------
   - id: project_canon.implementer_role
     kind: role_note
-    applies_to: [implementer]
-    tags: [implementer, role, execution]
     md: |
-      # ========================================
-      # SECTION 9 — IMPLEMENTER GPT — EXECUTION ROLE
-      # ========================================
       NOTE:
         Detailed execution rules for the Implementer GPT, including scope
         boundaries, documentation update duties, and escalation behaviour,
         have been moved to DOCUMENTATION_PROTOCOL. PROJECT_CANON no longer
         carries per-role procedural checklists.
 
-  # --------------------------------
-  # Section 10 – QA GPT (conceptual role)
-  # --------------------------------
   - id: project_canon.qa_role
     kind: role_note
-    applies_to: [qa]
-    tags: [qa, role, verification]
     md: |
-      # ========================================
-      # SECTION 10 — QA GPT — VERIFICATION & CORRECTION ROLE
-      # ========================================
       NOTE:
         Detailed verification, PASS/FAIL criteria, and correction-card
         workflows for QA GPT have been moved to DOCUMENTATION_PROTOCOL.
@@ -286,17 +206,9 @@ blocks:
         discipline; the operational protocol is defined elsewhere.
 - Redesign architecture or rewrite cards (except via corrective-task creation).
 
-  # --------------------------------
-  # Section 11 – Updates to the Canon
-  # --------------------------------
   - id: project_canon.updates_to_canon
     kind: updates
-    applies_to: [architect, implementer, qa]
-    tags: [canon, updates]
     md: |
-      # ========================================
-      # SECTION 11 — UPDATES TO THE CANON
-      # ========================================
       - The Canon may ONLY change when Andrew explicitly approves changes.
       - AI MUST NEVER imply or silently modify Canon rules.
       - All Canon changes MUST be committed to Git as visible updates.
@@ -312,8 +224,6 @@ NEW SECTIONS - possible duplicates portions within
 ---
   - id: tech_spec.no_guessing.rule
     kind: rule
-    applies_to: [architect, implementer, qa, tooling]
-    tags: [no_assumptions, anti_drift]
     md: |
       ## No-Guessing Rule (Hard)
 
@@ -328,9 +238,6 @@ NEW SECTIONS - possible duplicates portions within
       - Offer 1–2 best-practice options clearly labeled as options.
       - Do not proceed as if a choice has been made.
 ---
-  # --------------------------------
-  # Section 6 – Ask-Before-Acting Rules
-  # --------------------------------
   - id: documentation_protocol.section.6_ask_before_acting
     kind: spec_section
     md: |
@@ -379,8 +286,6 @@ NEW SECTIONS - possible duplicates portions within
 
 - id: doc_protocol.helpers.request_blocks_via_script
   kind: helper
-  applies_to: [architect, implementer, qa]
-  tags: [script, paste_to_user]
   md: |
     ## Helper: request docs/blocks via local script
 
@@ -397,8 +302,6 @@ NEW SECTIONS - possible duplicates portions within
 ---
 - id: doc_protocol.helpers.block_fetch
   kind: helper
-  applies_to: [architect, implementer, qa]
-  tags: [script, blocks]
   md: |
     ## Helper: Fetch specific doc blocks via local command
 
