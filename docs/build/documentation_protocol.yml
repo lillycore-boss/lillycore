@@ -39,10 +39,10 @@
     - How QA treats documentation as part of “Done When”.
 
     This file is a **procedural overlay** on top of existing rules in:
-    - BUILD_CANON
+    - build_canon
     - LILLYCORE_ROADMAP
-    - TECH_SPEC
-    - GPT_RESOURCE_INDEX
+    - tech_spec
+    - gpt_resource_index
     - feature cards / phase bundles (tracked in GitHub or equivalent)
 
     Those documents remain authoritative for ontology, technical standards, roadmap, and taxonomy.
@@ -56,19 +56,19 @@
     This protocol:
 
     - **Follows**:
-      - BUILD_CANON §1–§2 (Prime Directive, ask-before-acting, no assumptions).
-      - BUILD_CANON §4 (documentation standards: every change updates docs; atomic file updates).
-      - BUILD_CANON role boundaries (Architect, Implementer, QA).
+      - build_canon §1–§2 (Prime Directive, ask-before-acting, no assumptions).
+      - build_canon §4 (documentation standards: every change updates docs; atomic file updates).
+      - build_canon role boundaries (Architect, Implementer, QA).
 
     - **Respects**:
-      - TECH_SPEC (repository layout and docs/build location).
-      - GPT_RESOURCE_INDEX (master directory of canonical docs).
+      - tech_spec (repository layout and docs/build location).
+      - gpt_resource_index (master directory of canonical docs).
       - feature cards / phase bundles (tracked in GitHub or equivalent).
 
     When this protocol appears to conflict with any of the above:
 
     1. **Andrew’s explicit instruction wins.**
-    2. Then BUILD_CANON, LILLYCORE_ROADMAP, TECH_SPEC, and GPT_RESOURCE_INDEX are updated as needed via approved cards.
+    2. Then build_canon, LILLYCORE_ROADMAP, tech_spec, and gpt_resource_index are updated as needed via approved cards.
     3. This protocol is adjusted afterward to match.
 
   - id: documentation_protocol.responsibilities
@@ -81,11 +81,11 @@
       ### 3.1 Andrew
 
       - Final authority on:
-        - System meaning and ontology (BUILD_CANON).
+        - System meaning and ontology (build_canon).
         - Phase sequencing and intentions (LILLYCORE_ROADMAP).
-        - Whether new docs become canonical and are added to GPT_RESOURCE_INDEX.
+        - Whether new docs become canonical and are added to gpt_resource_index.
       - Approves:
-        - Any change to BUILD_CANON or LILLYCORE_ROADMAP.
+        - Any change to build_canon or LILLYCORE_ROADMAP.
         - Any change that alters repository taxonomy (via Architect-designed cards).
         - Any new canonical document type in documentation_governance.
 
@@ -93,19 +93,19 @@
 
       - Any Canon or Roadmap text is changed.
       - Any new canonical doc type is introduced.
-      - Any structural/taxonomy change is made in TECH_SPEC §3.
+      - Any structural/taxonomy change is made in tech_spec §3.
 
       ### 3.2 Architect GPT
 
       - Owns:
-        - Updates to GPT_RESOURCE_INDEX when new canonical docs are introduced or existing docs change meaning.  
+        - Updates to gpt_resource_index when new canonical docs are introduced or existing docs change meaning.  
         - System-level conceptual docs (including documentation_governance).
 
       Architect MUST:
 
       - Ensure new canonical docs are:
-        - Added to GPT_RESOURCE_INDEX.
-        - Placed in locations allowed by TECH_SPEC and this protocol.
+        - Added to gpt_resource_index.
+        - Placed in locations allowed by tech_spec and this protocol.
       - Include documentation deliverables in every phase/feature bundle.
 
       Architect MUST NOT:
@@ -121,8 +121,8 @@
       - Identify which docs are affected by the work.
       - Update:
         - **feature cards / phase bundles (tracked externally)**: card status, notes, and any mirrored content if the card lives there.  
-        - **TECH_SPEC**: when technical standards, tools, or repo layout change as part of the card.  
-        - **GPT_RESOURCE_INDEX**: *only when* the card explicitly calls for adding or changing indexed docs, and Andrew/Architect have approved.  
+        - **tech_spec**: when technical standards, tools, or repo layout change as part of the card.  
+        - **gpt_resource_index**: *only when* the card explicitly calls for adding or changing indexed docs, and Andrew/Architect have approved.  
         - Other build/system docs (e.g. documentation_protocol, documentation_governance) when the card explicitly includes such changes.
 
       Implementer MUST:
@@ -142,8 +142,8 @@
       - Verifies that **all required documentation updates** have been made for a given card/phase.
       - Uses:
         - feature cards / phase bundles (tracked externally)
-        - TECH_SPEC → technical and layout rules
-        - GPT_RESOURCE_INDEX → canonical doc list
+        - tech_spec → technical and layout rules
+        - gpt_resource_index → canonical doc list
         - DOCUMENTATION_PROTOCOL → documentation categories, constraints, and enforcement rules
 
 
@@ -151,7 +151,7 @@
 
       - Fail any card/phase if doc updates are missing, incomplete, or inconsistent with canonical docs.
       - Generate corrective cards when documentation is wrong or incomplete.
-      - Confirm that new canonical docs have been added to GPT_RESOURCE_INDEX when required.
+      - Confirm that new canonical docs have been added to gpt_resource_index when required.
 
       QA MUST NOT:
 
@@ -175,7 +175,7 @@
            - Note key behavioural changes.
            - Link to any new docs or scripts created by the card (if relevant).
 
-      2. **TECH_SPEC**
+      2. **tech_spec**
          - Consider updates if:
            - Tools or baseline configs change (e.g. new required linter behaviour, new scripts conventions).
            - Repo layout or script expectations change.
@@ -189,8 +189,8 @@
       When phase structure, ontology, or high-level module responsibilities change:
 
       1. Update **LILLYCORE_ROADMAP** (phase sequences, intents).
-      2. Update **BUILD_CANON** only when ontology / planning discipline changes and Andrew approves.
-      4. Update **GPT_RESOURCE_INDEX** when the canonical doc set changes.
+      2. Update **build_canon** only when ontology / planning discipline changes and Andrew approves.
+      4. Update **gpt_resource_index** when the canonical doc set changes.
       5. Update relevant conceptual docs (e.g. documentation_governance) to match the new story.
 
       All of the above require explicit Architect cards and Andrew’s approval.
@@ -200,9 +200,9 @@
       When a new doc is meant to become canonical (e.g. engine spec, plugin spec, DOC schema spec):
 
       1. Architect designs an appropriate feature/phase card.
-      2. Implementer (or Architect, depending on the card) creates the new doc at a location consistent with TECH_SPEC §3 and documentation_governance.
+      2. Implementer (or Architect, depending on the card) creates the new doc at a location consistent with tech_spec §3 and documentation_governance.
       3. Architect/Implementer:
-         - Adds the doc to **GPT_RESOURCE_INDEX** with:
+         - Adds the doc to **gpt_resource_index** with:
            - name  
            - type  
            - status  
@@ -211,18 +211,18 @@
            - usage/access notes
       4. QA verifies that:
          - The new doc is indexed.
-         - Its location and category obey TECH_SPEC and documentation_governance.
+         - Its location and category obey tech_spec and documentation_governance.
 
       Until this flow completes, the doc is treated as **non-authoritative**.
 
       ### 4.4 Taxonomy / Repo Layout Change
 
-      Any change covered by TECH_SPEC §3’s taxonomy rules (e.g. top-level folder changes, docs layout changes) MUST:
+      Any change covered by tech_spec §3’s taxonomy rules (e.g. top-level folder changes, docs layout changes) MUST:
 
       - Be designed via an Architect card.
       - Update:
-        - TECH_SPEC §3 (and related sections).
-        - GPT_RESOURCE_INDEX if canonical docs move or new top-level doc subtrees are created.
+        - tech_spec §3 (and related sections).
+        - gpt_resource_index if canonical docs move or new top-level doc subtrees are created.
       - Be validated by QA against the new taxonomy.
 
       Implementers MUST NOT perform these changes under ordinary feature cards.
@@ -233,8 +233,8 @@
 
       - QA creates corrective Implementer cards (and a QA card) per the QA System in FEATURES.
       - Implementer:
-        - Updates the relevant docs (FEATURES, TECH_SPEC, MODULES, etc.) to match reality.
-        - Ensures changes are consistent with BUILD_CANON and LILLYCORE_ROADMAP.
+        - Updates the relevant docs (FEATURES, tech_spec, MODULES, etc.) to match reality.
+        - Ensures changes are consistent with build_canon and LILLYCORE_ROADMAP.
       - QA re-runs checks for both:
         - The corrective cards.
         - The affected phase bundle.
@@ -252,7 +252,7 @@
          - Read the card’s Purpose, Context, Deliverables, Done When.
          - Identify **which docs are likely relevant**:
            - FEATURE card/bundle itself.
-           - TECH_SPEC (if tools, standards, or layout are affected).
+           - tech_spec (if tools, standards, or layout are affected).
            - MODULES (if engines/plugins are being realized or re-scoped).
            - Any specific doc mentioned in the card.
 
@@ -265,15 +265,15 @@
          - Prepare **atomic, ready-to-paste blocks** for each affected doc.
          - For example:
            - An updated module entry in MODULES.
-           - An updated section in TECH_SPEC.
+           - An updated section in tech_spec.
            - An updated card or note in FEATURES or the phase bundle.
          - Do **not** partially patch random lines; replace coherent sections.
 
       4. **Check canonical alignment**
          - Verify that:
-           - No change contradicts BUILD_CANON or LILLYCORE_ROADMAP.
-           - Any new or changed responsibilities still respect MODULES and TECH_SPEC boundaries.
-           - You are not accidentally introducing a new canonical doc type without going through GPT_RESOURCE_INDEX.
+           - No change contradicts build_canon or LILLYCORE_ROADMAP.
+           - Any new or changed responsibilities still respect MODULES and tech_spec boundaries.
+           - You are not accidentally introducing a new canonical doc type without going through gpt_resource_index.
 
       6. **Report in output**
          - In the Implementer response, clearly list:
@@ -295,11 +295,11 @@
          - FEATURES / phase bundle entries reflect:
            - Completed status.
            - Actual behaviour and deliverables.
-         - TECH_SPEC reflects:
+         - tech_spec reflects:
            - Any new technical standards, tools, or layout changes.
          - MODULES reflects:
            - Any changes to engine/plugin status, responsibilities, or dependencies.
-         - GPT_RESOURCE_INDEX reflects:
+         - gpt_resource_index reflects:
            - Any new canonical docs or major changes to existing ones (when the card required it).
 
       2. **No forbidden docs**
@@ -310,8 +310,8 @@
 
       3. **Docs align with Canon and Tech Spec**
          - No doc claims behaviour or layout that violates:
-           - BUILD_CANON (ontology and AI rules).
-           - TECH_SPEC §3 (layout and taxonomy) or other relevant sections.
+           - build_canon (ontology and AI rules).
+           - tech_spec §3 (layout and taxonomy) or other relevant sections.
 
       4. **All updates are atomic and paste-ready**
          - The Implementer has provided coherent sections rather than ad-hoc line edits.
@@ -332,20 +332,20 @@
       For each leaf card:
 
       - [ ] I updated or explicitly considered **FEATURES / phase bundle**.  
-      - [ ] I checked whether **TECH_SPEC** needs updates (tools, layout, technical rules).  
+      - [ ] I checked whether **tech_spec** needs updates (tools, layout, technical rules).  
       - [ ] I checked whether **MODULES** needs updates (status, responsibilities, dependencies).  
-      - [ ] If I created or promoted a doc to canonical, I ensured a plan exists to update **GPT_RESOURCE_INDEX**.  
+      - [ ] If I created or promoted a doc to canonical, I ensured a plan exists to update **gpt_resource_index**.  
       - [ ] All doc edits are provided as **ready-to-paste blocks**.  
 
       ### 8.2 Architect “When Designing Cards”
 
       For each phase or redesign:
 
-      - [ ] I checked BUILD_CANON, LILLYCORE_ROADMAP, TECH_SPEC, FEATURES, GPT_RESOURCE_INDEX, and DOCUMENTATION_PROTOCOL.
+      - [ ] I checked build_canon, LILLYCORE_ROADMAP, tech_spec, FEATURES, gpt_resource_index, and DOCUMENTATION_PROTOCOL.
       - [ ] I included **explicit documentation deliverables** for any change that affects behaviour, taxonomy, or canonical docs.  
       - [ ] If new canonical docs are needed, I included tasks to:
         - Create them under allowed locations, and  
-        - Add them to GPT_RESOURCE_INDEX.  
+        - Add them to gpt_resource_index.  
 
       ### 8.3 QA “Doc-Focused Sanity Pass”
 
@@ -355,7 +355,7 @@
       - [ ] No forbidden doc categories are being relied upon (per DOCUMENTATION_PROTOCOL).
       - [ ] Any new “important” doc has either been:
         - Explicitly marked non-authoritative, or  
-        - Promoted through a card and indexed in GPT_RESOURCE_INDEX.  
+        - Promoted through a card and indexed in gpt_resource_index.  
       - [ ] There is no visible contradiction between Canon, Roadmap, Tech Spec, Modules, Features, and the new work.  
 
   - id: documentation_protocol.formatting_replacement
@@ -397,7 +397,7 @@
       - Local headings inside that block only.
 
       GPTs MUST NOT:
-      - Recreate file-level banners like `FILE: TECH_SPEC`, `ROLE: …`, `VERSION: …`
+      - Recreate file-level banners like `FILE: tech_spec`, `ROLE: …`, `VERSION: …`
         inside `md` if that information is already present in YAML metadata.
       - Invent new file-level markers that conflict with the registry format.
 
@@ -497,7 +497,7 @@
     DOCUMENTATION_PROTOCOL is the authoritative source for documentation
     governance, categories, constraints, and enforcement rules.
 
-    Concrete file lists and locations are governed by GPT_RESOURCE_INDEX and TECH_SPEC.
+    Concrete file lists and locations are governed by gpt_resource_index and tech_spec.
 
     ### Must-Have Categories
     - Core build/system authority docs (e.g. Canon, roadmap, technical specs,
@@ -506,8 +506,8 @@
 
     **Rules**
     - Must-have docs are canonical and authoritative.
-    - Any new canonical doc type MUST be indexed in GPT_RESOURCE_INDEX and placed
-      consistently with TECH_SPEC unless Andrew explicitly overrides.
+    - Any new canonical doc type MUST be indexed in gpt_resource_index and placed
+      consistently with tech_spec unless Andrew explicitly overrides.
 
     ### Should-Have Categories
     - System-level conceptual overviews.
@@ -537,7 +537,7 @@
     - If a must-not-have document appears, it MUST either:
       1) be deleted or clearly marked deprecated, or
       2) be promoted via a feature card and properly indexed (and reflected in
-         TECH_SPEC if placement changes are required).
+         tech_spec if placement changes are required).
 
   - id: documentation_protocol.docs_vs_docs_build
     kind: concept
@@ -552,21 +552,21 @@
       - `docs/build/`
         - Home for build/system docs and engineering-time artefacts required to build and maintain LillyCORE
 
-      Any change to physical layout must be designed via Architect cards and reflected in TECH_SPEC and GPT_RESOURCE_INDEX.
+      Any change to physical layout must be designed via Architect cards and reflected in tech_spec and gpt_resource_index.
 
 - id: documentation_protocol.canonical_doc_relationships
   kind: reference
   md: |
     ## Canonical Document Relationships
 
-    - **BUILD_CANON**
+    - **build_canon**
       Defines ontology, authority, and planning discipline.
       Highest-level meaning; overrides all other docs when conflicts arise.
 
     - **LILLYCORE_ROADMAP**
       Defines phase sequencing and intent.
 
-    - **TECH_SPEC**
+    - **tech_spec**
       Defines technical environment, tooling, and repository layout.
 
     - **DOCUMENTATION_PROTOCOL**
@@ -574,7 +574,7 @@
       and enforcement expectations. Governs how documentation is created,
       modified, validated, and retired without redefining system ontology.
 
-    - **GPT_RESOURCE_INDEX**
+    - **gpt_resource_index**
       Defines which documents are canonical and where they live.
       A document is not authoritative unless listed here.
 
@@ -604,9 +604,9 @@
 
     ### Canonical Registration
     - Once approved, a new canonical document type MUST be added to
-      GPT_RESOURCE_INDEX.
+      gpt_resource_index.
     - A document MUST NOT be treated as canonical unless it appears in
-      GPT_RESOURCE_INDEX.
+      gpt_resource_index.
 
     ### Prohibited Document Types
     The following MUST NOT be treated as canonical documents:
@@ -620,4 +620,4 @@
       - a clear purpose,
       - a defined owner,
       - explicit relationships to other docs,
-      - and a physical location consistent with TECH_SPEC.
+      - and a physical location consistent with tech_spec.

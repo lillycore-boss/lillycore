@@ -1,16 +1,16 @@
   - id: build_canon.overview
     kind: overview
     md: |
-      BUILD_CANON defines LillyCORE’s **core philosophy, authority model,
+      build_canon defines LillyCORE’s **core philosophy, authority model,
       ontology, and planning discipline**.
     
       It is the highest-level source of meaning in the system.
     
       When conflicts arise:
       - Andrew’s explicit instruction always wins.
-      - BUILD_CANON overrides all other documentation.
+      - build_canon overrides all other documentation.
 
-  - id: BUILD_CANON.philosophy_and_authority
+  - id: build_canon.philosophy_and_authority
     kind: philosophy
     md: |
       LillyCORE is a modular, evolving AI system.
@@ -26,7 +26,7 @@
       prior documentation, and prior GPT interpretations.
       No subsystem, GPT, module, or engine may reinterpret or soften this.
 
-  - id: BUILD_CANON.global_ai_behaviour_rules
+  - id: build_canon.global_ai_behaviour_rules
     kind: behaviour_rules
     md: |
       2.1 — NO ASSUMPTIONS
@@ -53,33 +53,33 @@
       ASK Andrew:
       "Is this card tracked in GitHub, FEATURES, or both?"
       
-  - id: BUILD_CANON.naming_standards_and_conventions
+  - id: build_canon.naming_standards_and_conventions
     kind: standards
     md: |
       - LillyCORE standard for project-owned files and folders is snake_case
         (lowercase_with_underscores).
       - Technical naming details and explicit exceptions (e.g. tool-standard
-        filenames and vendored third-party files) are defined in TECH_SPEC
+        filenames and vendored third-party files) are defined in tech_spec
         Section 2, which is the authoritative source for naming rules.
       - Hyphens ("-") in names are only allowed where external tools,
         ecosystems, or third-party artefacts REQUIRE them (e.g.
         .pre-commit-config.yaml, pyproject.toml) or in non-filename titles.
       - Files, folders, modules, and engines MUST follow the folder taxonomy
-        defined in the Tools & Environment Spec (TECH_SPEC).
+        defined in the Tools & Environment Spec (tech_spec).
 
       - Documentation version numbers are optional and symbolic.
         Git is the real version history.
         AI MUST NOT depend on doc version numbers for logic.
 
-  - id: BUILD_CANON.documentation_standards
+  - id: build_canon.documentation_standards
     kind: docs_pointer
     md: |
       NOTE:
         Detailed rules for documentation maintenance, update responsibilities,
         and governance now live in DOCUMENTATION_PROTOCOL.
-        BUILD_CANON no longer defines per-role documentation procedures.
+        build_canon no longer defines per-role documentation procedures.
 
-  - id: BUILD_CANON.planning_and_decomposition
+  - id: build_canon.planning_and_decomposition
     kind: planning_rules
     md: |
       6.1 — PLANNING IS STRUCTURED
@@ -155,7 +155,7 @@
       - Architect MUST use this template.
       - Implementer MUST NOT alter template semantics.
       
-  - id: BUILD_CANON.canon_and_roadmap_interaction
+  - id: build_canon.canon_and_roadmap_interaction
     kind: interaction
     md: |
       - The Roadmap defines WHEN the system evolves.
@@ -165,7 +165,7 @@
         Andrew resolves it.
         Architect then updates docs accordingly.
 
-  - id: BUILD_CANON.architect_role
+  - id: build_canon.architect_role
     kind: role_note
     md: |
       NOTE:
@@ -175,25 +175,25 @@
         conceptual anchor that Architect GPT is responsible for decomposition,
         not execution.
 
-  - id: BUILD_CANON.implementer_role
+  - id: build_canon.implementer_role
     kind: role_note
     md: |
       NOTE:
         Detailed execution rules for the Implementer GPT, including scope
         boundaries, documentation update duties, and escalation behaviour,
-        have been moved to DOCUMENTATION_PROTOCOL. BUILD_CANON no longer
+        have been moved to DOCUMENTATION_PROTOCOL. build_canon no longer
         carries per-role procedural checklists.
 
-  - id: BUILD_CANON.qa_role
+  - id: build_canon.qa_role
     kind: role_note
     md: |
       NOTE:
         Detailed verification, PASS/FAIL criteria, and correction-card
         workflows for QA GPT have been moved to DOCUMENTATION_PROTOCOL.
-        BUILD_CANON keeps QA only as a conceptual role in the planning
+        build_canon keeps QA only as a conceptual role in the planning
         discipline; the operational protocol is defined elsewhere.
 
-  - id: BUILD_CANON.updates_to_canon
+  - id: build_canon.updates_to_canon
     kind: updates
     md: |
       - The Canon may ONLY change when Andrew explicitly approves changes.

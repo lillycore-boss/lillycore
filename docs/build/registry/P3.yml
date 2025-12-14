@@ -79,7 +79,7 @@ phase:
     - id: P3.D7
       name: "Documentation of data layer, boundaries, and write rules"
       description: |
-        Canon/TECH_SPEC/MODULES updates documenting the data layer, its boundaries,
+        Canon/tech_spec/MODULES updates documenting the data layer, its boundaries,
         exceptions, schema rules, and lifecycle behaviours.
 
   constraints:

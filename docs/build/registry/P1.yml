@@ -74,7 +74,7 @@ phase:
       name: "Initial project infrastructure implemented (repo, config files, CI, tooling, developer automation)"
       description: |
         Repository-level infrastructure including config files, CI, pre-commit/tooling, and
-        basic developer automation, consistent with Phase 0 TECH_SPEC and Canon.
+        basic developer automation, consistent with Phase 0 tech_spec and Canon.
 
   constraints:
     - "No AI execution, scheduling, or chaining in Phase 1 (AI pools are structural only)."

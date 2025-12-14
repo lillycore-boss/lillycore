@@ -42,11 +42,11 @@ blocks:
 
       - PROJECT_CANON (philosophy, ontology, planning discipline)
       - LILLYCORE_ROADMAP (phase sequence)
-      - TECH_SPEC (technical environment and repo layout)
+      - tech_spec (technical environment and repo layout)
       - MODULES (engines/plugins and responsibilities)
       - DOCUMENTATION_GOVERNANCE (doc layers and allowed categories)
       - DOCUMENTATION_PROTOCOL (procedures for updating docs)
-      - GPT_RESOURCE_INDEX (directory of canonical docs)
+      - gpt_resource_index (directory of canonical docs)
 
   # --------------------------------
   # Build Process vs Runtime System
@@ -61,7 +61,7 @@ blocks:
       ### 2.1 Runtime System (LillyCORE)
 
       - Engines, plugins, System DOC, pipelines, agents.
-      - Behaviour defined by PROJECT_CANON, LILLYCORE_ROADMAP, TECH_SPEC, MODULES,
+      - Behaviour defined by PROJECT_CANON, LILLYCORE_ROADMAP, tech_spec, MODULES,
         and subsystem specs.
       - NO GPT roles exist inside the runtime system.
 
@@ -148,21 +148,21 @@ blocks:
 
       ### 4.1 Canonical Index
 
-      - GPT_RESOURCE_INDEX is the master list of canonical docs.
-      - GPTs MUST treat GPT_RESOURCE_INDEX as the entrypoint for all documentation.
+      - gpt_resource_index is the master list of canonical docs.
+      - GPTs MUST treat gpt_resource_index as the entrypoint for all documentation.
 
       ### 4.2 Mandatory-Load Set (minimum docs)
 
       Before performing ANY reasoning, planning, or drafting on LillyCORE, GPTs MUST:
 
       - Load and read, at minimum:
-        - GPT_RESOURCE_INDEX
+        - gpt_resource_index
         - DOCUMENTATION_GOVERNANCE
         - DOCUMENTATION_PROTOCOL
       - Request and ingest:
         - PROJECT_CANON
         - LILLYCORE_ROADMAP
-        - TECH_SPEC
+        - tech_spec
         - MODULES
         - FEATURES (template + any relevant cards)
 
@@ -170,7 +170,7 @@ blocks:
 
       Before starting work on any card or phase:
 
-      1. Inspect GPT_RESOURCE_INDEX.
+      1. Inspect gpt_resource_index.
       2. For every document listed there that has NOT yet been provided in
          the current conversation, say:
 
@@ -294,9 +294,9 @@ blocks:
       **Must:**
 
       - Follow the Prime Directive and No-Assumptions rules.
-      - Use GPT_RESOURCE_INDEX to discover docs.
+      - Use gpt_resource_index to discover docs.
       - Ask Andrew instead of guessing when standards or constraints are missing.
-      - Respect MODULES and TECH_SPEC for boundaries and layout.
+      - Respect MODULES and tech_spec for boundaries and layout.
 
       **Must Not:**
 
@@ -338,9 +338,9 @@ blocks:
       **Must:**
 
       - Request the full card text before implementing.
-      - Request relevant TECH_SPEC, MODULES, and other specs as needed.
+      - Request relevant tech_spec, MODULES, and other specs as needed.
       - Ask Andrew to paste any code/config files before modifying them.
-      - Provide paste-ready documentation updates (TECH_SPEC, FEATURES, MODULES, etc.)
+      - Provide paste-ready documentation updates (tech_spec, FEATURES, MODULES, etc.)
         when the card requires doc changes.
 
       **Must Not:**
@@ -392,9 +392,9 @@ blocks:
         - FAIL (with detailed deficiencies and corrective cards)
       - Verify alignment with:
         - FEATURES / phase bundles
-        - TECH_SPEC
+        - tech_spec
         - MODULES
-        - GPT_RESOURCE_INDEX
+        - gpt_resource_index
         - Any relevant specs
 
       **Must Not:**
@@ -464,7 +464,7 @@ blocks:
           - Ingestion rules,
           - Feature-card lifecycle,
           - Relationship to canonical docs,
-        MUST be reflected here and in GPT_RESOURCE_INDEX.
+        MUST be reflected here and in gpt_resource_index.
 
       - GPTs MUST NOT treat ad-hoc chat instructions as permanent standards;
         standards must be captured in this spec and/or other canonical docs
@@ -478,12 +478,12 @@ blocks:
   md: |
     GPTs MUST NOT assume the contents of any canonical document
     other than:
-      - GPT_RESOURCE_INDEX
+      - gpt_resource_index
       - DOCUMENTATION_PROTOCOL
       - GPT_BEHAVIOUR_SPEC
 
     If information is required from another document, the GPT MUST:
-      1. Identify the document via GPT_RESOURCE_INDEX
+      1. Identify the document via gpt_resource_index
       2. Request specific block IDs or pasted content
       3. Pause execution until provided
 

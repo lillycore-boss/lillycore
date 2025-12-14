@@ -8,19 +8,19 @@ blocks:
   # --------------------------------
   - id: tech_spec.overview
     kind: overview
-    name: TECH_SPEC
+    name: tech_spec
     applies_to: [architect, implementer]
     tags: [tech_spec, environment, constraints]
     md: |
-      # TECH_SPEC
+      # tech_spec
 
-      **FILE:** TECH_SPEC  
+      **FILE:** tech_spec  
       **ROLE:** Technical standards and environment details for LillyCORE
 
       > NOTE:
       > - All GPT behavioural, procedural, and documentation-governance rules
       >   have been moved to DOCUMENTATION_PROTOCOL and DOCUMENTATION_GOVERNANCE.
-      > - This TECH_SPEC now contains only technical constraints, tooling rules,
+      > - This tech_spec now contains only technical constraints, tooling rules,
       >   environment details, naming conventions, and repository structure.
 
   # --------------------------------
@@ -136,7 +136,7 @@ blocks:
           or other styles).
 
       - **Display-only names:**
-        - Conceptual document names like PROJECT_CANON, TECH_SPEC, or
+        - Conceptual document names like PROJECT_CANON, tech_spec, or
           LILLYCORE_ROADMAP are titles, not filenames; they do not override
           the snake_case rules for actual files in the repo.
 
@@ -297,9 +297,9 @@ blocks:
           - PROJECT_CANON
           - LILLYCORE_ROADMAP
           - FEATURES
-          - TECH_SPEC
+          - tech_spec
           - MODULES
-          - GPT_RESOURCE_INDEX
+          - gpt_resource_index
 
       - `scripts/`:
         - All dev and runtime scripts.
@@ -348,7 +348,7 @@ blocks:
 
       - Stored under `docs/build/`.
       - Filenames follow `lowercase_with_underscores`.
-      - Conceptual names used only in discussion (PROJECT_CANON, TECH_SPEC).
+      - Conceptual names used only in discussion (PROJECT_CANON, tech_spec).
 
       **User-facing docs:**
 

@@ -83,7 +83,7 @@ phase:
         including creation, updates, completion, querying, and summarization.
 
     - id: P10.D8
-      name: "Documentation across MODULES, Canon, TECH_SPEC"
+      name: "Documentation across MODULES, Canon, tech_spec"
       description: |
         Documentation entries describing the PM Plugin’s role, storage model, packet
         schemas, and integration with HELPER, UX, and SYSTEM_DOC.

@@ -7,20 +7,20 @@
 
       This document defines the **conceptual documentation layers and categories** for LillyCORE at the system level.
 
-      It is intentionally **file-path agnostic** where possible: it describes **what kinds of documentation the project should have, who owns them, how they relate to each other, and which are allowed or forbidden**, without redesigning the repository layout. Physical locations and tooling details remain governed by **TECH_SPEC Section 3** and **GPT_RESOURCE_INDEX**.
+      It is intentionally **file-path agnostic** where possible: it describes **what kinds of documentation the project should have, who owns them, how they relate to each other, and which are allowed or forbidden**, without redesigning the repository layout. Physical locations and tooling details remain governed by **tech_spec Section 3** and **gpt_resource_index**.
 
       This file is itself a **system-level conceptual doc**. It exists to:
 
       - Give humans and GPTs a shared mental model of documentation layers.
       - Clarify which docs are authoritative versus exploratory.
-      - Prevent “random spec files” that drift outside GPT_RESOURCE_INDEX or conflict with Canon / Tech Spec.
+      - Prevent “random spec files” that drift outside gpt_resource_index or conflict with Canon / Tech Spec.
 
   - id: docs_gov.layers.intro
     kind: concept
     md: |
       ## Doc Layers & Categories
 
-      This section describes **doc layers** conceptually. Individual documents and their physical locations are still indexed and governed by **GPT_RESOURCE_INDEX** and **TECH_SPEC**.
+      This section describes **doc layers** conceptually. Individual documents and their physical locations are still indexed and governed by **gpt_resource_index** and **tech_spec**.
 
       For each layer:
 
@@ -37,9 +37,9 @@
       **Examples (non-exhaustive):**
       - PROJECT_CANON
       - LILLYCORE_ROADMAP
-      - TECH_SPEC
+      - tech_spec
       - MODULES
-      - GPT_RESOURCE_INDEX
+      - gpt_resource_index
       - Phase/feature bundles and similar “control plane” docs.
 
       **Purpose**
@@ -53,17 +53,17 @@
 
       **Ownership**
       - PROJECT_CANON and LILLYCORE_ROADMAP: **Andrew + Architect** (ontology, planning, phase evolution).
-      - TECH_SPEC: **Andrew + Architect + Implementers** (technical standards and repo layout).
+      - tech_spec: **Andrew + Architect + Implementers** (technical standards and repo layout).
       - MODULES: **Architect**, with Implementers updating details when modules become real.
-      - GPT_RESOURCE_INDEX: **Andrew + Architect**, kept in sync whenever new docs become authoritative.
+      - gpt_resource_index: **Andrew + Architect**, kept in sync whenever new docs become authoritative.
 
       **Lifecycle**
       - These are **system-level** docs: they define how LillyCORE is meant to behave and evolve.
       - They are **not ephemeral**; they change over time but should never be treated as disposable.
-      - Physically, early-phase build/control docs are stored under `docs/build/` as defined in TECH_SPEC; this document does not relocate them.
+      - Physically, early-phase build/control docs are stored under `docs/build/` as defined in tech_spec; this document does not relocate them.
 
       **Governance**
-      - Must be **indexed in GPT_RESOURCE_INDEX** before they are treated as canonical.
+      - Must be **indexed in gpt_resource_index** before they are treated as canonical.
       - Must stay consistent with PROJECT_CANON’s ontology and planning rules.
       - **Authoritative specifications** for engines, plugins, DOC layers, and taxonomy belong here or in explicitly related specs, not in ad-hoc files.
 
@@ -96,7 +96,7 @@
 
       **Purpose**
       - Provide **narrative explanations** and mental models that bridge core/build docs and everyday work.
-      - Explain how the **ontology from PROJECT_CANON** and the **repo layout from TECH_SPEC** map onto concrete workflows and behaviours.
+      - Explain how the **ontology from PROJECT_CANON** and the **repo layout from tech_spec** map onto concrete workflows and behaviours.
 
       **Audience**
       - Andrew
@@ -110,11 +110,11 @@
       **Lifecycle**
       - **System-level and persistent**: these docs are part of the long-lived understanding of LillyCORE.
       - Expected to live under `docs/` (not `docs/build/`), reflecting their role as shareable, persistent documentation rather than build-only artefacts.
-      - Any structural or taxonomic changes that affect physical locations must still be designed and captured in TECH_SPEC and GPT_RESOURCE_INDEX via dedicated cards.
+      - Any structural or taxonomic changes that affect physical locations must still be designed and captured in tech_spec and gpt_resource_index via dedicated cards.
 
       **Governance**
-      - Must not contradict PROJECT_CANON, LILLYCORE_ROADMAP, or TECH_SPEC; if conflicts arise, Canon + Andrew’s explicit direction win, and follow-up tasks update these docs.
-      - When a conceptual doc becomes authoritative, it should be referenced from GPT_RESOURCE_INDEX so GPTs discover it reliably.
+      - Must not contradict PROJECT_CANON, LILLYCORE_ROADMAP, or tech_spec; if conflicts arise, Canon + Andrew’s explicit direction win, and follow-up tasks update these docs.
+      - When a conceptual doc becomes authoritative, it should be referenced from gpt_resource_index so GPTs discover it reliably.
 
   - id: docs_gov.layers.plugin_docs
     kind: layer
@@ -135,23 +135,23 @@
 
       **Ownership**
       - Plugin owner (human or engine) for day-to-day updates
-      - Architect for structural changes to responsibilities or boundaries (mirrored in MODULES and TECH_SPEC where needed)
+      - Architect for structural changes to responsibilities or boundaries (mirrored in MODULES and tech_spec where needed)
 
       **Lifecycle**
       - System-level for that plugin: persistent as long as the plugin exists
-      - Physical location is governed by TECH_SPEC and future cards
+      - Physical location is governed by tech_spec and future cards
 
       **Governance**
       - Plugin docs may extend but must not redefine System DOC or Plugin DOC ontology.
       - Any plugin that defines new DOC schemas must do so within the Plugin DOC layer and respect the System DOC boundaries in core docs.
-      - Authoritative plugin specs should be referenced from GPT_RESOURCE_INDEX once they exist, rather than living as unindexed files.
+      - Authoritative plugin specs should be referenced from gpt_resource_index once they exist, rather than living as unindexed files.
 
   - id: docs_gov.layers.user_docs
     kind: layer
     md: |
       ### 4. User-Facing Docs (docs/user, docs/api, etc.)
 
-      **Examples (future, per TECH_SPEC):**
+      **Examples (future, per tech_spec):**
       - `docs/user/` – official guides, onboarding, and narratives for human users
       - `docs/api/` – API/SDK documentation exported or generated for external consumers
 
@@ -170,7 +170,7 @@
 
       **Lifecycle**
       - System-level and persistent: part of what LillyCORE promises externally
-      - Physical location governed by TECH_SPEC and future cards
+      - Physical location governed by tech_spec and future cards
 
       **Governance**
       - Must not diverge from the behaviour defined by Canon, Roadmap, Tech Spec, and plugin docs
@@ -209,15 +209,15 @@
     md: |
       ## Doc Categories & Requirements
 
-      This section defines which categories we must have, should have, may have, and must not have. It operates at the conceptual level and relies on GPT_RESOURCE_INDEX and TECH_SPEC for concrete file lists and locations.
+      This section defines which categories we must have, should have, may have, and must not have. It operates at the conceptual level and relies on gpt_resource_index and tech_spec for concrete file lists and locations.
 
       ### 1. Must-Have Categories
-      - Core Build/System Docs: PROJECT_CANON, LILLYCORE_ROADMAP, TECH_SPEC, MODULES, GPT_RESOURCE_INDEX, phase/feature bundles
+      - Core Build/System Docs: PROJECT_CANON, LILLYCORE_ROADMAP, tech_spec, MODULES, gpt_resource_index, phase/feature bundles
       - Documentation Governance: this file (or its successor) as the single place describing documentation layers and allowed/forbidden categories
 
       **Rules**
       - Must be kept in sync with each other whenever code or architecture changes (per Canon rules).
-      - Any new canonical doc type must be added to GPT_RESOURCE_INDEX and placed consistently with TECH_SPEC unless Andrew overrides.
+      - Any new canonical doc type must be added to gpt_resource_index and placed consistently with tech_spec unless Andrew overrides.
 
       ### 2. Should-Have Categories
       - System-level conceptual overviews (architecture, how things fit)
@@ -233,14 +233,14 @@
       - If a may-have doc contradicts a must-have doc, the must-have doc and Andrew’s explicit instructions win.
 
       ### 4. Must-Not-Have Categories
-      - Unindexed spec files that define behaviour/rules/architecture without being referenced in GPT_RESOURCE_INDEX or clearly marked non-authoritative
+      - Unindexed spec files that define behaviour/rules/architecture without being referenced in gpt_resource_index or clearly marked non-authoritative
       - Shadow copies of Canon/Tech Spec/Roadmap outside the canonical doc set
       - Plugin/engine specs that bypass ontology (introduce new meanings without going through Canon)
       - Runtime artefacts treated as specs
 
       If a must-not-have document appears, it must either:
       1) be deleted or clearly marked deprecated, or
-      2) be promoted via a proper feature card plus updates to GPT_RESOURCE_INDEX (and TECH_SPEC if needed).
+      2) be promoted via a proper feature card plus updates to gpt_resource_index (and tech_spec if needed).
 
 
   - id: docs_gov.docs_vs_docs_build
@@ -256,7 +256,7 @@
       - `docs/build/`
         - Home for build/system docs and engineering-time artefacts required to build and maintain LillyCORE
 
-      Any change to physical layout must be designed via Architect cards and reflected in TECH_SPEC and GPT_RESOURCE_INDEX.
+      Any change to physical layout must be designed via Architect cards and reflected in tech_spec and gpt_resource_index.
 
 
   - id: docs_gov.hierarchy_and_roles
@@ -271,7 +271,7 @@
       - Plugin/Engine Docs
       - User-Facing Docs
 
-      All layers inherit constraints from PROJECT_CANON (ontology & rules) and TECH_SPEC (technical standards & layout).
+      All layers inherit constraints from PROJECT_CANON (ontology & rules) and tech_spec (technical standards & layout).
 
       ### 2. Canonical Document Roles
 
@@ -286,7 +286,7 @@
       - Ownership: Andrew + Architect
       - Notes: Must never be changed by Implementers
 
-      **TECH_SPEC**
+      **tech_spec**
       - Defines technical environment, coding standards, tools, and repository layout
       - Section 3 is the authoritative declaration of physical file structure
       - Ownership: Andrew + Architect + Implementers
@@ -299,13 +299,13 @@
       - Defines feature card format and GitHub integration rules; optionally mirrors selected cards
       - Ownership: Andrew + Architect
 
-      **GPT_RESOURCE_INDEX**
+      **gpt_resource_index**
       - Master directory of authoritative docs; binds the canonical set
       - Ownership: Andrew + Architect
       - Notes: A doc is not canonical until listed here
 
       ### 3. Allowed Future Doc Categories (high-level)
-      New canonical doc types may be added only via feature cards that update GPT_RESOURCE_INDEX (and TECH_SPEC if needed):
+      New canonical doc types may be added only via feature cards that update gpt_resource_index (and tech_spec if needed):
       - Engine specs
       - Plugin specs
       - DOC schema specs (System DOC / Plugin DOC)
@@ -317,10 +317,10 @@
       ### 4. Relationships Between Major Docs
       - PROJECT_CANON → meaning and ontology
       - LILLYCORE_ROADMAP → phase sequencing
-      - TECH_SPEC → physical layout & technical rules
+      - tech_spec → physical layout & technical rules
       - MODULES → subsystem boundaries
       - FEATURES → task structure and implementation workflow
-      - GPT_RESOURCE_INDEX → binds all canonical docs together
+      - gpt_resource_index → binds all canonical docs together
 
       System-level conceptual docs (such as this file) interpret and guide; they do not redefine layout or ontology.
 
@@ -344,14 +344,14 @@
       - Architect may propose new canonical document types but cannot approve them
       - Implementer may create/update such docs only after approval and with an explicit feature card
 
-      ### 3. Relationship to GPT_RESOURCE_INDEX
+      ### 3. Relationship to gpt_resource_index
       Once a new document type becomes canonical:
-      - It MUST be added to GPT_RESOURCE_INDEX
-      - GPT_RESOURCE_INDEX becomes the authoritative directory for its meaning, purpose, and physical path
-      - GPTs MUST NOT treat a document as canonical unless it appears in GPT_RESOURCE_INDEX
+      - It MUST be added to gpt_resource_index
+      - gpt_resource_index becomes the authoritative directory for its meaning, purpose, and physical path
+      - GPTs MUST NOT treat a document as canonical unless it appears in gpt_resource_index
 
       ### 4. Prohibited Document Types
-      The following MUST NOT be treated as documents within GPT_RESOURCE_INDEX:
+      The following MUST NOT be treated as documents within gpt_resource_index:
       - Runtime logs
       - Work event histories
       - Transcripts or summaries created by System DOC or Notes flows
@@ -360,4 +360,4 @@
       ### 5. Lifecycle Expectations
       - Canonical docs are persistent and evolve through approved feature cards
       - Governance docs must remain stable enough for long-term orientation
-      - A new canonical doc must have: clear purpose, stable owner, defined relationships, explicit place in repo per TECH_SPEC
+      - A new canonical doc must have: clear purpose, stable owner, defined relationships, explicit place in repo per tech_spec

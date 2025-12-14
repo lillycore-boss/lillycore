@@ -43,7 +43,7 @@
     - Local headings inside that block only.
 
     GPTs MUST NOT:
-    - Recreate file-level banners like `FILE: TECH_SPEC`, `ROLE: …`, `VERSION: …`
+    - Recreate file-level banners like `FILE: tech_spec`, `ROLE: …`, `VERSION: …`
       inside `md` if that information is already present in YAML metadata.
     - Invent new file-level markers that conflict with the registry format.
 

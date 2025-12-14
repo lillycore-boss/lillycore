@@ -22,7 +22,7 @@ phase:
         linters/formatters, testing baseline, etc.).
       • Core repository organization at a conceptual level (folder taxonomy, naming
         conventions, document layout).
-      • Minimal BUILD_CANON foundations required to begin Phase 1 cleanly.
+      • Minimal build_canon foundations required to begin Phase 1 cleanly.
       • Processes for maintaining and updating standards, docs, and canon as the
         system evolves.
       • Workspace preparation required for consistent execution, even if some
@@ -32,7 +32,7 @@ phase:
     roadmap:
       - "Roadmap definitions indicating the role and boundaries of Phase 0."
     canon:
-      - "Minimal BUILD_CANON subset required to start (system-wide rules and philosophy)."
+      - "Minimal build_canon subset required to start (system-wide rules and philosophy)."
     environment:
       - "Existing repository or workspace conditions to be normalized."
       - "Decisions on tooling requirements (Python version, formatter, linter, testing framework)."
@@ -58,9 +58,9 @@ phase:
         documentation placement.
 
     - id: P0.D4
-      name: "Minimal BUILD_CANON foundations for Phase 1"
+      name: "Minimal build_canon foundations for Phase 1"
       description: |
-        The subset of BUILD_CANON required to allow Phase 1 to begin cleanly, including
+        The subset of build_canon required to allow Phase 1 to begin cleanly, including
         system-wide rules and invariants that must already be in place.
 
     - id: P0.D5
@@ -79,7 +79,7 @@ phase:
     - "Phase 0 must not introduce functional runtime, engines, or module logic."
     - "Definitions must remain high-level and avoid premature architecture for later phases."
     - "No module, engine, or functional code may be designed beyond establishing the environment they will later inhabit."
-    - "All documentation and standards must be maintainable by GPTs and align with BUILD_CANON and GPT_RESOURCE_INDEX."
+    - "All documentation and standards must be maintainable by GPTs and align with build_canon and gpt_resource_index."
     - "Phase 0 outputs must not conflict with the roadmap; they act as prerequisites, not prescriptive architecture."
 
   structure:

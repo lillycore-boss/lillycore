@@ -66,7 +66,7 @@
         - `plugins/multi_user/`
         - `plugins/demos_and_corp/`
 
-      - The folder taxonomy for these modules is defined in TECH_SPEC Section 3
+      - The folder taxonomy for these modules is defined in tech_spec Section 3
         and MUST be kept in sync with this overview.
 
       **Dependency and boundary rules:**
@@ -194,7 +194,7 @@
         - CORE_RUNTIME
 
       notes:
-        - Actual DB/storage engine is defined in TECH_SPEC / future design.
+        - Actual DB/storage engine is defined in tech_spec / future design.
         - Engines and plugins build on this.
 
   - id: modules.drift_engine
@@ -339,7 +339,7 @@
 
       dependencies:
         - CORE_RUNTIME
-        - TECH_SPEC (for script standards).
+        - tech_spec (for script standards).
 
       notes:
         - Works with HELP_DESK_ENGINE and DREAM_ENGINE for self-maintenance.

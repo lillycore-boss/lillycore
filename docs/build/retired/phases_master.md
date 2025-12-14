@@ -55,7 +55,7 @@ DESCRIPTION:
   - No module, engine, or functional code may be designed or implemented beyond establishing the environment
     in which they will later exist.
   - All documentation and standards must be maintainable by GPTs and align with PROJECT_CANON and
-    GPT_RESOURCE_INDEX.
+    gpt_resource_index.
   - Phase 0 outputs must not conflict with later roadmap phases; they act as prerequisites, not prescriptive architecture.
 
   Notes:
@@ -88,7 +88,7 @@ DONE_WHEN:
 
 DOCUMENTATION_UPDATES:
   - Canon: Reference Phase 0 as the origin of foundational standards (optional summary).
-  - TECH_SPEC: Capture any Phase-0-specific technical environment standards (tooling, language version, etc.).
+  - tech_spec: Capture any Phase-0-specific technical environment standards (tooling, language version, etc.).
   - FEATURES: None (Phase 0 is infrastructural, not feature-based).
   - MODULES: None (no functional modules in Phase 0).
 
@@ -127,7 +127,7 @@ INPUTS / PRECONDITIONS:
     - Runtime behaviour
     - Identity persistence
     - System integrity / invariants
-  - TECH_SPEC sections covering:
+  - tech_spec sections covering:
     - Repository layout and folder taxonomy
     - Logging and error-handling baseline expectations
     - Tooling and infrastructure decisions from P0.1
@@ -137,7 +137,7 @@ INPUTS / PRECONDITIONS:
     - Error envelope schema details (fields, severity levels, propagation rules)
 
 STEPS:
-  - Step 1: Review all relevant Phase 0 outputs (Canon, TECH_SPEC, documentation governance, repo taxonomy, GPT behaviour rules) and the Phase 1 roadmap text to confirm constraints, dependencies, and expectations for the first runtime layer.
+  - Step 1: Review all relevant Phase 0 outputs (Canon, tech_spec, documentation governance, repo taxonomy, GPT behaviour rules) and the Phase 1 roadmap text to confirm constraints, dependencies, and expectations for the first runtime layer.
   - Step 2: Define or refine the Phase 1 deliverables list (P1.D1–P1.D6) as the authoritative “done when” targets for the core loop, logging, error envelopes, preferences, AI pool structures, and infrastructure setup.
   - Step 3: Design a decomposition plan for Phase 1 into P1.x Architect and Implementer cards:
       - Separate runtime loop design vs implementation work.
@@ -153,7 +153,7 @@ STEPS:
       - Alignment with Phase 0 standards and documentation conventions.
   - Step 5: Explicitly design the “infrastructure setup” slice so that Implementer cards:
       - Detect if repo/CI/tooling already exist.
-      - Validate configuration against TECH_SPEC and Canon.
+      - Validate configuration against tech_spec and Canon.
       - Fix or create missing pieces as needed.
   - Step 6: Produce a QA-ready P1.x card bundle that:
       - Covers all P1.D1–P1.D6 deliverables.
@@ -174,7 +174,7 @@ DONE_WHEN:
     - Explicit inputs and preconditions.
     - Clear steps and DONE_WHEN criteria.
     - Correct linkage to P1.D1–P1.D6 deliverables.
-  - Constraints from Phase 0 (Canon, TECH_SPEC, documentation governance, repo taxonomy, GPT behaviour) are explicitly reflected in the P1.x cards.
+  - Constraints from Phase 0 (Canon, tech_spec, documentation governance, repo taxonomy, GPT behaviour) are explicitly reflected in the P1.x cards.
   - There is at least one QA card at the end of the P1 bundle to validate Phase 1’s deliverables.
   - No Phase 2+ responsibilities are silently embedded into Phase 1 cards.
 
@@ -182,7 +182,7 @@ DOCUMENTATION_UPDATES:
   - Canon:
       - None directly from this milestone card.
       - Architect must flag any Canon updates discovered during decomposition as separate Architect cards (e.g., runtime invariants, error-handling philosophy, identity persistence rules).
-  - TECH_SPEC:
+  - tech_spec:
       - Identify required sections for later Implementer updates:
         - Runtime loop architecture and contracts.
         - Logging schema, channels, and usage patterns.
@@ -225,7 +225,7 @@ DESCRIPTION:
 INPUTS / PRECONDITIONS:
   - Phase 1 runtime loop, logging system, and error envelope semantics.
   - Canon rules relating to execution safety, runtime integrity, and system identity.
-  - TECH_SPEC sections on:
+  - tech_spec sections on:
       - Repository layout
       - Tooling and environment constraints
       - Logging and error-handling rules
@@ -281,17 +281,17 @@ DONE_WHEN:
   - Unified AI API contract is documented and ready for implementation.
   - All design work respects:
       - Canon execution/safety rules
-      - TECH_SPEC constraints
+      - tech_spec constraints
       - Phase 1 runtime conventions
   - No Phase 3+ responsibilities appear in the design (e.g., no persistence engine work).
   - At least one QA card exists to validate Phase 2 completion.
-  - Documentation references and update points (Canon/TECH_SPEC) are catalogued.
+  - Documentation references and update points (Canon/tech_spec) are catalogued.
 
 DOCUMENTATION_UPDATES:
   - Canon:
       - May require additions for global AI execution invariants or safety guarantees.
       - Architect must propose updates via separate cards if modifications are required.
-  - TECH_SPEC:
+  - tech_spec:
       - Must gain sections for:
           - AI pool architecture
           - Backend adapter structure
@@ -413,7 +413,7 @@ DOCUMENTATION_UPDATES:
   - Canon:
       • May require updates for persistence security, privacy, and invariants.
       • All updates must be proposed through dedicated cards.
-  - TECH_SPEC:
+  - tech_spec:
       • Must gain sections for:
           - Storage technology selection
           - Schema/directory conventions
@@ -530,7 +530,7 @@ DOCUMENTATION_UPDATES:
   - Canon:
       • Plugin-boundary rules may require additions
       • User-output vs system-owned data distinctions documented
-  - TECH_SPEC:
+  - tech_spec:
       • File/output conventions
       • Plugin storage mappings
       • Notes Plugin integration with runtime/logging
@@ -653,7 +653,7 @@ DOCUMENTATION_UPDATES:
       • Emotional semantics
       • Personal vs ephemeral vs system-state distinctions
       • DRIFT storage boundaries and guarantees
-  - TECH_SPEC:
+  - tech_spec:
       • DRIFT storage mappings and schema layout
       • Perceptual pipeline integration in runtime stack
   - FEATURES:
@@ -776,7 +776,7 @@ DOCUMENTATION_UPDATES:
   - Canon:
       • Engine roles and boundaries
       • Work packet ontology
-  - TECH_SPEC:
+  - tech_spec:
       • HELPER module location + routing rules
       • AI_POOL invocation constraints and safety
   - FEATURES:
@@ -900,7 +900,7 @@ DOCUMENTATION_UPDATES:
   - Canon:
       • Engine/plugin boundary definitions
       • Plugin ontology rules
-  - TECH_SPEC:
+  - tech_spec:
       • Plugin Engine runtime integration
       • Manifest schema + sandbox constraints
       • Plugin directory structure
@@ -1019,15 +1019,15 @@ DONE_WHEN:
   - Snapshot, integrity verification, and restoration protocols are finalized.
   - Maintenance cycle schedule documented and approved.
   - Boundaries between stability engines, operational engines, and plugins are fully specified.
-  - P8.x implementer cards generated and validated against Canon + TECH_SPEC.
-  - Documentation updated across Canon, TECH_SPEC, MODULES, and FEATURES.
+  - P8.x implementer cards generated and validated against Canon + tech_spec.
+  - Documentation updated across Canon, tech_spec, MODULES, and FEATURES.
 
 DOCUMENTATION_UPDATES:
   - Canon:
       • Stability engine ontology
       • Rules for self-repair, degradation, and script regeneration
       • Escalation + destructive-op validation rules
-  - TECH_SPEC:
+  - tech_spec:
       • Snapshot system spec
       • Integrity checks
       • Stability packet formats
@@ -1145,14 +1145,14 @@ DONE_WHEN:
   - Network interface + serving model are approved.
   - UX boundaries and non-permitted actions are clearly documented.
   - P9.x implementer cards are generated and validated.
-  - Documentation updated across Canon, TECH_SPEC, MODULES, and FEATURES.
+  - Documentation updated across Canon, tech_spec, MODULES, and FEATURES.
 
 DOCUMENTATION_UPDATES:
   - Canon:
       • UX ontology (“chat is human, crates are system”)
       • Packet interpretation rules
       • UX boundaries and safety guarantees
-  - TECH_SPEC:
+  - tech_spec:
       • Local server/network interface requirements
       • Packet → UX routing specification
   - FEATURES:
@@ -1178,7 +1178,7 @@ DELIVERABLES_SERVED:
   - P10.D5 – UX crate specifications for projects/tasks
   - P10.D6 – Packet formats for PM operations (create/update/query)
   - P10.D7 – Lifecycle rules + user/system workflows
-  - P10.D8 – Documentation across MODULES, Canon, TECH_SPEC
+  - P10.D8 – Documentation across MODULES, Canon, tech_spec
 
 ---
 DESCRIPTION:
@@ -1267,7 +1267,7 @@ DOCUMENTATION_UPDATES:
   - Canon:
       • Plugin ontology extension for PM plugin
       • Rules for long-lived project/task structures
-  - TECH_SPEC:
+  - tech_spec:
       • PM plugin storage model
       • Packet schemas for PM operations
   - FEATURES:
@@ -1380,7 +1380,7 @@ DOCUMENTATION_UPDATES:
   - Canon:
       • Plugin ontology extension for PA capabilities
       • Rules for assistant-style workflows
-  - TECH_SPEC:
+  - tech_spec:
       • PA data model + storage boundaries
       • Packet schemas for PA operations + briefings
   - FEATURES:

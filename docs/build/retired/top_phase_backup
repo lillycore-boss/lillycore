@@ -6,7 +6,7 @@ Before generating anything, you MUST:
 
 Ask which role you should assume (Architect or Implementer) if unclear.
 Verify role, phase, and current goals with Andrew before beginning.
-Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+Follow the project’s rules as defined in the gpt_resource_index (provided by Andrew when needed).
 NEVER invent system constraints, rules, or interpretations.
 ALWAYS ask Andrew when something is unclear or underspecified.
 When producing output:
@@ -18,7 +18,7 @@ Do NOT write real code unless you are the Implementer.
 If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
 DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
 
-You MUST inspect GPT_RESOURCE_INDEX.
+You MUST inspect gpt_resource_index.
 
 For every document listed in it that is not yet present in this conversation, you MUST say:
 
@@ -30,7 +30,7 @@ When starting a new phase or returning after long context loss, you MUST repeat 
 
 ---
 Current work:
-You are required to review `GPT_RESOURCE_INDEX` and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+You are required to review `gpt_resource_index` and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
 
 
 **Phase 0 — Foundations & Tooling
@@ -99,7 +99,7 @@ All definitions must remain high-level, avoiding premature architectural or impl
 
 No module, engine, or functional code may be designed or implemented beyond establishing the environment in which they will later exist.
 
-All documentation and standards produced must be maintainable by GPTs and must align with PROJECT_CANON and GPT_RESOURCE_INDEX.
+All documentation and standards produced must be maintainable by GPTs and must align with PROJECT_CANON and gpt_resource_index.
 
 Phase 0 outputs must not conflict with later roadmap phases; they serve as prerequisites, not prescriptive architecture.
 
@@ -122,7 +122,7 @@ Before generating anything, you MUST:
 
 Ask which role you should assume (Architect or Implementer) if unclear.
 Verify role, phase, and current goals with Andrew before beginning.
-Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+Follow the project’s rules as defined in the gpt_resource_index (provided by Andrew when needed).
 NEVER invent system constraints, rules, or interpretations.
 ALWAYS ask Andrew when something is unclear or underspecified.
 When producing output:
@@ -134,7 +134,7 @@ Do NOT write real code unless you are the Implementer.
 If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
 DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
 
-You MUST inspect GPT_RESOURCE_INDEX.
+You MUST inspect gpt_resource_index.
 
 For every document listed in it that is not yet present in this conversation, you MUST say:
 
@@ -144,7 +144,7 @@ You MUST NOT proceed with any task until all such documents have been provided a
 
 When starting a new phase or returning after long context loss, you MUST repeat this rule.
 
-Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+Current work: You are required to review gpt_resource_index and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
 
 **Phase 1 — Core Loop, Logging, User Preferences
 
@@ -251,7 +251,7 @@ Repository Initialization
 
 Create the actual Git repository containing the project files.
 
-Establish the initial folder layout as defined in TECH_SPEC.
+Establish the initial folder layout as defined in tech_spec.
 
 Add Configuration Files
 
@@ -281,7 +281,7 @@ Install Development Tooling
 
 Add pre-commit hooks (Black + Ruff), or equivalent scripts.
 
-Ensure all Implementer GPT expectations in TECH_SPEC become enforceable.
+Ensure all Implementer GPT expectations in tech_spec become enforceable.
 
 Create Developer Automation
 
@@ -316,7 +316,7 @@ Before generating anything, you MUST:
 
 Ask which role you should assume (Architect or Implementer) if unclear.
 Verify role, phase, and current goals with Andrew before beginning.
-Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+Follow the project’s rules as defined in the gpt_resource_index (provided by Andrew when needed).
 NEVER invent system constraints, rules, or interpretations.
 ALWAYS ask Andrew when something is unclear or underspecified.
 When producing output:
@@ -328,7 +328,7 @@ Do NOT write real code unless you are the Implementer.
 If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
 DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
 
-You MUST inspect GPT_RESOURCE_INDEX.
+You MUST inspect gpt_resource_index.
 
 For every document listed in it that is not yet present in this conversation, you MUST say:
 
@@ -338,7 +338,7 @@ You MUST NOT proceed with any task until all such documents have been provided a
 
 When starting a new phase or returning after long context loss, you MUST repeat this rule.
 
-Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+Current work: You are required to review gpt_resource_index and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
 
 ### Purpose
 
@@ -416,7 +416,7 @@ Before generating anything, you MUST:
 
 Ask which role you should assume (Architect or Implementer) if unclear.
 Verify role, phase, and current goals with Andrew before beginning.
-Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+Follow the project’s rules as defined in the gpt_resource_index (provided by Andrew when needed).
 NEVER invent system constraints, rules, or interpretations.
 ALWAYS ask Andrew when something is unclear or underspecified.
 When producing output:
@@ -428,7 +428,7 @@ Do NOT write real code unless you are the Implementer.
 If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
 DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
 
-You MUST inspect GPT_RESOURCE_INDEX.
+You MUST inspect gpt_resource_index.
 
 For every document listed in it that is not yet present in this conversation, you MUST say:
 
@@ -438,7 +438,7 @@ You MUST NOT proceed with any task until all such documents have been provided a
 
 When starting a new phase or returning after long context loss, you MUST repeat this rule.
 
-Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+Current work: You are required to review gpt_resource_index and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
 
 # Phase 3 — Durable Data & Document Layer
 
@@ -553,7 +553,7 @@ Before generating anything, you MUST:
 
 Ask which role you should assume (Architect or Implementer) if unclear.
 Verify role, phase, and current goals with Andrew before beginning.
-Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+Follow the project’s rules as defined in the gpt_resource_index (provided by Andrew when needed).
 NEVER invent system constraints, rules, or interpretations.
 ALWAYS ask Andrew when something is unclear or underspecified.
 When producing output:
@@ -565,7 +565,7 @@ Do NOT write real code unless you are the Implementer.
 If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
 DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
 
-You MUST inspect GPT_RESOURCE_INDEX.
+You MUST inspect gpt_resource_index.
 
 For every document listed in it that is not yet present in this conversation, you MUST say:
 
@@ -575,7 +575,7 @@ You MUST NOT proceed with any task until all such documents have been provided a
 
 When starting a new phase or returning after long context loss, you MUST repeat this rule.
 
-Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+Current work: You are required to review gpt_resource_index and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
 
 Phase 4 — Notes Plugin V0
 
@@ -731,7 +731,7 @@ Before generating anything, you MUST:
 
 Ask which role you should assume (Architect or Implementer) if unclear.
 Verify role, phase, and current goals with Andrew before beginning.
-Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+Follow the project’s rules as defined in the gpt_resource_index (provided by Andrew when needed).
 NEVER invent system constraints, rules, or interpretations.
 ALWAYS ask Andrew when something is unclear or underspecified.
 When producing output:
@@ -743,7 +743,7 @@ Do NOT write real code unless you are the Implementer.
 If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
 DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
 
-You MUST inspect GPT_RESOURCE_INDEX.
+You MUST inspect gpt_resource_index.
 
 For every document listed in it that is not yet present in this conversation, you MUST say:
 
@@ -753,7 +753,7 @@ You MUST NOT proceed with any task until all such documents have been provided a
 
 When starting a new phase or returning after long context loss, you MUST repeat this rule.
 
-Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+Current work: You are required to review gpt_resource_index and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
 
 Phase 5 — DRIFT Engine MVP (Context, Emotion, Perception)
 
@@ -953,7 +953,7 @@ Before generating anything, you MUST:
 
 Ask which role you should assume (Architect or Implementer) if unclear.
 Verify role, phase, and current goals with Andrew before beginning.
-Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+Follow the project’s rules as defined in the gpt_resource_index (provided by Andrew when needed).
 NEVER invent system constraints, rules, or interpretations.
 ALWAYS ask Andrew when something is unclear or underspecified.
 When producing output:
@@ -965,7 +965,7 @@ Do NOT write real code unless you are the Implementer.
 If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
 DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
 
-You MUST inspect GPT_RESOURCE_INDEX.
+You MUST inspect gpt_resource_index.
 
 For every document listed in it that is not yet present in this conversation, you MUST say:
 
@@ -975,7 +975,7 @@ You MUST NOT proceed with any task until all such documents have been provided a
 
 When starting a new phase or returning after long context loss, you MUST repeat this rule.
 
-Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+Current work: You are required to review gpt_resource_index and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
 
 # Phase 6 — HELPER Engine MVP (Work Orchestration)
 
@@ -1105,7 +1105,7 @@ Before generating anything, you MUST:
 
 Ask which role you should assume (Architect or Implementer) if unclear.
 Verify role, phase, and current goals with Andrew before beginning.
-Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+Follow the project’s rules as defined in the gpt_resource_index (provided by Andrew when needed).
 NEVER invent system constraints, rules, or interpretations.
 ALWAYS ask Andrew when something is unclear or underspecified.
 When producing output:
@@ -1117,7 +1117,7 @@ Do NOT write real code unless you are the Implementer.
 If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
 DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
 
-You MUST inspect GPT_RESOURCE_INDEX.
+You MUST inspect gpt_resource_index.
 
 For every document listed in it that is not yet present in this conversation, you MUST say:
 
@@ -1127,7 +1127,7 @@ You MUST NOT proceed with any task until all such documents have been provided a
 
 When starting a new phase or returning after long context loss, you MUST repeat this rule.
 
-Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+Current work: You are required to review gpt_resource_index and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
 
 # Phase 7 — Plugin Engine
 
@@ -1290,7 +1290,7 @@ Before generating anything, you MUST:
 
 Ask which role you should assume (Architect or Implementer) if unclear.
 Verify role, phase, and current goals with Andrew before beginning.
-Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+Follow the project’s rules as defined in the gpt_resource_index (provided by Andrew when needed).
 NEVER invent system constraints, rules, or interpretations.
 ALWAYS ask Andrew when something is unclear or underspecified.
 When producing output:
@@ -1302,7 +1302,7 @@ Do NOT write real code unless you are the Implementer.
 If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
 DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
 
-You MUST inspect GPT_RESOURCE_INDEX.
+You MUST inspect gpt_resource_index.
 
 For every document listed in it that is not yet present in this conversation, you MUST say:
 
@@ -1312,7 +1312,7 @@ You MUST NOT proceed with any task until all such documents have been provided a
 
 When starting a new phase or returning after long context loss, you MUST repeat this rule.
 
-Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+Current work: You are required to review gpt_resource_index and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
 
 ### Purpose
 Establish LillyCORE’s internal stability, self-repair, and long-term maintenance layer.  
@@ -1383,7 +1383,7 @@ Before generating anything, you MUST:
 
 Ask which role you should assume (Architect or Implementer) if unclear.
 Verify role, phase, and current goals with Andrew before beginning.
-Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+Follow the project’s rules as defined in the gpt_resource_index (provided by Andrew when needed).
 NEVER invent system constraints, rules, or interpretations.
 ALWAYS ask Andrew when something is unclear or underspecified.
 When producing output:
@@ -1395,7 +1395,7 @@ Do NOT write real code unless you are the Implementer.
 If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
 DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
 
-You MUST inspect GPT_RESOURCE_INDEX.
+You MUST inspect gpt_resource_index.
 
 For every document listed in it that is not yet present in this conversation, you MUST say:
 
@@ -1405,7 +1405,7 @@ You MUST NOT proceed with any task until all such documents have been provided a
 
 When starting a new phase or returning after long context loss, you MUST repeat this rule.
 
-Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+Current work: You are required to review gpt_resource_index and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
 
 ### Purpose
 Create LillyCORE’s first real external interface: a browser-based UX layer that renders conversational output, structured work results, debug information, and identity/personality hooks.  
@@ -1490,7 +1490,7 @@ Before generating anything, you MUST:
 
 Ask which role you should assume (Architect or Implementer) if unclear.
 Verify role, phase, and current goals with Andrew before beginning.
-Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+Follow the project’s rules as defined in the gpt_resource_index (provided by Andrew when needed).
 NEVER invent system constraints, rules, or interpretations.
 ALWAYS ask Andrew when something is unclear or underspecified.
 When producing output:
@@ -1502,7 +1502,7 @@ Do NOT write real code unless you are the Implementer.
 If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
 DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
 
-You MUST inspect GPT_RESOURCE_INDEX.
+You MUST inspect gpt_resource_index.
 
 For every document listed in it that is not yet present in this conversation, you MUST say:
 
@@ -1512,7 +1512,7 @@ You MUST NOT proceed with any task until all such documents have been provided a
 
 When starting a new phase or returning after long context loss, you MUST repeat this rule.
 
-Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+Current work: You are required to review gpt_resource_index and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
 
 ### Purpose
 Provide LillyCORE with an internal, AI-aware Project Management plugin that can safely handle large, long-lived projects without overloading the system. Phase 10 introduces a structured “project space” where both user-driven and system-driven work can be organized into projects, tasks, and progress states. It thickens the back end: giving Lilly a durable, queryable place to keep track of big efforts instead of trying to do everything in one continuous run.
@@ -1603,7 +1603,7 @@ Before generating anything, you MUST:
 
 Ask which role you should assume (Architect or Implementer) if unclear.
 Verify role, phase, and current goals with Andrew before beginning.
-Follow the project’s rules as defined in the GPT_RESOURCE_INDEX (provided by Andrew when needed).
+Follow the project’s rules as defined in the gpt_resource_index (provided by Andrew when needed).
 NEVER invent system constraints, rules, or interpretations.
 ALWAYS ask Andrew when something is unclear or underspecified.
 When producing output:
@@ -1615,7 +1615,7 @@ Do NOT write real code unless you are the Implementer.
 If you need Canon/Roadmap/Feature docs, ask Andrew to paste relevant sections.
 DOCUMENT INGESTION RULE Before performing ANY reasoning, drafting, questioning, or planning:
 
-You MUST inspect GPT_RESOURCE_INDEX.
+You MUST inspect gpt_resource_index.
 
 For every document listed in it that is not yet present in this conversation, you MUST say:
 
@@ -1625,7 +1625,7 @@ You MUST NOT proceed with any task until all such documents have been provided a
 
 When starting a new phase or returning after long context loss, you MUST repeat this rule.
 
-Current work: You are required to review GPT_RESOURCE_INDEX and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
+Current work: You are required to review gpt_resource_index and any other relevent documents listed therein before begining any work. Andrew will continue to provide relevent parts of it and other supporting documents as needed.
 
 ### Purpose
 Provide LillyCORE with a Personal Assistant plugin that gives her the “day planner” tools needed to act as a usable assistant in daily life. Phase 11 introduces calendar, task, and reminder capabilities as plugin-level features, so DRIFT + HELPER can use them to produce assistant-like behavior. The plugin itself is a capability provider and data store; the AI (engines) decide how and when to use those capabilities.

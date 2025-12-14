@@ -1,7 +1,7 @@
   - id: tech_spec.overview
     kind: overview
     md: |
-      # TECH_SPEC
+      # tech_spec
 
       Purpose:
       - Define the technical environment and baseline engineering standards for LillyCORE.
@@ -15,7 +15,7 @@
 
       Out of scope (explicit):
       - Runtime architecture and engine/plugin behavior
-      - GPT role behaviour rules (see BUILD_CANON and DOCUMENTATION_PROTOCOL)
+      - GPT role behaviour rules (see build_canon and DOCUMENTATION_PROTOCOL)
       - Documentation update procedures (see DOCUMENTATION_PROTOCOL)
 
   - id: tech_spec.platform_assumptions
@@ -111,12 +111,12 @@
     ## Repository Taxonomy Authority & Change Process
 
     Authority:
-    - TECH_SPEC is the authoritative source for repository layout and
+    - tech_spec is the authoritative source for repository layout and
       folder taxonomy during Phase 0.
-    - BUILD_CANON governs ontology and planning discipline, not physical layout.
+    - build_canon governs ontology and planning discipline, not physical layout.
 
     Rules:
-    - Files and folders MUST follow the taxonomy defined in TECH_SPEC.
+    - Files and folders MUST follow the taxonomy defined in tech_spec.
     - Implementers MUST NOT silently change repository structure.
 
     Any change to:
@@ -125,7 +125,7 @@
 
     MUST:
     - be designed via an Architect-approved card, and
-    - update TECH_SPEC accordingly.
+    - update tech_spec accordingly.
 
-    BUILD_CANON is updated ONLY when underlying ontology or planning
+    build_canon is updated ONLY when underlying ontology or planning
     discipline changes — not for ordinary layout changes.

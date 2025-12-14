@@ -82,7 +82,7 @@ phase:
     - id: P2.D7
       name: "Documentation updates for AI pools, envelopes, backend configuration"
       description: |
-        Documentation and TECH_SPEC updates covering pool roles, contracts, envelope
+        Documentation and tech_spec updates covering pool roles, contracts, envelope
         behaviour, backend configuration rules, and interactions for higher layers.
 
   constraints:

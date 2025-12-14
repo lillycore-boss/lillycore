@@ -1,7 +1,7 @@
   - id: gpt_resources.overview
     kind: overview
     md: |
-      # GPT_RESOURCE_INDEX – Overview
+      # gpt_resource_index – Overview
 
       This file is the single source of truth for:
       - What project documents exist
@@ -28,10 +28,10 @@
 
       ### Load Set
       
-      - GPT_RESOURCE_INDEX (this index)
-      - TECH_SPEC
+      - gpt_resource_index (this index)
+      - tech_spec
       - DOCUMENTATION_PROTOCOL
-      - BUILD_CANON
+      - build_canon
 
   - id: gpt_resources.load_paths
     kind: paths
@@ -42,7 +42,7 @@
 
       - This block is the single source of truth for where GPT resource files live.
       - When files are moved or renamed, update this mapping.
-      - Other blocks (BUILD_CANON, TECH_SPEC, etc.) may repeat the path as
+      - Other blocks (build_canon, tech_spec, etc.) may repeat the path as
         convenience metadata, but this mapping wins if there is a conflict.
 
       Tools or GPTs that need to locate a file SHOULD read `paths` in this block
@@ -52,9 +52,9 @@
       elsewhere but does not appear on this list, treat it as a retired document and
       ask Andrew what to do.
 
-      BUILD_CANON: "docs/build/build_canon.yml"
-      TECH_SPEC: "docs/build/tech_spec.yml"
-      GPT_RESOURCE_INDEX: "docs/build/gpt_resource_index.yml"
+      build_canon: "docs/build/build_canon.yml"
+      tech_spec: "docs/build/tech_spec.yml"
+      gpt_resource_index: "docs/build/gpt_resource_index.yml"
       DOCUMENTATION_PROTOCOL: "docs/build/documentation_protocol.yml"
       QA_REFERENCE: "docs/build/optional/qa_reference.yml"
       REGISTRY_SYSTEM: "docs/build/optional/registry_system.yml"
@@ -63,7 +63,7 @@
   - id: gpt_resources.build_canon
     kind: document
     md: |
-      ## BUILD_CANON
+      ## build_canon
 
       ### Description
 
@@ -101,7 +101,7 @@
   - id: gpt_resources.tech_spec
     kind: document
     md: |
-      ## TECH_SPEC
+      ## tech_spec
 
       ### Description
 
@@ -119,7 +119,7 @@
 
       ### Access
 
-      - When needed, Andrew can paste the relevant TECH_SPEC section
+      - When needed, Andrew can paste the relevant tech_spec section
         (e.g. Python, DB, scripts).
 
   - id: gpt_resources.documentation_protocol
@@ -130,8 +130,8 @@
       ### Description
 
       Build/system documentation protocol defining roles, triggers, and
-      procedures for updating canonical docs (`BUILD_CANON`, ROADMAP,
-      `TECH_SPEC`, `MODULES`, `FEATURES`, `GPT_RESOURCE_INDEX`, and related
+      procedures for updating canonical docs (`build_canon`, ROADMAP,
+      `tech_spec`, `MODULES`, `FEATURES`, `gpt_resource_index`, and related
       conceptual docs).
 
       ### Usage

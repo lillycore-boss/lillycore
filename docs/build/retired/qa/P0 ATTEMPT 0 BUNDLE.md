@@ -19,7 +19,7 @@ Purpose:
     test framework, etc.) required for Phase 1 to begin.
 
 Context:
-    TECH_SPEC contains unresolved TODOs. Phase 1 depends on well-defined
+    tech_spec contains unresolved TODOs. Phase 1 depends on well-defined
     technical standards. Architect does not guide these decisions; Implementer
     works with Andrew to finalize them during Phase 0.
 
@@ -28,13 +28,13 @@ Deliverables:
     - Chosen formatter
     - Chosen linter
     - Minimum tooling requirements
-    - Updated TECH_SPEC reflecting all decisions
+    - Updated tech_spec reflecting all decisions
     - A Phase-0 summary of baseline decisions
 
 Done When:
     - All technical choices are made and documented
-    - No unresolved TODOs remain in TECH_SPEC technical-baseline sections
-    - Implementer has supplied ready-to-paste TECH_SPEC updates
+    - No unresolved TODOs remain in tech_spec technical-baseline sections
+    - Implementer has supplied ready-to-paste tech_spec updates
 
 Notes / Future:
     Baseline remains stable unless revised by Andrew via future cards.
@@ -54,7 +54,7 @@ Purpose:
     taxonomy, naming rules, and placement boundaries.
 
 Context:
-    TECH_SPEC defines draft folders; Canon requires mirrored doc/code structure;
+    tech_spec defines draft folders; Canon requires mirrored doc/code structure;
     Andrew selected lowercase_with_underscores for naming.
 
 Deliverables:
@@ -66,7 +66,7 @@ Deliverables:
 Done When:
     - Repo taxonomy is fully defined
     - Naming rules are finalized
-    - TECH_SPEC updated accordingly
+    - tech_spec updated accordingly
 
 Notes / Future:
     No physical folders created until Phase 1.
@@ -86,7 +86,7 @@ Purpose:
     GPT roles.
 
 Context:
-    Canon and TECH_SPEC require consistent, rule-driven documentation behaviour.
+    Canon and tech_spec require consistent, rule-driven documentation behaviour.
 
 Deliverables:
     - Full doc hierarchy
@@ -128,7 +128,7 @@ Deliverables:
 
 Done When:
     - Behaviour is fully defined in one authoritative form
-    - Canon and TECH_SPEC reflect the unified rules
+    - Canon and tech_spec reflect the unified rules
 
 Notes / Future:
     Forms the backbone of all future GPT interactions.
@@ -157,7 +157,7 @@ Deliverables:
 
 Done When:
     - Canon required for Phase 1 is finalized and stable
-    - BUILD_CANON updated to mark frozen/mutable sections
+    - build_canon updated to mark frozen/mutable sections
 
 Notes / Future:
     Future Canon expansions require explicit approval.
@@ -177,7 +177,7 @@ Purpose:
     which are forbidden.
 
 Context:
-    Canon and TECH_SPEC require structural consistency.
+    Canon and tech_spec require structural consistency.
 
 Deliverables:
     - Required root files list
@@ -187,39 +187,39 @@ Deliverables:
 
 Done When:
     - Root-level file standards are finalized
-    - TECH_SPEC updated accordingly
+    - tech_spec updated accordingly
 
 Notes / Future:
     Physical file creation occurs in Phase 1.
 
 
 # ----------------------------------------
-# P0.7 — Establish TECH_SPEC Foundations
+# P0.7 — Establish tech_spec Foundations
 # ----------------------------------------
 ID: P0.7
-Title: Establish TECH_SPEC Foundations (Structure & Update Flow)
+Title: Establish tech_spec Foundations (Structure & Update Flow)
 Phase: 0
 Engine/Plugin: none
 Status: planned
 
 Purpose:
-    Define TECH_SPEC structure and governance before inserting technical
+    Define tech_spec structure and governance before inserting technical
     decisions.
 
 Context:
-    TECH_SPEC is partially drafted and requires foundational structure.
+    tech_spec is partially drafted and requires foundational structure.
 
 Deliverables:
-    - Full TECH_SPEC structure
+    - Full tech_spec structure
     - Update rules
     - Cross-doc alignment rules
     - Conventions for section creation
 
 Done When:
-    - TECH_SPEC skeleton is finalized and ready for P0.1 decisions
+    - tech_spec skeleton is finalized and ready for P0.1 decisions
 
 Notes / Future:
-    Prepares TECH_SPEC for Phase-0 technical baseline selections.
+    Prepares tech_spec for Phase-0 technical baseline selections.
 
 
 # ----------------------------------------
