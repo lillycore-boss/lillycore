@@ -794,6 +794,15 @@
 
     - `documentation_protocol.conflicts_ledger`
       Conflict ledger for unresolved contradictions and temporary rules.
+      
+    - `documentation_protocol.index_update_rule`
+      Requirement that any change to a canonical file must update its `*.index` block.
+      
+    - `documentation_protocol.block_id_stability`
+      Rules ensuring block IDs are stable and independent of block `kind`.
+
+    - `documentation_protocol.internal_reference_format`
+      Rules enforcing lowercase `snake_case` for all internal doc references.
 
     ### Explicitly not defined here
 
@@ -801,3 +810,74 @@
     - Technical environment and repository layout rules (see TECH_SPEC)
     - Phase sequencing and subsystem rollout intent (see ROADMAP)
     - Canonical doc inventory and file locations (see GPT_RESOURCE_INDEX)
+
+- id: documentation_protocol.index_update_rule
+  kind: rules
+  md: |
+    ## Index Update Requirement
+
+    Any change to a canonical registry-style YAML document MUST include a
+    corresponding update to that document’s `*.index` block.
+
+    A change includes:
+    - adding a new block,
+    - removing a block,
+    - renaming a block ID,
+    - or materially changing a block’s meaning or scope.
+
+    Rules:
+    - The file’s `*.index` MUST be updated in the same change set.
+    - The index MUST accurately reflect the current contents of the file.
+    - Stale, missing, or misleading index entries are considered documentation drift.
+
+    QA Enforcement:
+    - QA MUST FAIL any card or phase where a file was modified but its index
+      was not updated accordingly.
+
+- id: documentation_protocol.block_id_stability
+  kind: rules
+  md: |
+    ## Block ID Stability & Kind Independence
+
+    Block IDs are semantic identifiers and MUST NOT encode block `kind`.
+
+    Rules:
+    - A block ID MUST remain stable across refactors.
+    - The block’s `kind` MAY change without requiring an ID rename.
+    - Block IDs SHOULD describe meaning, not structure or role.
+
+    Prohibited:
+    - Encoding `kind` into the ID (e.g. `*_rules`, `*_section`, `*_meta`).
+    - Renaming blocks solely because their `kind` changed.
+
+    Rationale:
+    - Stable IDs allow reliable block loading, cross-referencing, and history tracking.
+    - `kind` is metadata; ID is identity.
+
+    QA Enforcement:
+    - QA MAY FAIL documentation changes that rename blocks unnecessarily
+      or encode `kind` into IDs.
+
+- id: documentation_protocol.internal_reference_format
+  kind: rules
+  md: |
+    ## Internal Documentation Reference Format
+
+    All internal references to canonical documentation artifacts MUST use
+    lowercase `snake_case`.
+
+    This applies to:
+    - filenames,
+    - block IDs,
+    - internal cross-references in markdown,
+    - paths listed in indexes or registries.
+
+    Rules:
+    - Canonical identifiers and paths use `snake_case` only.
+    - Human-readable labels (e.g. TECH_SPEC, BUILD_CANON) MAY be used for display,
+      but MUST NOT be used as identifiers.
+    - Mixed-case or stylized names are prohibited in identifiers.
+
+    QA Enforcement:
+    - QA MUST FAIL documentation if internal references use inconsistent casing
+      or ambiguous identifiers.
