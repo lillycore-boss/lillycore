@@ -608,3 +608,101 @@ blocks:
 
 
       
+- id: documentation_protocol.canonical_doc_roles
+  kind: reference
+  md: |
+    ## Canonical Document Roles & Relationships
+
+    The following documents have distinct, non-overlapping roles:
+
+    - **BUILD_CANON**
+      Defines ontology, authority, AI behaviour invariants, and planning discipline.
+      Highest-level meaning; overrides all other docs when conflicts arise.
+
+    - **LILLYCORE_ROADMAP**
+      Defines phase sequencing and intent.
+      Determines *when* the system evolves.
+
+    - **TECH_SPEC**
+      Defines technical environment, tooling, and repository layout.
+      Section governing layout is authoritative for physical structure.
+
+    - **MODULES**
+      Defines engines and plugins, including boundaries, responsibilities, and dependencies.
+
+    - **GPT_RESOURCE_INDEX**
+      Defines which documents are canonical and where they live.
+      A document is not canonical unless listed here.
+
+    These roles are complementary:
+    - Canon defines *what things mean*.
+    - Roadmap defines *when things happen*.
+    - Tech Spec defines *how things are built and laid out*.
+    - Modules define *what subsystems exist*.
+    - Resource Index defines *what is authoritative*.
+
+
+- id: documentation_protocol.canonical_doc_relationships
+  kind: reference
+  md: |
+    ## Canonical Document Relationships
+
+    - **BUILD_CANON**
+      Defines ontology, authority, and planning discipline.
+      Highest-level meaning; overrides all other docs when conflicts arise.
+
+    - **LILLYCORE_ROADMAP**
+      Defines phase sequencing and intent.
+
+    - **TECH_SPEC**
+      Defines technical environment, tooling, and repository layout.
+
+    - **MODULES**
+      Defines subsystem boundaries and responsibilities.
+
+    - **GPT_RESOURCE_INDEX**
+      Defines which documents are canonical and where they live.
+      A document is not authoritative unless listed here.
+
+    System-level conceptual docs may explain these relationships,
+    but MUST NOT redefine ontology, layout, or authority.
+
+- id: documentation_protocol.new_doc_type_criteria
+  kind: rules
+  md: |
+    ## Criteria for Introducing New Canonical Document Types
+
+    A new canonical document type may be introduced ONLY when it:
+    - Captures system-level meaning that cannot live in existing canonical docs.
+    - Defines persistent concepts (not runtime data or ephemeral artefacts).
+    - Supports architectural clarity or cross-role coordination.
+    - Is required to describe a new subsystem, contract, or stable interface.
+
+    A document type MUST NOT be introduced merely to store scratch notes,
+    partial designs, or exploratory drafts.
+
+    ### Authority & Approval
+    - Andrew is the final authority on approving new canonical document types.
+    - Architect may propose new types via feature cards.
+    - Implementers may create or update such docs only after approval and with
+      an explicit card.
+
+    ### Canonical Registration
+    - Once approved, a new canonical document type MUST be added to
+      GPT_RESOURCE_INDEX.
+    - A document MUST NOT be treated as canonical unless it appears in
+      GPT_RESOURCE_INDEX.
+
+    ### Prohibited Document Types
+    The following MUST NOT be treated as canonical documents:
+    - Runtime logs or error records.
+    - Work event histories.
+    - Transcripts, summaries, or snapshots generated at runtime.
+
+    ### Lifecycle Expectations
+    - Canonical docs are persistent and evolve only via approved feature cards.
+    - Each canonical doc MUST have:
+      - a clear purpose,
+      - a defined owner,
+      - explicit relationships to other docs,
+      - and a physical location consistent with TECH_SPEC.
