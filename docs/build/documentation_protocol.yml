@@ -281,45 +281,108 @@
           - If no docs changed, why that is safe.
 
 - id: documentation_protocol.qa_expectations
-  kind: rules
+  kind: spec_section
   md: |
-    ## 7. QA Expectations for Documentation
+    ## QA Expectations (Documentation + Execution Enforcement)
 
-    QA uses the QA System section in FEATURES as the authoritative operational rulebook.
-    This protocol summarizes how QA should apply those rules to documentation.
+    QA is the enforcement mechanism for both:
+    - documentation correctness, and
+    - BUILD_CANON invariants related to execution and proof.
 
-    For any card/phase to PASS, QA MUST confirm:
+    QA has **no discretion** to waive requirements defined here.
 
-    1. **Docs updated where required**
-        - FEATURES / phase bundle entries reflect:
-          - Completed status.
-          - Actual behaviour and deliverables.
-        - tech_spec reflects:
-          - Any new technical standards, tools, or layout changes.
-        - modules reflects:
-          - Any changes to engine/plugin status, responsibilities, or dependencies.
-        - gpt_resource_index reflects:
-          - Any new canonical docs or major changes to existing ones (when the card required it).
+    ---
+    ## 1. Documentation Correctness (Existing Rules)
 
-    2. **No forbidden docs**
-        - No “must-not-have” docs exist (per documentation_protocol), such as:
-          - Unindexed spec files that define behaviour
-          - Shadow copies of Canon, Tech Spec, or Roadmap with divergent rules
-          - Plugin/engine specs that bypass the ontology
+    For any card or phase to PASS, QA MUST confirm:
 
-    3. **Docs align with Canon and Tech Spec**
-        - No doc claims behaviour or layout that violates:
-          - build_canon (ontology and AI rules).
-          - tech_spec §3 (layout and taxonomy) or other relevant sections.
+    ### 1.1 Docs updated where required
+    - FEATURES / phase bundle entries reflect:
+      - completed status
+      - actual behaviour and deliverables
+    - TECH_SPEC reflects:
+      - any new technical standards, tools, or layout changes
+    - MODULES reflects:
+      - any changes to engine/plugin status, responsibilities, or dependencies
+    - GPT_RESOURCE_INDEX reflects:
+      - any new canonical docs or major changes to existing ones (when required)
 
-    4. **All updates are atomic and paste-ready**
-        - The Implementer has provided coherent sections rather than ad-hoc line edits.
-        - Documentation changes are realistically copy-pastable into the repo.
+    ### 1.2 No forbidden docs
+    - No “must-not-have” docs exist (per DOCUMENTATION_PROTOCOL), such as:
+      - unindexed spec files that define behaviour
+      - shadow copies of Canon, Tech Spec, or Roadmap with divergent rules
+      - plugin/engine specs that bypass the ontology
 
-    If any of these fail, QA MUST:
+    ### 1.3 Docs align with Canon and Tech Spec
+    - No doc claims behaviour or layout that violates:
+      - BUILD_CANON (ontology, authority, invariants)
+      - TECH_SPEC (layout, taxonomy, tooling rules)
 
-    - Return **FAIL**.
-    - Generate corrective Implementer card(s) and a QA card per the QA System rules.
+    ### 1.4 All updates are atomic and paste-ready
+    - Implementer provides coherent sections, not ad-hoc line edits
+    - Documentation changes are realistically copy-pastable into the repo
+
+    ---
+    ## 2. Execution & Runtime Enforcement (New)
+
+    QA MUST FAIL any card or phase that claims runtime or execution behaviour
+    without proof.
+
+    This includes claims that:
+    - code runs
+    - loops operate
+    - logging emits
+    - preferences load/save
+    - scripts execute
+    - CI checks pass
+    - errors are handled or propagated
+
+    QA MUST enforce:
+    - `build_canon.invariant_no_silent_deferral`
+    - `build_canon.invariant_no_stub_victory`
+
+    ---
+    ## 3. Proof Verification Rules
+
+    When proof is required, QA MUST verify:
+
+    1) A runnable command is provided (exact invocation)
+    2) Raw output artefacts exist under:
+       `builds/outputs/<phase_id>/`
+    3) Artefacts correspond to the claimed behaviour
+    4) At least one negative-path result exists when applicable
+
+    Proof location and handling rules are defined in:
+    - `tech_spec.proof_outputs_convention`
+
+    QA MUST NOT accept:
+    - paraphrased output
+    - summarized logs
+    - “it worked” statements
+    - formatted-only artefacts unless formatting itself is the deliverable
+
+    ---
+    ## 4. QA_REFERENCE Usage
+
+    QA MUST consult `QA_REFERENCE` for:
+    - QA card lifecycle
+    - retry and escalation handling
+    - GitHub automation mechanics
+    - PASS / FAIL / FAIL_ESCALATE workflows
+
+    QA_REFERENCE defines *how* QA operates.
+    This document defines *what QA must enforce*.
+
+    ---
+    ## 5. Failure Handling
+
+    If any requirement above fails, QA MUST:
+    - return **FAIL**
+    - generate corrective Implementer card(s)
+    - generate a QA card per the QA System rules
+
+    Ambiguity defaults to FAIL until clarified by Andrew.
+
 
 - id: documentation_protocol.checklists
   kind: checklist
