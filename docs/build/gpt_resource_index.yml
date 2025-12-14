@@ -170,6 +170,12 @@
     - `gpt_resource_index.documentation_protocol`
       Entry describing DOCUMENTATION_PROTOCOL (doc governance and enforcement).
 
+    - `gpt_resource_index.qa_reference`
+      Entry describing QA_REFERENCE (QA card workflow, enforcement mechanics, automation templates).
+
+    - `gpt_resource_index.registry_system`
+      Entry describing REGISTRY_SYSTEM (phase/slice registry schema and automation support).
+
     ### Explicitly not defined here
 
     - Procedural governance (see DOCUMENTATION_PROTOCOL)
