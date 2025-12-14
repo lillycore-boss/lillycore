@@ -480,10 +480,12 @@
         - Ask for surgical line edits in those files.
         - Depend on fragile alignment or spacing tricks.
 
+---
+NEW SECTIONS - possible duplicates portions within
+---
+
 - id: doc_protocol.conflicts.ledger
   kind: ledger
-  applies_to: [architect, implementer, qa]
-  tags: [conflicts, unresolved]
   md: |
     ## Conflict Ledger (Unresolved)
 
