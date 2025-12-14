@@ -9,9 +9,7 @@
       - Where they live in the repository
 
       Procedural rules for how GPTs load, use, and update these documents
-      are defined in DOCUMENTATION_PROTOCOL and DOCUMENTATION_GOVERNANCE.
-      See docs/build/documentation_protocol.md and
-      docs/documentation_governance.md.
+      are defined in DOCUMENTATION_PROTOCOL.
 
       Architect, Implementer, and QA GPTs should treat this file as the
       directory of canonical docs. If a new canonical doc is created or an
@@ -25,12 +23,6 @@
       - TECH_SPEC
       - DOCUMENTATION_PROTOCOL
       - BUILD_CANON
-
-      Additional rules:
-      - DOCUMENTATION_PROTOCOL is the **procedural authority** for how GPTs
-        behave when reading/updating docs.
-      - DOCUMENTATION_GOVERNANCE is the **conceptual authority** for doc
-        layers, categories, and which docs are allowed or forbidden.
 
   - id: gpt_resources.load_paths
     kind: paths
