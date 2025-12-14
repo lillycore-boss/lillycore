@@ -113,9 +113,6 @@
       Use this pattern for each entry:
 
       ```text
-      # ----------------------------------------
-      # MODULE: <NAME>
-      # ----------------------------------------
         type: core | engine | plugin | ui | infra
         phase: <roadmap phase number>
         status: planned | in-progress | implemented
@@ -161,9 +158,6 @@
   - id: modules.ai_pools
     kind: module
     md: |
-      # ----------------------------------------
-      # MODULE: AI_POOLS
-      # ----------------------------------------
       type: core
       phase: 2
       status: planned
@@ -184,9 +178,6 @@
   - id: modules.system_doc
     kind: module
     md: |
-      # ----------------------------------------
-      # MODULE: SYSTEM_DOC
-      # ----------------------------------------
       type: core
       phase: 3
       status: planned
@@ -209,9 +200,6 @@
   - id: modules.drift_engine
     kind: module
     md: |
-      # ----------------------------------------
-      # MODULE: DRIFT_ENGINE
-      # ----------------------------------------
       type: engine
       phase: 5
       status: planned
@@ -238,9 +226,6 @@
   - id: modules.helper_engine
     kind: module
     md: |
-      # ----------------------------------------
-      # MODULE: HELPER_ENGINE
-      # ----------------------------------------
       type: engine
       phase: 6
       status: planned
@@ -268,9 +253,6 @@
   - id: modules.plugin_engine
     kind: module
     md: |
-      # ----------------------------------------
-      # MODULE: PLUGIN_ENGINE
-      # ----------------------------------------
       type: engine
       phase: 7
       status: planned
@@ -295,9 +277,6 @@
   - id: modules.help_desk_engine
     kind: module
     md: |
-      # ----------------------------------------
-      # MODULE: HELP_DESK_ENGINE
-      # ----------------------------------------
       type: engine
       phase: 8
       status: planned
@@ -322,9 +301,6 @@
   - id: modules.dream_engine
     kind: module
     md: |
-      # ----------------------------------------
-      # MODULE: DREAM_ENGINE
-      # ----------------------------------------
       type: engine
       phase: 8
       status: planned
@@ -348,9 +324,6 @@
   - id: modules.script_engine
     kind: module
     md: |
-      # ----------------------------------------
-      # MODULE: SCRIPT_ENGINE
-      # ----------------------------------------
       type: engine
       phase: 8
       status: planned
@@ -374,9 +347,6 @@
   - id: modules.notes_plugin
     kind: module
     md: |
-      # ----------------------------------------
-      # MODULE: NOTES_PLUGIN
-      # ----------------------------------------
       type: plugin
       phase: 4
       status: planned
@@ -399,9 +369,6 @@
   - id: modules.ux_interface
     kind: module
     md: |
-      # ----------------------------------------
-      # MODULE: UX_INTERFACE
-      # ----------------------------------------
       type: ui
       phase: 9
       status: planned
@@ -424,9 +391,6 @@
   - id: modules.project_management
     kind: module
     md: |
-      # ----------------------------------------
-      # MODULE: PROJECT_MANAGEMENT
-      # ----------------------------------------
       type: plugin
       phase: 10
       status: planned
@@ -446,9 +410,6 @@
   - id: modules.personal_assistant
     kind: module
     md: |
-      # ----------------------------------------
-      # MODULE: PERSONAL_ASSISTANT
-      # ----------------------------------------
       type: plugin
       phase: 11
       status: planned
@@ -470,9 +431,6 @@
   - id: modules.multi_user
     kind: module
     md: |
-      # ----------------------------------------
-      # MODULE: MULTI_USER
-      # ----------------------------------------
       type: plugin
       phase: 13
       status: planned
@@ -493,9 +451,6 @@
   - id: modules.io_network_layer
     kind: module
     md: |
-      # ----------------------------------------
-      # MODULE: IO_NETWORK_LAYER
-      # ----------------------------------------
       type: infra
       phase: 14
       status: planned
@@ -519,9 +474,6 @@
   - id: modules.demos_and_corp
     kind: module
     md: |
-      # ----------------------------------------
-      # MODULE: DEMOS_AND_CORP
-      # ----------------------------------------
       type: plugin
       phase: 12+
       status: future
@@ -551,7 +503,3 @@
         Procedural rules for introducing new engines and plugins, including
         when they become canonical and how they are indexed, are defined in
         DOCUMENTATION_GOVERNANCE and DOCUMENTATION_PROTOCOL.
-
-      ---
-
-      _End of MODULES_
