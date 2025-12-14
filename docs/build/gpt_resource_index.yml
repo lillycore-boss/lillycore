@@ -15,24 +15,6 @@
     directory of canonical docs. If a new canonical doc is created or an
     existing one changes meaning, this index must be updated.
 
-    ## Mandatory-load set
-
-    ### Loader Contract
-    
-    Any GPT operating on LillyCORE MUST:
-    
-    1. STOP all reasoning and planning upon detecting this document
-    2. REQUEST the full Mandatory Load Set if any item is missing
-    3. INGEST and ACKNOWLEDGE all items in the set
-    4. ONLY THEN proceed with any task, analysis, or modification
-
-    ### Load Set
-    
-    - gpt_resource_index (this index)
-    - tech_spec
-    - documentation_protocol
-    - build_canon
-
 - id: gpt_resources.load_paths
   kind: reference
   md: |
