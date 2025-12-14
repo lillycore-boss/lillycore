@@ -543,3 +543,40 @@ blocks:
             easy to overwrite entire sections
 ---
 
+  - id: docs_gov.categories
+    kind: rules
+    md: |
+      ## Doc Categories & Requirements
+
+      This section defines which categories we must have, should have, may have, and must not have. It operates at the conceptual level and relies on GPT_RESOURCE_INDEX and TECH_SPEC for concrete file lists and locations.
+
+      ### 1. Must-Have Categories
+      - Core Build/System Docs: PROJECT_CANON, LILLYCORE_ROADMAP, TECH_SPEC, MODULES, GPT_RESOURCE_INDEX, phase/feature bundles
+      - Documentation Governance: this file (or its successor) as the single place describing documentation layers and allowed/forbidden categories
+
+      **Rules**
+      - Must be kept in sync with each other whenever code or architecture changes (per Canon rules).
+      - Any new canonical doc type must be added to GPT_RESOURCE_INDEX and placed consistently with TECH_SPEC unless Andrew overrides.
+
+      ### 2. Should-Have Categories
+      - System-level conceptual overviews (architecture, how things fit)
+      - Per-plugin conceptual docs (responsibilities, boundaries)
+      - User-facing docs once UX/APIs exist
+      - Module-level READMEs inside code folders are allowed if they do not redefine canonical behaviour and link back to canonical specs
+
+      ### 3. May-Have Categories
+      - Exploratory / scratch / design notes (clearly non-authoritative)
+      - Generated documentation (clearly marked generated and non-authoritative)
+
+      Rule of thumb:
+      - If a may-have doc contradicts a must-have doc, the must-have doc and Andrew’s explicit instructions win.
+
+      ### 4. Must-Not-Have Categories
+      - Unindexed spec files that define behaviour/rules/architecture without being referenced in GPT_RESOURCE_INDEX or clearly marked non-authoritative
+      - Shadow copies of Canon/Tech Spec/Roadmap outside the canonical doc set
+      - Plugin/engine specs that bypass ontology (introduce new meanings without going through Canon)
+      - Runtime artefacts treated as specs
+
+      If a must-not-have document appears, it must either:
+      1) be deleted or clearly marked deprecated, or
+      2) be promoted via a proper feature card plus updates to GPT_RESOURCE_INDEX (and TECH_SPEC if needed).
