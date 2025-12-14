@@ -102,10 +102,10 @@
         - System-level conceptual docs (including documentation_governance).
 
       Architect MUST:
-      
+
       - Ensure new canonical docs are:
         - Added to GPT_RESOURCE_INDEX.
-        - Placed in locations allowed by TECH_SPEC and documentation_governance.
+        - Placed in locations allowed by TECH_SPEC and this protocol.
       - Include documentation deliverables in every phase/feature bundle.
 
       Architect MUST NOT:
@@ -141,10 +141,11 @@
 
       - Verifies that **all required documentation updates** have been made for a given card/phase.
       - Uses:
-        - feature cards / phase bundles (tracked externally) → QA System and phase bundles.  
-        - TECH_SPEC → technical and layout rules.  
-        - GPT_RESOURCE_INDEX → canonical doc list.  
-        - documentation_governance → doc categories and allowed/forbidden patterns.
+        - feature cards / phase bundles (tracked externally)
+        - TECH_SPEC → technical and layout rules
+        - GPT_RESOURCE_INDEX → canonical doc list
+        - DOCUMENTATION_PROTOCOL → documentation categories, constraints, and enforcement rules
+
 
       QA MUST:
 
@@ -181,7 +182,7 @@
            - Typing/linting/test requirements change.
 
       3. **System-Level Conceptual Docs**
-         - Update documentation_governance or other high-level conceptual docs **only** when the card explicitly includes that as a deliverable.
+         - Update DOCUMENTATION_PROTOCOL or other high-level conceptual docs **only** when the card explicitly includes that as a deliverable.
 
       ### 4.2 Architecture or Planning Change (Architect)
 
@@ -285,7 +286,8 @@
     md: |
       ## 7. QA Expectations for Documentation
 
-      QA uses the QA System section in FEATURES as the authoritative operational rulebook. This protocol summarizes how QA should apply those rules to documentation.
+      QA uses the QA System section in FEATURES as the authoritative operational rulebook.
+      This protocol summarizes how QA should apply those rules to documentation.
 
       For any card/phase to PASS, QA MUST confirm:
 
@@ -301,10 +303,10 @@
            - Any new canonical docs or major changes to existing ones (when the card required it).
 
       2. **No forbidden docs**
-         - No “must-not-have” docs exist (per documentation_governance), such as:
-           - Unindexed spec files that define behaviour.
-           - Shadow copies of Canon, Tech Spec, or Roadmap with divergent rules.
-           - Plugin/engine specs that bypass the ontology.
+         - No “must-not-have” docs exist (per DOCUMENTATION_PROTOCOL), such as:
+           - Unindexed spec files that define behaviour
+           - Shadow copies of Canon, Tech Spec, or Roadmap with divergent rules
+           - Plugin/engine specs that bypass the ontology
 
       3. **Docs align with Canon and Tech Spec**
          - No doc claims behaviour or layout that violates:
@@ -339,7 +341,7 @@
 
       For each phase or redesign:
 
-      - [ ] I checked PROJECT_CANON, LILLYCORE_ROADMAP, TECH_SPEC, MODULES, FEATURES, GPT_RESOURCE_INDEX, and documentation_governance.  
+      - [ ] I checked PROJECT_CANON, LILLYCORE_ROADMAP, TECH_SPEC, FEATURES, GPT_RESOURCE_INDEX, and DOCUMENTATION_PROTOCOL.
       - [ ] I included **explicit documentation deliverables** for any change that affects behaviour, taxonomy, or canonical docs.  
       - [ ] If new canonical docs are needed, I included tasks to:
         - Create them under allowed locations, and  
@@ -349,8 +351,8 @@
 
       For each QA card:
 
-      - [ ] All docs listed in this protocol as relevant to the card/phase have been checked.  
-      - [ ] No forbidden doc categories are being relied upon.  
+      - [ ] All docs listed in this protocol as relevant to the card/phase have been checked.
+      - [ ] No forbidden doc categories are being relied upon (per DOCUMENTATION_PROTOCOL).
       - [ ] Any new “important” doc has either been:
         - Explicitly marked non-authoritative, or  
         - Promoted through a card and indexed in GPT_RESOURCE_INDEX.  
@@ -490,8 +492,12 @@
     ## Documentation Categories & Constraints
 
     This section defines which categories of documentation are permitted to exist
-    and how they are treated. It operates at a conceptual level; concrete file
-    lists and locations are governed by GPT_RESOURCE_INDEX and TECH_SPEC.
+    and how they are treated.
+
+    DOCUMENTATION_PROTOCOL is the authoritative source for documentation
+    governance, categories, constraints, and enforcement rules.
+
+    Concrete file lists and locations are governed by GPT_RESOURCE_INDEX and TECH_SPEC.
 
     ### Must-Have Categories
     - Core build/system authority docs (e.g. Canon, roadmap, technical specs,
