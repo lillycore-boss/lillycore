@@ -34,7 +34,7 @@
     Outcomes of each phase represent architectural readiness,
     not code-complete deliverables.
 
-- id: roadmap.phase.0
+- id: roadmap.p0
   kind: reference
   md: |
     # PHASE 0 — FOUNDATIONS & TOOLING
@@ -52,7 +52,7 @@
     **Outcome:**
       A clean workspace with stable rules.
 
-- id: roadmap.phase.1
+- id: roadmap.p1
   kind: reference
   md: |
     # PHASE 1 — CORE LOOP, LOGGING, USER PREFERENCES
@@ -70,7 +70,7 @@
     **Outcome:**
       LillyCORE can run and persist user settings.
 
-- id: roadmap.phase.2
+- id: roadmap.p2
   kind: reference
   md: |
     # PHASE 2 — AI POOLS & EXECUTION FRAMEWORK
@@ -88,7 +88,7 @@
     **Outcome:**
       Any LLM backend can be attached safely.
 
-- id: roadmap.phase.3
+- id: roadmap.p3
   kind: reference
   md: |
     # PHASE 3 — SYSTEM DOC MVP (DURABLE DATA LAYER)
@@ -105,7 +105,7 @@
     **Outcome:**
       Durable state with no corruption.
 
-- id: roadmap.phase.4
+- id: roadmap.p4
   kind: reference
   md: |
     # PHASE 4 — NOTES PLUGIN V0
@@ -122,7 +122,7 @@
     **Outcome:**
       Cheap way to test memory flow.
 
-- id: roadmap.phase.5
+- id: roadmap.p5
   kind: reference
   md: |
     # PHASE 5 — DRIFT ENGINE MVP (CONTEXT, EMOTION, PERCEPTION)
@@ -140,7 +140,7 @@
     **Outcome:**
       Structured input for HELPER_ENGINE.
 
-- id: roadmap.phase.6
+- id: roadmap.p6
   kind: reference
   md: |
     # PHASE 6 — HELPER ENGINE MVP (WORK ENGINE)
@@ -158,7 +158,7 @@
     **Outcome:**
       Full engine for doing work with traceability.
 
-- id: roadmap.phase.7
+- id: roadmap.p7
   kind: reference
   md: |
     # PHASE 7 — PLUGIN ENGINE MVP
@@ -176,7 +176,7 @@
     **Outcome:**
       The system becomes expandable.
 
-- id: roadmap.phase.8
+- id: roadmap.p8
   kind: reference
   md: |
     # PHASE 8 — STABILITY SPINE
@@ -195,7 +195,7 @@
     - SUBPHASE 8b — DREAM ENGINE V0
     - SUBPHASE 8c — SCRIPT ENGINE V0
 
-- id: roadmap.phase.8a.help_desk_engine
+- id: roadmap.p8a.help_desk_engine
   kind: reference
   md: |
     ## SUBPHASE 8a — HELP DESK ENGINE V0
@@ -208,7 +208,7 @@
     **Outcome:**
       System stays alive.
 
-- id: roadmap.phase.8b.dream_engine
+- id: roadmap.p8b.dream_engine
   kind: reference
   md: |
     ## SUBPHASE 8b — DREAM ENGINE V0
@@ -222,7 +222,7 @@
     **Outcome:**
       Lilly learns and self-corrects.
 
-- id: roadmap.phase.8c.script_engine
+- id: roadmap.p8c.script_engine
   kind: reference
   md: |
     ## SUBPHASE 8c — SCRIPT ENGINE V0
@@ -236,7 +236,7 @@
     **Outcome:**
       Procedural intelligence + autonomous maintenance.
 
-- id: roadmap.phase.9
+- id: roadmap.p9
   kind: reference
   md: |
     # PHASE 9 — UX MVP
@@ -253,7 +253,7 @@
     **Outcome:**
       External interaction begins.
 
-- id: roadmap.phase.10
+- id: roadmap.p10
   kind: reference
   md: |
     # PHASE 10 — PROJECT MANAGEMENT PLUGIN
@@ -269,7 +269,7 @@
     **Outcome:**
       Autonomous internal PM.
 
-- id: roadmap.phase.11
+- id: roadmap.p11
   kind: reference
   md: |
     # PHASE 11 — PERSONAL ASSISTANT PLUGIN
@@ -286,7 +286,7 @@
     **Outcome:**
       Lilly becomes a usable assistant.
 
-- id: roadmap.phase.12
+- id: roadmap.p12
   kind: reference
   md: |
     # PHASE 12 — DEMONSTRATION PLUGINS
@@ -304,7 +304,7 @@
     **Outcome:**
       Public demos and validation.
 
-- id: roadmap.phase.13
+- id: roadmap.p13
   kind: reference
   md: |
     # PHASE 13 — MULTI-USER PLUGIN
@@ -321,7 +321,7 @@
     **Outcome:**
       LillyCORE supports multiple humans.
 
-- id: roadmap.phase.14
+- id: roadmap.p14
   kind: reference
   md: |
     # PHASE 14 — IO & NETWORK LAYER
@@ -338,7 +338,7 @@
     **Outcome:**
       Whole-home digital presence.
 
-- id: roadmap.phase.15
+- id: roadmap.p15
   kind: reference
   md: |
     # PHASE 15 — APPLIANCE LAYER
@@ -355,7 +355,7 @@
     **Outcome:**
       Dedicated device compatibility.
 
-- id: roadmap.phase.16
+- id: roadmap.p16
   kind: reference
   md: |
     # PHASE 16 — USER CONFIGURATION & FIRST-RUN EXPERIENCE
@@ -373,7 +373,7 @@
     **Outcome:**
       Refined entry experience.
 
-- id: roadmap.phase.17
+- id: roadmap.p17
   kind: reference
   md: |
     # PHASE 17 — ENTERPRISE DEMO PLUGIN
@@ -390,7 +390,7 @@
     **Outcome:**
       Investor-ready demo.
 
-- id: roadmap.phase.18
+- id: roadmap.p18
   kind: reference
   md: |
     # PHASE 18 — SYSTEM INTEGRATION + ALPHA RELEASE
