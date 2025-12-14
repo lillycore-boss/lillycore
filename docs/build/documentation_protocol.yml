@@ -321,7 +321,7 @@
     - Return **FAIL**.
     - Generate corrective Implementer card(s) and a QA card per the QA System rules.
 
-- id: documentation_protocol.Checklists
+- id: documentation_protocol.checklists
   kind: checklist
   md: |
     ## 8. Quick Checklists
