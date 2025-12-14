@@ -11,7 +11,7 @@
       - build_canon overrides all other documentation.
 
   - id: build_canon.philosophy_and_authority
-    kind: philosophy
+    kind: rules
     md: |
       LillyCORE is a modular, evolving AI system.
       Its rules, definitions, and meaning come from Andrew only.
@@ -27,7 +27,7 @@
       No subsystem, GPT, module, or engine may reinterpret or soften this.
 
   - id: build_canon.global_ai_behaviour_rules
-    kind: behaviour_rules
+    kind: rules
     md: |
       2.1 — NO ASSUMPTIONS
         - Do NOT invent rules, dependencies, behaviours, limitations,
@@ -54,7 +54,7 @@
       "Is this card tracked in GitHub, FEATURES, or both?"
       
   - id: build_canon.naming_standards_and_conventions
-    kind: standards
+    kind: rules
     md: |
       - LillyCORE standard for project-owned files and folders is snake_case
         (lowercase_with_underscores).
@@ -72,7 +72,7 @@
         AI MUST NOT depend on doc version numbers for logic.
 
   - id: build_canon.documentation_standards
-    kind: docs_pointer
+    kind: reference
     md: |
       NOTE:
         Detailed rules for documentation maintenance, update responsibilities,
@@ -80,7 +80,7 @@
         build_canon no longer defines per-role documentation procedures.
 
   - id: build_canon.planning_and_decomposition
-    kind: planning_rules
+    kind: rules
     md: |
       6.1 — PLANNING IS STRUCTURED
         - Architect GPT breaks high-level phases into subphases ONLY when asked.
@@ -124,9 +124,14 @@
       **ID**
       - A short identifier like F-001 or F-002.
       - May match a GitHub Issue or use a separate scheme.
+      
+      **GPT RULE**
+      - Architect MUST use build_canon.feature_card_template. 
+      - Implementer MUST NOT alter template semantics.
 
-      **Template**
-
+  id: build_canon.feature_card_template
+  kind: template
+  md: |
       ID: F-XXX  
       Title: <short feature name>  
       Phase: <roadmap phase numbers>  
@@ -151,12 +156,8 @@
           - Follow-ups.
           - Risks or possible extensions.
 
-      **GPT RULE**
-      - Architect MUST use this template.
-      - Implementer MUST NOT alter template semantics.
-
   - id: build_canon.canon_and_roadmap_interaction
-    kind: interaction
+    kind: reference
     md: |
       - The Roadmap defines WHEN the system evolves.
       - The Canon defines HOW planning and implementation must behave.
@@ -166,7 +167,7 @@
         Architect then updates docs accordingly.
 
   - id: build_canon.architect_role
-    kind: role_note
+    kind: reference
     md: |
       NOTE:
         Detailed procedural rules for the Architect GPT decomposition role,
@@ -176,7 +177,7 @@
         not execution.
 
   - id: build_canon.implementer_role
-    kind: role_note
+    kind: reference
     md: |
       NOTE:
         Detailed execution rules for the Implementer GPT, including scope
@@ -185,7 +186,7 @@
         carries per-role procedural checklists.
 
   - id: build_canon.qa_role
-    kind: role_note
+    kind: reference
     md: |
       NOTE:
         Detailed verification, PASS/FAIL criteria, and correction-card
@@ -194,7 +195,7 @@
         discipline; the operational protocol is defined elsewhere.
 
   - id: build_canon.updates_to_canon
-    kind: updates
+    kind: rules
     md: |
       - The Canon may ONLY change when Andrew explicitly approves changes.
       - AI MUST NEVER imply or silently modify Canon rules.
