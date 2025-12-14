@@ -34,12 +34,6 @@
 
   - id: gpt_resources.load_paths
     kind: paths
-    paths:
-      PROJECT_CANON: "docs/build/project_canon.yml"
-      LILLYCORE_ROADMAP: "docs/build/lillycore_roadmap.yml"
-      TECH_SPEC: "docs/build/tech_spec.yml"
-      GPT_RESOURCE_INDEX: "docs/build/gpt_resource_index.yml"
-      DOCUMENTATION_PROTOCOL: "docs/build/documentation_protocol.ymld"
     md: |
       ## GPT Resource Load Paths
 
@@ -53,6 +47,18 @@
       Tools or GPTs that need to locate a file SHOULD read `paths` in this block
       rather than hardcoding paths elsewhere.
 
+      This list is the authoritative list of documents. If a document is named
+      elsewhere but does not appear on this list, treat it as a retired document and
+      ask Andrew what to do.
+
+      PROJECT_CANON: "docs/build/project_canon.yml"
+      LILLYCORE_ROADMAP: "docs/build/lillycore_roadmap.yml"
+      TECH_SPEC: "docs/build/tech_spec.yml"
+      GPT_RESOURCE_INDEX: "docs/build/gpt_resource_index.yml"
+      DOCUMENTATION_PROTOCOL: "docs/build/documentation_protocol.yml"
+      QA_REFERENCE: "docs/build/optional/qa_reference.yml"
+      REGISTRY_SYSTEM: "docs/build/optional/registry_system.yml"
+      
   - id: gpt_resources.document.project_canon
     kind: document
     md: |
