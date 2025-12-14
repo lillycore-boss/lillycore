@@ -621,3 +621,33 @@
       - a defined owner,
       - explicit relationships to other docs,
       - and a physical location consistent with tech_spec.
+
+- id: documentation_protocol.kind_governance
+  kind: rules
+  md: |
+    ## Governance: Adding or Modifying Block Kinds
+
+    Block kinds are a controlled classification mechanism used to group
+    similar blocks by semantic role.
+
+    ### General Rule
+    GPTs MUST use an existing kind if one reasonably fits the block’s purpose.
+
+    A new kind may be introduced ONLY if:
+    1. No existing kind accurately describes the block’s role
+    2. The kind is expected to be reused (not single-use)
+    3. The file’s `*.allowed_kinds` block is updated to include it
+    4. QA verifies that the new kind is justified and consistently applied
+
+    ### Prohibited Practices
+    - Creating a new kind to mirror a block’s topic (e.g. `tooling`, `repo`)
+    - Creating role-based or one-off kinds
+    - Encoding behaviour or authority into kind names
+
+    ### Authority
+    - `kind` is metadata, not identity
+    - Block IDs MUST remain stable if a kind changes
+    - Final approval of new kinds rests with Andrew
+
+    If unsure whether a new kind is permitted:
+    STOP and ask Andrew.
