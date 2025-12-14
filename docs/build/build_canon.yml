@@ -207,3 +207,73 @@
 
     - Architect is responsible for producing the update text,
       but ONLY after Andrew explicitly authorizes it.
+
+- id: build_canon.allowed_kinds
+  kind: meta
+  md: |
+    Allowed kinds for BUILD_CANON:
+
+    - overview
+    - meta
+    - index
+    - rules
+    - reference
+    - template
+
+    If no existing kind fits a new block, follow
+    `documentation_protocol.kind_governance`.
+
+- id: build_canon.index
+  kind: index
+  md: |
+    ## BUILD_CANON Block Index
+
+    BUILD_CANON defines LillyCORE’s authority model, core planning discipline,
+    and global behavioural constraints for GPT roles building LillyCORE.
+
+    ### Blocks in this file
+
+    - `build_canon.overview`
+      High-level purpose and conflict resolution priority.
+
+    - `build_canon.allowed_kinds`
+      List of permitted block kinds for this file.
+
+    - `build_canon.philosophy_and_authority`
+      Prime Directive, authority model, and “Andrew wins” rules.
+
+    - `build_canon.global_ai_behaviour_rules`
+      Global GPT behavioural constraints (no assumptions, ask-before-acting, etc.).
+
+    - `build_canon.naming_standards_and_conventions`
+      Naming conventions and references to TECH_SPEC as the technical authority.
+
+    - `build_canon.documentation_standards`
+      Pointer to DOCUMENTATION_PROTOCOL for documentation procedures and governance.
+
+    - `build_canon.planning_and_decomposition`
+      Planning discipline rules and decomposition constraints (rules only; template is separate).
+
+    - `build_canon.feature_card_template`
+      Canonical feature card template referenced by planning rules and used by Architect GPT.
+
+    - `build_canon.canon_and_roadmap_interaction`
+      Relationship between BUILD_CANON and the roadmap.
+
+    - `build_canon.architect_role`
+      Conceptual scope of the Architect role (decomposition, not execution).
+
+    - `build_canon.implementer_role`
+      Conceptual scope of the Implementer role (execution within constraints).
+
+    - `build_canon.qa_role`
+      Conceptual scope of QA role (verification and corrective card generation).
+
+    - `build_canon.updates_to_canon`
+      Rules governing when and how BUILD_CANON may be changed.
+
+    ### Explicitly not defined here
+
+    - Technical environment/tooling/layout specifics (see TECH_SPEC)
+    - Documentation update procedures and enforcement mechanics (see DOCUMENTATION_PROTOCOL)
+    - Phase sequencing and subsystem rollout intentions (see ROADMAP)
