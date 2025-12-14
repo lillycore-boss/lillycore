@@ -19,7 +19,7 @@
       - Documentation update procedures (see documentation_protocol)
 
   - id: tech_spec.platform_assumptions
-    kind: platform
+    kind: baseline
     md: |
       ## Platform Assumptions
 
@@ -42,7 +42,7 @@
       - All code, scripts, and tooling choices MUST be compatible with the minimum version.
 
   - id: tech_spec.best_practice_policy
-    kind: policy
+    kind: rules
     md: |
       ## Best-Practice Policy (Default)
 
@@ -55,7 +55,7 @@
         but the exception MUST be documented here.
 
   - id: tech_spec.repo_root_definition
-    kind: repo
+    kind: rules
     md: |
       ## Repository Root Definition
 
@@ -67,7 +67,7 @@
       - Repository-wide configuration files live at repository root unless explicitly stated otherwise.
 
   - id: tech_spec.tooling_baseline
-    kind: tooling
+    kind: baseline
     md: |
       ## Tooling Baseline (Conceptual)
 
@@ -129,3 +129,20 @@
 
     build_canon is updated ONLY when underlying ontology or planning
     discipline changes — not for ordinary layout changes.
+
+- id: tech_spec.allowed_kinds
+  kind: meta
+  md: |
+    Allowed kinds for TECH_SPEC:
+
+    - overview
+    - meta
+    - index
+    - baseline
+    - rules
+    - decisions
+    - reference
+
+    If no existing kind fits a new block, follow
+    `documentation_protocol.kind_governance`.
+
