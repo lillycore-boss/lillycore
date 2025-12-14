@@ -1,5 +1,5 @@
 - id: lillycore_qa_reference.overview
-  kind: section
+  kind: overview
   md: |
     ## 1. GitHub Project Layout Overview
 
@@ -23,8 +23,8 @@
     | Result            | Single-select | `PENDING`, `PASS`, `FAIL`, `FAIL_ESCALATE`. |
     | Attempt #         | Number        | Records which QA attempt this is for the phase. |
 
-- id: lillycore_qa_reference.section_2_github_automation_scripts
-  kind: section
+- id: lillycore_qa_reference.github_automation_scripts
+  kind: reference
   md: |
     ## 2. GitHub Automation Scripts & Command Templates
 
@@ -88,8 +88,8 @@
     gh project item move <ITEM_ID>   --project "<MAIN_PROJECT_NUMBER>"   --column "Graveyard"
     ```
 
-- id: lillycore_qa_reference.section_3_notes
-  kind: section
+- id: lillycore_qa_reference.notes
+  kind: reference
   md: |
     ## 3. Notes
     - All commands assume issue-based workflow (no markdown files in repo).
@@ -98,10 +98,44 @@
     - All sections are deterministic and designed for AI-friendly parsing.
 
     Document generated automatically by Lilly for Phase 0.4 deliverables.
-
 - id: lillycore_qa_reference.allowed_kinds
   kind: meta
   md: |
-    Required blocks per canonical file
-    - One overview block (kind: overview)
-    - One allowed_kinds block (kind: meta)
+    Allowed kinds for QA_REFERENCE:
+
+    - overview
+    - meta
+    - index
+    - reference
+    - template
+
+    If no existing kind fits a new block, follow
+    `documentation_protocol.kind_governance`.
+
+- id: lillycore_qa_reference.index
+  kind: index
+  md: |
+    ## QA_REFERENCE Block Index
+
+    QA_REFERENCE is a helper document containing deterministic conventions and
+    GitHub CLI templates used for QA card workflow.
+
+    ### Blocks in this file
+
+    - `lillycore_qa_reference.overview`
+      Overview of the QA project layout and intent.
+
+    - `lillycore_qa_reference.allowed_kinds`
+      List of permitted block kinds for this file.
+
+    - `lillycore_qa_reference.github_automation_scripts`
+      GitHub CLI command templates for creating, moving, editing, and appending QA reports.
+
+    - `lillycore_qa_reference.notes`
+      Notes and conventions (e.g., append-to-end rule, deterministic structure).
+
+    ### Explicitly not defined here
+
+    - QA PASS/FAIL governance (see DOCUMENTATION_PROTOCOL)
+    - Phase deliverables and scope (see phase cards / FEATURES system)
+
