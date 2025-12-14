@@ -1,0 +1,169 @@
+- id: build_github_reference.overview
+  kind: overview
+  md: |
+    build_github_reference is a helper document containing deterministic conventions and GitHub workflow templates
+    used to manage LillyCORE phase/feature cards in the main project board.
+
+    Scope:
+    - GitHub project layout (columns/fields) for the main board
+    - Command templates for creating/moving/updating cards and appending reports
+
+    Out of scope:
+    - Phase planning and decomposition rules (see build_canon and roadmap)
+    - Documentation governance and enforcement (see documentation_protocol)
+    - QA PASS/FAIL governance (see documentation_protocol.qa_expectations and qa_reference)
+
+    ## 1. GitHub Project Layout Overview
+
+    ### Project Name
+    **LillyCORE Main**
+
+    ### Columns
+    - **Parking Lot** – Unsorted ideas, future work, or untriaged items.
+    - **Backlog** – Planned work not yet ready for execution.
+    - **Ready** – Approved cards ready to be executed.
+    - **In Progress** – Currently being worked.
+    - **Needs Review** – Awaiting QA or Andrew review/sign-off.
+    - **Done** – Completed and validated items.
+    - **Graveyard** – Archived failed attempts or deprecated work.
+
+    ### Custom Fields
+    | Field Name       | Type   | Description |
+    |------------------|--------|-------------|
+    | Card ID          | Text   | Unique identifier (e.g., `p1.runtime.1`). |
+    | Phase ID         | Text   | Phase identifier (e.g., `p1`). |
+    | Parent ID        | Text   | Parent card identifier (e.g., `p1` or `p1.runtime`). |
+    | Executor Role    | Text   | Role expected to execute (e.g., `architect`, `implementer`, `qa`). |
+    | Deliverables     | Text   | Comma-separated deliverables under this card. |
+    | Attempt #        | Number | Attempt counter for retries. |
+
+- id: build_github_reference.github_automation_scripts
+  kind: reference
+  md: |
+    ## 2. GitHub Automation Scripts & Command Templates (Main Board)
+
+    Below are standard GitHub CLI command templates for card creation, updating, movement, archiving, and report attachment.
+
+    Notes:
+    - These are templates. Replace all `<...>` placeholders.
+    - Commands assume issue-based workflow (cards live as GitHub issues).
+
+    ### 2.1 Create a Main Card
+    ```bash
+    gh issue create \
+      --title "<CARD_ID> — <CARD_TITLE>" \
+      --body "<card body>" \
+      --project "<MAIN_PROJECT_NUMBER>" \
+      --field "Card ID=<CARD_ID>" \
+      --field "Phase ID=<PHASE_ID>" \
+      --field "Parent ID=<PARENT_ID>" \
+      --field "Executor Role=<ROLE>" \
+      --field "Deliverables=<LIST>" \
+      --field "Attempt #=<ATTEMPT_NUMBER>"
+    ```
+
+    ### 2.2 Move a Card Between Columns
+    ```bash
+    gh project item move <ITEM_ID> \
+      --project "<MAIN_PROJECT_NUMBER>" \
+      --column "<COLUMN_NAME>"
+    ```
+
+    Common columns:
+    - Parking Lot
+    - Backlog
+    - Ready
+    - In Progress
+    - Needs Review
+    - Done
+    - Graveyard
+
+    ### 2.3 Edit Fields on a Card
+    ```bash
+    gh project item edit <ITEM_ID> \
+      --field "<FIELD_NAME>=<VALUE>"
+    ```
+
+    Examples:
+    ```bash
+    gh project item edit <ITEM_ID> --field "Executor Role=architect"
+    gh project item edit <ITEM_ID> --field "Attempt #=2"
+    gh project item edit <ITEM_ID> --field "Phase ID=p1"
+    ```
+
+    ### 2.4 Append a Report to a Card (Deterministic Append-to-End)
+    ```bash
+    # Step 1: Retrieve current issue body
+    gh issue view <ISSUE_NUMBER> --json body --jq '.body' > card.txt
+
+    # Step 2: Append report
+    cat >> card.txt <<'EOF'
+
+    ## Report — <LABEL>
+    Timestamp: <TIME>
+    --------------------
+    <REPORT_CONTENT>
+
+    EOF
+
+    # Step 3: Push updated body
+    gh issue edit <ISSUE_NUMBER> --body-file card.txt
+    ```
+
+    ### 2.5 Archive a Card (Move to Graveyard)
+    ```bash
+    gh project item move <ITEM_ID> \
+      --project "<MAIN_PROJECT_NUMBER>" \
+      --column "Graveyard"
+    ```
+
+- id: build_github_reference.notes
+  kind: reference
+  md: |
+    ## 3. Notes & Conventions
+
+    - GPT agents should generate commands, and Andrew manually executes them.
+    - Report blocks should be appended to the end of the issue body for deterministic parsing.
+    - This document is a build-time tooling reference. It does not define project meaning or QA governance.
+
+- id: build_github_reference.allowed_kinds
+  kind: meta
+  md: |
+    Allowed kinds for BUILD_GITHUB_REFERENCE:
+
+    - overview
+    - meta
+    - index
+    - reference
+    - template
+
+    If no existing kind fits a new block, follow
+    `documentation_protocol.kind_governance`.
+
+- id: build_github_reference.index
+  kind: index
+  md: |
+    ## BUILD_GITHUB_REFERENCE Block Index
+
+    BUILD_GITHUB_REFERENCE is a helper document containing deterministic conventions and GitHub CLI templates
+    used for the LillyCORE Main project board.
+
+    ### Blocks in this file
+
+    - `build_github_reference.overview`
+      Overview of the main project board layout (columns/fields) and scope.
+
+    - `build_github_reference.allowed_kinds`
+      List of permitted block kinds for this file.
+
+    - `build_github_reference.github_automation_scripts`
+      GitHub CLI templates for creating, moving, editing, archiving, and appending reports to main cards.
+
+    - `build_github_reference.notes`
+      Tooling conventions and deterministic append-to-end rule.
+
+    ### Explicitly not defined here
+
+    - Planning/decomposition rules (see build_canon and roadmap)
+    - Documentation governance (see documentation_protocol)
+    - QA governance (see documentation_protocol and qa_reference)
