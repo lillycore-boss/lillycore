@@ -37,13 +37,9 @@
     paths:
       PROJECT_CANON: "docs/build/project_canon.yml"
       LILLYCORE_ROADMAP: "docs/build/lillycore_roadmap.yml"
-      FEATURES: "docs/build/features.yml"
       TECH_SPEC: "docs/build/tech_spec.yml"
-      MODULES: "docs/build/modules.yml"
       GPT_RESOURCE_INDEX: "docs/build/gpt_resource_index.yml"
       DOCUMENTATION_PROTOCOL: "docs/build/documentation_protocol.ymld"
-      DOCUMENTATION_GOVERNANCE: "docs/documentation_governance.yml"
-      GPT_BEHAVIOUR_SPEC: "docs/build/gpt_behaviour_spec.yml"
     md: |
       ## GPT Resource Load Paths
 
@@ -103,33 +99,6 @@
 
       - When needed, Andrew can paste the relevant roadmap phases.
 
-  - id: gpt_resources.document.features
-    kind: document
-    md: |
-      ## FEATURES
-
-      **Type:** feature_cards  
-      **Status:** exists  
-      **Path:** `docs/build/features.md`
-
-      ### Description
-
-      Defines the standard feature card structure for LillyCORE and
-      optionally mirrors a small subset of important features.
-
-      **Truth source:**
-      - Canonical feature list lives in GitHub Issues / Project Board.
-      - `FEATURES` is a template and optional mirror.
-
-      ### Usage
-
-      - Used to design, read, and reference feature cards.
-
-      ### Access
-
-      - When needed, Andrew can paste the relevant feature card(s) from
-        GitHub or `FEATURES`.
-
   - id: gpt_resources.document.tech_spec
     kind: document
     md: |
@@ -157,61 +126,6 @@
 
       - When needed, Andrew can paste the relevant TECH_SPEC section
         (e.g. Python, DB, scripts).
-
-  - id: gpt_resources.document.modules
-    kind: document
-    md: |
-      ## MODULES
-
-      **Type:** module_overview  
-      **Status:** exists  
-      **Path:** `docs/build/modules.md`
-
-      ### Description
-
-      Overview of major modules, engines, and handlers:
-      - responsibilities
-      - boundaries
-      - dependencies
-
-      ### Usage
-
-      - Used to understand where module responsibilities live and how they
-        relate.
-
-      ### Access
-
-      - When needed, Andrew can paste the MODULES entry for a given
-        module or engine.
-
-  - id: gpt_resources.document.documentation_governance
-    kind: document
-    md: |
-      ## DOCUMENTATION_GOVERNANCE
-
-      **Type:** system_rules  
-      **Status:** exists  
-      **Path:** `docs/documentation_governance.md`
-
-      ### Description
-
-      System-level conceptual documentation governance for LillyCORE:
-      defines documentation layers and categories, which docs are
-      canonical vs exploratory, and which doc types are allowed or
-      forbidden.
-
-      ### Usage
-
-      - Used to reason about where new docs belong and which kinds of docs
-        may be introduced or promoted.
-      - MUST be loaded as part of the mandatory-load set before any
-        reasoning, planning, or documentation updates involving canonical
-        docs.
-
-      ### Access
-
-      - When needed, Andrew can paste the full content of
-        DOCUMENTATION_GOVERNANCE.
 
   - id: gpt_resources.document.documentation_protocol
     kind: document
