@@ -88,19 +88,15 @@
           p6.yml
           p7.yml
           p8.yml
-          p8.hd.yml
-          p8.dr.yml
-          p8.sc.yml
+          p8_hd.yml
+          p8_dr.yml
+          p8_sc.yml
           p9.yml
           p10.yml
           p11.yml
           phase_registry_index.yml
-
-        scripts/
-          registry_add_or_update_slice.py
-          registry_add_or_update_subslice.py
+          registry_sync_from_github.py
           registry_validate.py
-          registry_mark_phase_state.py
     ```
     
   Notes:
@@ -197,36 +193,39 @@
 - id: registry_system.script_contracts
   kind: reference
   md: |
-    ## Automation Script Contracts (Conceptual)
+    ## Automation Script Contracts (Registry Sync Model)
 
-    GPTs MUST NOT hand-edit registry YAML directly.
-    They should propose calls to mutation/validation scripts (commands or pseudo-commands) for Andrew to run.
+    The registry is a build-time index and SHOULD be updated by scripts, not by hand.
 
-    Scripts (conceptual):
-    - registry_add_or_update_slice.py
-      - Adds/updates top-level slice entries in a phase file.
-    - registry_add_or_update_subslice.py
-      - Adds/updates nested subslices under a parent slice.
-    - registry_validate.py
-      - Validates schema, uniqueness, parent links, and deliverable references.
-    - registry_mark_phase_state.py
-      - Marks phase entries in the registry index as active/superseded/deprecated/broken.
+    Source of truth:
+    - GitHub issues on the "LillyCORE Main" project board hold full card bodies.
+    - The registry holds topology + minimal metadata only.
+
+    Scripts:
+    - `registry_sync_from_github.py`
+      - Reads cards from GitHub (via gh CLI) and writes/updates:
+        - `docs/build/registry/p<n>.yml` phase files
+        - `docs/build/registry/phase_registry_index.yml` manifest (recommended)
+    - `registry_validate.py`
+      - Validates registry files and relationships (schema, uniqueness, parent links).
+
+    GPT Rule:
+    - GPTs MUST NOT hand-edit registry YAML during normal operation.
+    - If scripts are missing or fail, GPTs MUST ask Andrew before proposing manual edits.
 
 - id: registry_system.gpt_usage_guidelines
   kind: rules
   md: |
-    ## GPT Usage Guidelines
+    ## GPT Usage Guidelines (Registry)
 
     Reading:
-    - Prefer reading the relevant phase file (p<n>.yml) for local slice topology.
-    - Use phase_registry_index.yml for global discovery.
+    - Prefer GitHub issues for full card bodies.
+    - Use registry files for topology/indexing only.
 
-    Modifying:
-    - Determine which phase file must be updated.
-    - Decide whether the target is a slice or subslice.
-    - Construct the minimal metadata object (id/title/role/parent/delivers/qa_status/subslices).
-    - Propose a script call rather than manual YAML edits.
+    Updating:
+    - Preferred: run `registry_sync_from_github.py` after cards are created/updated.
+    - Validate: run `registry_validate.py` as a sanity pass (especially before QA).
 
     Constraints:
-    - Full card bodies must remain in GitHub issues.
     - Registry entries must remain minimal and non-authoritative.
+    - If registry and GitHub disagree, GitHub wins unless Andrew explicitly overrides.
