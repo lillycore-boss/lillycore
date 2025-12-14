@@ -17,8 +17,8 @@
 
       ## Mandatory-load set
 
-      For any architectural reasoning, planning, implementation, or QA work
-      on LillyCORE, GPT roles MUST load and read, at minimum:
+      For any GPT working on LillyCORE MUST stop, load and read the following
+      manditory load out before taking any other actions:
       - GPT_RESOURCE_INDEX (this index)
       - TECH_SPEC
       - DOCUMENTATION_PROTOCOL
