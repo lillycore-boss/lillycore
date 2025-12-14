@@ -146,3 +146,50 @@
     If no existing kind fits a new block, follow
     `documentation_protocol.kind_governance`.
 
+- id: tech_spec.index
+  kind: index
+  md: |
+    ## TECH_SPEC Block Index
+
+    TECH_SPEC defines LillyCORE’s technical environment, tooling,
+    repository layout, and execution conventions.
+
+    It prevents guessing and drift during implementation.
+
+    ### Blocks in this file
+
+    - `tech_spec.overview`
+      Purpose, scope, and exclusions.
+
+    - `tech_spec.platform_assumptions`
+      Supported platforms and GPT constraints.
+
+    - `tech_spec.python_baseline`
+      Minimum supported Python version.
+
+    - `tech_spec.best_practice_policy`
+      Default best-practice stance and exception policy.
+
+    - `tech_spec.repo_root_definition`
+      Definition of repository root and config placement.
+
+    - `tech_spec.tooling_baseline`
+      Conceptual description of formatter, linter, tests, CI.
+
+    - `tech_spec.tooling_choices`
+      Authoritative tooling selections.
+
+    - `tech_spec.repo_taxonomy_authority`
+      Authority and process for changing repository layout.
+
+    - `tech_spec.proof_outputs_convention`
+      Required location and rules for execution proof artefacts.
+
+    - `tech_spec.change_log`
+      Lightweight change history.
+
+    ### Explicitly not defined here
+
+    - System ontology and authority (see BUILD_CANON)
+    - Documentation governance (see DOCUMENTATION_PROTOCOL)
+    - Phase intent and sequencing (see ROADMAP)
