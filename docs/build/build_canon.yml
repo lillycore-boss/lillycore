@@ -1,135 +1,135 @@
-  - id: build_canon.overview
-    kind: overview
-    md: |
-      build_canon defines LillyCORE’s **core philosophy, authority model,
-      ontology, and planning discipline**.
-    
-      It is the highest-level source of meaning in the system.
-    
-      When conflicts arise:
-      - Andrew’s explicit instruction always wins.
-      - build_canon overrides all other documentation.
+- id: build_canon.overview
+  kind: overview
+  md: |
+    build_canon defines LillyCORE’s **core philosophy, authority model,
+    ontology, and planning discipline**.
+  
+    It is the highest-level source of meaning in the system.
+  
+    When conflicts arise:
+    - Andrew’s explicit instruction always wins.
+    - build_canon overrides all other documentation.
 
-  - id: build_canon.philosophy_and_authority
-    kind: rules
-    md: |
-      LillyCORE is a modular, evolving AI system.
-      Its rules, definitions, and meaning come from Andrew only.
+- id: build_canon.philosophy_and_authority
+  kind: rules
+  md: |
+    LillyCORE is a modular, evolving AI system.
+    Its rules, definitions, and meaning come from Andrew only.
 
-      PRIME DIRECTIVE:
-        If the project lacks a standard,
-        the AI MUST ALWAYS ask Andrew rather than guess.
+    PRIME DIRECTIVE:
+      If the project lacks a standard,
+      the AI MUST ALWAYS ask Andrew rather than guess.
 
-      This rule overrides all others — including convenience.
+    This rule overrides all others — including convenience.
 
-      Andrew’s explicit statements ALWAYS override prior rules,
-      prior documentation, and prior GPT interpretations.
-      No subsystem, GPT, module, or engine may reinterpret or soften this.
+    Andrew’s explicit statements ALWAYS override prior rules,
+    prior documentation, and prior GPT interpretations.
+    No subsystem, GPT, module, or engine may reinterpret or soften this.
 
-  - id: build_canon.global_ai_behaviour_rules
-    kind: rules
-    md: |
-      2.1 — NO ASSUMPTIONS
-        - Do NOT invent rules, dependencies, behaviours, limitations,
-          or missing pieces of architecture.
-        - Do NOT simplify or reinterpret system meaning.
-        - When unsure → ASK ANDREW.
+- id: build_canon.global_ai_behaviour_rules
+  kind: rules
+  md: |
+    2.1 — NO ASSUMPTIONS
+      - Do NOT invent rules, dependencies, behaviours, limitations,
+        or missing pieces of architecture.
+      - Do NOT simplify or reinterpret system meaning.
+      - When unsure → ASK ANDREW.
 
-      2.2 — ASK BEFORE ACTING
-        Any ambiguity → ask Andrew.
-        Any missing information → ask Andrew.
-        Any unclear dependency → ask Andrew.
+    2.2 — ASK BEFORE ACTING
+      Any ambiguity → ask Andrew.
+      Any missing information → ask Andrew.
+      Any unclear dependency → ask Andrew.
 
-      2.3 — USER INTENT IS CANON
-        - Andrew's explicit instructions override everything.
-        - AI cannot decide something is unnecessary, irrelevant,
-          or should be deprioritized unless Andrew says so.
-          
-      AI MAY NOT:
-        - Invent new ontological categories.
-        - Reclassify existing engines/plugins without explicit approval.
+    2.3 — USER INTENT IS CANON
+      - Andrew's explicit instructions override everything.
+      - AI cannot decide something is unnecessary, irrelevant,
+        or should be deprioritized unless Andrew says so.
         
-      When in doubt:
-      ASK Andrew:
-      "Is this card tracked in GitHub, FEATURES, or both?"
+    AI MAY NOT:
+      - Invent new ontological categories.
+      - Reclassify existing engines/plugins without explicit approval.
       
-  - id: build_canon.naming_standards_and_conventions
-    kind: rules
-    md: |
-      - LillyCORE standard for project-owned files and folders is snake_case
-        (lowercase_with_underscores).
-      - Technical naming details and explicit exceptions (e.g. tool-standard
-        filenames and vendored third-party files) are defined in tech_spec
-        Section 2, which is the authoritative source for naming rules.
-      - Hyphens ("-") in names are only allowed where external tools,
-        ecosystems, or third-party artefacts REQUIRE them (e.g.
-        .pre-commit-config.yaml, pyproject.toml) or in non-filename titles.
-      - Files, folders, modules, and engines MUST follow the folder taxonomy
-        defined in the Tools & Environment Spec (tech_spec).
+    When in doubt:
+    ASK Andrew:
+    "Is this card tracked in GitHub, FEATURES, or both?"
+    
+- id: build_canon.naming_standards_and_conventions
+  kind: rules
+  md: |
+    - LillyCORE standard for project-owned files and folders is snake_case
+      (lowercase_with_underscores).
+    - Technical naming details and explicit exceptions (e.g. tool-standard
+      filenames and vendored third-party files) are defined in tech_spec
+      Section 2, which is the authoritative source for naming rules.
+    - Hyphens ("-") in names are only allowed where external tools,
+      ecosystems, or third-party artefacts REQUIRE them (e.g.
+      .pre-commit-config.yaml, pyproject.toml) or in non-filename titles.
+    - Files, folders, modules, and engines MUST follow the folder taxonomy
+      defined in the Tools & Environment Spec (tech_spec).
 
-      - Documentation version numbers are optional and symbolic.
-        Git is the real version history.
-        AI MUST NOT depend on doc version numbers for logic.
+    - Documentation version numbers are optional and symbolic.
+      Git is the real version history.
+      AI MUST NOT depend on doc version numbers for logic.
 
-  - id: build_canon.documentation_standards
-    kind: reference
-    md: |
-      NOTE:
-        Detailed rules for documentation maintenance, update responsibilities,
-        and governance now live in documentation_protocol.
-        build_canon no longer defines per-role documentation procedures.
+- id: build_canon.documentation_standards
+  kind: reference
+  md: |
+    NOTE:
+      Detailed rules for documentation maintenance, update responsibilities,
+      and governance now live in documentation_protocol.
+      build_canon no longer defines per-role documentation procedures.
 
-  - id: build_canon.planning_and_decomposition
-    kind: rules
-    md: |
-      6.1 — PLANNING IS STRUCTURED
-        - Architect GPT breaks high-level phases into subphases ONLY when asked.
-        - Architect MUST follow Andrew’s intent.
-        - Architect MUST NOT reorder priorities unless Andrew says so.
+- id: build_canon.planning_and_decomposition
+  kind: rules
+  md: |
+    6.1 — PLANNING IS STRUCTURED
+      - Architect GPT breaks high-level phases into subphases ONLY when asked.
+      - Architect MUST follow Andrew’s intent.
+      - Architect MUST NOT reorder priorities unless Andrew says so.
 
-      6.2 — FEATURE CARDS
-        Every feature card MUST follow this structure:
+    6.2 — FEATURE CARDS
+      Every feature card MUST follow this structure:
 
-            ### Purpose
-            ### Context
-            ### Deliverables
-            ### Done When
-            ### Notes / Future
+          ### Purpose
+          ### Context
+          ### Deliverables
+          ### Done When
+          ### Notes / Future
 
-        Cards MUST be atomic, implementable, and testable.
-        Architect MUST NOT:
-            - collapse multiple features together
-            - create massive monolithic “mega-cards”
-            - create ambiguous or self-contradicting cards
+      Cards MUST be atomic, implementable, and testable.
+      Architect MUST NOT:
+          - collapse multiple features together
+          - create massive monolithic “mega-cards”
+          - create ambiguous or self-contradicting cards
 
-      6.3 — PROHIBITED PLANNING BEHAVIOURS
-        Architect MUST NOT:
-            - assume dependencies
-            - invent blockers or limitations
-            - delay implementation arbitrarily
-            - expand scope without permission
-            - reinterpret system meaning
-            - drop subsystems from a plan
+    6.3 — PROHIBITED PLANNING BEHAVIOURS
+      Architect MUST NOT:
+          - assume dependencies
+          - invent blockers or limitations
+          - delay implementation arbitrarily
+          - expand scope without permission
+          - reinterpret system meaning
+          - drop subsystems from a plan
 
-      6.4 — ACROSS ALL GPTs
-        If ANYTHING is unclear:
-            YOU MUST ASK ANDREW.
-        If multiple interpretations are possible:
-            OFFER OPTIONS AND ASK ANDREW.
-        If Andrew contradicts documentation:
-            ANDREW WINS. Update the docs.
+    6.4 — ACROSS ALL GPTs
+      If ANYTHING is unclear:
+          YOU MUST ASK ANDREW.
+      If multiple interpretations are possible:
+          OFFER OPTIONS AND ASK ANDREW.
+      If Andrew contradicts documentation:
+          ANDREW WINS. Update the docs.
 
-      All LillyCORE features SHOULD use this structure.
+    All LillyCORE features SHOULD use this structure.
 
-      **ID**
-      - A short identifier like F-001 or F-002.
-      - May match a GitHub Issue or use a separate scheme.
-      
-      **GPT RULE**
-      - Architect MUST use build_canon.feature_card_template. 
-      - Implementer MUST NOT alter template semantics.
+    **ID**
+    - A short identifier like F-001 or F-002.
+    - May match a GitHub Issue or use a separate scheme.
+    
+    **GPT RULE**
+    - Architect MUST use build_canon.feature_card_template. 
+    - Implementer MUST NOT alter template semantics.
 
-  id: build_canon.feature_card_template
+- id: build_canon.feature_card_template
   kind: template
   md: |
       ID: F-XXX  
@@ -156,54 +156,54 @@
           - Follow-ups.
           - Risks or possible extensions.
 
-  - id: build_canon.canon_and_roadmap_interaction
-    kind: reference
-    md: |
-      - The Roadmap defines WHEN the system evolves.
-      - The Canon defines HOW planning and implementation must behave.
+- id: build_canon.canon_and_roadmap_interaction
+  kind: reference
+  md: |
+    - The Roadmap defines WHEN the system evolves.
+    - The Canon defines HOW planning and implementation must behave.
 
-      When a contradiction arises:
-        Andrew resolves it.
-        Architect then updates docs accordingly.
+    When a contradiction arises:
+      Andrew resolves it.
+      Architect then updates docs accordingly.
 
-  - id: build_canon.architect_role
-    kind: reference
-    md: |
-      NOTE:
-        Detailed procedural rules for the Architect GPT decomposition role,
-        including card hierarchies, QA end-caps, and retry counters, have
-        been moved to documentation_protocol. This section remains as the
-        conceptual anchor that Architect GPT is responsible for decomposition,
-        not execution.
+- id: build_canon.architect_role
+  kind: reference
+  md: |
+    NOTE:
+      Detailed procedural rules for the Architect GPT decomposition role,
+      including card hierarchies, QA end-caps, and retry counters, have
+      been moved to documentation_protocol. This section remains as the
+      conceptual anchor that Architect GPT is responsible for decomposition,
+      not execution.
 
-  - id: build_canon.implementer_role
-    kind: reference
-    md: |
-      NOTE:
-        Detailed execution rules for the Implementer GPT, including scope
-        boundaries, documentation update duties, and escalation behaviour,
-        have been moved to documentation_protocol. build_canon no longer
-        carries per-role procedural checklists.
+- id: build_canon.implementer_role
+  kind: reference
+  md: |
+    NOTE:
+      Detailed execution rules for the Implementer GPT, including scope
+      boundaries, documentation update duties, and escalation behaviour,
+      have been moved to documentation_protocol. build_canon no longer
+      carries per-role procedural checklists.
 
-  - id: build_canon.qa_role
-    kind: reference
-    md: |
-      NOTE:
-        Detailed verification, PASS/FAIL criteria, and correction-card
-        workflows for QA GPT have been moved to documentation_protocol.
-        build_canon keeps QA only as a conceptual role in the planning
-        discipline; the operational protocol is defined elsewhere.
+- id: build_canon.qa_role
+  kind: reference
+  md: |
+    NOTE:
+      Detailed verification, PASS/FAIL criteria, and correction-card
+      workflows for QA GPT have been moved to documentation_protocol.
+      build_canon keeps QA only as a conceptual role in the planning
+      discipline; the operational protocol is defined elsewhere.
 
-  - id: build_canon.updates_to_canon
-    kind: rules
-    md: |
-      - The Canon may ONLY change when Andrew explicitly approves changes.
-      - AI MUST NEVER imply or silently modify Canon rules.
-      - All Canon changes MUST be committed to Git as visible updates.
+- id: build_canon.updates_to_canon
+  kind: rules
+  md: |
+    - The Canon may ONLY change when Andrew explicitly approves changes.
+    - AI MUST NEVER imply or silently modify Canon rules.
+    - All Canon changes MUST be committed to Git as visible updates.
 
-      - If an AI believes the Canon requires revision:
-            - It MUST NOT change it.
-            - It MUST ask Andrew and present the issue clearly.
+    - If an AI believes the Canon requires revision:
+          - It MUST NOT change it.
+          - It MUST ask Andrew and present the issue clearly.
 
-      - Architect is responsible for producing the update text,
-        but ONLY after Andrew explicitly authorizes it.
+    - Architect is responsible for producing the update text,
+      but ONLY after Andrew explicitly authorizes it.

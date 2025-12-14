@@ -1,169 +1,169 @@
-  - id: gpt_resources.overview
-    kind: overview
-    md: |
-      # gpt_resource_index – Overview
+- id: gpt_resources.overview
+  kind: overview
+  md: |
+    # gpt_resource_index – Overview
 
-      This file is the single source of truth for:
-      - What project documents exist
-      - What each document is for
-      - Where they live in the repository
+    This file is the single source of truth for:
+    - What project documents exist
+    - What each document is for
+    - Where they live in the repository
 
-      Procedural rules for how GPTs load, use, and update these documents
-      are defined in documentation_protocol.
+    Procedural rules for how GPTs load, use, and update these documents
+    are defined in documentation_protocol.
 
-      Architect, Implementer, and QA GPTs should treat this file as the
-      directory of canonical docs. If a new canonical doc is created or an
-      existing one changes meaning, this index must be updated.
+    Architect, Implementer, and QA GPTs should treat this file as the
+    directory of canonical docs. If a new canonical doc is created or an
+    existing one changes meaning, this index must be updated.
 
-      ## Mandatory-load set
+    ## Mandatory-load set
 
-      ### Loader Contract
-      
-      Any GPT operating on LillyCORE MUST:
-      
-      1. STOP all reasoning and planning upon detecting this document
-      2. REQUEST the full Mandatory Load Set if any item is missing
-      3. INGEST and ACKNOWLEDGE all items in the set
-      4. ONLY THEN proceed with any task, analysis, or modification
+    ### Loader Contract
+    
+    Any GPT operating on LillyCORE MUST:
+    
+    1. STOP all reasoning and planning upon detecting this document
+    2. REQUEST the full Mandatory Load Set if any item is missing
+    3. INGEST and ACKNOWLEDGE all items in the set
+    4. ONLY THEN proceed with any task, analysis, or modification
 
-      ### Load Set
-      
-      - gpt_resource_index (this index)
-      - tech_spec
-      - documentation_protocol
-      - build_canon
+    ### Load Set
+    
+    - gpt_resource_index (this index)
+    - tech_spec
+    - documentation_protocol
+    - build_canon
 
-  - id: gpt_resources.load_paths
-    kind: paths
-    md: |
-      ## GPT Resource Load Paths
+- id: gpt_resources.load_paths
+  kind: paths
+  md: |
+    ## GPT Resource Load Paths
 
-      Authoritative mapping from conceptual document names to on-disk paths.
+    Authoritative mapping from conceptual document names to on-disk paths.
 
-      - This block is the single source of truth for where GPT resource files live.
-      - When files are moved or renamed, update this mapping.
-      - Other blocks (build_canon, tech_spec, etc.) may repeat the path as
-        convenience metadata, but this mapping wins if there is a conflict.
+    - This block is the single source of truth for where GPT resource files live.
+    - When files are moved or renamed, update this mapping.
+    - Other blocks (build_canon, tech_spec, etc.) may repeat the path as
+      convenience metadata, but this mapping wins if there is a conflict.
 
-      Tools or GPTs that need to locate a file SHOULD read `paths` in this block
-      rather than hardcoding paths elsewhere.
+    Tools or GPTs that need to locate a file SHOULD read `paths` in this block
+    rather than hardcoding paths elsewhere.
 
-      This list is the authoritative list of documents. If a document is named
-      elsewhere but does not appear on this list, treat it as a retired document and
-      ask Andrew what to do.
+    This list is the authoritative list of documents. If a document is named
+    elsewhere but does not appear on this list, treat it as a retired document and
+    ask Andrew what to do.
 
-      build_canon: "docs/build/build_canon.yml"
-      tech_spec: "docs/build/tech_spec.yml"
-      gpt_resource_index: "docs/build/gpt_resource_index.yml"
-      documentation_protocol: "docs/build/documentation_protocol.yml"
-      qa_reference: "docs/build/optional/qa_reference.yml"
-      registry_system: "docs/build/optional/registry_system.yml"
-      lillycore_roadmap: "docs/build/optional/lillycore_roadmap.yml"
-      
-  - id: gpt_resources.build_canon
-    kind: document
-    md: |
-      ## build_canon
+    build_canon: "docs/build/build_canon.yml"
+    tech_spec: "docs/build/tech_spec.yml"
+    gpt_resource_index: "docs/build/gpt_resource_index.yml"
+    documentation_protocol: "docs/build/documentation_protocol.yml"
+    qa_reference: "docs/build/optional/qa_reference.yml"
+    registry_system: "docs/build/optional/registry_system.yml"
+    lillycore_roadmap: "docs/build/optional/lillycore_roadmap.yml"
+    
+- id: gpt_resources.build_canon
+  kind: document
+  md: |
+    ## build_canon
 
-      ### Description
+    ### Description
 
-      Core philosophy, global AI behaviour principles, ontology of
-      components, and high-level planning discipline.
+    Core philosophy, global AI behaviour principles, ontology of
+    components, and high-level planning discipline.
 
-      ### Usage
+    ### Usage
 
-      - Used to ensure new work aligns with LillyCORE’s meaning and
-        ontological categories.
+    - Used to ensure new work aligns with LillyCORE’s meaning and
+      ontological categories.
 
-      ### Access
+    ### Access
 
-      - When needed, Andrew can paste the relevant Canon section into chat.
-      
-  - id: gpt_resources.lillycore_roadmap
-    kind: document
-    md: |
-      ## lillycore_roadmap
+    - When needed, Andrew can paste the relevant Canon section into chat.
+    
+- id: gpt_resources.lillycore_roadmap
+  kind: document
+  md: |
+    ## lillycore_roadmap
 
-      ### Description
+    ### Description
 
-      High-level phases (0..N) for LillyCORE evolution, defining when
-      subsystems appear and their intent.
+    High-level phases (0..N) for LillyCORE evolution, defining when
+    subsystems appear and their intent.
 
-      ### Usage
+    ### Usage
 
-      - Used to understand phase context and when subsystems are expected
-        to exist.
+    - Used to understand phase context and when subsystems are expected
+      to exist.
 
-      ### Access
+    ### Access
 
-      - When needed, Andrew can paste the relevant roadmap phases.
+    - When needed, Andrew can paste the relevant roadmap phases.
 
-  - id: gpt_resources.tech_spec
-    kind: document
-    md: |
-      ## tech_spec
+- id: gpt_resources.tech_spec
+  kind: document
+  md: |
+    ## tech_spec
 
-      ### Description
+    ### Description
 
-      Technical standards and environment details, such as:
-      - Python versions
-      - naming conventions
-      - repository layout
-      - script conventions
-      - tooling and CI expectations
+    Technical standards and environment details, such as:
+    - Python versions
+    - naming conventions
+    - repository layout
+    - script conventions
+    - tooling and CI expectations
 
-      ### Usage
+    ### Usage
 
-      - Used to understand and obey technical constraints and environment
-        rules.
+    - Used to understand and obey technical constraints and environment
+      rules.
 
-      ### Access
+    ### Access
 
-      - When needed, Andrew can paste the relevant tech_spec section
-        (e.g. Python, DB, scripts).
+    - When needed, Andrew can paste the relevant tech_spec section
+      (e.g. Python, DB, scripts).
 
-  - id: gpt_resources.documentation_protocol
-    kind: document
-    md: |
-      ## documentation_protocol
+- id: gpt_resources.documentation_protocol
+  kind: document
+  md: |
+    ## documentation_protocol
 
-      ### Description
+    ### Description
 
-      Build/system documentation protocol defining roles, triggers, and
-      procedures for updating canonical docs (`build_canon`, ROADMAP,
-      `tech_spec`, `modules`, `FEATURES`, `gpt_resource_index`, and related
-      conceptual docs).
+    Build/system documentation protocol defining roles, triggers, and
+    procedures for updating canonical docs (`build_canon`, ROADMAP,
+    `tech_spec`, `modules`, `FEATURES`, `gpt_resource_index`, and related
+    conceptual docs).
 
-      ### Usage
+    ### Usage
 
-      - Used as the operational reference for when and how to update
-        docs, which roles are responsible, and how QA verifies doc
-        completeness.
-      - MUST be loaded and read as part of the mandatory-load set before
-        any reasoning, architectural planning, implementation, or QA that
-        reads or writes canonical docs.
+    - Used as the operational reference for when and how to update
+      docs, which roles are responsible, and how QA verifies doc
+      completeness.
+    - MUST be loaded and read as part of the mandatory-load set before
+      any reasoning, architectural planning, implementation, or QA that
+      reads or writes canonical docs.
 
-      ### Access
+    ### Access
 
-      - When needed, Andrew can paste the documentation_protocol build
-        doc.
+    - When needed, Andrew can paste the documentation_protocol build
+      doc.
 
-  - id: gpt_resources.placeholder
-    kind: document_placeholder
-    md: |
-      ## Future Documents Placeholder
+- id: gpt_resources.placeholder
+  kind: document_placeholder
+  md: |
+    ## Future Documents Placeholder
 
-      Used as a placeholder for additional docs that may be added later, such as:
-      - `NOTES_PLUGIN_SPEC`
-      - `DREAM_ENGINE_SPEC`
-      - Other subsystem-specific documents.
+    Used as a placeholder for additional docs that may be added later, such as:
+    - `NOTES_PLUGIN_SPEC`
+    - `DREAM_ENGINE_SPEC`
+    - Other subsystem-specific documents.
 
-      When new docs are added, they should follow this pattern:
-      - SECTION-style logical grouping
-      - `name:`
-      - `type:`
-      - `status:`
-      - `path:` (if applicable)
-      - `description:`
-      - `usage:`
-      - `access:`
+    When new docs are added, they should follow this pattern:
+    - SECTION-style logical grouping
+    - `name:`
+    - `type:`
+    - `status:`
+    - `path:` (if applicable)
+    - `description:`
+    - `usage:`
+    - `access:`

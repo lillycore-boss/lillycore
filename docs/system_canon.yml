@@ -1,39 +1,39 @@
-  - id: system_canon.system_ontology
-    kind: ontology
-    md: |
-      LillyCORE uses a precise vocabulary to prevent GPT drift.
+- id: system_canon.system_ontology
+  kind: ontology
+  md: |
+    LillyCORE uses a precise vocabulary to prevent GPT drift.
 
-      CORE:
-        - Runtime loop, logging, preferences
-        - AI pools
-        - System DOC (durable storage)
-        - Engines (core subsystems)
+    CORE:
+      - Runtime loop, logging, preferences
+      - AI pools
+      - System DOC (durable storage)
+      - Engines (core subsystems)
 
-      ENGINES (Core Subsystems):
-        - DRIFT_ENGINE     → Context/emotion/perception processor (formerly 2a)
-        - HELPER_ENGINE    → Work engine / backend orchestrator (formerly 2b)
-        - PLUGIN_ENGINE    → Loads and routes external plugins
-        - HELP_DESK_ENGINE → Failure detection and self-repair
-        - DREAM_ENGINE     → Optimization, degradation, drift management
-        - SCRIPT_ENGINE    → Internal script optimizer & validator
+    ENGINES (Core Subsystems):
+      - DRIFT_ENGINE     → Context/emotion/perception processor (formerly 2a)
+      - HELPER_ENGINE    → Work engine / backend orchestrator (formerly 2b)
+      - PLUGIN_ENGINE    → Loads and routes external plugins
+      - HELP_DESK_ENGINE → Failure detection and self-repair
+      - DREAM_ENGINE     → Optimization, degradation, drift management
+      - SCRIPT_ENGINE    → Internal script optimizer & validator
 
-      PLUGINS:
-        - Optional add-ons that extend behaviour without modifying the core.
-        - Examples:
-            UX Plugin
-            Notes Plugin
-            Project Management Plugin
-            Personal Assistant Plugin
-            Multi-User Plugin
-            Demo Plugins
+    PLUGINS:
+      - Optional add-ons that extend behaviour without modifying the core.
+      - Examples:
+          UX Plugin
+          Notes Plugin
+          Project Management Plugin
+          Personal Assistant Plugin
+          Multi-User Plugin
+          Demo Plugins
 
-      PIPELINES:
-        - Named multi-step processes involving engines, plugins, or pools.
+    PIPELINES:
+      - Named multi-step processes involving engines, plugins, or pools.
 
-      AGENTS:
-        - LLM-driven reasoning entities used by engines or plugins.
+    AGENTS:
+      - LLM-driven reasoning entities used by engines or plugins.
 
-      DOC LAYERS:
-        - System DOC → durable system-level storage
-        - Plugin DOC → per-plugin storage boundary
-        - User DOC   → user-generated content
+    DOC LAYERS:
+      - System DOC → durable system-level storage
+      - Plugin DOC → per-plugin storage boundary
+      - User DOC   → user-generated content

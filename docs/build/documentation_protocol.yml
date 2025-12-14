@@ -71,403 +71,403 @@
     2. Then build_canon, lillycore_roadmap, tech_spec, and gpt_resource_index are updated as needed via approved cards.
     3. This protocol is adjusted afterward to match.
 
-  - id: documentation_protocol.responsibilities
-    kind: spec_section
+- id: documentation_protocol.responsibilities
+  kind: spec_section
+  md: |
+    ## 3. Roles & Documentation Responsibilities
+
+    This section summarizes **who does what for docs**. It does not change any role definitions from Canon; it just makes them operational for documentation work.
+
+    ### 3.1 Andrew
+
+    - Final authority on:
+      - System meaning and ontology (build_canon).
+      - Phase sequencing and intentions (lillycore_roadmap).
+      - Whether new docs become canonical and are added to gpt_resource_index.
+    - Approves:
+      - Any change to build_canon or lillycore_roadmap.
+      - Any change that alters repository taxonomy (via Architect-designed cards).
+      - Any new canonical document type in documentation_governance.
+
+    **Andrew must be asked** explicitly before:
+
+    - Any Canon or Roadmap text is changed.
+    - Any new canonical doc type is introduced.
+    - Any structural/taxonomy change is made in tech_spec §3.
+
+    ### 3.2 Architect GPT
+
+    - Owns:
+      - Updates to gpt_resource_index when new canonical docs are introduced or existing docs change meaning.  
+      - System-level conceptual docs (including documentation_governance).
+
+    Architect MUST:
+
+    - Ensure new canonical docs are:
+      - Added to gpt_resource_index.
+      - Placed in locations allowed by tech_spec and this protocol.
+    - Include documentation deliverables in every phase/feature bundle.
+
+    Architect MUST NOT:
+
+    - Invent new doc layers or categories outside documentation_governance.
+
+    ### 3.3 Implementer GPT
+
+    - Is **always responsible** for documentation updates that follow from that card’s changes.
+
+    Implementer MUST:
+
+    - Identify which docs are affected by the work.
+    - Update:
+      - **feature cards / phase bundles (tracked externally)**: card status, notes, and any mirrored content if the card lives there.  
+      - **tech_spec**: when technical standards, tools, or repo layout change as part of the card.  
+      - **gpt_resource_index**: *only when* the card explicitly calls for adding or changing indexed docs, and Andrew/Architect have approved.  
+      - Other build/system docs (e.g. documentation_protocol, documentation_governance) when the card explicitly includes such changes.
+
+    Implementer MUST:
+
+    - Present doc updates as **ready-to-paste sections**, not fragmented edits.
+    - Explicitly state if **no documentation changes are required** and why.
+
+    Implementer MUST NOT:
+
+    - Treat unindexed spec files as canonical.
+
+    When unsure whether a doc should be updated, Implementer MUST:
+    - Stop and ask Andrew, or request an Architect clarification card.
+
+    ### 3.4 QA GPT
+
+    - Verifies that **all required documentation updates** have been made for a given card/phase.
+    - Uses:
+      - feature cards / phase bundles (tracked externally)
+      - tech_spec → technical and layout rules
+      - gpt_resource_index → canonical doc list
+      - documentation_protocol → documentation categories, constraints, and enforcement rules
+
+
+    QA MUST:
+
+    - Fail any card/phase if doc updates are missing, incomplete, or inconsistent with canonical docs.
+    - Generate corrective cards when documentation is wrong or incomplete.
+    - Confirm that new canonical docs have been added to gpt_resource_index when required.
+
+    QA MUST NOT:
+
+    - Edit docs directly.
+
+- id: documentation_protocol.update_triggers
+  kind: spec_section
+  md: |
+    ## 4. Update Triggers
+
+    This section lists **when** documentation MUST be considered and potentially updated.  
+    “Consider” means **explicitly thinking through whether a given doc is affected**, not blindly editing everything.
+
+    ### 4.1 Code or Behaviour Change (Implementer)
+
+    Whenever code behaviour changes (new function, altered API, changed semantics, removed capability, etc.):
+
+    1. **feature cards / phase bundles (tracked externally)**
+        - Update the feature card / phase bundle:
+          - Mark status (in-progress → implemented).
+          - Note key behavioural changes.
+          - Link to any new docs or scripts created by the card (if relevant).
+
+    2. **tech_spec**
+        - Consider updates if:
+          - Tools or baseline configs change (e.g. new required linter behaviour, new scripts conventions).
+          - Repo layout or script expectations change.
+          - Typing/linting/test requirements change.
+
+    3. **System-Level Conceptual Docs**
+        - Update documentation_protocol or other high-level conceptual docs **only** when the card explicitly includes that as a deliverable.
+
+    ### 4.2 Architecture or Planning Change (Architect)
+
+    When phase structure, ontology, or high-level module responsibilities change:
+
+    1. Update **lillycore_roadmap** (phase sequences, intents).
+    2. Update **build_canon** only when ontology / planning discipline changes and Andrew approves.
+    4. Update **gpt_resource_index** when the canonical doc set changes.
+    5. Update relevant conceptual docs (e.g. documentation_governance) to match the new story.
+
+    All of the above require explicit Architect cards and Andrew’s approval.
+
+    ### 4.3 New Canonical Document Type
+
+    When a new doc is meant to become canonical (e.g. engine spec, plugin spec, DOC schema spec):
+
+    1. Architect designs an appropriate feature/phase card.
+    2. Implementer (or Architect, depending on the card) creates the new doc at a location consistent with tech_spec §3 and documentation_governance.
+    3. Architect/Implementer:
+        - Adds the doc to **gpt_resource_index** with:
+          - name  
+          - type  
+          - status  
+          - path  
+          - description  
+          - usage/access notes
+    4. QA verifies that:
+        - The new doc is indexed.
+        - Its location and category obey tech_spec and documentation_governance.
+
+    Until this flow completes, the doc is treated as **non-authoritative**.
+
+    ### 4.4 Taxonomy / Repo Layout Change
+
+    Any change covered by tech_spec §3’s taxonomy rules (e.g. top-level folder changes, docs layout changes) MUST:
+
+    - Be designed via an Architect card.
+    - Update:
+      - tech_spec §3 (and related sections).
+      - gpt_resource_index if canonical docs move or new top-level doc subtrees are created.
+    - Be validated by QA against the new taxonomy.
+
+    Implementers MUST NOT perform these changes under ordinary feature cards.
+
+    ### 4.5 QA-Detected Drift
+
+    When QA detects that runtime behaviour and documentation disagree:
+
+    - QA creates corrective Implementer cards (and a QA card) per the QA System in FEATURES.
+    - Implementer:
+      - Updates the relevant docs (FEATURES, tech_spec, modules, etc.) to match reality.
+      - Ensures changes are consistent with build_canon and lillycore_roadmap.
+    - QA re-runs checks for both:
+      - The corrective cards.
+      - The affected phase bundle.
+
+    If QA determines that docs are wrong because the **behaviour** is wrong, Architect may need to create redesign cards; documentation then follows the corrected design.
+
+- id: documentation_protocol.implementer_flow
+  kind: spec_section
+  md: |
+    ## 5. Standard Implementer Documentation Flow (Per Card)
+
+    For each Implementer leaf card:
+
+    1. **Before coding**
+        - Read the card’s Purpose, Context, Deliverables, Done When.
+        - Identify **which docs are likely relevant**:
+          - FEATURE card/bundle itself.
+          - tech_spec (if tools, standards, or layout are affected).
+          - modules (if engines/plugins are being realized or re-scoped).
+          - Any specific doc mentioned in the card.
+
+    2. **After coding but before declaring “Done”**
+        - For each relevant doc, decide:
+          - Does the behaviour change require an update?
+          - Is the card’s description still accurate?
+
+    3. **Apply updates**
+        - Prepare **atomic, ready-to-paste blocks** for each affected doc.
+        - For example:
+          - An updated module entry in modules.
+          - An updated section in tech_spec.
+          - An updated card or note in FEATURES or the phase bundle.
+        - Do **not** partially patch random lines; replace coherent sections.
+
+    4. **Check canonical alignment**
+        - Verify that:
+          - No change contradicts build_canon or lillycore_roadmap.
+          - Any new or changed responsibilities still respect modules and tech_spec boundaries.
+          - You are not accidentally introducing a new canonical doc type without going through gpt_resource_index.
+
+    6. **Report in output**
+        - In the Implementer response, clearly list:
+          - Which docs you changed (with snippets).
+          - Which docs you considered but did not change (with a brief justification).
+          - If no docs changed, why that is safe.
+
+- id: documentation_protocol.qa_expectations
+  kind: spec_section
+  md: |
+    ## 7. QA Expectations for Documentation
+
+    QA uses the QA System section in FEATURES as the authoritative operational rulebook.
+    This protocol summarizes how QA should apply those rules to documentation.
+
+    For any card/phase to PASS, QA MUST confirm:
+
+    1. **Docs updated where required**
+        - FEATURES / phase bundle entries reflect:
+          - Completed status.
+          - Actual behaviour and deliverables.
+        - tech_spec reflects:
+          - Any new technical standards, tools, or layout changes.
+        - modules reflects:
+          - Any changes to engine/plugin status, responsibilities, or dependencies.
+        - gpt_resource_index reflects:
+          - Any new canonical docs or major changes to existing ones (when the card required it).
+
+    2. **No forbidden docs**
+        - No “must-not-have” docs exist (per documentation_protocol), such as:
+          - Unindexed spec files that define behaviour
+          - Shadow copies of Canon, Tech Spec, or Roadmap with divergent rules
+          - Plugin/engine specs that bypass the ontology
+
+    3. **Docs align with Canon and Tech Spec**
+        - No doc claims behaviour or layout that violates:
+          - build_canon (ontology and AI rules).
+          - tech_spec §3 (layout and taxonomy) or other relevant sections.
+
+    4. **All updates are atomic and paste-ready**
+        - The Implementer has provided coherent sections rather than ad-hoc line edits.
+        - Documentation changes are realistically copy-pastable into the repo.
+
+    If any of these fail, QA MUST:
+
+    - Return **FAIL**.
+    - Generate corrective Implementer card(s) and a QA card per the QA System rules.
+
+- id: documentation_protocol.Checklists
+  kind: spec_section
+  md: |
+    ## 8. Quick Checklists
+
+    ### 8.1 Implementer “Before Handing to QA”
+
+    For each leaf card:
+
+    - [ ] I updated or explicitly considered **FEATURES / phase bundle**.  
+    - [ ] I checked whether **tech_spec** needs updates (tools, layout, technical rules).  
+    - [ ] I checked whether **modules** needs updates (status, responsibilities, dependencies).  
+    - [ ] If I created or promoted a doc to canonical, I ensured a plan exists to update **gpt_resource_index**.  
+    - [ ] All doc edits are provided as **ready-to-paste blocks**.  
+
+    ### 8.2 Architect “When Designing Cards”
+
+    For each phase or redesign:
+
+    - [ ] I checked build_canon, lillycore_roadmap, tech_spec, FEATURES, gpt_resource_index, and documentation_protocol.
+    - [ ] I included **explicit documentation deliverables** for any change that affects behaviour, taxonomy, or canonical docs.  
+    - [ ] If new canonical docs are needed, I included tasks to:
+      - Create them under allowed locations, and  
+      - Add them to gpt_resource_index.  
+
+    ### 8.3 QA “Doc-Focused Sanity Pass”
+
+    For each QA card:
+
+    - [ ] All docs listed in this protocol as relevant to the card/phase have been checked.
+    - [ ] No forbidden doc categories are being relied upon (per documentation_protocol).
+    - [ ] Any new “important” doc has either been:
+      - Explicitly marked non-authoritative, or  
+      - Promoted through a card and indexed in gpt_resource_index.  
+    - [ ] There is no visible contradiction between Canon, Roadmap, Tech Spec, modules, Features, and the new work.  
+
+- id: documentation_protocol.formatting_replacement
+  kind: spec_section
+  md: |
+    ## 9. Formatting & Replacement Standards
+
+    This section defines how GPTs format **documentation updates** now that
+    canonical structure lives in `docs/*.yml` files.
+
+    - The **registry YAML** (IDs, kinds) is the structural authority.
+    - The `md` fields inside blocks hold **human-readable markdown only**.
+    - We do **not** repeat “FILE: … / ROLE: … / VERSION: …” headers in markdown
+      where the same information is already present as YAML metadata.
+
+    These rules apply whenever GPTs are:
+    - Proposing changes to registry docs (`docs/registry/*.yml`), or
+    - Emitting markdown that will live in `md:` fields inside those registry blocks.
+
+    ### 9.0  Canonical File Block Format
+
+    - id: <required>
+    kind: <required>
     md: |
-      ## 3. Roles & Documentation Responsibilities
+      <required markdown>
 
-      This section summarizes **who does what for docs**. It does not change any role definitions from Canon; it just makes them operational for documentation work.
+    Required blocks per canonical file
+    - One overview block (kind: overview)
+    - One allowed_kinds block (kind: meta)
+    
+    ### 9.1 YAML vs Markdown Responsibilities
 
-      ### 3.1 Andrew
+    YAML defines:
+    - Block IDs (`id`)
+    - Block kinds (`kind`)
 
-      - Final authority on:
-        - System meaning and ontology (build_canon).
-        - Phase sequencing and intentions (lillycore_roadmap).
-        - Whether new docs become canonical and are added to gpt_resource_index.
-      - Approves:
-        - Any change to build_canon or lillycore_roadmap.
-        - Any change that alters repository taxonomy (via Architect-designed cards).
-        - Any new canonical document type in documentation_governance.
+    Markdown (`md:`) defines:
+    - The text humans read (explanations, lists, examples, checklists).
+    - Local headings inside that block only.
 
-      **Andrew must be asked** explicitly before:
+    GPTs MUST NOT:
+    - Recreate file-level banners like `FILE: tech_spec`, `ROLE: …`, `VERSION: …`
+      inside `md` if that information is already present in YAML metadata.
+    - Invent new file-level markers that conflict with the registry format.
 
-      - Any Canon or Roadmap text is changed.
-      - Any new canonical doc type is introduced.
-      - Any structural/taxonomy change is made in tech_spec §3.
+    GPTs MAY:
+    - Include small inline reminders or labels inside `md` when it helps readability
+      (e.g. “This block describes Section 4 – Update Triggers”),
+      as long as that does not conflict with the registry metadata.
 
-      ### 3.2 Architect GPT
 
-      - Owns:
-        - Updates to gpt_resource_index when new canonical docs are introduced or existing docs change meaning.  
-        - System-level conceptual docs (including documentation_governance).
+    ### 9.2 Markdown Style Inside `md` Fields
 
-      Architect MUST:
+    When writing markdown inside a block’s `md:`:
 
-      - Ensure new canonical docs are:
-        - Added to gpt_resource_index.
-        - Placed in locations allowed by tech_spec and this protocol.
-      - Include documentation deliverables in every phase/feature bundle.
+    - **Headings**
+      - Use normal markdown headings (`#`, `##`, `###`) for structure.
+      - Keep heading levels shallow and consistent within a block.
+      - Do **not** try to recreate a “top of file” heading; the block itself is
+        the unit of meaning.
 
-      Architect MUST NOT:
+    - **Lists**
+      - Use standard `-` bullet lists or numbered lists.
+      - Keep items short and atomic where possible.
 
-      - Invent new doc layers or categories outside documentation_governance.
+    - **Code & Examples**
+      - Use fenced code blocks for examples and paste-ready content, e.g.:
 
-      ### 3.3 Implementer GPT
+        ```markdown
+        ```markdown
+        ## 4. Update Triggers
+        ...
+        ```
+        ```
 
-      - Is **always responsible** for documentation updates that follow from that card’s changes.
+      - Choose a language hint (`markdown`, `yaml`, `python`, `text`) when useful.
 
-      Implementer MUST:
+    - **ASCII SECTION Patterns**
+      - Do not use the older `SECTION: ...` ASCII bars.
 
-      - Identify which docs are affected by the work.
-      - Update:
-        - **feature cards / phase bundles (tracked externally)**: card status, notes, and any mirrored content if the card lives there.  
-        - **tech_spec**: when technical standards, tools, or repo layout change as part of the card.  
-        - **gpt_resource_index**: *only when* the card explicitly calls for adding or changing indexed docs, and Andrew/Architect have approved.  
-        - Other build/system docs (e.g. documentation_protocol, documentation_governance) when the card explicitly includes such changes.
 
-      Implementer MUST:
+    ### 9.3 Block-Level Replacement (Not Line-Level Surgery)
 
-      - Present doc updates as **ready-to-paste sections**, not fragmented edits.
-      - Explicitly state if **no documentation changes are required** and why.
+    For documentation changes, the **atomic unit of change** is a single registry block:
 
-      Implementer MUST NOT:
+    - One `blocks[…]` entry with its `id`, `kind`, and `md`.
 
-      - Treat unindexed spec files as canonical.
+    GPTs MUST:
+    - Replace the entire `md` field for that block when updating it.
+    - Avoid “change just these two lines” style instructions.
 
-      When unsure whether a doc should be updated, Implementer MUST:
-      - Stop and ask Andrew, or request an Architect clarification card.
+    In chat, GPTs SHOULD:
 
-      ### 3.4 QA GPT
+    - Present updates as fenced blocks that show the **full new content**:
+      - Either the full YAML block, or
+      - The full markdown body that should become the new `md:` content.
+    - Clearly label what is being replaced, for example:
+      - “Replace `documentation_protocol.section.4_update_triggers` md with: …”
 
-      - Verifies that **all required documentation updates** have been made for a given card/phase.
-      - Uses:
-        - feature cards / phase bundles (tracked externally)
-        - tech_spec → technical and layout rules
-        - gpt_resource_index → canonical doc list
-        - documentation_protocol → documentation categories, constraints, and enforcement rules
 
+    ### 9.4 Markdown Chunks Used in `.md` Files
 
-      QA MUST:
+    When markdown from a registry block is meant to be pasted back into a
+    `.md` file (e.g. `docs/build/documentation_protocol.md`):
 
-      - Fail any card/phase if doc updates are missing, incomplete, or inconsistent with canonical docs.
-      - Generate corrective cards when documentation is wrong or incomplete.
-      - Confirm that new canonical docs have been added to gpt_resource_index when required.
-
-      QA MUST NOT:
-
-      - Edit docs directly.
-
-  - id: documentation_protocol.update_triggers
-    kind: spec_section
-    md: |
-      ## 4. Update Triggers
-
-      This section lists **when** documentation MUST be considered and potentially updated.  
-      “Consider” means **explicitly thinking through whether a given doc is affected**, not blindly editing everything.
-
-      ### 4.1 Code or Behaviour Change (Implementer)
-
-      Whenever code behaviour changes (new function, altered API, changed semantics, removed capability, etc.):
-
-      1. **feature cards / phase bundles (tracked externally)**
-         - Update the feature card / phase bundle:
-           - Mark status (in-progress → implemented).
-           - Note key behavioural changes.
-           - Link to any new docs or scripts created by the card (if relevant).
-
-      2. **tech_spec**
-         - Consider updates if:
-           - Tools or baseline configs change (e.g. new required linter behaviour, new scripts conventions).
-           - Repo layout or script expectations change.
-           - Typing/linting/test requirements change.
-
-      3. **System-Level Conceptual Docs**
-         - Update documentation_protocol or other high-level conceptual docs **only** when the card explicitly includes that as a deliverable.
-
-      ### 4.2 Architecture or Planning Change (Architect)
-
-      When phase structure, ontology, or high-level module responsibilities change:
-
-      1. Update **lillycore_roadmap** (phase sequences, intents).
-      2. Update **build_canon** only when ontology / planning discipline changes and Andrew approves.
-      4. Update **gpt_resource_index** when the canonical doc set changes.
-      5. Update relevant conceptual docs (e.g. documentation_governance) to match the new story.
-
-      All of the above require explicit Architect cards and Andrew’s approval.
-
-      ### 4.3 New Canonical Document Type
-
-      When a new doc is meant to become canonical (e.g. engine spec, plugin spec, DOC schema spec):
-
-      1. Architect designs an appropriate feature/phase card.
-      2. Implementer (or Architect, depending on the card) creates the new doc at a location consistent with tech_spec §3 and documentation_governance.
-      3. Architect/Implementer:
-         - Adds the doc to **gpt_resource_index** with:
-           - name  
-           - type  
-           - status  
-           - path  
-           - description  
-           - usage/access notes
-      4. QA verifies that:
-         - The new doc is indexed.
-         - Its location and category obey tech_spec and documentation_governance.
-
-      Until this flow completes, the doc is treated as **non-authoritative**.
-
-      ### 4.4 Taxonomy / Repo Layout Change
-
-      Any change covered by tech_spec §3’s taxonomy rules (e.g. top-level folder changes, docs layout changes) MUST:
-
-      - Be designed via an Architect card.
-      - Update:
-        - tech_spec §3 (and related sections).
-        - gpt_resource_index if canonical docs move or new top-level doc subtrees are created.
-      - Be validated by QA against the new taxonomy.
-
-      Implementers MUST NOT perform these changes under ordinary feature cards.
-
-      ### 4.5 QA-Detected Drift
-
-      When QA detects that runtime behaviour and documentation disagree:
-
-      - QA creates corrective Implementer cards (and a QA card) per the QA System in FEATURES.
-      - Implementer:
-        - Updates the relevant docs (FEATURES, tech_spec, modules, etc.) to match reality.
-        - Ensures changes are consistent with build_canon and lillycore_roadmap.
-      - QA re-runs checks for both:
-        - The corrective cards.
-        - The affected phase bundle.
-
-      If QA determines that docs are wrong because the **behaviour** is wrong, Architect may need to create redesign cards; documentation then follows the corrected design.
-
-  - id: documentation_protocol.implementer_flow
-    kind: spec_section
-    md: |
-      ## 5. Standard Implementer Documentation Flow (Per Card)
-
-      For each Implementer leaf card:
-
-      1. **Before coding**
-         - Read the card’s Purpose, Context, Deliverables, Done When.
-         - Identify **which docs are likely relevant**:
-           - FEATURE card/bundle itself.
-           - tech_spec (if tools, standards, or layout are affected).
-           - modules (if engines/plugins are being realized or re-scoped).
-           - Any specific doc mentioned in the card.
-
-      2. **After coding but before declaring “Done”**
-         - For each relevant doc, decide:
-           - Does the behaviour change require an update?
-           - Is the card’s description still accurate?
-
-      3. **Apply updates**
-         - Prepare **atomic, ready-to-paste blocks** for each affected doc.
-         - For example:
-           - An updated module entry in modules.
-           - An updated section in tech_spec.
-           - An updated card or note in FEATURES or the phase bundle.
-         - Do **not** partially patch random lines; replace coherent sections.
-
-      4. **Check canonical alignment**
-         - Verify that:
-           - No change contradicts build_canon or lillycore_roadmap.
-           - Any new or changed responsibilities still respect modules and tech_spec boundaries.
-           - You are not accidentally introducing a new canonical doc type without going through gpt_resource_index.
-
-      6. **Report in output**
-         - In the Implementer response, clearly list:
-           - Which docs you changed (with snippets).
-           - Which docs you considered but did not change (with a brief justification).
-           - If no docs changed, why that is safe.
-
-  - id: documentation_protocol.qa_expectations
-    kind: spec_section
-    md: |
-      ## 7. QA Expectations for Documentation
-
-      QA uses the QA System section in FEATURES as the authoritative operational rulebook.
-      This protocol summarizes how QA should apply those rules to documentation.
-
-      For any card/phase to PASS, QA MUST confirm:
-
-      1. **Docs updated where required**
-         - FEATURES / phase bundle entries reflect:
-           - Completed status.
-           - Actual behaviour and deliverables.
-         - tech_spec reflects:
-           - Any new technical standards, tools, or layout changes.
-         - modules reflects:
-           - Any changes to engine/plugin status, responsibilities, or dependencies.
-         - gpt_resource_index reflects:
-           - Any new canonical docs or major changes to existing ones (when the card required it).
-
-      2. **No forbidden docs**
-         - No “must-not-have” docs exist (per documentation_protocol), such as:
-           - Unindexed spec files that define behaviour
-           - Shadow copies of Canon, Tech Spec, or Roadmap with divergent rules
-           - Plugin/engine specs that bypass the ontology
-
-      3. **Docs align with Canon and Tech Spec**
-         - No doc claims behaviour or layout that violates:
-           - build_canon (ontology and AI rules).
-           - tech_spec §3 (layout and taxonomy) or other relevant sections.
-
-      4. **All updates are atomic and paste-ready**
-         - The Implementer has provided coherent sections rather than ad-hoc line edits.
-         - Documentation changes are realistically copy-pastable into the repo.
-
-      If any of these fail, QA MUST:
-
-      - Return **FAIL**.
-      - Generate corrective Implementer card(s) and a QA card per the QA System rules.
-
-  - id: documentation_protocol.Checklists
-    kind: spec_section
-    md: |
-      ## 8. Quick Checklists
-
-      ### 8.1 Implementer “Before Handing to QA”
-
-      For each leaf card:
-
-      - [ ] I updated or explicitly considered **FEATURES / phase bundle**.  
-      - [ ] I checked whether **tech_spec** needs updates (tools, layout, technical rules).  
-      - [ ] I checked whether **modules** needs updates (status, responsibilities, dependencies).  
-      - [ ] If I created or promoted a doc to canonical, I ensured a plan exists to update **gpt_resource_index**.  
-      - [ ] All doc edits are provided as **ready-to-paste blocks**.  
-
-      ### 8.2 Architect “When Designing Cards”
-
-      For each phase or redesign:
-
-      - [ ] I checked build_canon, lillycore_roadmap, tech_spec, FEATURES, gpt_resource_index, and documentation_protocol.
-      - [ ] I included **explicit documentation deliverables** for any change that affects behaviour, taxonomy, or canonical docs.  
-      - [ ] If new canonical docs are needed, I included tasks to:
-        - Create them under allowed locations, and  
-        - Add them to gpt_resource_index.  
-
-      ### 8.3 QA “Doc-Focused Sanity Pass”
-
-      For each QA card:
-
-      - [ ] All docs listed in this protocol as relevant to the card/phase have been checked.
-      - [ ] No forbidden doc categories are being relied upon (per documentation_protocol).
-      - [ ] Any new “important” doc has either been:
-        - Explicitly marked non-authoritative, or  
-        - Promoted through a card and indexed in gpt_resource_index.  
-      - [ ] There is no visible contradiction between Canon, Roadmap, Tech Spec, modules, Features, and the new work.  
-
-  - id: documentation_protocol.formatting_replacement
-    kind: spec_section
-    md: |
-      ## 9. Formatting & Replacement Standards
-
-      This section defines how GPTs format **documentation updates** now that
-      canonical structure lives in `docs/*.yml` files.
-
-      - The **registry YAML** (IDs, kinds) is the structural authority.
-      - The `md` fields inside blocks hold **human-readable markdown only**.
-      - We do **not** repeat “FILE: … / ROLE: … / VERSION: …” headers in markdown
-        where the same information is already present as YAML metadata.
-
-      These rules apply whenever GPTs are:
-      - Proposing changes to registry docs (`docs/registry/*.yml`), or
-      - Emitting markdown that will live in `md:` fields inside those registry blocks.
-
-      ### 9.0  Canonical File Block Format
-
-     - id: <required>
-      kind: <required>
-      md: |
-        <required markdown>
-
-      Required blocks per canonical file
-      - One overview block (kind: overview)
-      - One allowed_kinds block (kind: meta)
-      
-      ### 9.1 YAML vs Markdown Responsibilities
-
-      YAML defines:
-      - Block IDs (`id`)
-      - Block kinds (`kind`)
-
-      Markdown (`md:`) defines:
-      - The text humans read (explanations, lists, examples, checklists).
-      - Local headings inside that block only.
-
-      GPTs MUST NOT:
-      - Recreate file-level banners like `FILE: tech_spec`, `ROLE: …`, `VERSION: …`
-        inside `md` if that information is already present in YAML metadata.
-      - Invent new file-level markers that conflict with the registry format.
-
-      GPTs MAY:
-      - Include small inline reminders or labels inside `md` when it helps readability
-        (e.g. “This block describes Section 4 – Update Triggers”),
-        as long as that does not conflict with the registry metadata.
-
-
-      ### 9.2 Markdown Style Inside `md` Fields
-
-      When writing markdown inside a block’s `md:`:
-
-      - **Headings**
-        - Use normal markdown headings (`#`, `##`, `###`) for structure.
-        - Keep heading levels shallow and consistent within a block.
-        - Do **not** try to recreate a “top of file” heading; the block itself is
-          the unit of meaning.
-
-      - **Lists**
-        - Use standard `-` bullet lists or numbered lists.
-        - Keep items short and atomic where possible.
-
-      - **Code & Examples**
-        - Use fenced code blocks for examples and paste-ready content, e.g.:
-
-          ```markdown
-          ```markdown
-          ## 4. Update Triggers
-          ...
-          ```
-          ```
-
-        - Choose a language hint (`markdown`, `yaml`, `python`, `text`) when useful.
-
-      - **ASCII SECTION Patterns**
-        - Do not use the older `SECTION: ...` ASCII bars.
-
-
-      ### 9.3 Block-Level Replacement (Not Line-Level Surgery)
-
-      For documentation changes, the **atomic unit of change** is a single registry block:
-
-      - One `blocks[…]` entry with its `id`, `kind`, and `md`.
-
-      GPTs MUST:
-      - Replace the entire `md` field for that block when updating it.
-      - Avoid “change just these two lines” style instructions.
-
-      In chat, GPTs SHOULD:
-
-      - Present updates as fenced blocks that show the **full new content**:
-        - Either the full YAML block, or
-        - The full markdown body that should become the new `md:` content.
-      - Clearly label what is being replaced, for example:
-        - “Replace `documentation_protocol.section.4_update_triggers` md with: …”
-
-
-      ### 9.4 Markdown Chunks Used in `.md` Files
-
-      When markdown from a registry block is meant to be pasted back into a
-      `.md` file (e.g. `docs/build/documentation_protocol.md`):
-
-      - The chunk MUST:
-        - Start at a logical heading boundary (e.g. `## 4. Update Triggers`).
-        - Include the full section down to (but not including) the next heading
-          of the same level, or the end of the parent section.
-      - GPTs MUST NOT:
-        - Ask for surgical line edits in those files.
-        - Depend on fragile alignment or spacing tricks.
+    - The chunk MUST:
+      - Start at a logical heading boundary (e.g. `## 4. Update Triggers`).
+      - Include the full section down to (but not including) the next heading
+        of the same level, or the end of the parent section.
+    - GPTs MUST NOT:
+      - Ask for surgical line edits in those files.
+      - Depend on fragile alignment or spacing tricks.
 
 - id: documentation_protocol.conflicts_ledger
   kind: ledger

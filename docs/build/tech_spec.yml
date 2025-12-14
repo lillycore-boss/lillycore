@@ -1,88 +1,88 @@
-  - id: tech_spec.overview
-    kind: overview
-    md: |
-      # tech_spec
+- id: tech_spec.overview
+  kind: overview
+  md: |
+    # tech_spec
 
-      Purpose:
-      - Define the technical environment and baseline engineering standards for LillyCORE.
-      - Prevent guessing, drift, and cross-platform nonsense.
+    Purpose:
+    - Define the technical environment and baseline engineering standards for LillyCORE.
+    - Prevent guessing, drift, and cross-platform nonsense.
 
-      Scope:
-      - Python runtime baseline
-      - Tooling baseline (formatter, linter, tests)
-      - Repository-root conventions (where configs live)
-      - Minimal execution conventions (how to run checks)
+    Scope:
+    - Python runtime baseline
+    - Tooling baseline (formatter, linter, tests)
+    - Repository-root conventions (where configs live)
+    - Minimal execution conventions (how to run checks)
 
-      Out of scope (explicit):
-      - Runtime architecture and engine/plugin behavior
-      - GPT role behaviour rules (see build_canon and documentation_protocol)
-      - Documentation update procedures (see documentation_protocol)
+    Out of scope (explicit):
+    - Runtime architecture and engine/plugin behavior
+    - GPT role behaviour rules (see build_canon and documentation_protocol)
+    - Documentation update procedures (see documentation_protocol)
 
-  - id: tech_spec.platform_assumptions
-    kind: baseline
-    md: |
-      ## Platform Assumptions
+- id: tech_spec.platform_assumptions
+  kind: baseline
+  md: |
+    ## Platform Assumptions
 
-      Primary development platform:
-      - Linux (Pop!_OS).
+    Primary development platform:
+    - Linux (Pop!_OS).
 
-      GPT constraint:
-      - GPTs MUST NOT provide Windows/Mac-specific instructions unless Andrew explicitly asks.
-      - If cross-platform behavior matters, GPTs MUST ask what targets are required.
+    GPT constraint:
+    - GPTs MUST NOT provide Windows/Mac-specific instructions unless Andrew explicitly asks.
+    - If cross-platform behavior matters, GPTs MUST ask what targets are required.
 
-  - id: tech_spec.python_baseline
-    kind: baseline
-    md: |
-      ## Python Baseline
+- id: tech_spec.python_baseline
+  kind: baseline
+  md: |
+    ## Python Baseline
 
-      Minimum supported Python:
-      - Python 3.11+
+    Minimum supported Python:
+    - Python 3.11+
 
-      Notes:
-      - All code, scripts, and tooling choices MUST be compatible with the minimum version.
+    Notes:
+    - All code, scripts, and tooling choices MUST be compatible with the minimum version.
 
-  - id: tech_spec.best_practice_policy
-    kind: rules
-    md: |
-      ## Best-Practice Policy (Default)
+- id: tech_spec.best_practice_policy
+  kind: rules
+  md: |
+    ## Best-Practice Policy (Default)
 
-      Default stance:
-      - Use widely accepted Python best practices to reduce context load and drift.
+    Default stance:
+    - Use widely accepted Python best practices to reduce context load and drift.
 
-      Constraint:
-      - Best practice MUST be treated as a default, not a law.
-      - If best practice conflicts with a LillyCORE requirement, the requirement wins,
-        but the exception MUST be documented here.
+    Constraint:
+    - Best practice MUST be treated as a default, not a law.
+    - If best practice conflicts with a LillyCORE requirement, the requirement wins,
+      but the exception MUST be documented here.
 
-  - id: tech_spec.repo_root_definition
-    kind: rules
-    md: |
-      ## Repository Root Definition
+- id: tech_spec.repo_root_definition
+  kind: rules
+  md: |
+    ## Repository Root Definition
 
-      Definition:
-      - "Repository root" = the top-level directory of the lillycore repository
-        (the folder containing .git and the main project files).
+    Definition:
+    - "Repository root" = the top-level directory of the lillycore repository
+      (the folder containing .git and the main project files).
 
-      Policy:
-      - Repository-wide configuration files live at repository root unless explicitly stated otherwise.
+    Policy:
+    - Repository-wide configuration files live at repository root unless explicitly stated otherwise.
 
-  - id: tech_spec.tooling_baseline
-    kind: baseline
-    md: |
-      ## Tooling Baseline (Conceptual)
+- id: tech_spec.tooling_baseline
+  kind: baseline
+  md: |
+    ## Tooling Baseline (Conceptual)
 
-      Purpose:
-      - Keep code consistent and catch obvious mistakes early.
+    Purpose:
+    - Keep code consistent and catch obvious mistakes early.
 
-      Definitions (plain English):
-      - Formatter:
-          Automatically rewrites code layout (spacing, wrapping) to a consistent style.
-      - Linter:
-          Checks code for likely bugs, suspicious patterns, and rule violations.
-      - Test framework:
-          Runs automated checks to confirm behavior.
-      - CI gate:
-          A rule that says: "Changes are not considered valid unless required checks pass."
+    Definitions (plain English):
+    - Formatter:
+        Automatically rewrites code layout (spacing, wrapping) to a consistent style.
+    - Linter:
+        Checks code for likely bugs, suspicious patterns, and rule violations.
+    - Test framework:
+        Runs automated checks to confirm behavior.
+    - CI gate:
+        A rule that says: "Changes are not considered valid unless required checks pass."
 
 - id: tech_spec.tooling_choices
   kind: decisions
