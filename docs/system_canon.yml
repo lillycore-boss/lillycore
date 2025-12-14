@@ -1,4 +1,4 @@
-  - id: project_canon.system_ontology
+  - id: system_canon.system_ontology
     kind: ontology
     md: |
       LillyCORE uses a precise vocabulary to prevent GPT drift.
