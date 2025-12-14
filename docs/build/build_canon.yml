@@ -1,20 +1,14 @@
   - id: build_canon.overview
     kind: overview
-    name: BUILD_CANON
-    applies_to: [architect, implementer, qa]
-    tags: [canon, philosophy, ontology]
     md: |
-      # PROJECT_CANON
-
-      **FILE:** PROJECT_CANON  
-      **ROLE:** Core philosophy, rules, ontology, and planning discipline  
-      **VERSION:** v1.0 (Engines/Plugins terminology update)
-
-      > NOTE:
-      >   Detailed GPT behavioural rules and documentation-governance procedures
-      >   now live in GPT_BEHAVIOUR_SPEC, DOCUMENTATION_PROTOCOL, and
-      >   DOCUMENTATION_GOVERNANCE. PROJECT_CANON focuses on LillyCORE’s
-      >   philosophy, ontology, and planning discipline.
+      BUILD_CANON defines LillyCORE’s **core philosophy, authority model,
+      ontology, and planning discipline**.
+    
+      It is the highest-level source of meaning in the system.
+    
+      When conflicts arise:
+      - Andrew’s explicit instruction always wins.
+      - BUILD_CANON overrides all other documentation.
 
   - id: project_canon.philosophy_and_authority
     kind: philosophy
@@ -181,11 +175,6 @@
         been moved to DOCUMENTATION_PROTOCOL. This section remains as the
         conceptual anchor that Architect GPT is responsible for decomposition,
         not execution.
-- Ensure every structural/taxonomy change has an explicit card and corresponding TECH_SPEC / MODULES updates.
-      - MUST ask Andrew whether to:
-          - Add them to GitHub,
-          - Add them to this file,
-          - Or treat them as exploratory only.
 
   - id: project_canon.implementer_role
     kind: role_note
@@ -204,7 +193,6 @@
         workflows for QA GPT have been moved to DOCUMENTATION_PROTOCOL.
         PROJECT_CANON keeps QA only as a conceptual role in the planning
         discipline; the operational protocol is defined elsewhere.
-- Redesign architecture or rewrite cards (except via corrective-task creation).
 
   - id: project_canon.updates_to_canon
     kind: updates
@@ -219,101 +207,3 @@
 
       - Architect is responsible for producing the update text,
         but ONLY after Andrew explicitly authorizes it.
----
-NEW SECTIONS - possible duplicates portions within
----
-  - id: tech_spec.no_guessing.rule
-    kind: rule
-    md: |
-      ## No-Guessing Rule (Hard)
-
-      GPTs MUST NOT:
-      - invent tooling selections
-      - invent OS-specific instructions
-      - invent repository layout rules
-      - invent "standard" commands
-
-      When missing info:
-      - Ask Andrew a concrete question.
-      - Offer 1–2 best-practice options clearly labeled as options.
-      - Do not proceed as if a choice has been made.
----
-  - id: documentation_protocol.section.6_ask_before_acting
-    kind: spec_section
-    md: |
-      ## 6. Ask-Before-Acting Rules (Documentation Edition)
-
-      The following are explicit cases where GPTs MUST stop and ask Andrew before editing docs or proceeding.
-
-      ### 6.1 Canon, Roadmap, and Ontology
-
-      - Editing **PROJECT_CANON** in any way.
-      - Editing **LILLYCORE_ROADMAP**.
-      - Introducing new ontological categories (new meanings of “engine”, “plugin”, “DOC layer”, etc.).
-      - Reinterpreting Canon’s definitions for engines, plugins, pipelines, agents, DOC layers.
-
-      ### 6.2 Repository Taxonomy and Docs Layout
-
-      - Adding, renaming, or removing:
-        - Any top-level folder in the repo.
-        - Any major docs subtrees under `docs/` (e.g. new `docs/api/`-like trees).
-        - Any canonical file listed in GPT_RESOURCE_INDEX.
-      - Moving canonical docs out of `docs/build/` or changing where canonical docs live, beyond what TECH_SPEC §3 already states.
-
-      These require Architect cards and Andrew’s approval.
-
-      ### 6.3 New Canonical Docs or Categories
-
-      - Creating a new document and intending it to be **canonical** (e.g. an engine spec, plugin spec, or DOC schema spec) when it is not yet mentioned in documentation_governance.
-      - Introducing a new category of documentation not listed in documentation_governance (e.g. a new persistent doc layer type).
-
-      ### 6.4 Ambiguous Authority
-
-      - When two or more docs appear to contradict each other.
-      - When it is unclear which doc is the **source of truth**:
-        - e.g. a README inside an engine folder vs MODULES vs TECH_SPEC.
-      - When a “scratch” or “exploratory” doc appears to have drifted into de-facto spec status.
-
-      In these cases, GPTs MUST ask Andrew which doc should win and then bring the rest in line via cards.
-
-      ### 6.5 QA Edge Cases
-
-      - When QA would be forced to pass or fail a phase based on unclear or conflicting doc rules.
-      - When the QA System’s requirements appear to contradict TECH_SPEC or documentation_governance.
-
-      In all such cases, QA MUST escalate to Andrew and/or Architect and request corrective cards rather than making unilateral interpretation changes.
----
-
-- id: doc_protocol.helpers.request_blocks_via_script
-  kind: helper
-  md: |
-    ## Helper: request docs/blocks via local script
-
-    When the GPT needs specific block IDs from canonical docs, it SHOULD:
-    1) list the required block IDs
-    2) provide this command for Andrew to run
-    3) ask Andrew to paste the output
-
-    Example command (adjust path if needed):
-      python scripts/doc_blocks.py get \
-        --doc docs/build/tech_spec.yml \
-        --id tech.python.baseline \
-        --id tech.repo.root_rules
----
-- id: doc_protocol.helpers.block_fetch
-  kind: helper
-  md: |
-    ## Helper: Fetch specific doc blocks via local command
-
-    When a GPT needs specific block IDs from canonical docs, it SHOULD:
-    1) list the required block IDs (doc + block id)
-    2) provide the command pattern below
-    3) ask Andrew to paste the output
-
-    Command pattern:
-      ${DOC_BLOCK_TOOL_CMD} get --doc <path> --id <block_id> [--id <block_id>...]
-
-    NOTE:
-    - DOC_BLOCK_TOOL_CMD is defined in TECH_SPEC.
-    - GPTs MUST NOT invent script paths. They must use the TECH_SPEC-defined command.
----
