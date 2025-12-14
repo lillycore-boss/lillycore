@@ -35,7 +35,7 @@
     not code-complete deliverables.
 
 - id: roadmap.phase.0
-  kind: phase
+  kind: reference
   md: |
     # PHASE 0 — FOUNDATIONS & TOOLING
 
@@ -53,7 +53,7 @@
       A clean workspace with stable rules.
 
 - id: roadmap.phase.1
-  kind: phase
+  kind: reference
   md: |
     # PHASE 1 — CORE LOOP, LOGGING, USER PREFERENCES
 
@@ -71,7 +71,7 @@
       LillyCORE can run and persist user settings.
 
 - id: roadmap.phase.2
-  kind: phase
+  kind: reference
   md: |
     # PHASE 2 — AI POOLS & EXECUTION FRAMEWORK
 
@@ -89,7 +89,7 @@
       Any LLM backend can be attached safely.
 
 - id: roadmap.phase.3
-  kind: phase
+  kind: reference
   md: |
     # PHASE 3 — SYSTEM DOC MVP (DURABLE DATA LAYER)
 
@@ -106,7 +106,7 @@
       Durable state with no corruption.
 
 - id: roadmap.phase.4
-  kind: phase
+  kind: reference
   md: |
     # PHASE 4 — NOTES PLUGIN V0
 
@@ -123,7 +123,7 @@
       Cheap way to test memory flow.
 
 - id: roadmap.phase.5
-  kind: phase
+  kind: reference
   md: |
     # PHASE 5 — DRIFT ENGINE MVP (CONTEXT, EMOTION, PERCEPTION)
 
@@ -141,7 +141,7 @@
       Structured input for HELPER_ENGINE.
 
 - id: roadmap.phase.6
-  kind: phase
+  kind: reference
   md: |
     # PHASE 6 — HELPER ENGINE MVP (WORK ENGINE)
 
@@ -159,7 +159,7 @@
       Full engine for doing work with traceability.
 
 - id: roadmap.phase.7
-  kind: phase
+  kind: reference
   md: |
     # PHASE 7 — PLUGIN ENGINE MVP
 
@@ -177,7 +177,7 @@
       The system becomes expandable.
 
 - id: roadmap.phase.8
-  kind: phase
+  kind: reference
   md: |
     # PHASE 8 — STABILITY SPINE
 
@@ -196,7 +196,7 @@
     - SUBPHASE 8c — SCRIPT ENGINE V0
 
 - id: roadmap.phase.8a.help_desk_engine
-  kind: subphase
+  kind: reference
   md: |
     ## SUBPHASE 8a — HELP DESK ENGINE V0
 
@@ -209,7 +209,7 @@
       System stays alive.
 
 - id: roadmap.phase.8b.dream_engine
-  kind: subphase
+  kind: reference
   md: |
     ## SUBPHASE 8b — DREAM ENGINE V0
 
@@ -223,7 +223,7 @@
       Lilly learns and self-corrects.
 
 - id: roadmap.phase.8c.script_engine
-  kind: subphase
+  kind: reference
   md: |
     ## SUBPHASE 8c — SCRIPT ENGINE V0
 
@@ -237,7 +237,7 @@
       Procedural intelligence + autonomous maintenance.
 
 - id: roadmap.phase.9
-  kind: phase
+  kind: reference
   md: |
     # PHASE 9 — UX MVP
 
@@ -254,7 +254,7 @@
       External interaction begins.
 
 - id: roadmap.phase.10
-  kind: phase
+  kind: reference
   md: |
     # PHASE 10 — PROJECT MANAGEMENT PLUGIN
 
@@ -270,7 +270,7 @@
       Autonomous internal PM.
 
 - id: roadmap.phase.11
-  kind: phase
+  kind: reference
   md: |
     # PHASE 11 — PERSONAL ASSISTANT PLUGIN
 
@@ -287,7 +287,7 @@
       Lilly becomes a usable assistant.
 
 - id: roadmap.phase.12
-  kind: phase
+  kind: reference
   md: |
     # PHASE 12 — DEMONSTRATION PLUGINS
 
@@ -305,7 +305,7 @@
       Public demos and validation.
 
 - id: roadmap.phase.13
-  kind: phase
+  kind: reference
   md: |
     # PHASE 13 — MULTI-USER PLUGIN
 
@@ -322,7 +322,7 @@
       LillyCORE supports multiple humans.
 
 - id: roadmap.phase.14
-  kind: phase
+  kind: reference
   md: |
     # PHASE 14 — IO & NETWORK LAYER
 
@@ -339,7 +339,7 @@
       Whole-home digital presence.
 
 - id: roadmap.phase.15
-  kind: phase
+  kind: reference
   md: |
     # PHASE 15 — APPLIANCE LAYER
 
@@ -356,7 +356,7 @@
       Dedicated device compatibility.
 
 - id: roadmap.phase.16
-  kind: phase
+  kind: reference
   md: |
     # PHASE 16 — USER CONFIGURATION & FIRST-RUN EXPERIENCE
 
@@ -374,7 +374,7 @@
       Refined entry experience.
 
 - id: roadmap.phase.17
-  kind: phase
+  kind: reference
   md: |
     # PHASE 17 — ENTERPRISE DEMO PLUGIN
 
@@ -391,7 +391,7 @@
       Investor-ready demo.
 
 - id: roadmap.phase.18
-  kind: phase
+  kind: reference
   md: |
     # PHASE 18 — SYSTEM INTEGRATION + ALPHA RELEASE
 
@@ -403,3 +403,17 @@
       - System validation
       - Runtime optimization
       - Installer
+
+- id: roadmap.allowed_kinds
+  kind: meta
+  md: |
+    Allowed kinds for ROADMAP:
+
+    - overview
+    - meta
+    - index
+    - reference
+
+    ROADMAP describes phase sequencing and intent.
+    Governance and enforcement rules live elsewhere.
+
