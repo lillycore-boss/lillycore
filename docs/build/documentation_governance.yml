@@ -1,16 +1,5 @@
-# docs/build/documentation_governance.yml
-
-version: "1.0"
-
-blocks:
-  # --------------------------------
-  # Overview
-  # --------------------------------
   - id: docs_gov.overview
     kind: overview
-    name: DOCUMENTATION_GOVERNANCE
-    applies_to: [architect, implementer, qa]
-    tags: [docs, governance, canonical, mandatory_load]
     md: |
       # LillyCORE Documentation Governance
 
@@ -26,13 +15,8 @@ blocks:
       - Clarify which docs are authoritative versus exploratory.
       - Prevent “random spec files” that drift outside GPT_RESOURCE_INDEX or conflict with Canon / Tech Spec.
 
-  # --------------------------------
-  # Doc Layers & Categories
-  # --------------------------------
   - id: docs_gov.layers.intro
     kind: concept
-    applies_to: [architect, implementer, qa]
-    tags: [docs, layers]
     md: |
       ## Doc Layers & Categories
 
@@ -47,9 +31,6 @@ blocks:
 
   - id: docs_gov.layers.build_system_docs
     kind: layer
-    name: Build / System Docs
-    applies_to: [architect, implementer, qa]
-    tags: [docs, layers, build_system, canonical]
     md: |
       ### 1. Build / System Docs (Engineering & Control Docs)
 
@@ -105,9 +86,6 @@ blocks:
 
   - id: docs_gov.layers.system_conceptual
     kind: layer
-    name: System-Level Conceptual Docs
-    applies_to: [architect, implementer, qa]
-    tags: [docs, layers, conceptual]
     md: |
       ### 2. System-Level Conceptual Docs
 
@@ -140,9 +118,6 @@ blocks:
 
   - id: docs_gov.layers.plugin_docs
     kind: layer
-    name: Plugin-Specific Docs
-    applies_to: [architect, implementer, qa]
-    tags: [docs, layers, plugins]
     md: |
       ### 3. Plugin-Specific Docs
 
@@ -173,9 +148,6 @@ blocks:
 
   - id: docs_gov.layers.user_docs
     kind: layer
-    name: User-Facing Docs
-    applies_to: [architect, implementer, qa]
-    tags: [docs, layers, user_docs]
     md: |
       ### 4. User-Facing Docs (docs/user, docs/api, etc.)
 
@@ -206,9 +178,6 @@ blocks:
 
   - id: docs_gov.layers.runtime_artefacts
     kind: layer
-    name: Runtime-Generated Artefacts
-    applies_to: [architect, implementer, qa]
-    tags: [docs, layers, runtime]
     md: |
       ### 5. Runtime-Generated Artefacts
 
@@ -235,13 +204,8 @@ blocks:
       - Must not be treated as specification documents
       - Specs may reference runtime artefacts as evidence, but not replace build/system docs
 
-  # --------------------------------
-  # Doc Categories & Requirements
-  # --------------------------------
   - id: docs_gov.categories
     kind: rules
-    applies_to: [architect, implementer, qa]
-    tags: [docs, categories, requirements]
     md: |
       ## Doc Categories & Requirements
 
@@ -278,13 +242,9 @@ blocks:
       1) be deleted or clearly marked deprecated, or
       2) be promoted via a proper feature card plus updates to GPT_RESOURCE_INDEX (and TECH_SPEC if needed).
 
-  # --------------------------------
-  # docs/ vs docs/build/
-  # --------------------------------
+
   - id: docs_gov.docs_vs_docs_build
     kind: concept
-    applies_to: [architect, implementer, qa]
-    tags: [docs, layout, guidance]
     md: |
       ## docs/ vs docs/build/ (Conceptual Guidance)
 
@@ -298,13 +258,9 @@ blocks:
 
       Any change to physical layout must be designed via Architect cards and reflected in TECH_SPEC and GPT_RESOURCE_INDEX.
 
-  # --------------------------------
-  # Documentation Hierarchy & Canonical Roles
-  # --------------------------------
+
   - id: docs_gov.hierarchy_and_roles
     kind: reference
-    applies_to: [architect, implementer, qa]
-    tags: [docs, hierarchy, roles]
     md: |
       ## Documentation Hierarchy & Canonical Roles
 
@@ -368,13 +324,9 @@ blocks:
 
       System-level conceptual docs (such as this file) interpret and guide; they do not redefine layout or ontology.
 
-  # --------------------------------
-  # Criteria for Introducing New Document Types
-  # --------------------------------
+
   - id: docs_gov.new_doc_types.criteria
     kind: rules
-    applies_to: [architect, implementer, qa]
-    tags: [docs, governance, new_doc_types]
     md: |
       ## Criteria for Introducing New Document Types
 
