@@ -58,7 +58,7 @@
     documentation_protocol: "docs/build/documentation_protocol.yml"
     qa_reference: "docs/build/optional/qa_reference.yml"
     registry_system: "docs/build/optional/registry_system.yml"
-    lillycore_roadmap: "docs/build/optional/lillycore_roadmap.yml"
+    roadmap: "docs/build/optional/roadmap.yml"
 
 - id: gpt_resources.build_canon
   kind: reference
@@ -79,10 +79,10 @@
 
     - When needed, Andrew can paste the relevant Canon section into chat.
 
-- id: gpt_resources.lillycore_roadmap
+- id: gpt_resources.roadmap
   kind: reference
   md: |
-    ## lillycore_roadmap
+    ## roadmap
 
     ### Description
 
@@ -183,7 +183,7 @@
     - `gpt_resources.build_canon`
       Entry describing BUILD_CANON (authority, philosophy, planning discipline).
 
-    - `gpt_resources.lillycore_roadmap`
+    - `gpt_resources.roadmap`
       Entry describing the roadmap (phases and sequencing intent).
 
     - `gpt_resources.tech_spec`

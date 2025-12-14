@@ -36,7 +36,7 @@
 
       **Examples (non-exhaustive):**
       - PROJECT_CANON
-      - lillycore_roadmap
+      - roadmap
       - tech_spec
       - modules
       - gpt_resource_index
@@ -52,7 +52,7 @@
       - Human contributors working on the codebase.
 
       **Ownership**
-      - PROJECT_CANON and lillycore_roadmap: **Andrew + Architect** (ontology, planning, phase evolution).
+      - PROJECT_CANON and roadmap: **Andrew + Architect** (ontology, planning, phase evolution).
       - tech_spec: **Andrew + Architect + Implementers** (technical standards and repo layout).
       - modules: **Architect**, with Implementers updating details when modules become real.
       - gpt_resource_index: **Andrew + Architect**, kept in sync whenever new docs become authoritative.
@@ -113,7 +113,7 @@
       - Any structural or taxonomic changes that affect physical locations must still be designed and captured in tech_spec and gpt_resource_index via dedicated cards.
 
       **Governance**
-      - Must not contradict PROJECT_CANON, lillycore_roadmap, or tech_spec; if conflicts arise, Canon + Andrew’s explicit direction win, and follow-up tasks update these docs.
+      - Must not contradict PROJECT_CANON, roadmap, or tech_spec; if conflicts arise, Canon + Andrew’s explicit direction win, and follow-up tasks update these docs.
       - When a conceptual doc becomes authoritative, it should be referenced from gpt_resource_index so GPTs discover it reliably.
 
   - id: docs_gov.layers.plugin_docs
@@ -212,7 +212,7 @@
       This section defines which categories we must have, should have, may have, and must not have. It operates at the conceptual level and relies on gpt_resource_index and tech_spec for concrete file lists and locations.
 
       ### 1. Must-Have Categories
-      - Core Build/System Docs: PROJECT_CANON, lillycore_roadmap, tech_spec, modules, gpt_resource_index, phase/feature bundles
+      - Core Build/System Docs: PROJECT_CANON, roadmap, tech_spec, modules, gpt_resource_index, phase/feature bundles
       - Documentation Governance: this file (or its successor) as the single place describing documentation layers and allowed/forbidden categories
 
       **Rules**
@@ -281,7 +281,7 @@
       - Ownership: Andrew + Architect
       - Notes: Overrides all other documents when conflicts arise
 
-      **lillycore_roadmap**
+      **roadmap**
       - Defines order and intent of phases
       - Ownership: Andrew + Architect
       - Notes: Must never be changed by Implementers
@@ -316,7 +316,7 @@
 
       ### 4. Relationships Between Major Docs
       - PROJECT_CANON → meaning and ontology
-      - lillycore_roadmap → phase sequencing
+      - roadmap → phase sequencing
       - tech_spec → physical layout & technical rules
       - modules → subsystem boundaries
       - FEATURES → task structure and implementation workflow

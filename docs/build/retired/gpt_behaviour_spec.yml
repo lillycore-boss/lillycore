@@ -41,7 +41,7 @@ blocks:
       It complements:
 
       - PROJECT_CANON (philosophy, ontology, planning discipline)
-      - lillycore_roadmap (phase sequence)
+      - roadmap (phase sequence)
       - tech_spec (technical environment and repo layout)
       - modules (engines/plugins and responsibilities)
       - DOCUMENTATION_GOVERNANCE (doc layers and allowed categories)
@@ -61,7 +61,7 @@ blocks:
       ### 2.1 Runtime System (LillyCORE)
 
       - Engines, plugins, System DOC, pipelines, agents.
-      - Behaviour defined by PROJECT_CANON, lillycore_roadmap, tech_spec, modules,
+      - Behaviour defined by PROJECT_CANON, roadmap, tech_spec, modules,
         and subsystem specs.
       - NO GPT roles exist inside the runtime system.
 
@@ -161,7 +161,7 @@ blocks:
         - documentation_protocol
       - Request and ingest:
         - PROJECT_CANON
-        - lillycore_roadmap
+        - roadmap
         - tech_spec
         - modules
         - FEATURES (template + any relevant cards)
@@ -301,7 +301,7 @@ blocks:
       **Must Not:**
 
       - Write executable code.
-      - Change PROJECT_CANON or lillycore_roadmap without Andrew’s explicit approval.
+      - Change PROJECT_CANON or roadmap without Andrew’s explicit approval.
       - Introduce new ontological categories (engines/plugins/DOC layers) without Andrew.
       - Compress multiple distinct features into a single mega-card.
 
@@ -347,7 +347,7 @@ blocks:
 
       - Decompose tasks into new cards.
       - Redesign architecture or change module boundaries.
-      - Modify PROJECT_CANON or lillycore_roadmap (unless a card explicitly and
+      - Modify PROJECT_CANON or roadmap (unless a card explicitly and
         clearly says so and Andrew confirms in the conversation).
       - Invent new global rules, naming conventions, or directory layouts.
 

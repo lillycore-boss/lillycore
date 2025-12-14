@@ -39,7 +39,7 @@
 
     This file is a **procedural overlay** on top of existing rules in:
     - build_canon
-    - lillycore_roadmap
+    - roadmap
     - tech_spec
     - gpt_resource_index
     - feature cards / phase bundles (tracked in GitHub or equivalent)
@@ -67,7 +67,7 @@
     When this protocol appears to conflict with any of the above:
 
     1. **Andrew’s explicit instruction wins.**
-    2. Then build_canon, lillycore_roadmap, tech_spec, and gpt_resource_index are updated as needed via approved cards.
+    2. Then build_canon, roadmap, tech_spec, and gpt_resource_index are updated as needed via approved cards.
     3. This protocol is adjusted afterward to match.
 
 - id: documentation_protocol.responsibilities
@@ -81,10 +81,10 @@
 
     - Final authority on:
       - System meaning and ontology (build_canon).
-      - Phase sequencing and intentions (lillycore_roadmap).
+      - Phase sequencing and intentions (roadmap).
       - Whether new docs become canonical and are added to gpt_resource_index.
     - Approves:
-      - Any change to build_canon or lillycore_roadmap.
+      - Any change to build_canon or roadmap.
       - Any change that alters repository taxonomy (via Architect-designed cards).
       - Any new canonical document type in documentation_governance.
 
@@ -187,7 +187,7 @@
 
     When phase structure, ontology, or high-level module responsibilities change:
 
-    1. Update **lillycore_roadmap** (phase sequences, intents).
+    1. Update **roadmap** (phase sequences, intents).
     2. Update **build_canon** only when ontology / planning discipline changes and Andrew approves.
     4. Update **gpt_resource_index** when the canonical doc set changes.
     5. Update relevant conceptual docs (e.g. documentation_governance) to match the new story.
@@ -233,7 +233,7 @@
     - QA creates corrective Implementer cards (and a QA card) per the QA System in FEATURES.
     - Implementer:
       - Updates the relevant docs (FEATURES, tech_spec, modules, etc.) to match reality.
-      - Ensures changes are consistent with build_canon and lillycore_roadmap.
+      - Ensures changes are consistent with build_canon and roadmap.
     - QA re-runs checks for both:
       - The corrective cards.
       - The affected phase bundle.
@@ -270,7 +270,7 @@
 
     4. **Check canonical alignment**
         - Verify that:
-          - No change contradicts build_canon or lillycore_roadmap.
+          - No change contradicts build_canon or roadmap.
           - Any new or changed responsibilities still respect modules and tech_spec boundaries.
           - You are not accidentally introducing a new canonical doc type without going through gpt_resource_index.
 
@@ -340,7 +340,7 @@
 
     For each phase or redesign:
 
-    - [ ] I checked build_canon, lillycore_roadmap, tech_spec, FEATURES, gpt_resource_index, and documentation_protocol.
+    - [ ] I checked build_canon, roadmap, tech_spec, FEATURES, gpt_resource_index, and documentation_protocol.
     - [ ] I included **explicit documentation deliverables** for any change that affects behaviour, taxonomy, or canonical docs.  
     - [ ] If new canonical docs are needed, I included tasks to:
       - Create them under allowed locations, and  
@@ -562,7 +562,7 @@
       Defines ontology, authority, and planning discipline.
       Highest-level meaning; overrides all other docs when conflicts arise.
 
-    - **lillycore_roadmap**
+    - **roadmap**
       Defines phase sequencing and intent.
 
     - **tech_spec**

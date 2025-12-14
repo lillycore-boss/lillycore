@@ -137,7 +137,7 @@ blocks:
 
       - **Display-only names:**
         - Conceptual document names like PROJECT_CANON, tech_spec, or
-          lillycore_roadmap are titles, not filenames; they do not override
+          roadmap are titles, not filenames; they do not override
           the snake_case rules for actual files in the repo.
 
       **Per-folder naming expectations (Phase 0 layout):**
@@ -295,7 +295,7 @@ blocks:
         - Required human-facing documentation.
         - `docs/build/` contains system/build docs:
           - PROJECT_CANON
-          - lillycore_roadmap
+          - roadmap
           - FEATURES
           - tech_spec
           - modules
