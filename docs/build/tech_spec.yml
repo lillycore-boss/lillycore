@@ -1,11 +1,5 @@
-version: "1.0"
-
-blocks:
   - id: tech_spec.overview
     kind: overview
-    name: TECH_SPEC
-    applies_to: [architect, implementer, qa, tooling]
-    tags: [tech_spec, environment, tooling, repo]
     md: |
       # TECH_SPEC
 
@@ -26,8 +20,6 @@ blocks:
 
   - id: tech_spec.platform.assumptions
     kind: platform
-    applies_to: [architect, implementer, qa, tooling]
-    tags: [linux, popos, local_dev]
     md: |
       ## Platform Assumptions
 
@@ -40,8 +32,6 @@ blocks:
 
   - id: tech_spec.python.baseline
     kind: baseline
-    applies_to: [architect, implementer, qa, tooling]
-    tags: [python, runtime]
     md: |
       ## Python Baseline
 
@@ -53,8 +43,6 @@ blocks:
 
   - id: tech_spec.best_practice.policy
     kind: policy
-    applies_to: [architect, implementer, qa, tooling]
-    tags: [best_practice, defaults, anti_drift]
     md: |
       ## Best-Practice Policy (Default)
 
@@ -68,8 +56,6 @@ blocks:
 
   - id: tech_spec.repo.root_definition
     kind: repo
-    applies_to: [architect, implementer, qa, tooling]
-    tags: [repo_root, layout]
     md: |
       ## Repository Root Definition
 
@@ -82,8 +68,6 @@ blocks:
 
   - id: tech_spec.tooling.baseline
     kind: tooling
-    applies_to: [architect, implementer, qa, tooling]
-    tags: [formatter, linter, tests, ci]
     md: |
       ## Tooling Baseline (Conceptual)
 
@@ -102,8 +86,6 @@ blocks:
 
   - id: tech_spec.tooling.choices
     kind: decisions
-    applies_to: [architect, implementer, qa, tooling]
-    tags: [decisions, tooling]
     md: |
       ## Tooling Choices (Authoritative)
 
@@ -118,8 +100,6 @@ blocks:
 
   - id: tech_spec.change_log
     kind: meta
-    applies_to: [architect, implementer, qa, tooling]
-    tags: [changelog]
     md: |
       ## Change Log (Lightweight)
 
