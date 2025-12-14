@@ -1,6 +1,3 @@
-  # --------------------------------
-  # Section 5 – System Ontology
-  # --------------------------------
   - id: project_canon.system_ontology
     kind: ontology
     md: |
