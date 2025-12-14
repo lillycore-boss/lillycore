@@ -49,10 +49,7 @@
       - Invent new ontological categories.
       - Reclassify existing engines/plugins without explicit approval.
       
-    When in doubt:
-    ASK Andrew:
-    "Is this card tracked in GitHub, FEATURES, or both?"
-    
+  
 - id: build_canon.naming_standards_and_conventions
   kind: rules
   md: |
@@ -74,10 +71,9 @@
 - id: build_canon.documentation_standards
   kind: reference
   md: |
-    NOTE:
-      Detailed rules for documentation maintenance, update responsibilities,
-      and governance now live in documentation_protocol.
-      build_canon no longer defines per-role documentation procedures.
+    Detailed rules for documentation maintenance, update responsibilities,
+    and governance now live in documentation_protocol.
+    build_canon no longer defines per-role documentation procedures.
 
 - id: build_canon.planning_and_decomposition
   kind: rules
