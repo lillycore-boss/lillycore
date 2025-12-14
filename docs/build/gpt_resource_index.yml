@@ -56,10 +56,6 @@
     md: |
       ## PROJECT_CANON
 
-      **Type:** system_rules  
-      **Status:** exists  
-      **Path:** `docs/build/project_canon.md`
-
       ### Description
 
       Core philosophy, global AI behaviour principles, ontology of
@@ -79,10 +75,6 @@
     md: |
       ## LILLYCORE_ROADMAP
 
-      **Type:** roadmap  
-      **Status:** exists  
-      **Path:** `docs/build/lillycore_roadmap.md`
-
       ### Description
 
       High-level phases (0..N) for LillyCORE evolution, defining when
@@ -101,10 +93,6 @@
     kind: document
     md: |
       ## TECH_SPEC
-
-      **Type:** tools_environment  
-      **Status:** exists  
-      **Path:** `docs/build/tech_spec.md`
 
       ### Description
 
@@ -129,10 +117,6 @@
     kind: document
     md: |
       ## DOCUMENTATION_PROTOCOL
-
-      **Type:** system_rules  
-      **Status:** exists  
-      **Path:** `docs/build/documentation_protocol.md`
 
       ### Description
 
@@ -159,10 +143,6 @@
     kind: document
     md: |
       ## GPT_BEHAVIOUR_SPEC
-
-      **Type:** process_rules  
-      **Status:** exists  
-      **Path:** `docs/build/gpt_behaviour_spec.md`
 
       ### Description
 
