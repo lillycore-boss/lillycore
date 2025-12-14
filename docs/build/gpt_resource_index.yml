@@ -34,7 +34,7 @@
     - build_canon
 
 - id: gpt_resources.load_paths
-  kind: paths
+  kind: reference
   md: |
     ## GPT Resource Load Paths
 
@@ -59,9 +59,9 @@
     qa_reference: "docs/build/optional/qa_reference.yml"
     registry_system: "docs/build/optional/registry_system.yml"
     lillycore_roadmap: "docs/build/optional/lillycore_roadmap.yml"
-    
+
 - id: gpt_resources.build_canon
-  kind: document
+  kind: reference
   md: |
     ## build_canon
 
@@ -78,9 +78,9 @@
     ### Access
 
     - When needed, Andrew can paste the relevant Canon section into chat.
-    
+
 - id: gpt_resources.lillycore_roadmap
-  kind: document
+  kind: reference
   md: |
     ## lillycore_roadmap
 
@@ -99,7 +99,7 @@
     - When needed, Andrew can paste the relevant roadmap phases.
 
 - id: gpt_resources.tech_spec
-  kind: document
+  kind: reference
   md: |
     ## tech_spec
 
@@ -123,7 +123,7 @@
       (e.g. Python, DB, scripts).
 
 - id: gpt_resources.documentation_protocol
-  kind: document
+  kind: reference
   md: |
     ## documentation_protocol
 
@@ -148,22 +148,54 @@
     - When needed, Andrew can paste the documentation_protocol build
       doc.
 
-- id: gpt_resources.placeholder
-  kind: document_placeholder
+- id: gpt_resources.allowed_kinds
+  kind: meta
   md: |
-    ## Future Documents Placeholder
+    Allowed kinds for GPT_RESOURCE_INDEX:
 
-    Used as a placeholder for additional docs that may be added later, such as:
-    - `NOTES_PLUGIN_SPEC`
-    - `DREAM_ENGINE_SPEC`
-    - Other subsystem-specific documents.
+    - overview
+    - meta
+    - index
+    - reference
 
-    When new docs are added, they should follow this pattern:
-    - SECTION-style logical grouping
-    - `name:`
-    - `type:`
-    - `status:`
-    - `path:` (if applicable)
-    - `description:`
-    - `usage:`
-    - `access:`
+    GPT_RESOURCE_INDEX is an inventory/directory.
+    Governance and procedural rules live in DOCUMENTATION_PROTOCOL.
+
+- id: gpt_resources.index
+  kind: index
+  md: |
+    ## GPT_RESOURCE_INDEX Block Index
+
+    GPT_RESOURCE_INDEX is the directory of canonical build/system documents for LillyCORE.
+    It lists what documents exist, what they are for, and where they live.
+
+    ### Blocks in this file
+
+    - `gpt_resources.overview`
+      Purpose and usage of the resource index.
+
+    - `gpt_resources.allowed_kinds`
+      List of permitted block kinds for this file.
+
+    - `gpt_resources.load_paths`
+      Authoritative mapping from document names to on-disk paths.
+
+    - `gpt_resources.build_canon`
+      Entry describing BUILD_CANON (authority, philosophy, planning discipline).
+
+    - `gpt_resources.lillycore_roadmap`
+      Entry describing the roadmap (phases and sequencing intent).
+
+    - `gpt_resources.tech_spec`
+      Entry describing TECH_SPEC (platform/tooling/layout constraints).
+
+    - `gpt_resources.documentation_protocol`
+      Entry describing DOCUMENTATION_PROTOCOL (doc governance and enforcement).
+
+    - `gpt_resources.placeholder`
+      Temporary placeholder for future docs (should be removed once real doc entries exist).
+
+    ### Explicitly not defined here
+
+    - Procedural governance (see DOCUMENTATION_PROTOCOL)
+    - Runtime architecture and behaviour specs (appear in phase cards / future system docs)
