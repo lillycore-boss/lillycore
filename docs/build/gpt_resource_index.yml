@@ -112,18 +112,14 @@
     ### Description
 
     Build/system documentation protocol defining roles, triggers, and
-    procedures for updating canonical docs (`build_canon`, ROADMAP,
-    `tech_spec`, `modules`, `FEATURES`, `gpt_resource_index`, and related
-    conceptual docs).
+    procedures for updating canonical docs (build_canon, roadmap,
+    tech_spec, documentation_protocol, gpt_resource_index)
 
     ### Usage
 
     - Used as the operational reference for when and how to update
       docs, which roles are responsible, and how QA verifies doc
       completeness.
-    - MUST be loaded and read as part of the mandatory-load set before
-      any reasoning, architectural planning, implementation, or QA that
-      reads or writes canonical docs.
 
     ### Access
 
@@ -174,10 +170,45 @@
     - `gpt_resources.documentation_protocol`
       Entry describing DOCUMENTATION_PROTOCOL (doc governance and enforcement).
 
-    - `gpt_resources.placeholder`
-      Temporary placeholder for future docs (should be removed once real doc entries exist).
-
     ### Explicitly not defined here
 
     - Procedural governance (see DOCUMENTATION_PROTOCOL)
     - Runtime architecture and behaviour specs (appear in phase cards / future system docs)
+
+- id: gpt_resource_index.qa_reference
+  kind: reference
+  md: |
+    ## qa_reference
+
+    ### Description
+
+    Reference document containing GitHub QA workflow conventions and CLI command templates
+    used to create, move, and update QA cards and attach QA reports.
+
+    ### Usage
+
+    - Used by QA and Implementer roles when creating QA cards, updating QA results, or appending QA reports.
+    - Used as a command-template library (copy/paste), not as a source of system behaviour.
+
+    ### Access
+
+    - When needed, Andrew can paste the relevant qa_reference section into chat.
+
+- id: gpt_resource_index.registry_system
+  kind: reference
+  md: |
+    ## registry_system
+
+    ### Description
+
+    Documentation describing LillyCORE’s phase/card registry concept and any supporting automation
+    intended to index phases/slices and support retrieval.
+
+    ### Usage
+
+    - Used when working on registry structure, registry scripts, or phase/slice catalog behaviour.
+    - Not a replacement for GitHub cards; treated as an index/map layer only.
+
+    ### Access
+
+    - When needed, Andrew can paste the relevant registry_system section into chat.
