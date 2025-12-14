@@ -1,4 +1,4 @@
-- id: gpt_resources.overview
+- id: gpt_resource_index.overview
   kind: overview
   md: |
     # gpt_resource_index – Overview
@@ -15,7 +15,7 @@
     directory of canonical docs. If a new canonical doc is created or an
     existing one changes meaning, this index must be updated.
 
-- id: gpt_resources.load_paths
+- id: gpt_resource_index.load_paths
   kind: reference
   md: |
     ## GPT Resource Load Paths
@@ -42,7 +42,7 @@
     registry_system: "docs/build/optional/registry_system.yml"
     roadmap: "docs/build/optional/roadmap.yml"
 
-- id: gpt_resources.build_canon
+- id: gpt_resource_index.build_canon
   kind: reference
   md: |
     ## build_canon
@@ -61,7 +61,7 @@
 
     - When needed, Andrew can paste the relevant Canon section into chat.
 
-- id: gpt_resources.roadmap
+- id: gpt_resource_index.roadmap
   kind: reference
   md: |
     ## roadmap
@@ -80,7 +80,7 @@
 
     - When needed, Andrew can paste the relevant roadmap phases.
 
-- id: gpt_resources.tech_spec
+- id: gpt_resource_index.tech_spec
   kind: reference
   md: |
     ## tech_spec
@@ -104,7 +104,7 @@
     - When needed, Andrew can paste the relevant tech_spec section
       (e.g. Python, DB, scripts).
 
-- id: gpt_resources.documentation_protocol
+- id: gpt_resource_index.documentation_protocol
   kind: reference
   md: |
     ## documentation_protocol
@@ -126,7 +126,7 @@
     - When needed, Andrew can paste the documentation_protocol build
       doc.
 
-- id: gpt_resources.allowed_kinds
+- id: gpt_resource_index.allowed_kinds
   kind: meta
   md: |
     Allowed kinds for GPT_RESOURCE_INDEX:
@@ -139,7 +139,7 @@
     GPT_RESOURCE_INDEX is an inventory/directory.
     Governance and procedural rules live in DOCUMENTATION_PROTOCOL.
 
-- id: gpt_resources.index
+- id: gpt_resource_index.index
   kind: index
   md: |
     ## GPT_RESOURCE_INDEX Block Index
@@ -149,25 +149,25 @@
 
     ### Blocks in this file
 
-    - `gpt_resources.overview`
+    - `gpt_resource_index.overview`
       Purpose and usage of the resource index.
 
-    - `gpt_resources.allowed_kinds`
+    - `gpt_resource_index.allowed_kinds`
       List of permitted block kinds for this file.
 
-    - `gpt_resources.load_paths`
+    - `gpt_resource_index.load_paths`
       Authoritative mapping from document names to on-disk paths.
 
-    - `gpt_resources.build_canon`
+    - `gpt_resource_index.build_canon`
       Entry describing BUILD_CANON (authority, philosophy, planning discipline).
 
-    - `gpt_resources.roadmap`
+    - `gpt_resource_index.roadmap`
       Entry describing the roadmap (phases and sequencing intent).
 
-    - `gpt_resources.tech_spec`
+    - `gpt_resource_index.tech_spec`
       Entry describing TECH_SPEC (platform/tooling/layout constraints).
 
-    - `gpt_resources.documentation_protocol`
+    - `gpt_resource_index.documentation_protocol`
       Entry describing DOCUMENTATION_PROTOCOL (doc governance and enforcement).
 
     ### Explicitly not defined here
