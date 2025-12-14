@@ -60,10 +60,10 @@
       REGISTRY_SYSTEM: "docs/build/optional/registry_system.yml"
       LILLYCORE_ROADMAP: "docs/build/optional/lillycore_roadmap.yml"
       
-  - id: gpt_resources.document.project_canon
+  - id: gpt_resources.document.build_canon
     kind: document
     md: |
-      ## PROJECT_CANON
+      ## BUILD_CANON
 
       ### Description
 
@@ -147,29 +147,6 @@
 
       - When needed, Andrew can paste the DOCUMENTATION_PROTOCOL build
         doc.
-
-  - id: gpt_resources.document.gpt_behaviour_spec
-    kind: document
-    md: |
-      ## GPT_BEHAVIOUR_SPEC
-
-      ### Description
-
-      Unified behaviour and ingestion standard for GPT roles used to build
-      LillyCORE (Architect, Implementer, QA, and future helper GPTs). Defines
-      role boundaries, ingestion rules, feature-card lifecycle, and how GPTs
-      interact with canonical docs and with Andrew.
-
-      ### Usage
-
-      - MUST be loaded by any GPT participating in the LillyCORE build process.
-      - Used to determine how GPTs ingest docs, ask Andrew for clarification,
-        and coordinate between Architect, Implementer, and QA roles.
-
-      ### Access
-
-      - When needed, Andrew can paste the full content of GPT_BEHAVIOUR_SPEC
-        or relevant sections.
 
   - id: gpt_resources.document.other
     kind: document_placeholder
