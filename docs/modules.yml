@@ -1,16 +1,5 @@
-# docs/registry/modules.yml
-
-version: 1
-
-blocks:
-  # --------------------------------
-  # Overview
-  # --------------------------------
   - id: modules.overview
     kind: overview
-    name: MODULES
-    applies_to: [architect, implementer, qa]
-    tags: [modules, engines, plugins, overview]
     md: |
       # MODULES
 
@@ -116,13 +105,8 @@ blocks:
 
       - Context when touching specific engines/plugins.
 
-  # --------------------------------
-  # Entry template
-  # --------------------------------
   - id: modules.entry_template
     kind: entry_template
-    applies_to: [architect]
-    tags: [template, module_entry]
     md: |
       ## SECTION: ENTRY TEMPLATE
 
@@ -150,20 +134,9 @@ blocks:
           - any important constraints or decisions
       ```
 
-  # --------------------------------
-  # MODULE: CORE_RUNTIME
-  # --------------------------------
   - id: modules.core_runtime
     kind: module
-    module_name: CORE_RUNTIME
-    type: core
-    phase: 1
-    status: planned
-    tags: [core, runtime]
     md: |
-      # ----------------------------------------
-      # MODULE: CORE_RUNTIME
-      # ----------------------------------------
       type: core
       phase: 1
       status: planned
@@ -185,16 +158,8 @@ blocks:
           or on separate machines.
         - Do NOT bake in assumptions that all engines are forever fused.
 
-  # --------------------------------
-  # MODULE: AI_POOLS
-  # --------------------------------
   - id: modules.ai_pools
     kind: module
-    module_name: AI_POOLS
-    type: core
-    phase: 2
-    status: planned
-    tags: [core, ai_pools]
     md: |
       # ----------------------------------------
       # MODULE: AI_POOLS
@@ -216,16 +181,8 @@ blocks:
       notes:
         - Backend choices (OpenAI, local models, etc.) are defined elsewhere.
 
-  # --------------------------------
-  # MODULE: SYSTEM_DOC
-  # --------------------------------
   - id: modules.system_doc
     kind: module
-    module_name: SYSTEM_DOC
-    type: core
-    phase: 3
-    status: planned
-    tags: [core, system_doc]
     md: |
       # ----------------------------------------
       # MODULE: SYSTEM_DOC
@@ -249,16 +206,8 @@ blocks:
         - Actual DB/storage engine is defined in TECH_SPEC / future design.
         - Engines and plugins build on this.
 
-  # --------------------------------
-  # MODULE: DRIFT_ENGINE
-  # --------------------------------
   - id: modules.drift_engine
     kind: module
-    module_name: DRIFT_ENGINE
-    type: engine
-    phase: 5
-    status: planned
-    tags: [engine, drift]
     md: |
       # ----------------------------------------
       # MODULE: DRIFT_ENGINE
@@ -286,16 +235,8 @@ blocks:
         - Name "DRIFT_ENGINE" reflects its role in managing emotional/contextual drift.
         - May eventually run in a separate process/machine from HELPER_ENGINE.
 
-  # --------------------------------
-  # MODULE: HELPER_ENGINE
-  # --------------------------------
   - id: modules.helper_engine
     kind: module
-    module_name: HELPER_ENGINE
-    type: engine
-    phase: 6
-    status: planned
-    tags: [engine, helper]
     md: |
       # ----------------------------------------
       # MODULE: HELPER_ENGINE
@@ -324,16 +265,8 @@ blocks:
         - Does not decide who Lilly is; it just does work in context.
         - May have its own runtime separate from DRIFT_ENGINE for stability.
 
-  # --------------------------------
-  # MODULE: PLUGIN_ENGINE
-  # --------------------------------
   - id: modules.plugin_engine
     kind: module
-    module_name: PLUGIN_ENGINE
-    type: engine
-    phase: 7
-    status: planned
-    tags: [engine, plugin_engine]
     md: |
       # ----------------------------------------
       # MODULE: PLUGIN_ENGINE
@@ -359,16 +292,8 @@ blocks:
         - Previously called "Module Handler" → "Module Engine".
         - Now definitively called PLUGIN_ENGINE to align with plugin terminology.
 
-  # --------------------------------
-  # MODULE: HELP_DESK_ENGINE
-  # --------------------------------
   - id: modules.help_desk_engine
     kind: module
-    module_name: HELP_DESK_ENGINE
-    type: engine
-    phase: 8
-    status: planned
-    tags: [engine, stability]
     md: |
       # ----------------------------------------
       # MODULE: HELP_DESK_ENGINE
@@ -394,16 +319,8 @@ blocks:
       notes:
         - Part of the "stability spine" along with DREAM_ENGINE and SCRIPT_ENGINE.
 
-  # --------------------------------
-  # MODULE: DREAM_ENGINE
-  # --------------------------------
   - id: modules.dream_engine
     kind: module
-    module_name: DREAM_ENGINE
-    type: engine
-    phase: 8
-    status: planned
-    tags: [engine, dream]
     md: |
       # ----------------------------------------
       # MODULE: DREAM_ENGINE
@@ -428,16 +345,8 @@ blocks:
       notes:
         - Intended to run during downtime or scheduled windows.
 
-  # --------------------------------
-  # MODULE: SCRIPT_ENGINE
-  # --------------------------------
   - id: modules.script_engine
     kind: module
-    module_name: SCRIPT_ENGINE
-    type: engine
-    phase: 8
-    status: planned
-    tags: [engine, scripts]
     md: |
       # ----------------------------------------
       # MODULE: SCRIPT_ENGINE
@@ -462,16 +371,8 @@ blocks:
       notes:
         - Works with HELP_DESK_ENGINE and DREAM_ENGINE for self-maintenance.
 
-  # --------------------------------
-  # MODULE: NOTES_PLUGIN
-  # --------------------------------
   - id: modules.notes_plugin
     kind: module
-    module_name: NOTES_PLUGIN
-    type: plugin
-    phase: 4
-    status: planned
-    tags: [plugin, notes]
     md: |
       # ----------------------------------------
       # MODULE: NOTES_PLUGIN
@@ -495,16 +396,8 @@ blocks:
         - Used heavily by DRIFT_ENGINE as an early, cheap test surface.
         - This is NOT a core engine; it is a plugin/demo.
 
-  # --------------------------------
-  # MODULE: UX_INTERFACE
-  # --------------------------------
   - id: modules.ux_interface
     kind: module
-    module_name: UX_INTERFACE
-    type: ui
-    phase: 9
-    status: planned
-    tags: [ui, plugin]
     md: |
       # ----------------------------------------
       # MODULE: UX_INTERFACE
@@ -528,16 +421,8 @@ blocks:
       notes:
         - UX is a plugin-level concern, not a core engine.
 
-  # --------------------------------
-  # MODULE: PROJECT_MANAGEMENT
-  # --------------------------------
   - id: modules.project_management
     kind: module
-    module_name: PROJECT_MANAGEMENT
-    type: plugin
-    phase: 10
-    status: planned
-    tags: [plugin, project_management]
     md: |
       # ----------------------------------------
       # MODULE: PROJECT_MANAGEMENT
@@ -558,16 +443,8 @@ blocks:
         - SYSTEM_DOC
         - HELPER_ENGINE
 
-  # --------------------------------
-  # MODULE: PERSONAL_ASSISTANT
-  # --------------------------------
   - id: modules.personal_assistant
     kind: module
-    module_name: PERSONAL_ASSISTANT
-    type: plugin
-    phase: 11
-    status: planned
-    tags: [plugin, assistant]
     md: |
       # ----------------------------------------
       # MODULE: PERSONAL_ASSISTANT
@@ -590,16 +467,8 @@ blocks:
         - HELPER_ENGINE
         - NOTES_PLUGIN
 
-  # --------------------------------
-  # MODULE: MULTI_USER
-  # --------------------------------
   - id: modules.multi_user
     kind: module
-    module_name: MULTI_USER
-    type: plugin
-    phase: 13
-    status: planned
-    tags: [plugin, multi_user]
     md: |
       # ----------------------------------------
       # MODULE: MULTI_USER
@@ -621,16 +490,8 @@ blocks:
         - DRIFT_ENGINE
         - HELPER_ENGINE
 
-  # --------------------------------
-  # MODULE: IO_NETWORK_LAYER
-  # --------------------------------
   - id: modules.io_network_layer
     kind: module
-    module_name: IO_NETWORK_LAYER
-    type: infra
-    phase: 14
-    status: planned
-    tags: [infra, network]
     md: |
       # ----------------------------------------
       # MODULE: IO_NETWORK_LAYER
@@ -655,16 +516,8 @@ blocks:
       notes:
         - Appliance / hardware specifics defined later.
 
-  # --------------------------------
-  # MODULE: DEMOS_AND_CORP
-  # --------------------------------
   - id: modules.demos_and_corp
     kind: module
-    module_name: DEMOS_AND_CORP
-    type: plugin
-    phase: "12+"
-    status: future
-    tags: [plugin, demos, corp]
     md: |
       # ----------------------------------------
       # MODULE: DEMOS_AND_CORP
@@ -684,13 +537,8 @@ blocks:
         - HELPER_ENGINE (usually)
         - DRIFT_ENGINE (where context/personality matters)
 
-  # --------------------------------
-  # Future engines / plugins placeholder
-  # --------------------------------
   - id: modules.future_placeholder
     kind: future_placeholder
-    applies_to: [architect]
-    tags: [future, placeholder]
     md: |
       ## SECTION: FUTURE ENGINES / PLUGINS PLACEHOLDER
 
