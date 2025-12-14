@@ -105,7 +105,8 @@
 
       - v1.0: Clean baseline rewrite. Python 3.11+ established. No-guessing + best-practice policy defined.
 
-
+---
+NEW SECTIONS - possible duplicates portions within
 ---
       Repository taxonomy ownership and change process:
         - The authoritative definition of the repository folder taxonomy and
