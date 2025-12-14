@@ -36,9 +36,9 @@
 
       **Examples (non-exhaustive):**
       - PROJECT_CANON
-      - LILLYCORE_ROADMAP
+      - lillycore_roadmap
       - tech_spec
-      - MODULES
+      - modules
       - gpt_resource_index
       - Phase/feature bundles and similar “control plane” docs.
 
@@ -52,9 +52,9 @@
       - Human contributors working on the codebase.
 
       **Ownership**
-      - PROJECT_CANON and LILLYCORE_ROADMAP: **Andrew + Architect** (ontology, planning, phase evolution).
+      - PROJECT_CANON and lillycore_roadmap: **Andrew + Architect** (ontology, planning, phase evolution).
       - tech_spec: **Andrew + Architect + Implementers** (technical standards and repo layout).
-      - MODULES: **Architect**, with Implementers updating details when modules become real.
+      - modules: **Architect**, with Implementers updating details when modules become real.
       - gpt_resource_index: **Andrew + Architect**, kept in sync whenever new docs become authoritative.
 
       **Lifecycle**
@@ -113,7 +113,7 @@
       - Any structural or taxonomic changes that affect physical locations must still be designed and captured in tech_spec and gpt_resource_index via dedicated cards.
 
       **Governance**
-      - Must not contradict PROJECT_CANON, LILLYCORE_ROADMAP, or tech_spec; if conflicts arise, Canon + Andrew’s explicit direction win, and follow-up tasks update these docs.
+      - Must not contradict PROJECT_CANON, lillycore_roadmap, or tech_spec; if conflicts arise, Canon + Andrew’s explicit direction win, and follow-up tasks update these docs.
       - When a conceptual doc becomes authoritative, it should be referenced from gpt_resource_index so GPTs discover it reliably.
 
   - id: docs_gov.layers.plugin_docs
@@ -135,7 +135,7 @@
 
       **Ownership**
       - Plugin owner (human or engine) for day-to-day updates
-      - Architect for structural changes to responsibilities or boundaries (mirrored in MODULES and tech_spec where needed)
+      - Architect for structural changes to responsibilities or boundaries (mirrored in modules and tech_spec where needed)
 
       **Lifecycle**
       - System-level for that plugin: persistent as long as the plugin exists
@@ -212,7 +212,7 @@
       This section defines which categories we must have, should have, may have, and must not have. It operates at the conceptual level and relies on gpt_resource_index and tech_spec for concrete file lists and locations.
 
       ### 1. Must-Have Categories
-      - Core Build/System Docs: PROJECT_CANON, LILLYCORE_ROADMAP, tech_spec, MODULES, gpt_resource_index, phase/feature bundles
+      - Core Build/System Docs: PROJECT_CANON, lillycore_roadmap, tech_spec, modules, gpt_resource_index, phase/feature bundles
       - Documentation Governance: this file (or its successor) as the single place describing documentation layers and allowed/forbidden categories
 
       **Rules**
@@ -281,7 +281,7 @@
       - Ownership: Andrew + Architect
       - Notes: Overrides all other documents when conflicts arise
 
-      **LILLYCORE_ROADMAP**
+      **lillycore_roadmap**
       - Defines order and intent of phases
       - Ownership: Andrew + Architect
       - Notes: Must never be changed by Implementers
@@ -291,7 +291,7 @@
       - Section 3 is the authoritative declaration of physical file structure
       - Ownership: Andrew + Architect + Implementers
 
-      **MODULES**
+      **modules**
       - Defines engines and plugins; boundaries, dependencies, responsibilities
       - Ownership: Architect (Implementers update details as modules become real)
 
@@ -316,9 +316,9 @@
 
       ### 4. Relationships Between Major Docs
       - PROJECT_CANON → meaning and ontology
-      - LILLYCORE_ROADMAP → phase sequencing
+      - lillycore_roadmap → phase sequencing
       - tech_spec → physical layout & technical rules
-      - MODULES → subsystem boundaries
+      - modules → subsystem boundaries
       - FEATURES → task structure and implementation workflow
       - gpt_resource_index → binds all canonical docs together
 

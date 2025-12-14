@@ -76,7 +76,7 @@
     md: |
       NOTE:
         Detailed rules for documentation maintenance, update responsibilities,
-        and governance now live in DOCUMENTATION_PROTOCOL.
+        and governance now live in documentation_protocol.
         build_canon no longer defines per-role documentation procedures.
 
   - id: build_canon.planning_and_decomposition
@@ -171,7 +171,7 @@
       NOTE:
         Detailed procedural rules for the Architect GPT decomposition role,
         including card hierarchies, QA end-caps, and retry counters, have
-        been moved to DOCUMENTATION_PROTOCOL. This section remains as the
+        been moved to documentation_protocol. This section remains as the
         conceptual anchor that Architect GPT is responsible for decomposition,
         not execution.
 
@@ -181,7 +181,7 @@
       NOTE:
         Detailed execution rules for the Implementer GPT, including scope
         boundaries, documentation update duties, and escalation behaviour,
-        have been moved to DOCUMENTATION_PROTOCOL. build_canon no longer
+        have been moved to documentation_protocol. build_canon no longer
         carries per-role procedural checklists.
 
   - id: build_canon.qa_role
@@ -189,7 +189,7 @@
     md: |
       NOTE:
         Detailed verification, PASS/FAIL criteria, and correction-card
-        workflows for QA GPT have been moved to DOCUMENTATION_PROTOCOL.
+        workflows for QA GPT have been moved to documentation_protocol.
         build_canon keeps QA only as a conceptual role in the planning
         discipline; the operational protocol is defined elsewhere.
 

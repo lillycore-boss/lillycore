@@ -97,7 +97,7 @@ phase:
     - id: P8.D8
       name: "Stability Spine documentation set"
       description: |
-        Canon, tech_spec, FEATURES, and MODULES updates documenting stability engines,
+        Canon, tech_spec, FEATURES, and modules updates documenting stability engines,
         lifecycle responsibilities, schedules, and escalation rules.
 
   constraints:

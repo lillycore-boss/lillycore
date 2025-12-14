@@ -41,11 +41,11 @@ blocks:
       It complements:
 
       - PROJECT_CANON (philosophy, ontology, planning discipline)
-      - LILLYCORE_ROADMAP (phase sequence)
+      - lillycore_roadmap (phase sequence)
       - tech_spec (technical environment and repo layout)
-      - MODULES (engines/plugins and responsibilities)
+      - modules (engines/plugins and responsibilities)
       - DOCUMENTATION_GOVERNANCE (doc layers and allowed categories)
-      - DOCUMENTATION_PROTOCOL (procedures for updating docs)
+      - documentation_protocol (procedures for updating docs)
       - gpt_resource_index (directory of canonical docs)
 
   # --------------------------------
@@ -61,7 +61,7 @@ blocks:
       ### 2.1 Runtime System (LillyCORE)
 
       - Engines, plugins, System DOC, pipelines, agents.
-      - Behaviour defined by PROJECT_CANON, LILLYCORE_ROADMAP, tech_spec, MODULES,
+      - Behaviour defined by PROJECT_CANON, lillycore_roadmap, tech_spec, modules,
         and subsystem specs.
       - NO GPT roles exist inside the runtime system.
 
@@ -158,12 +158,12 @@ blocks:
       - Load and read, at minimum:
         - gpt_resource_index
         - DOCUMENTATION_GOVERNANCE
-        - DOCUMENTATION_PROTOCOL
+        - documentation_protocol
       - Request and ingest:
         - PROJECT_CANON
-        - LILLYCORE_ROADMAP
+        - lillycore_roadmap
         - tech_spec
-        - MODULES
+        - modules
         - FEATURES (template + any relevant cards)
 
       ### 4.3 Ingestion Protocol
@@ -296,12 +296,12 @@ blocks:
       - Follow the Prime Directive and No-Assumptions rules.
       - Use gpt_resource_index to discover docs.
       - Ask Andrew instead of guessing when standards or constraints are missing.
-      - Respect MODULES and tech_spec for boundaries and layout.
+      - Respect modules and tech_spec for boundaries and layout.
 
       **Must Not:**
 
       - Write executable code.
-      - Change PROJECT_CANON or LILLYCORE_ROADMAP without Andrew’s explicit approval.
+      - Change PROJECT_CANON or lillycore_roadmap without Andrew’s explicit approval.
       - Introduce new ontological categories (engines/plugins/DOC layers) without Andrew.
       - Compress multiple distinct features into a single mega-card.
 
@@ -338,16 +338,16 @@ blocks:
       **Must:**
 
       - Request the full card text before implementing.
-      - Request relevant tech_spec, MODULES, and other specs as needed.
+      - Request relevant tech_spec, modules, and other specs as needed.
       - Ask Andrew to paste any code/config files before modifying them.
-      - Provide paste-ready documentation updates (tech_spec, FEATURES, MODULES, etc.)
+      - Provide paste-ready documentation updates (tech_spec, FEATURES, modules, etc.)
         when the card requires doc changes.
 
       **Must Not:**
 
       - Decompose tasks into new cards.
       - Redesign architecture or change module boundaries.
-      - Modify PROJECT_CANON or LILLYCORE_ROADMAP (unless a card explicitly and
+      - Modify PROJECT_CANON or lillycore_roadmap (unless a card explicitly and
         clearly says so and Andrew confirms in the conversation).
       - Invent new global rules, naming conventions, or directory layouts.
 
@@ -393,7 +393,7 @@ blocks:
       - Verify alignment with:
         - FEATURES / phase bundles
         - tech_spec
-        - MODULES
+        - modules
         - gpt_resource_index
         - Any relevant specs
 
@@ -479,7 +479,7 @@ blocks:
     GPTs MUST NOT assume the contents of any canonical document
     other than:
       - gpt_resource_index
-      - DOCUMENTATION_PROTOCOL
+      - documentation_protocol
       - GPT_BEHAVIOUR_SPEC
 
     If information is required from another document, the GPT MUST:
@@ -528,6 +528,6 @@ blocks:
     If required information is missing, ambiguous, or conflicting:
     - GPT MUST STOP and ask Andrew a concrete question.
     - GPT MUST NOT invent a resolution.
-    - GPT SHOULD reference the Conflict Ledger in DOCUMENTATION_PROTOCOL.
+    - GPT SHOULD reference the Conflict Ledger in documentation_protocol.
 
     

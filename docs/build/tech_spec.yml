@@ -15,8 +15,8 @@
 
       Out of scope (explicit):
       - Runtime architecture and engine/plugin behavior
-      - GPT role behaviour rules (see build_canon and DOCUMENTATION_PROTOCOL)
-      - Documentation update procedures (see DOCUMENTATION_PROTOCOL)
+      - GPT role behaviour rules (see build_canon and documentation_protocol)
+      - Documentation update procedures (see documentation_protocol)
 
   - id: tech_spec.platform_assumptions
     kind: platform

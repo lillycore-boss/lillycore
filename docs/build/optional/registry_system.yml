@@ -346,4 +346,4 @@
     * Canon: Optional note referencing the Phase Registry as part of system governance.
     * tech_spec: Add link/section under “Infrastructure & Tooling” describing registry usage.
     * FEATURES: None (registry is infrastructural).
-    * MODULES: None directly, but registry may be referenced by future maintenance engines.
+    * modules: None directly, but registry may be referenced by future maintenance engines.

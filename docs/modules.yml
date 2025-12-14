@@ -1,9 +1,9 @@
   - id: modules.overview
     kind: overview
     md: |
-      # MODULES
+      # modules
 
-      **FILE:** MODULES  
+      **FILE:** modules  
       **ROLE:** Overview of major engines and plugins in LillyCORE  
 
       > NOTE: This file tracks BIG PIECES of the system, not individual features.
@@ -74,7 +74,7 @@
       - Engines may depend on:
           `core/` (runtime loop, logging, AI pools, System DOC),
           other engines where explicitly listed under "dependencies"
-          in this MODULES file.
+          in this modules file.
       - Engines MUST NOT import plugins directly; they see plugins only through
         PLUGIN_ENGINE / MODULE_ENGINE registries and capability interfaces.
 

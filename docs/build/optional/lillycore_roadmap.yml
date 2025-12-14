@@ -1,9 +1,9 @@
   - id: roadmap.overview
     kind: overview
     md: |
-      # LILLYCORE_ROADMAP
+      # lillycore_roadmap
 
-      **FILE:** LILLYCORE_ROADMAP  
+      **FILE:** lillycore_roadmap  
       **ROLE:** High-level architectural evolution plan for LillyCORE  
       **VERSION:** v2.1 (Plugin/Engine terminology)
 

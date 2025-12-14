@@ -90,7 +90,7 @@ DOCUMENTATION_UPDATES:
   - Canon: Reference Phase 0 as the origin of foundational standards (optional summary).
   - tech_spec: Capture any Phase-0-specific technical environment standards (tooling, language version, etc.).
   - FEATURES: None (Phase 0 is infrastructural, not feature-based).
-  - MODULES: None (no functional modules in Phase 0).
+  - modules: None (no functional modules in Phase 0).
 
 
 CARD_ID: P1
@@ -192,7 +192,7 @@ DOCUMENTATION_UPDATES:
       - These updates will be executed by Implementer P1.x cards, not by this card directly.
   - FEATURES:
       - Ensure that P1.x cards and their relationship to P1.D1–P1.D6 are documented or mirrored as needed.
-  - MODULES:
+  - modules:
       - Add or refine high-level notes indicating how runtime, logging, preferences, and AI pools relate to core/ and engines/ layout if required by P1.x decomposition.
 
 CARD_ID: P2
@@ -300,7 +300,7 @@ DOCUMENTATION_UPDATES:
       - Population of these sections is handled by Implementer P2.x cards.
   - FEATURES:
       - Must record P2.x implementation slices and their deliverables.
-  - MODULES:
+  - modules:
       - Add or refine notes regarding where AI pool code, adapters, and envelopes belong in the repo taxonomy.
 
 
@@ -422,7 +422,7 @@ DOCUMENTATION_UPDATES:
           - Validation/security details
   - FEATURES:
       • Must record P3.x implementer and QA tasks, ensuring traceability.
-  - MODULES:
+  - modules:
       • Must reflect correct placement of data layer, document handler, schemas, and mapping files.
 
 CARD_ID: P4
@@ -536,7 +536,7 @@ DOCUMENTATION_UPDATES:
       • Notes Plugin integration with runtime/logging
   - FEATURES:
       • P4.x implementer and QA cards recorded
-  - MODULES:
+  - modules:
       • Placement of Notes Plugin directory and integration mapping defined
 
 CARD_ID: P5
@@ -658,7 +658,7 @@ DOCUMENTATION_UPDATES:
       • Perceptual pipeline integration in runtime stack
   - FEATURES:
       • P5.x implementer and QA cards added
-  - MODULES:
+  - modules:
       • DRIFT Engine module location and data-region placement established
 
 CARD_ID: P6
@@ -705,7 +705,7 @@ INPUTS / PRECONDITIONS:
   - From PROJECT_CANON:
       • Engine/plugin boundaries and ontological rules
       • Pipeline structure expectations
-  - From MODULES:
+  - From modules:
       • HELPER_ENGINE responsibilities, dependencies
       • DRIFT_ENGINE output semantics
       • NOTES_PLUGIN testbed usage
@@ -781,7 +781,7 @@ DOCUMENTATION_UPDATES:
       • AI_POOL invocation constraints and safety
   - FEATURES:
       • P6.x implementer + QA cards
-  - MODULES:
+  - modules:
       • HELPER module entry + responsibilities finalized
 
 
@@ -838,7 +838,7 @@ INPUTS / PRECONDITIONS:
       • P4: Notes Plugin as minimal testbed
       • P5: DRIFT structured input (context + emotional metadata)
       • P6: HELPER work engine + packet format
-  - From Canon + MODULES:
+  - From Canon + modules:
       • Engine boundaries
       • Plugin ontology
       • Safety/permission rules
@@ -906,7 +906,7 @@ DOCUMENTATION_UPDATES:
       • Plugin directory structure
   - FEATURES:
       • P7.x implementer + QA cards
-  - MODULES:
+  - modules:
       • Plugin Engine entry, responsibilities, and contract definitions
 
 
@@ -1020,7 +1020,7 @@ DONE_WHEN:
   - Maintenance cycle schedule documented and approved.
   - Boundaries between stability engines, operational engines, and plugins are fully specified.
   - P8.x implementer cards generated and validated against Canon + tech_spec.
-  - Documentation updated across Canon, tech_spec, MODULES, and FEATURES.
+  - Documentation updated across Canon, tech_spec, modules, and FEATURES.
 
 DOCUMENTATION_UPDATES:
   - Canon:
@@ -1034,7 +1034,7 @@ DOCUMENTATION_UPDATES:
       • Engine boundaries (stability vs operational)
   - FEATURES:
       • P8.x implementer + QA cards
-  - MODULES:
+  - modules:
       • HELP_DESK, DREAM, SCRIPT engine definitions + contracts
 
 
@@ -1145,7 +1145,7 @@ DONE_WHEN:
   - Network interface + serving model are approved.
   - UX boundaries and non-permitted actions are clearly documented.
   - P9.x implementer cards are generated and validated.
-  - Documentation updated across Canon, tech_spec, MODULES, and FEATURES.
+  - Documentation updated across Canon, tech_spec, modules, and FEATURES.
 
 DOCUMENTATION_UPDATES:
   - Canon:
@@ -1157,7 +1157,7 @@ DOCUMENTATION_UPDATES:
       • Packet → UX routing specification
   - FEATURES:
       • P9.x implementer and QA cards
-  - MODULES:
+  - modules:
       • UX module definition + responsibilities
 
 CARD_ID: P10
@@ -1178,7 +1178,7 @@ DELIVERABLES_SERVED:
   - P10.D5 – UX crate specifications for projects/tasks
   - P10.D6 – Packet formats for PM operations (create/update/query)
   - P10.D7 – Lifecycle rules + user/system workflows
-  - P10.D8 – Documentation across MODULES, Canon, tech_spec
+  - P10.D8 – Documentation across modules, Canon, tech_spec
 
 ---
 DESCRIPTION:
@@ -1272,7 +1272,7 @@ DOCUMENTATION_UPDATES:
       • Packet schemas for PM operations
   - FEATURES:
       • P10.x implementer/QA cards
-  - MODULES:
+  - modules:
       • PM Plugin definition + responsibilities
 
 
@@ -1385,5 +1385,5 @@ DOCUMENTATION_UPDATES:
       • Packet schemas for PA operations + briefings
   - FEATURES:
       • P11.x Implementer/QA task cards
-  - MODULES:
+  - modules:
       • Personal Assistant Plugin definition + responsibilities

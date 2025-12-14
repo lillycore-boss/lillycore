@@ -9,7 +9,7 @@
       - Where they live in the repository
 
       Procedural rules for how GPTs load, use, and update these documents
-      are defined in DOCUMENTATION_PROTOCOL.
+      are defined in documentation_protocol.
 
       Architect, Implementer, and QA GPTs should treat this file as the
       directory of canonical docs. If a new canonical doc is created or an
@@ -30,7 +30,7 @@
       
       - gpt_resource_index (this index)
       - tech_spec
-      - DOCUMENTATION_PROTOCOL
+      - documentation_protocol
       - build_canon
 
   - id: gpt_resources.load_paths
@@ -55,10 +55,10 @@
       build_canon: "docs/build/build_canon.yml"
       tech_spec: "docs/build/tech_spec.yml"
       gpt_resource_index: "docs/build/gpt_resource_index.yml"
-      DOCUMENTATION_PROTOCOL: "docs/build/documentation_protocol.yml"
-      QA_REFERENCE: "docs/build/optional/qa_reference.yml"
-      REGISTRY_SYSTEM: "docs/build/optional/registry_system.yml"
-      LILLYCORE_ROADMAP: "docs/build/optional/lillycore_roadmap.yml"
+      documentation_protocol: "docs/build/documentation_protocol.yml"
+      qa_reference: "docs/build/optional/qa_reference.yml"
+      registry_system: "docs/build/optional/registry_system.yml"
+      lillycore_roadmap: "docs/build/optional/lillycore_roadmap.yml"
       
   - id: gpt_resources.build_canon
     kind: document
@@ -82,7 +82,7 @@
   - id: gpt_resources.lillycore_roadmap
     kind: document
     md: |
-      ## LILLYCORE_ROADMAP
+      ## lillycore_roadmap
 
       ### Description
 
@@ -125,13 +125,13 @@
   - id: gpt_resources.documentation_protocol
     kind: document
     md: |
-      ## DOCUMENTATION_PROTOCOL
+      ## documentation_protocol
 
       ### Description
 
       Build/system documentation protocol defining roles, triggers, and
       procedures for updating canonical docs (`build_canon`, ROADMAP,
-      `tech_spec`, `MODULES`, `FEATURES`, `gpt_resource_index`, and related
+      `tech_spec`, `modules`, `FEATURES`, `gpt_resource_index`, and related
       conceptual docs).
 
       ### Usage
@@ -145,7 +145,7 @@
 
       ### Access
 
-      - When needed, Andrew can paste the DOCUMENTATION_PROTOCOL build
+      - When needed, Andrew can paste the documentation_protocol build
         doc.
 
   - id: gpt_resources.placeholder

@@ -987,7 +987,7 @@ Establish HELPER_ENGINE as LillyCORE’s first fully functional **work engine an
 
 ### Scope
 
-* Implement HELPER_ENGINE as defined in MODULES:
+* Implement HELPER_ENGINE as defined in modules:
 
   * Accepts a **WorkPackage + ContextBundle** from DRIFT/CORE. 
   * Selects appropriate work mode/type (e.g., analysis, transformation, lookup, generation).
@@ -1030,7 +1030,7 @@ Establish HELPER_ENGINE as LillyCORE’s first fully functional **work engine an
 
 * Roadmap definition for Phase 6 (HELPER as “Lilly the Worker”).
 * PROJECT_CANON ontology and behavior rules for engines, plugins, and pipelines. 
-* MODULES entries for:
+* modules entries for:
 
   * HELPER_ENGINE (responsibilities, dependencies).
   * DRIFT_ENGINE and NOTES_PLUGIN (for context and testbed behavior). 
@@ -1209,7 +1209,7 @@ The Plugin Engine becomes the *gatekeeper*: every plugin is a black box, every r
   * **HELPER Engine MVP** for work decomposition and plugin invocation.
   * **AI_POOLS** for validating plugin claims or performing manifest analysis.
   * **SYSTEM_DOC** from Phase 3 for storing plugin metadata and execution logs.
-* Canon & Modules docs defining engine boundaries and plugin ontology.
+* Canon & modules docs defining engine boundaries and plugin ontology.
 * Decisions regarding:
 
   * Plugin manifest schema (version, permissions, capabilities).

@@ -19,7 +19,7 @@ blocks:
 
       > NOTE:
       > - All GPT behavioural, procedural, and documentation-governance rules
-      >   have been moved to DOCUMENTATION_PROTOCOL and DOCUMENTATION_GOVERNANCE.
+      >   have been moved to documentation_protocol and DOCUMENTATION_GOVERNANCE.
       > - This tech_spec now contains only technical constraints, tooling rules,
       >   environment details, naming conventions, and repository structure.
 
@@ -137,7 +137,7 @@ blocks:
 
       - **Display-only names:**
         - Conceptual document names like PROJECT_CANON, tech_spec, or
-          LILLYCORE_ROADMAP are titles, not filenames; they do not override
+          lillycore_roadmap are titles, not filenames; they do not override
           the snake_case rules for actual files in the repo.
 
       **Per-folder naming expectations (Phase 0 layout):**
@@ -229,7 +229,7 @@ blocks:
 
       - `core/`, `engines/`, and key system modules MUST be fully annotated and mypy-clean.
 
-      **Non-strict Modules:**
+      **Non-strict modules:**
 
       - Plugins may run mypy in non-strict mode.
 
@@ -295,10 +295,10 @@ blocks:
         - Required human-facing documentation.
         - `docs/build/` contains system/build docs:
           - PROJECT_CANON
-          - LILLYCORE_ROADMAP
+          - lillycore_roadmap
           - FEATURES
           - tech_spec
-          - MODULES
+          - modules
           - gpt_resource_index
 
       - `scripts/`:
@@ -312,7 +312,7 @@ blocks:
       ----------------------------------------
 
       **Purpose:**
-      Tie the top-level folders to the ontology and MODULES, and define clear boundaries.
+      Tie the top-level folders to the ontology and modules, and define clear boundaries.
 
       **General dependency rule:**
 
@@ -597,7 +597,7 @@ blocks:
 
       > NOTE:
       > - All GPT behavioural, procedural, and documentation-governance rules
-      >   have been moved to DOCUMENTATION_PROTOCOL and DOCUMENTATION_GOVERNANCE.
+      >   have been moved to documentation_protocol and DOCUMENTATION_GOVERNANCE.
       > - This section now exists only as a placeholder for any future
       >   technical GPT-related constraints that may arise.
 
