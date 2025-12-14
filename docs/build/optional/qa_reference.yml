@@ -1,4 +1,4 @@
-- id: lillycore_qa_reference.overview
+- id: qa_reference.overview
   kind: overview
   md: |
     ## 1. GitHub Project Layout Overview
@@ -23,7 +23,7 @@
     | Result            | Single-select | `PENDING`, `PASS`, `FAIL`, `FAIL_ESCALATE`. |
     | Attempt #         | Number        | Records which QA attempt this is for the phase. |
 
-- id: lillycore_qa_reference.github_automation_scripts
+- id: qa_reference.github_automation_scripts
   kind: reference
   md: |
     ## 2. GitHub Automation Scripts & Command Templates
@@ -88,7 +88,7 @@
     gh project item move <ITEM_ID>   --project "<MAIN_PROJECT_NUMBER>"   --column "Graveyard"
     ```
 
-- id: lillycore_qa_reference.notes
+- id: qa_reference.notes
   kind: reference
   md: |
     ## 3. Notes
@@ -98,7 +98,7 @@
     - All sections are deterministic and designed for AI-friendly parsing.
 
     Document generated automatically by Lilly for Phase 0.4 deliverables.
-- id: lillycore_qa_reference.allowed_kinds
+- id: qa_reference.allowed_kinds
   kind: meta
   md: |
     Allowed kinds for QA_REFERENCE:
@@ -112,7 +112,7 @@
     If no existing kind fits a new block, follow
     `documentation_protocol.kind_governance`.
 
-- id: lillycore_qa_reference.index
+- id: qa_reference.index
   kind: index
   md: |
     ## QA_REFERENCE Block Index
@@ -122,16 +122,16 @@
 
     ### Blocks in this file
 
-    - `lillycore_qa_reference.overview`
+    - `qa_reference.overview`
       Overview of the QA project layout and intent.
 
-    - `lillycore_qa_reference.allowed_kinds`
+    - `qa_reference.allowed_kinds`
       List of permitted block kinds for this file.
 
-    - `lillycore_qa_reference.github_automation_scripts`
+    - `qa_reference.github_automation_scripts`
       GitHub CLI command templates for creating, moving, editing, and appending QA reports.
 
-    - `lillycore_qa_reference.notes`
+    - `qa_reference.notes`
       Notes and conventions (e.g., append-to-end rule, deterministic structure).
 
     ### Explicitly not defined here
