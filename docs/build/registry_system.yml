@@ -1,26 +1,6 @@
-# docs/registry/registry_system.yml
-
-- id: registry.system.phase_registry
-  phase: P0
-  scope: infrastructure
-  applies_to: [architect, tooling]
-  tags: [registry, system, spec, scripts]
-  md: |
-    CARD_ID: REGISTRY.1
-    CARD_TITLE: Phase Registry System – Layout, Schema, and Automation Scripts
-
-    EXECUTOR_ROLE: Architect / Tooling
-
-    PHASE_CONTEXT:
-      Phase: P0 (cross-phase infrastructure)
-      Slice: Registry
-      Parent Card: P0 (supports long-term automation and stability)
-
-    DELIVERABLES_SERVED:
-      - P0.D5 – Standards and documentation maintenance rules
-      - P0.D6 – Workspace preparation for consistent execution
-      - Cross-phase: stable, machine-readable registry for Phases P0–P11+
-
+- id: build_registry.overview
+  kind: overview
+  MD: |
     DESCRIPTION:
     This card defines the Phase Registry System for LillyCORE and the automation scripts
     used to read and update it. It is the canonical reference GPTs and humans should use
@@ -35,8 +15,9 @@
     The registry is **not** a replacement for GitHub cards. It is an index and structural
     map telling the system what phases and slices exist and how they relate.
 
-    ---
-
+- id: build_registry.locations
+  kind: registry
+  MD: |
     ## 1. File Layout
 
     Unless otherwise specified, all registry files and scripts live under the build/docs
@@ -73,7 +54,9 @@
     GPTs should treat this layout as **canonical** unless the repository explicitly
     documents a different path.
 
-    ---
+- id: build_registry.file_schema
+  kind: schema
+  MD: |
 
     ## 2. Phase Registry File Schema (P0.yml, P1.yml, …)
 
@@ -118,7 +101,10 @@
         notes: |
           ...
     ```
-
+    
+- id: build_registry.slice_schema
+  kind: schema
+  MD: |
     ### 2.1 Slice Schema
 
     Each entry in `structure.slices` (and nested `subslices`) is minimal metadata, not a full card:
@@ -141,7 +127,9 @@
       lives in GitHub issues, **not** in the registry.
     * The registry is an **index + topology map**, not a card body store.
 
-    ---
+- id: build_registry.locations
+  kind: registry
+  MD: |
 
     ## 3. Phase Registry Index (phase_registry_index.yml)
 
