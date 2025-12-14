@@ -6,6 +6,22 @@
     This protocol defines **how build/system documentation is kept in sync with actual behaviour** in LillyCORE
     and how documentation is treated during planning, implementation, and QA.
 
+    It answers:
+    - Which docs must be considered when work is done.
+    - Who updates which docs.
+    - When GPTs must **stop and ask Andrew** instead of editing docs.
+    - How QA treats documentation as part of “Done When”.
+
+    This file is a **procedural overlay** on top of existing rules in:
+    - build_canon
+    - roadmap
+    - tech_spec
+    - gpt_resource_index
+    - feature cards / phase bundles (tracked in GitHub or equivalent)
+
+    Those documents remain authoritative for ontology, technical standards, roadmap, and taxonomy.
+    This protocol **does not redefine** any of them; it only describes **how to behave** when updating documentation.
+
 - id: documentation_protocol.allowed_kinds
   kind: meta
   md: |
@@ -23,29 +39,6 @@
     - All blocks in this file MUST use one of these `kind` values.
     - Scripts and GPTs MUST NOT introduce new `kind` values here
       without updating this block.
-
-- id: documentation_protocol.purpose_scope
-  kind: reference
-  md: |
-    ## 1. Purpose & Scope
-
-    This protocol defines **how build/system documentation is kept in sync with actual behaviour** in LillyCORE.
-
-    It answers:
-    - Which docs must be considered when work is done.
-    - Who updates which docs.
-    - When GPTs must **stop and ask Andrew** instead of editing docs.
-    - How QA treats documentation as part of “Done When”.
-
-    This file is a **procedural overlay** on top of existing rules in:
-    - build_canon
-    - roadmap
-    - tech_spec
-    - gpt_resource_index
-    - feature cards / phase bundles (tracked in GitHub or equivalent)
-
-    Those documents remain authoritative for ontology, technical standards, roadmap, and taxonomy.
-    This protocol **does not redefine** any of them; it only describes **how to behave** when updating documentation.
 
 - id: documentation_protocol.relationship
   kind: reference
@@ -752,9 +745,6 @@
 
     - `documentation_protocol.allowed_kinds`
       List of permitted block kinds for this file.
-
-    - `documentation_protocol.purpose_scope`
-      Purpose and scope detail (may be merged into `documentation_protocol.overview`).
 
     - `documentation_protocol.relationship`
       Relationship to other canonical documents and conflict resolution order.
