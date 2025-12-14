@@ -3,12 +3,7 @@
   # --------------------------------
   - id: project_canon.system_ontology
     kind: ontology
-    applies_to: [architect, implementer, qa]
-    tags: [ontology, core, engines, plugins, doc_layers]
     md: |
-      # ========================================
-      # SECTION 5 — SYSTEM ONTOLOGY (THE MEANING OF COMPONENTS)
-      # ========================================
       LillyCORE uses a precise vocabulary to prevent GPT drift.
 
       CORE:
