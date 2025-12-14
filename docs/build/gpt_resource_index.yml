@@ -17,8 +17,17 @@
 
       ## Mandatory-load set
 
-      For any GPT working on LillyCORE MUST stop, load and read the following
-      manditory load out before taking any other actions:
+      ### Loader Contract
+      
+      Any GPT operating on LillyCORE MUST:
+      
+      1. STOP all reasoning and planning upon detecting this document
+      2. REQUEST the full Mandatory Load Set if any item is missing
+      3. INGEST and ACKNOWLEDGE all items in the set
+      4. ONLY THEN proceed with any task, analysis, or modification
+
+      ### Load Set
+      
       - GPT_RESOURCE_INDEX (this index)
       - TECH_SPEC
       - DOCUMENTATION_PROTOCOL
