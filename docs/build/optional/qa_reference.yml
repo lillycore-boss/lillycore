@@ -1,6 +1,18 @@
 - id: qa_reference.overview
   kind: overview
   md: |
+    QA_REFERENCE is a helper document containing deterministic conventions and GitHub workflow templates
+    used to run LillyCORE QA without ambiguity.
+
+    Scope:
+    - GitHub project layout (columns/fields) for QA tracking
+    - Command templates for creating/moving/updating QA cards
+    - QA report append format conventions
+
+    Out of scope:
+    - QA PASS/FAIL rules and enforcement governance (see documentation_protocol.qa_expectations)
+    - Execution proof requirements (see build_canon invariants and tech_spec.proof_outputs_convention)
+
     ## 1. GitHub Project Layout Overview
 
     ### Project Name
@@ -16,10 +28,10 @@
     ### Custom Fields
     | Field Name        | Type          | Description |
     |-------------------|---------------|-------------|
-    | Phase ID          | Text          | The phase this QA card belongs to (e.g., `P0.4`). |
-    | Parent Card ID    | Text          | The phase/sub-phase card this QA issue originates from (e.g., `P0.4.4`). |
-    | QA Card ID        | Text          | Unique identifier for the QA card (e.g., `P0.4.QA.1`). |
-    | Deliverables      | Text          | Comma-separated list of deliverables under test (e.g., `D9, D10`). |
+    | Phase ID          | Text          | The phase this QA card belongs to (e.g., `p0.4`). |
+    | Parent Card ID    | Text          | The phase/sub-phase card this QA issue originates from (e.g., `p0.4.4`). |
+    | QA Card ID        | Text          | Unique identifier for the QA card (e.g., `p0.4.qa.1`). |
+    | Deliverables      | Text          | Comma-separated list of deliverables under test (e.g., `d9, d10`). |
     | Result            | Single-select | `PENDING`, `PASS`, `FAIL`, `FAIL_ESCALATE`. |
     | Attempt #         | Number        | Records which QA attempt this is for the phase. |
 
@@ -98,6 +110,7 @@
     - All sections are deterministic and designed for AI-friendly parsing.
 
     Document generated automatically by Lilly for Phase 0.4 deliverables.
+    
 - id: qa_reference.allowed_kinds
   kind: meta
   md: |
@@ -134,8 +147,42 @@
     - `qa_reference.notes`
       Notes and conventions (e.g., append-to-end rule, deterministic structure).
 
+    - `qa_reference.qa_report_template`
+      Canonical markdown template for QA reports appended to issue bodies.
+
     ### Explicitly not defined here
+    
+    - QA PASS/FAIL governance (see documentation_protocol.qa_expectations)
+    - Phase deliverables and scope (see phase cards / phase bundles tracked externally)
 
-    - QA PASS/FAIL governance (see DOCUMENTATION_PROTOCOL)
-    - Phase deliverables and scope (see phase cards / FEATURES system)
+- id: qa_reference.qa_report_template
+  kind: template
+  md: |
+    ## QA Report Template (Append to Issue Body)
 
+    ```markdown
+    ## QA Report — <RESULT> (Attempt <ATTEMPT_NUMBER>)
+    Deliverables Tested: <LIST>
+    Timestamp: <TIME>
+
+    Evidence:
+    - Proof outputs folder: builds/outputs/<phase_id>/
+    - Key artefacts:
+      - <filename1>
+      - <filename2>
+
+    Checks Performed:
+    - <check 1>
+    - <check 2>
+
+    Findings:
+    - <finding 1>
+    - <finding 2>
+
+    Result:
+    - <PASS | FAIL | FAIL_ESCALATE>
+
+    If FAIL:
+    - Corrective cards created: <IDs or links>
+    - Blocking dependency (if any): <dependency>
+    ```
