@@ -417,3 +417,90 @@
     ROADMAP describes phase sequencing and intent.
     Governance and enforcement rules live elsewhere.
 
+- id: roadmap.index
+  kind: index
+  md: |
+    ## ROADMAP Block Index
+
+    ROADMAP defines the high-level phase sequencing and intent for LillyCORE.
+    It describes *when* subsystems appear, not *how* they are implemented.
+
+    ### Blocks in this file
+
+    - `roadmap.overview`
+      Overview of roadmap purpose and usage.
+
+    - `roadmap.allowed_kinds`
+      List of permitted block kinds for this file.
+
+    - `roadmap.p0`
+      PHASE 0 — Foundations & Tooling
+
+    - `roadmap.p1`
+      PHASE 1 — Core Loop, Logging, User Preferences
+
+    - `roadmap.p2`
+      PHASE 2 — AI Pools & Execution Framework
+
+    - `roadmap.p3`
+      PHASE 3 — System Doc MVP (Durable Data Layer)
+
+    - `roadmap.p4`
+      PHASE 4 — Notes Plugin V0
+
+    - `roadmap.p5`
+      PHASE 5 — Drift Engine MVP (Context, Emotion, Perception)
+
+    - `roadmap.p6`
+      PHASE 6 — Helper Engine MVP (Work Engine)
+
+    - `roadmap.p7`
+      PHASE 7 — Plugin Engine MVP
+
+    - `roadmap.p8`
+      PHASE 8 — Stability Spine
+
+    - `roadmap.p8a_help_desk_engine`
+      SUBPHASE 8a — Help Desk Engine V0
+
+    - `roadmap.p8b_dream_engine`
+      SUBPHASE 8b — Dream Engine V0
+
+    - `roadmap.p8c_script_engine`
+      SUBPHASE 8c — Script Engine V0
+
+    - `roadmap.p9`
+      PHASE 9 — UX MVP
+
+    - `roadmap.p10`
+      PHASE 10 — Project Management Plugin
+
+    - `roadmap.p11`
+      PHASE 11 — Personal Assistant Plugin
+
+    - `roadmap.p12`
+      PHASE 12 — Demonstration Plugins
+
+    - `roadmap.p13`
+      PHASE 13 — Multi-User Plugin
+
+    - `roadmap.p14`
+      PHASE 14 — IO & Network Layer
+
+    - `roadmap.p15`
+      PHASE 15 — Appliance Layer
+
+    - `roadmap.p16`
+      PHASE 16 — User Configuration & First-Run Experience
+
+    - `roadmap.p17`
+      PHASE 17 — Enterprise Demo Plugin
+
+    - `roadmap.p18`
+      PHASE 18 — System Integration + Alpha Release
+
+    ### Explicitly not defined here
+
+    - Implementation details (see phase cards)
+    - Technical constraints (see TECH_SPEC)
+    - Planning discipline and authority rules (see BUILD_CANON)
