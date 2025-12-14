@@ -63,15 +63,9 @@
     2. Then build_canon, roadmap, tech_spec, and gpt_resource_index are updated as needed via approved cards.
     3. This protocol is adjusted afterward to match.
 
-- id: documentation_protocol.responsibilities
+- id: documentation_protocol.responsibilities.andrew
   kind: rules
   md: |
-    ## 3. Roles & Documentation Responsibilities
-
-    This section summarizes **who does what for docs**. It does not change any role definitions from Canon; it just makes them operational for documentation work.
-
-    ### 3.1 Andrew
-
     - Final authority on:
       - System meaning and ontology (build_canon).
       - Phase sequencing and intentions (roadmap).
@@ -79,7 +73,7 @@
     - Approves:
       - Any change to build_canon or roadmap.
       - Any change that alters repository taxonomy (via Architect-designed cards).
-      - Any new canonical document type in documentation_governance.
+      - Any new canonical document type in documentation_protocol.
 
     **Andrew must be asked** explicitly before:
 
@@ -87,11 +81,12 @@
     - Any new canonical doc type is introduced.
     - Any structural/taxonomy change is made in tech_spec §3.
 
-    ### 3.2 Architect GPT
-
+- id: documentation_protocol.responsibilities.architect
+  kind: rules
+  md: |
     - Owns:
       - Updates to gpt_resource_index when new canonical docs are introduced or existing docs change meaning.  
-      - System-level conceptual docs (including documentation_governance).
+      - System-level conceptual docs (including documentation_protocol).
 
     Architect MUST:
 
@@ -102,10 +97,11 @@
 
     Architect MUST NOT:
 
-    - Invent new doc layers or categories outside documentation_governance.
+    - Invent new doc layers or categories outside documentation_protocol.
 
-    ### 3.3 Implementer GPT
-
+- id: documentation_protocol.responsibilities.implementer
+  kind: rules
+  md: |
     - Is **always responsible** for documentation updates that follow from that card’s changes.
 
     Implementer MUST:
@@ -115,7 +111,7 @@
       - **feature cards / phase bundles (tracked externally)**: card status, notes, and any mirrored content if the card lives there.  
       - **tech_spec**: when technical standards, tools, or repo layout change as part of the card.  
       - **gpt_resource_index**: *only when* the card explicitly calls for adding or changing indexed docs, and Andrew/Architect have approved.  
-      - Other build/system docs (e.g. documentation_protocol, documentation_governance) when the card explicitly includes such changes.
+      - Other build/system docs (e.g. documentation_protocol) when the card explicitly includes such changes.
 
     Implementer MUST:
 
@@ -129,7 +125,9 @@
     When unsure whether a doc should be updated, Implementer MUST:
     - Stop and ask Andrew, or request an Architect clarification card.
 
-    ### 3.4 QA GPT
+- id: documentation_protocol.responsibilities.qa
+  kind: rules
+  md: |
 
     - Verifies that **all required documentation updates** have been made for a given card/phase.
     - Uses:
@@ -153,84 +151,84 @@
   kind: rules
   md: |
     ## 4. Update Triggers
-
+    
     This section lists **when** documentation MUST be considered and potentially updated.  
     “Consider” means **explicitly thinking through whether a given doc is affected**, not blindly editing everything.
-
+    
     ### 4.1 Code or Behaviour Change (Implementer)
-
+    
     Whenever code behaviour changes (new function, altered API, changed semantics, removed capability, etc.):
-
+    
     1. **feature cards / phase bundles (tracked externally)**
-        - Update the feature card / phase bundle:
-          - Mark status (in-progress → implemented).
-          - Note key behavioural changes.
-          - Link to any new docs or scripts created by the card (if relevant).
-
+       - Update the feature card / phase bundle:
+         - Mark status (in-progress → implemented).
+         - Note key behavioural changes.
+         - Link to any new docs or scripts created by the card (if relevant).
+    
     2. **tech_spec**
-        - Consider updates if:
-          - Tools or baseline configs change (e.g. new required linter behaviour, new scripts conventions).
-          - Repo layout or script expectations change.
-          - Typing/linting/test requirements change.
-
+       - Consider updates if:
+         - Tools or baseline configs change (e.g. new required linter behaviour, new scripts conventions).
+         - Repo layout or script expectations change.
+         - Typing/linting/test requirements change.
+    
     3. **System-Level Conceptual Docs**
-        - Update documentation_protocol or other high-level conceptual docs **only** when the card explicitly includes that as a deliverable.
-
+       - Update documentation_protocol or other high-level conceptual docs **only** when the card explicitly includes that as a deliverable.
+    
     ### 4.2 Architecture or Planning Change (Architect)
-
+    
     When phase structure, ontology, or high-level module responsibilities change:
-
+    
     1. Update **roadmap** (phase sequences, intents).
     2. Update **build_canon** only when ontology / planning discipline changes and Andrew approves.
-    4. Update **gpt_resource_index** when the canonical doc set changes.
-    5. Update relevant conceptual docs (e.g. documentation_governance) to match the new story.
-
+    3. Update **gpt_resource_index** when the canonical doc set changes.
+    4. Update relevant conceptual docs (e.g. documentation_protocol) to match the new story.
+    
     All of the above require explicit Architect cards and Andrew’s approval.
-
+    
     ### 4.3 New Canonical Document Type
-
-    When a new doc is meant to become canonical (e.g. engine spec, plugin spec, DOC schema spec):
-
+    
+    When a new doc is meant to become canonical (e.g. engine spec, plugin spec, schema spec):
+    
     1. Architect designs an appropriate feature/phase card.
-    2. Implementer (or Architect, depending on the card) creates the new doc at a location consistent with tech_spec §3 and documentation_governance.
+    2. Implementer (or Architect, depending on the card) creates the new doc at a location consistent with tech_spec and documentation_protocol.
     3. Architect/Implementer:
-        - Adds the doc to **gpt_resource_index** with:
-          - name  
-          - type  
-          - status  
-          - path  
-          - description  
-          - usage/access notes
+       - Adds the doc to **gpt_resource_index** with:
+         - name
+         - type
+         - status
+         - path
+         - description
+         - usage/access notes
     4. QA verifies that:
-        - The new doc is indexed.
-        - Its location and category obey tech_spec and documentation_governance.
-
+       - The new doc is indexed.
+       - Its location and category obey tech_spec and documentation_protocol.
+    
     Until this flow completes, the doc is treated as **non-authoritative**.
-
+    
     ### 4.4 Taxonomy / Repo Layout Change
-
-    Any change covered by tech_spec §3’s taxonomy rules (e.g. top-level folder changes, docs layout changes) MUST:
-
+    
+    Any change covered by tech_spec’s taxonomy rules (e.g. top-level folder changes, docs layout changes) MUST:
+    
     - Be designed via an Architect card.
     - Update:
-      - tech_spec §3 (and related sections).
+      - tech_spec (and related sections).
       - gpt_resource_index if canonical docs move or new top-level doc subtrees are created.
     - Be validated by QA against the new taxonomy.
-
+    
     Implementers MUST NOT perform these changes under ordinary feature cards.
-
+    
     ### 4.5 QA-Detected Drift
-
+    
     When QA detects that runtime behaviour and documentation disagree:
-
-    - QA creates corrective Implementer cards (and a QA card) per the QA System in FEATURES.
+    
+    - QA creates corrective Implementer cards (and a QA card) per the QA System defined by feature cards / phase bundles (tracked externally).
     - Implementer:
-      - Updates the relevant docs (FEATURES, tech_spec, modules, etc.) to match reality.
+      - Updates the relevant docs (feature cards / phase bundles, tech_spec, modules, etc.) to match reality.
       - Ensures changes are consistent with build_canon and roadmap.
     - QA re-runs checks for both:
       - The corrective cards.
       - The affected phase bundle.
-
+    
     If QA determines that docs are wrong because the **behaviour** is wrong, Architect may need to create redesign cards; documentation then follows the corrected design.
 
 - id: documentation_protocol.implementer_flow
@@ -243,10 +241,10 @@
     1. **Before coding**
         - Read the card’s Purpose, Context, Deliverables, Done When.
         - Identify **which docs are likely relevant**:
-          - FEATURE card/bundle itself.
-          - tech_spec (if tools, standards, or layout are affected).
-          - modules (if engines/plugins are being realized or re-scoped).
-          - Any specific doc mentioned in the card.
+          - feature card / phase bundle itself (tracked externally)
+          - tech_spec (if tools, standards, or layout are affected)
+          - modules (if engines/plugins are being realized or re-scoped)
+          - any specific doc mentioned in the card
 
     2. **After coding but before declaring “Done”**
         - For each relevant doc, decide:
@@ -256,22 +254,23 @@
     3. **Apply updates**
         - Prepare **atomic, ready-to-paste blocks** for each affected doc.
         - For example:
-          - An updated module entry in modules.
-          - An updated section in tech_spec.
-          - An updated card or note in FEATURES or the phase bundle.
+          - an updated module entry in modules
+          - an updated section in tech_spec
+          - an updated note in the feature card / phase bundle
         - Do **not** partially patch random lines; replace coherent sections.
 
     4. **Check canonical alignment**
         - Verify that:
-          - No change contradicts build_canon or roadmap.
-          - Any new or changed responsibilities still respect modules and tech_spec boundaries.
-          - You are not accidentally introducing a new canonical doc type without going through gpt_resource_index.
+          - no change contradicts build_canon or roadmap
+          - any new or changed responsibilities respect modules and tech_spec boundaries
+          - no new canonical doc type is introduced without going through gpt_resource_index
 
-    6. **Report in output**
-        - In the Implementer response, clearly list:
-          - Which docs you changed (with snippets).
-          - Which docs you considered but did not change (with a brief justification).
-          - If no docs changed, why that is safe.
+    5. **Report in output**
+        - Clearly list:
+          - which docs were changed (with snippets)
+          - which docs were considered but not changed (with justification)
+          - if no docs changed, why that is safe
+
 
 - id: documentation_protocol.qa_expectations
   kind: spec_section
@@ -280,40 +279,46 @@
 
     QA is the enforcement mechanism for both:
     - documentation correctness, and
-    - BUILD_CANON invariants related to execution and proof.
+    - build_canon invariants related to execution and proof.
 
     QA has **no discretion** to waive requirements defined here.
 
+    Execution proof requirements are defined in:
+    - build_canon (invariants: no silent deferral, no stub victory)
+    - tech_spec.proof_outputs_convention
+
     ---
-    ## 1. Documentation Correctness (Existing Rules)
+    ## 1. Documentation Correctness
 
     For any card or phase to PASS, QA MUST confirm:
 
     ### 1.1 Docs updated where required
-    - FEATURES / phase bundle entries reflect:
+    - feature cards / phase bundle entries (tracked externally) reflect:
       - completed status
       - actual behaviour and deliverables
-    - TECH_SPEC reflects:
+    - tech_spec reflects:
       - any new technical standards, tools, or layout changes
-    - MODULES reflects:
+    - modules reflects:
       - any changes to engine/plugin status, responsibilities, or dependencies
-    - GPT_RESOURCE_INDEX reflects:
+    - gpt_resource_index reflects:
       - any new canonical docs or major changes to existing ones (when required)
 
     ### 1.2 No forbidden docs
-    - No “must-not-have” docs exist (per DOCUMENTATION_PROTOCOL), such as:
+    - No “must-not-have” docs exist (per documentation_protocol), such as:
       - unindexed spec files that define behaviour
-      - shadow copies of Canon, Tech Spec, or Roadmap with divergent rules
+      - shadow copies of canonical docs with divergent rules
       - plugin/engine specs that bypass the ontology
 
     ### 1.3 Docs align with Canon and Tech Spec
     - No doc claims behaviour or layout that violates:
-      - BUILD_CANON (ontology, authority, invariants)
-      - TECH_SPEC (layout, taxonomy, tooling rules)
+      - build_canon (ontology, authority, invariants)
+      - tech_spec (layout, taxonomy, tooling rules)
 
     ### 1.4 All updates are atomic and paste-ready
     - Implementer provides coherent sections, not ad-hoc line edits
     - Documentation changes are realistically copy-pastable into the repo
+
+    Ambiguity defaults to **FAIL** until clarified by Andrew.
 
     ---
     ## 2. Execution & Runtime Enforcement (New)
@@ -376,42 +381,42 @@
 
     Ambiguity defaults to FAIL until clarified by Andrew.
 
-
 - id: documentation_protocol.checklists
   kind: checklist
   md: |
     ## 8. Quick Checklists
 
-    ### 8.1 Implementer “Before Handing to QA”
+    ### 8.1 Implementer — Before Handing to QA
 
     For each leaf card:
 
-    - [ ] I updated or explicitly considered **FEATURES / phase bundle**.  
-    - [ ] I checked whether **tech_spec** needs updates (tools, layout, technical rules).  
-    - [ ] I checked whether **modules** needs updates (status, responsibilities, dependencies).  
-    - [ ] If I created or promoted a doc to canonical, I ensured a plan exists to update **gpt_resource_index**.  
-    - [ ] All doc edits are provided as **ready-to-paste blocks**.  
+    - [ ] I updated or explicitly considered the feature card / phase bundle (tracked externally).
+    - [ ] I checked whether tech_spec needs updates (tools, layout, technical rules).
+    - [ ] I checked whether modules needs updates (status, responsibilities, dependencies).
+    - [ ] If I created or promoted a doc to canonical, I ensured a plan exists to update gpt_resource_index.
+    - [ ] All doc edits are provided as ready-to-paste blocks.
 
-    ### 8.2 Architect “When Designing Cards”
+    ### 8.2 Architect — When Designing Cards
 
     For each phase or redesign:
 
-    - [ ] I checked build_canon, roadmap, tech_spec, FEATURES, gpt_resource_index, and documentation_protocol.
-    - [ ] I included **explicit documentation deliverables** for any change that affects behaviour, taxonomy, or canonical docs.  
+    - [ ] I checked build_canon, roadmap, tech_spec, documentation_protocol, and gpt_resource_index.
+    - [ ] I included explicit documentation deliverables for any change that affects behaviour, taxonomy, or canonical docs.
     - [ ] If new canonical docs are needed, I included tasks to:
-      - Create them under allowed locations, and  
-      - Add them to gpt_resource_index.  
+      - create them under allowed locations, and
+      - add them to gpt_resource_index.
 
-    ### 8.3 QA “Doc-Focused Sanity Pass”
+    ### 8.3 QA — Documentation Sanity Pass
 
     For each QA card:
 
-    - [ ] All docs listed in this protocol as relevant to the card/phase have been checked.
-    - [ ] No forbidden doc categories are being relied upon (per documentation_protocol).
+    - [ ] All docs listed in documentation_protocol as relevant to the card/phase have been checked.
+    - [ ] No forbidden doc categories are being relied upon.
     - [ ] Any new “important” doc has either been:
-      - Explicitly marked non-authoritative, or  
-      - Promoted through a card and indexed in gpt_resource_index.  
-    - [ ] There is no visible contradiction between Canon, Roadmap, Tech Spec, modules, Features, and the new work.  
+      - explicitly marked non-authoritative, or
+      - promoted through a card and indexed in gpt_resource_index.
+    - [ ] There is no visible contradiction between build_canon, roadmap, tech_spec, modules, and the new work.
+
 
 - id: documentation_protocol.formatting_replacement
   kind: rules
@@ -427,7 +432,7 @@
       where the same information is already present as YAML metadata.
 
     These rules apply whenever GPTs are:
-    - Proposing changes to registry docs (`docs/registry/*.yml`), or
+    - Proposing changes to registry-style YAML docs, or
     - Emitting markdown that will live in `md:` fields inside those registry blocks.
 
     ### 9.0  Canonical File Block Format
@@ -595,7 +600,7 @@
          tech_spec if placement changes are required).
 
 - id: documentation_protocol.docs_vs_docs_build
-  kind: concept
+  kind: reference
   md: |
     ## docs/ vs docs/build/ (Conceptual Guidance)
 
@@ -749,9 +754,6 @@
     - `documentation_protocol.relationship`
       Relationship to other canonical documents and conflict resolution order.
 
-    - `documentation_protocol.responsibilities`
-      Role responsibilities for documentation (Andrew, Architect, Implementer, QA).
-
     - `documentation_protocol.update_triggers`
       When documentation must be considered/updated based on work type.
 
@@ -793,6 +795,18 @@
 
     - `documentation_protocol.internal_reference_format`
       Rules enforcing lowercase `snake_case` for all internal doc references.
+
+    - `documentation_protocol.responsibilities.andrew`
+      Documentation authority and explicit approval boundaries for Andrew.
+    
+    - `documentation_protocol.responsibilities.architect`
+      Architect responsibilities for canonical docs, indexing, and documentation deliverables.
+    
+    - `documentation_protocol.responsibilities.implementer`
+      Implementer documentation duties, update rules, and escalation requirements.
+    
+    - `documentation_protocol.responsibilities.qa`
+      QA documentation verification responsibilities and enforcement boundaries.
 
     ### Explicitly not defined here
 
