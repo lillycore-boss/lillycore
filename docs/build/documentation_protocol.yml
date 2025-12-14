@@ -6,7 +6,7 @@
     This protocol defines **how build/system documentation is kept in sync with actual behaviour** in LillyCORE
     and how documentation is treated during planning, implementation, and QA.
 
-- id: documentation_protocol.meta.kinds
+- id: documentation_protocol.kinds
   kind: meta
   md: |
     Allowed `kind` values for this file:
@@ -469,7 +469,7 @@
         - Ask for surgical line edits in those files.
         - Depend on fragile alignment or spacing tricks.
 
-- id: documentation_protocol.conflicts.ledger
+- id: documentation_protocol.conflicts_ledger
   kind: ledger
   md: |
     ## Conflict Ledger (Unresolved)
