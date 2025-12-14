@@ -39,7 +39,7 @@
     - How QA treats documentation as part of “Done When”.
 
     This file is a **procedural overlay** on top of existing rules in:
-    - PROJECT_CANON
+    - BUILD_CANON
     - LILLYCORE_ROADMAP
     - TECH_SPEC
     - GPT_RESOURCE_INDEX
@@ -56,9 +56,9 @@
     This protocol:
 
     - **Follows**:
-      - PROJECT_CANON §1–§2 (Prime Directive, ask-before-acting, no assumptions).
-      - PROJECT_CANON §4 (documentation standards: every change updates docs; atomic file updates).
-      - PROJECT_CANON role boundaries (Architect, Implementer, QA).
+      - BUILD_CANON §1–§2 (Prime Directive, ask-before-acting, no assumptions).
+      - BUILD_CANON §4 (documentation standards: every change updates docs; atomic file updates).
+      - BUILD_CANON role boundaries (Architect, Implementer, QA).
 
     - **Respects**:
       - TECH_SPEC (repository layout and docs/build location).
@@ -68,7 +68,7 @@
     When this protocol appears to conflict with any of the above:
 
     1. **Andrew’s explicit instruction wins.**
-    2. Then PROJECT_CANON, LILLYCORE_ROADMAP, TECH_SPEC, and GPT_RESOURCE_INDEX are updated as needed via approved cards.
+    2. Then BUILD_CANON, LILLYCORE_ROADMAP, TECH_SPEC, and GPT_RESOURCE_INDEX are updated as needed via approved cards.
     3. This protocol is adjusted afterward to match.
 
   - id: documentation_protocol.responsibilities
@@ -81,11 +81,11 @@
       ### 3.1 Andrew
 
       - Final authority on:
-        - System meaning and ontology (PROJECT_CANON).
+        - System meaning and ontology (BUILD_CANON).
         - Phase sequencing and intentions (LILLYCORE_ROADMAP).
         - Whether new docs become canonical and are added to GPT_RESOURCE_INDEX.
       - Approves:
-        - Any change to PROJECT_CANON or LILLYCORE_ROADMAP.
+        - Any change to BUILD_CANON or LILLYCORE_ROADMAP.
         - Any change that alters repository taxonomy (via Architect-designed cards).
         - Any new canonical document type in documentation_governance.
 
@@ -189,7 +189,7 @@
       When phase structure, ontology, or high-level module responsibilities change:
 
       1. Update **LILLYCORE_ROADMAP** (phase sequences, intents).
-      2. Update **PROJECT_CANON** only when ontology / planning discipline changes and Andrew approves.
+      2. Update **BUILD_CANON** only when ontology / planning discipline changes and Andrew approves.
       4. Update **GPT_RESOURCE_INDEX** when the canonical doc set changes.
       5. Update relevant conceptual docs (e.g. documentation_governance) to match the new story.
 
@@ -234,7 +234,7 @@
       - QA creates corrective Implementer cards (and a QA card) per the QA System in FEATURES.
       - Implementer:
         - Updates the relevant docs (FEATURES, TECH_SPEC, MODULES, etc.) to match reality.
-        - Ensures changes are consistent with PROJECT_CANON and LILLYCORE_ROADMAP.
+        - Ensures changes are consistent with BUILD_CANON and LILLYCORE_ROADMAP.
       - QA re-runs checks for both:
         - The corrective cards.
         - The affected phase bundle.
@@ -271,7 +271,7 @@
 
       4. **Check canonical alignment**
          - Verify that:
-           - No change contradicts PROJECT_CANON or LILLYCORE_ROADMAP.
+           - No change contradicts BUILD_CANON or LILLYCORE_ROADMAP.
            - Any new or changed responsibilities still respect MODULES and TECH_SPEC boundaries.
            - You are not accidentally introducing a new canonical doc type without going through GPT_RESOURCE_INDEX.
 
@@ -310,7 +310,7 @@
 
       3. **Docs align with Canon and Tech Spec**
          - No doc claims behaviour or layout that violates:
-           - PROJECT_CANON (ontology and AI rules).
+           - BUILD_CANON (ontology and AI rules).
            - TECH_SPEC §3 (layout and taxonomy) or other relevant sections.
 
       4. **All updates are atomic and paste-ready**
@@ -341,7 +341,7 @@
 
       For each phase or redesign:
 
-      - [ ] I checked PROJECT_CANON, LILLYCORE_ROADMAP, TECH_SPEC, FEATURES, GPT_RESOURCE_INDEX, and DOCUMENTATION_PROTOCOL.
+      - [ ] I checked BUILD_CANON, LILLYCORE_ROADMAP, TECH_SPEC, FEATURES, GPT_RESOURCE_INDEX, and DOCUMENTATION_PROTOCOL.
       - [ ] I included **explicit documentation deliverables** for any change that affects behaviour, taxonomy, or canonical docs.  
       - [ ] If new canonical docs are needed, I included tasks to:
         - Create them under allowed locations, and  

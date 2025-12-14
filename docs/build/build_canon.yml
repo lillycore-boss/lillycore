@@ -10,7 +10,7 @@
       - Andrew’s explicit instruction always wins.
       - BUILD_CANON overrides all other documentation.
 
-  - id: project_canon.philosophy_and_authority
+  - id: BUILD_CANON.philosophy_and_authority
     kind: philosophy
     md: |
       LillyCORE is a modular, evolving AI system.
@@ -26,7 +26,7 @@
       prior documentation, and prior GPT interpretations.
       No subsystem, GPT, module, or engine may reinterpret or soften this.
 
-  - id: project_canon.global_ai_behaviour_rules
+  - id: BUILD_CANON.global_ai_behaviour_rules
     kind: behaviour_rules
     md: |
       2.1 — NO ASSUMPTIONS
@@ -53,7 +53,7 @@
       ASK Andrew:
       "Is this card tracked in GitHub, FEATURES, or both?"
       
-  - id: project_canon.naming_standards_and_conventions
+  - id: BUILD_CANON.naming_standards_and_conventions
     kind: standards
     md: |
       - LillyCORE standard for project-owned files and folders is snake_case
@@ -71,15 +71,15 @@
         Git is the real version history.
         AI MUST NOT depend on doc version numbers for logic.
 
-  - id: project_canon.documentation_standards
+  - id: BUILD_CANON.documentation_standards
     kind: docs_pointer
     md: |
       NOTE:
         Detailed rules for documentation maintenance, update responsibilities,
         and governance now live in DOCUMENTATION_PROTOCOL.
-        PROJECT_CANON no longer defines per-role documentation procedures.
+        BUILD_CANON no longer defines per-role documentation procedures.
 
-  - id: project_canon.planning_and_decomposition
+  - id: BUILD_CANON.planning_and_decomposition
     kind: planning_rules
     md: |
       6.1 — PLANNING IS STRUCTURED
@@ -155,7 +155,7 @@
       - Architect MUST use this template.
       - Implementer MUST NOT alter template semantics.
       
-  - id: project_canon.canon_and_roadmap_interaction
+  - id: BUILD_CANON.canon_and_roadmap_interaction
     kind: interaction
     md: |
       - The Roadmap defines WHEN the system evolves.
@@ -165,7 +165,7 @@
         Andrew resolves it.
         Architect then updates docs accordingly.
 
-  - id: project_canon.architect_role
+  - id: BUILD_CANON.architect_role
     kind: role_note
     md: |
       NOTE:
@@ -175,25 +175,25 @@
         conceptual anchor that Architect GPT is responsible for decomposition,
         not execution.
 
-  - id: project_canon.implementer_role
+  - id: BUILD_CANON.implementer_role
     kind: role_note
     md: |
       NOTE:
         Detailed execution rules for the Implementer GPT, including scope
         boundaries, documentation update duties, and escalation behaviour,
-        have been moved to DOCUMENTATION_PROTOCOL. PROJECT_CANON no longer
+        have been moved to DOCUMENTATION_PROTOCOL. BUILD_CANON no longer
         carries per-role procedural checklists.
 
-  - id: project_canon.qa_role
+  - id: BUILD_CANON.qa_role
     kind: role_note
     md: |
       NOTE:
         Detailed verification, PASS/FAIL criteria, and correction-card
         workflows for QA GPT have been moved to DOCUMENTATION_PROTOCOL.
-        PROJECT_CANON keeps QA only as a conceptual role in the planning
+        BUILD_CANON keeps QA only as a conceptual role in the planning
         discipline; the operational protocol is defined elsewhere.
 
-  - id: project_canon.updates_to_canon
+  - id: BUILD_CANON.updates_to_canon
     kind: updates
     md: |
       - The Canon may ONLY change when Andrew explicitly approves changes.

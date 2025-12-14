@@ -157,7 +157,7 @@ Deliverables:
 
 Done When:
     - Canon required for Phase 1 is finalized and stable
-    - PROJECT_CANON updated to mark frozen/mutable sections
+    - BUILD_CANON updated to mark frozen/mutable sections
 
 Notes / Future:
     Future Canon expansions require explicit approval.

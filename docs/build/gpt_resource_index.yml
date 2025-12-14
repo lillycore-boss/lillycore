@@ -42,7 +42,7 @@
 
       - This block is the single source of truth for where GPT resource files live.
       - When files are moved or renamed, update this mapping.
-      - Other blocks (PROJECT_CANON, TECH_SPEC, etc.) may repeat the path as
+      - Other blocks (BUILD_CANON, TECH_SPEC, etc.) may repeat the path as
         convenience metadata, but this mapping wins if there is a conflict.
 
       Tools or GPTs that need to locate a file SHOULD read `paths` in this block
@@ -130,7 +130,7 @@
       ### Description
 
       Build/system documentation protocol defining roles, triggers, and
-      procedures for updating canonical docs (`PROJECT_CANON`, ROADMAP,
+      procedures for updating canonical docs (`BUILD_CANON`, ROADMAP,
       `TECH_SPEC`, `MODULES`, `FEATURES`, `GPT_RESOURCE_INDEX`, and related
       conceptual docs).
 
