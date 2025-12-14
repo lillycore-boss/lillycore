@@ -1,44 +1,5 @@
-# docs/registry/gpt_resource_index.yml
-
-version: 1
-root_dir: "docs/build"
-
-blocks:
-- id: gpt_resources.freeze_contract
-  kind: control
-  applies_to: [architect, implementer, qa]
-  tags: [freeze, stabilization, authority_override]
-  md: |
-    # GPT Resource Freeze Contract (Phase 0 Stabilization)
-
-    Until this block is explicitly removed or replaced:
-    - “If a document is not explicitly referenced by Andrew in chat, GPTs must assume it is out of scope.”
-    - GPT_RESOURCE_INDEX is the **only authoritative entry point**
-      for determining which documents exist and may be relied upon.
-
-    - The presence of a document in the repository does **not**
-      imply authority, correctness, or applicability unless it is
-      explicitly listed and described in this index.
-
-    - If documents conflict, overlap, or appear ambiguous:
-        → GPTs MUST NOT attempt to reconcile, reinterpret, or invent rules.
-        → GPTs MUST defer to explicit instructions given by Andrew in-chat.
-
-    - No new canonical documents, rules, schemas, or behaviors may be
-      introduced implicitly during this stabilization period.
-
-    Purpose:
-    This contract exists to halt documentation-driven drift while
-    the project is stabilized. Correctness is secondary to predictability.
-
-
-  # --------------------------------
-  # Overview / mandatory-load
-  # --------------------------------
   - id: gpt_resources.overview
     kind: overview
-    applies_to: [architect, implementer, qa]
-    tags: [index, canonical_docs, mandatory_load]
     md: |
       # GPT_RESOURCE_INDEX – Overview
 
@@ -61,8 +22,9 @@ blocks:
       For any architectural reasoning, planning, implementation, or QA work
       on LillyCORE, GPT roles MUST load and read, at minimum:
       - GPT_RESOURCE_INDEX (this index)
-      - DOCUMENTATION_GOVERNANCE
+      - TECH_SPEC
       - DOCUMENTATION_PROTOCOL
+      - BUILD_CANON
 
       Additional rules:
       - DOCUMENTATION_PROTOCOL is the **procedural authority** for how GPTs
@@ -70,13 +32,8 @@ blocks:
       - DOCUMENTATION_GOVERNANCE is the **conceptual authority** for doc
         layers, categories, and which docs are allowed or forbidden.
 
-  # --------------------------------
-  # Central load-path map (authoritative)
-  # --------------------------------
   - id: gpt_resources.load_paths
     kind: paths
-    applies_to: [architect, implementer, qa, tooling]
-    tags: [paths, filesystem, loadmap]
     paths:
       PROJECT_CANON: "docs/build/project_canon.yml"
       LILLYCORE_ROADMAP: "docs/build/lillycore_roadmap.yml"
@@ -100,16 +57,8 @@ blocks:
       Tools or GPTs that need to locate a file SHOULD read `paths` in this block
       rather than hardcoding paths elsewhere.
 
-  # --------------------------------
-  # PROJECT_CANON
-  # --------------------------------
   - id: gpt_resources.document.project_canon
     kind: document
-    name: PROJECT_CANON
-    type: system_rules
-    status: exists
-    path: "docs/build/project_canon.md"
-    tags: [canon, philosophy, ontology]
     md: |
       ## PROJECT_CANON
 
@@ -130,17 +79,9 @@ blocks:
       ### Access
 
       - When needed, Andrew can paste the relevant Canon section into chat.
-
-  # --------------------------------
-  # LILLYCORE_ROADMAP
-  # --------------------------------
+      
   - id: gpt_resources.document.lillycore_roadmap
     kind: document
-    name: LILLYCORE_ROADMAP
-    type: roadmap
-    status: exists
-    path: "docs/build/lillycore_roadmap.md"
-    tags: [roadmap, phases]
     md: |
       ## LILLYCORE_ROADMAP
 
@@ -162,16 +103,8 @@ blocks:
 
       - When needed, Andrew can paste the relevant roadmap phases.
 
-  # --------------------------------
-  # FEATURES
-  # --------------------------------
   - id: gpt_resources.document.features
     kind: document
-    name: FEATURES
-    type: feature_cards
-    status: exists
-    path: "docs/build/features.md"
-    tags: [features, cards, template]
     md: |
       ## FEATURES
 
@@ -197,16 +130,8 @@ blocks:
       - When needed, Andrew can paste the relevant feature card(s) from
         GitHub or `FEATURES`.
 
-  # --------------------------------
-  # TECH_SPEC
-  # --------------------------------
   - id: gpt_resources.document.tech_spec
     kind: document
-    name: TECH_SPEC
-    type: tools_environment
-    status: exists
-    path: "docs/build/tech_spec.md"
-    tags: [tech_spec, environment, tooling]
     md: |
       ## TECH_SPEC
 
@@ -233,16 +158,8 @@ blocks:
       - When needed, Andrew can paste the relevant TECH_SPEC section
         (e.g. Python, DB, scripts).
 
-  # --------------------------------
-  # MODULES
-  # --------------------------------
   - id: gpt_resources.document.modules
     kind: document
-    name: MODULES
-    type: module_overview
-    status: exists
-    path: "docs/build/modules.md"
-    tags: [modules, architecture]
     md: |
       ## MODULES
 
@@ -267,16 +184,8 @@ blocks:
       - When needed, Andrew can paste the MODULES entry for a given
         module or engine.
 
-  # --------------------------------
-  # DOCUMENTATION_GOVERNANCE
-  # --------------------------------
   - id: gpt_resources.document.documentation_governance
     kind: document
-    name: DOCUMENTATION_GOVERNANCE
-    type: system_rules
-    status: exists
-    path: "docs/documentation_governance.md"
-    tags: [docs, governance, mandatory_load]
     md: |
       ## DOCUMENTATION_GOVERNANCE
 
@@ -304,16 +213,8 @@ blocks:
       - When needed, Andrew can paste the full content of
         DOCUMENTATION_GOVERNANCE.
 
-  # --------------------------------
-  # DOCUMENTATION_PROTOCOL
-  # --------------------------------
   - id: gpt_resources.document.documentation_protocol
     kind: document
-    name: DOCUMENTATION_PROTOCOL
-    type: system_rules
-    status: exists
-    path: "docs/build/documentation_protocol.md"
-    tags: [docs, protocol, mandatory_load]
     md: |
       ## DOCUMENTATION_PROTOCOL
 
@@ -342,16 +243,8 @@ blocks:
       - When needed, Andrew can paste the DOCUMENTATION_PROTOCOL build
         doc.
 
-  # --------------------------------
-  # GPT_BEHAVIOUR_SPEC
-  # --------------------------------
   - id: gpt_resources.document.gpt_behaviour_spec
     kind: document
-    name: GPT_BEHAVIOUR_SPEC
-    type: process_rules
-    status: exists
-    path: "docs/build/gpt_behaviour_spec.md"
-    tags: [gpt_behaviour, roles, process_rules, mandatory]
     md: |
       ## GPT_BEHAVIOUR_SPEC
 
@@ -377,15 +270,8 @@ blocks:
       - When needed, Andrew can paste the full content of GPT_BEHAVIOUR_SPEC
         or relevant sections.
 
-  # --------------------------------
-  # Placeholder for future docs
-  # --------------------------------
   - id: gpt_resources.document.other
     kind: document_placeholder
-    name: FUTURE_DOCS
-    type: extension
-    status: future
-    tags: [placeholder, extension]
     md: |
       ## Future Documents Placeholder
 
