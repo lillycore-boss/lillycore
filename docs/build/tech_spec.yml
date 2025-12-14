@@ -18,7 +18,7 @@
       - GPT role behaviour rules (see BUILD_CANON and DOCUMENTATION_PROTOCOL)
       - Documentation update procedures (see DOCUMENTATION_PROTOCOL)
 
-  - id: tech_spec.platform.assumptions
+  - id: tech_spec.platform_assumptions
     kind: platform
     md: |
       ## Platform Assumptions
@@ -30,7 +30,7 @@
       - GPTs MUST NOT provide Windows/Mac-specific instructions unless Andrew explicitly asks.
       - If cross-platform behavior matters, GPTs MUST ask what targets are required.
 
-  - id: tech_spec.python.baseline
+  - id: tech_spec.python_baseline
     kind: baseline
     md: |
       ## Python Baseline
@@ -41,7 +41,7 @@
       Notes:
       - All code, scripts, and tooling choices MUST be compatible with the minimum version.
 
-  - id: tech_spec.best_practice.policy
+  - id: tech_spec.best_practice_policy
     kind: policy
     md: |
       ## Best-Practice Policy (Default)
@@ -54,7 +54,7 @@
       - If best practice conflicts with a LillyCORE requirement, the requirement wins,
         but the exception MUST be documented here.
 
-  - id: tech_spec.repo.root_definition
+  - id: tech_spec.repo_root_definition
     kind: repo
     md: |
       ## Repository Root Definition
@@ -66,7 +66,7 @@
       Policy:
       - Repository-wide configuration files live at repository root unless explicitly stated otherwise.
 
-  - id: tech_spec.tooling.baseline
+  - id: tech_spec.tooling_baseline
     kind: tooling
     md: |
       ## Tooling Baseline (Conceptual)
@@ -84,7 +84,7 @@
       - CI gate:
           A rule that says: "Changes are not considered valid unless required checks pass."
 
-- id: tech_spec.tooling.choices
+- id: tech_spec.tooling_choices
   kind: decisions
   md: |
     ## Tooling Choices (Authoritative)
@@ -105,7 +105,7 @@
 
       - v1.0: Clean baseline rewrite. Python 3.11+ established. No-guessing + best-practice policy defined.
 
-- id: tech_spec.repo.taxonomy_authority
+- id: tech_spec.repo_taxonomy_authority
   kind: rules
   md: |
     ## Repository Taxonomy Authority & Change Process
