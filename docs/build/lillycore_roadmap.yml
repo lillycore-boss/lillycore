@@ -1,16 +1,5 @@
-# docs/registry/lillycore_roadmap.yml
-
-version: "2.1"
-
-blocks:
-  # --------------------------------
-  # Overview
-  # --------------------------------
   - id: roadmap.overview
     kind: overview
-    name: LILLYCORE_ROADMAP
-    applies_to: [architect, implementer, qa]
-    tags: [roadmap, phases, overview]
     md: |
       # LILLYCORE_ROADMAP
 
@@ -45,14 +34,8 @@ blocks:
       Outcomes of each phase represent architectural readiness,
       not code-complete deliverables.
 
-  # --------------------------------
-  # Phase 0
-  # --------------------------------
   - id: roadmap.phase.0
     kind: phase
-    phase: 0
-    name: "PHASE 0 — FOUNDATIONS & TOOLING"
-    tags: [phase0, foundations, tooling]
     md: |
       # PHASE 0 — FOUNDATIONS & TOOLING
 
@@ -69,14 +52,8 @@ blocks:
       **Outcome:**
         A clean workspace with stable rules.
 
-  # --------------------------------
-  # Phase 1
-  # --------------------------------
   - id: roadmap.phase.1
     kind: phase
-    phase: 1
-    name: "PHASE 1 — CORE LOOP, LOGGING, USER PREFERENCES"
-    tags: [phase1, core_loop, logging, preferences]
     md: |
       # PHASE 1 — CORE LOOP, LOGGING, USER PREFERENCES
 
@@ -93,14 +70,8 @@ blocks:
       **Outcome:**
         LillyCORE can run and persist user settings.
 
-  # --------------------------------
-  # Phase 2
-  # --------------------------------
   - id: roadmap.phase.2
     kind: phase
-    phase: 2
-    name: "PHASE 2 — AI POOLS & EXECUTION FRAMEWORK"
-    tags: [phase2, ai_pools, execution_framework]
     md: |
       # PHASE 2 — AI POOLS & EXECUTION FRAMEWORK
 
@@ -117,14 +88,8 @@ blocks:
       **Outcome:**
         Any LLM backend can be attached safely.
 
-  # --------------------------------
-  # Phase 3
-  # --------------------------------
   - id: roadmap.phase.3
     kind: phase
-    phase: 3
-    name: "PHASE 3 — SYSTEM DOC MVP (DURABLE DATA LAYER)"
-    tags: [phase3, system_doc, storage]
     md: |
       # PHASE 3 — SYSTEM DOC MVP (DURABLE DATA LAYER)
 
@@ -140,14 +105,8 @@ blocks:
       **Outcome:**
         Durable state with no corruption.
 
-  # --------------------------------
-  # Phase 4
-  # --------------------------------
   - id: roadmap.phase.4
     kind: phase
-    phase: 4
-    name: "PHASE 4 — NOTES PLUGIN V0"
-    tags: [phase4, notes_plugin, plugin]
     md: |
       # PHASE 4 — NOTES PLUGIN V0
 
@@ -163,14 +122,8 @@ blocks:
       **Outcome:**
         Cheap way to test memory flow.
 
-  # --------------------------------
-  # Phase 5
-  # --------------------------------
   - id: roadmap.phase.5
     kind: phase
-    phase: 5
-    name: "PHASE 5 — DRIFT ENGINE MVP (CONTEXT, EMOTION, PERCEPTION)"
-    tags: [phase5, drift_engine, context, emotion]
     md: |
       # PHASE 5 — DRIFT ENGINE MVP (CONTEXT, EMOTION, PERCEPTION)
 
@@ -187,14 +140,8 @@ blocks:
       **Outcome:**
         Structured input for HELPER_ENGINE.
 
-  # --------------------------------
-  # Phase 6
-  # --------------------------------
   - id: roadmap.phase.6
     kind: phase
-    phase: 6
-    name: "PHASE 6 — HELPER ENGINE MVP (WORK ENGINE)"
-    tags: [phase6, helper_engine, work_engine]
     md: |
       # PHASE 6 — HELPER ENGINE MVP (WORK ENGINE)
 
@@ -211,14 +158,8 @@ blocks:
       **Outcome:**
         Full engine for doing work with traceability.
 
-  # --------------------------------
-  # Phase 7
-  # --------------------------------
   - id: roadmap.phase.7
     kind: phase
-    phase: 7
-    name: "PHASE 7 — PLUGIN ENGINE MVP"
-    tags: [phase7, plugin_engine]
     md: |
       # PHASE 7 — PLUGIN ENGINE MVP
 
@@ -235,14 +176,8 @@ blocks:
       **Outcome:**
         The system becomes expandable.
 
-  # --------------------------------
-  # Phase 8 (high-level)
-  # --------------------------------
   - id: roadmap.phase.8
     kind: phase
-    phase: 8
-    name: "PHASE 8 — STABILITY SPINE"
-    tags: [phase8, stability_spine, help_desk_engine, dream_engine, script_engine]
     md: |
       # PHASE 8 — STABILITY SPINE
 
@@ -260,15 +195,8 @@ blocks:
       - SUBPHASE 8b — DREAM ENGINE V0
       - SUBPHASE 8c — SCRIPT ENGINE V0
 
-  # --------------------------------
-  # Phase 8a – HELP DESK ENGINE V0
-  # --------------------------------
   - id: roadmap.phase.8a.help_desk_engine
     kind: subphase
-    phase: 8
-    subphase: "8a"
-    name: "SUBPHASE 8a — HELP DESK ENGINE V0"
-    tags: [phase8, help_desk_engine]
     md: |
       ## SUBPHASE 8a — HELP DESK ENGINE V0
 
@@ -280,15 +208,8 @@ blocks:
       **Outcome:**
         System stays alive.
 
-  # --------------------------------
-  # Phase 8b – DREAM ENGINE V0
-  # --------------------------------
   - id: roadmap.phase.8b.dream_engine
     kind: subphase
-    phase: 8
-    subphase: "8b"
-    name: "SUBPHASE 8b — DREAM ENGINE V0"
-    tags: [phase8, dream_engine]
     md: |
       ## SUBPHASE 8b — DREAM ENGINE V0
 
@@ -301,15 +222,8 @@ blocks:
       **Outcome:**
         Lilly learns and self-corrects.
 
-  # --------------------------------
-  # Phase 8c – SCRIPT ENGINE V0
-  # --------------------------------
   - id: roadmap.phase.8c.script_engine
     kind: subphase
-    phase: 8
-    subphase: "8c"
-    name: "SUBPHASE 8c — SCRIPT ENGINE V0"
-    tags: [phase8, script_engine]
     md: |
       ## SUBPHASE 8c — SCRIPT ENGINE V0
 
@@ -322,14 +236,8 @@ blocks:
       **Outcome:**
         Procedural intelligence + autonomous maintenance.
 
-  # --------------------------------
-  # Phase 9
-  # --------------------------------
   - id: roadmap.phase.9
     kind: phase
-    phase: 9
-    name: "PHASE 9 — UX MVP"
-    tags: [phase9, ux, interface]
     md: |
       # PHASE 9 — UX MVP
 
@@ -345,14 +253,8 @@ blocks:
       **Outcome:**
         External interaction begins.
 
-  # --------------------------------
-  # Phase 10
-  # --------------------------------
   - id: roadmap.phase.10
     kind: phase
-    phase: 10
-    name: "PHASE 10 — PROJECT MANAGEMENT PLUGIN"
-    tags: [phase10, project_management, plugin]
     md: |
       # PHASE 10 — PROJECT MANAGEMENT PLUGIN
 
@@ -367,14 +269,8 @@ blocks:
       **Outcome:**
         Autonomous internal PM.
 
-  # --------------------------------
-  # Phase 11
-  # --------------------------------
   - id: roadmap.phase.11
     kind: phase
-    phase: 11
-    name: "PHASE 11 — PERSONAL ASSISTANT PLUGIN"
-    tags: [phase11, personal_assistant, plugin]
     md: |
       # PHASE 11 — PERSONAL ASSISTANT PLUGIN
 
@@ -390,14 +286,8 @@ blocks:
       **Outcome:**
         Lilly becomes a usable assistant.
 
-  # --------------------------------
-  # Phase 12
-  # --------------------------------
   - id: roadmap.phase.12
     kind: phase
-    phase: 12
-    name: "PHASE 12 — DEMONSTRATION PLUGINS"
-    tags: [phase12, demos, plugins]
     md: |
       # PHASE 12 — DEMONSTRATION PLUGINS
 
@@ -414,14 +304,8 @@ blocks:
       **Outcome:**
         Public demos and validation.
 
-  # --------------------------------
-  # Phase 13
-  # --------------------------------
   - id: roadmap.phase.13
     kind: phase
-    phase: 13
-    name: "PHASE 13 — MULTI-USER PLUGIN"
-    tags: [phase13, multi_user, plugin]
     md: |
       # PHASE 13 — MULTI-USER PLUGIN
 
@@ -437,14 +321,8 @@ blocks:
       **Outcome:**
         LillyCORE supports multiple humans.
 
-  # --------------------------------
-  # Phase 14
-  # --------------------------------
   - id: roadmap.phase.14
     kind: phase
-    phase: 14
-    name: "PHASE 14 — IO & NETWORK LAYER"
-    tags: [phase14, io, network]
     md: |
       # PHASE 14 — IO & NETWORK LAYER
 
@@ -460,14 +338,8 @@ blocks:
       **Outcome:**
         Whole-home digital presence.
 
-  # --------------------------------
-  # Phase 15
-  # --------------------------------
   - id: roadmap.phase.15
     kind: phase
-    phase: 15
-    name: "PHASE 15 — APPLIANCE LAYER"
-    tags: [phase15, appliance]
     md: |
       # PHASE 15 — APPLIANCE LAYER
 
@@ -483,14 +355,8 @@ blocks:
       **Outcome:**
         Dedicated device compatibility.
 
-  # --------------------------------
-  # Phase 16
-  # --------------------------------
   - id: roadmap.phase.16
     kind: phase
-    phase: 16
-    name: "PHASE 16 — USER CONFIGURATION & FIRST-RUN EXPERIENCE"
-    tags: [phase16, onboarding, first_run]
     md: |
       # PHASE 16 — USER CONFIGURATION & FIRST-RUN EXPERIENCE
 
@@ -507,14 +373,8 @@ blocks:
       **Outcome:**
         Refined entry experience.
 
-  # --------------------------------
-  # Phase 17
-  # --------------------------------
   - id: roadmap.phase.17
     kind: phase
-    phase: 17
-    name: "PHASE 17 — ENTERPRISE DEMO PLUGIN"
-    tags: [phase17, enterprise_demo, plugin]
     md: |
       # PHASE 17 — ENTERPRISE DEMO PLUGIN
 
@@ -530,14 +390,8 @@ blocks:
       **Outcome:**
         Investor-ready demo.
 
-  # --------------------------------
-  # Phase 18
-  # --------------------------------
   - id: roadmap.phase.18
     kind: phase
-    phase: 18
-    name: "PHASE 18 — SYSTEM INTEGRATION + ALPHA RELEASE"
-    tags: [phase18, integration, alpha_release]
     md: |
       # PHASE 18 — SYSTEM INTEGRATION + ALPHA RELEASE
 
