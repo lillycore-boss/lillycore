@@ -56,10 +56,10 @@
       Schema for the master registry index file listing all registry files and scripts.
 
     - `registry_system.script_contracts`
-      Script interface contracts for safe mutation/validation (conceptual).
+      Script interface contracts for safe retreval/validation.
 
     - `registry_system.gpt_usage_guidelines`
-      Rules of use: read vs modify behavior and constraints.
+      Rules of use: read and validate behavior. 
 
     ### Explicitly not defined here
 
@@ -76,32 +76,31 @@
     area of the repository. Example layout:
 
     ```text
-    docs/
-      build/
-        registry/
-          p0.yml
-          p1.yml
-          p2.yml
-          p3.yml
-          p4.yml
-          p5.yml
-          p6.yml
-          p7.yml
-          p8.yml
-          p8_hd.yml
-          p8_dr.yml
-          p8_sc.yml
-          p9.yml
-          p10.yml
-          p11.yml
-          phase_registry_index.yml
-          registry_sync_from_github.py
-          registry_validate.py
+    docs/build/registry/
+      p0.yml
+      p1.yml
+      p2.yml
+      p3.yml
+      p4.yml
+      p5.yml
+      p6.yml
+      p7.yml
+      p8.yml
+      p8_hd.yml
+      p8_dr.yml
+      p8_sc.yml
+      p9.yml
+      p10.yml
+      p11.yml
+      ...
+      phase_registry_index.yml
+      registry_sync_from_github.py
+      registry_validate.py
     ```
     
-  Notes:
-    - This is a conceptual layout. If repo paths differ, update this block and gpt_resource_index accordingly.
-    - GPTs must not assume paths beyond what is documented in gpt_resource_index + tech_spec.
+    Notes:
+    - This layout is authoritative unless tech_spec or gpt_resource_index states otherwise.
+    - If paths change, update gpt_resource_index and this block.
 
 - id: registry_system.phase_file_schema
   kind: schema
