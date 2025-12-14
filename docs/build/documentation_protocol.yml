@@ -591,3 +591,20 @@ blocks:
       2) be promoted via a feature card and properly indexed (and reflected in
          TECH_SPEC if placement changes are required).
 
+  - id: docs_gov.docs_vs_docs_build
+    kind: concept
+    md: |
+      ## docs/ vs docs/build/ (Conceptual Guidance)
+
+      This document clarifies intent (not mechanical migration rules):
+
+      - `docs/`
+        - Home for persistent, system-level and shareable documentation (like this file and future high-level narratives)
+
+      - `docs/build/`
+        - Home for build/system docs and engineering-time artefacts required to build and maintain LillyCORE
+
+      Any change to physical layout must be designed via Architect cards and reflected in TECH_SPEC and GPT_RESOURCE_INDEX.
+
+
+      
