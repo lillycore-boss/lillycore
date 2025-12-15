@@ -124,33 +124,112 @@
     **GPT RULE**
     - Architect MUST use build_canon.feature_card_template. 
     - Implementer MUST NOT alter template semantics.
-
 - id: build_canon.feature_card_template
   kind: template
   md: |
-      ID: F-XXX  
-      Title: <short feature name>  
-      Phase: <roadmap phase numbers>  
-      Engine/Plugin: <DRIFT_ENGINE, HELPER_ENGINE, NOTES_PLUGIN, etc.>  
-      GitHub: <optional issue link or number>  
-      Status: planned | in-progress | implemented | blocked  
+    Card Template (Universal)
 
-      Purpose:
-          - Why this feature exists.
+    Use this template for all Architect, Implementer, and QA cards.
 
-      Context:
-          - Where it fits in the roadmap or module layout.
-          - Relevant background information.
+    ---
+    Card ID: <registry slice id, e.g. p1, p1.1, p1.1.3>
+    Card Title: <short, descriptive title>
+    Executor Role: Architect | Implementer | QA
 
-      Deliverables:
-          - Concrete outputs (code, behavior, docs).
+    Phase Context:
+      Phase: <pN>
+      Slice: <pN[.x[.y...]]>
+      Parent Card: <optional parent slice id or "none">
 
-      Done When:
-          - Clear, checkable completion criteria.
+    Deliverables Served:
+      - <phase-level deliverable IDs, if applicable>
+      - <or "none" if not applicable>
 
-      Notes / Future:
-          - Follow-ups.
-          - Risks or possible extensions.
+    Description:
+      <1–3 paragraphs describing what this card does and what it deliberately does NOT do>
+
+    ---
+    Block Load Requirements (Hard Gate)
+
+    Executor MUST NOT proceed until:
+    - all blocks listed below are loaded, OR
+    - Andrew explicitly waives the requirement for this card.
+
+    Bootstrap (minimum operating context for any task):
+      Run:
+      ```bash
+      python3 docs/build/get_md.py --block \
+        block_loading.overview \
+        block_loading.script_interface \
+        block_loading.canvas_usage \
+        gpt_resource_index.index \
+        gpt_resource_index.load_paths
+      ```
+
+    Required Blocks (task-specific; list exact IDs):
+      - <block_id_1>
+      - <block_id_2>
+      - ...
+
+    Notes:
+      - If unsure which blocks exist, request `*.index` blocks first, then request specifics by ID.
+      - Missing context is expected; inventing context is forbidden.
+
+    ---
+    Inputs / Preconditions:
+      - <what must already exist before starting>
+      - <what prior cards/phases must be complete>
+      - <required files/scripts/paths (if relevant)>
+
+    Constraints:
+      - <hard boundaries; what must not be changed>
+      - <explicit “not in scope” items>
+      - <“ask Andrew before…” triggers, if any>
+
+    Steps:
+      1. <bounded step>
+      2. <bounded step>
+      3. ...
+
+    Done When:
+      - <checkable completion criteria>
+      - <include explicit “real execution proof” requirement if runtime behaviour is introduced>
+      - <include explicit “no stubs unless documented + scheduled” requirement>
+
+    Proof / Execution Evidence (when required):
+      - Evidence MUST be stored under:
+        `builds/outputs/<phase_or_slice_id>/`
+      - Include:
+        - commands executed
+        - output filenames produced
+        - any failures and resolutions
+      - Proof artefacts are raw evidence and non-authoritative.
+
+    Documentation Updates (implicit requirement):
+      Unless Andrew explicitly waives it, every card MUST include either:
+      - (A) the exact doc blocks to update (paste-ready), OR
+      - (B) an explicit statement: “No documentation updates required” + why safe.
+
+      Common docs to consider:
+      - documentation_protocol (governance / procedures)
+      - tech_spec (tooling/layout/standards)
+      - gpt_resource_index (only if canonical docs changed)
+      - build_github_reference / qa_reference (if workflow scripts/fields change)
+      - registry_system (if registry schema/scripts change)
+
+    Notes / Future:
+      - <risks, follow-ups, deferred items>
+      - Any deferral MUST be:
+        - explicitly documented, AND
+        - scheduled via a future card/slice (no silent stubs)
+
+    QA Hooks (if Executor Role is QA or card requires QA):
+      - PASS/FAIL criteria:
+        - deliverables met
+        - required proof exists (if applicable)
+        - documentation updates present (or explicitly waived)
+        - no scope leakage into future phases
+
 
 - id: build_canon.canon_and_roadmap_interaction
   kind: reference
