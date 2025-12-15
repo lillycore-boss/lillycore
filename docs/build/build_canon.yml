@@ -124,6 +124,7 @@
     **GPT RULE**
     - Architect MUST use build_canon.feature_card_template. 
     - Implementer MUST NOT alter template semantics.
+  
 - id: build_canon.feature_card_template
   kind: template
   md: |
