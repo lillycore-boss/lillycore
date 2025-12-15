@@ -156,6 +156,7 @@
     - all blocks listed below are loaded, OR
     - Andrew explicitly waives the requirement for this card.
 
+    Have Andrew run the following before requesting anything else:
     Bootstrap (minimum operating context for any task):
       Run:
       ```bash
