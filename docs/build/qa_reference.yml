@@ -42,6 +42,10 @@
 
     Below are standard GitHub CLI command templates for card creation, updating, movement, archiving, and QA report attachment.
 
+    WARNING: All placeholders in these templates (project numbers, field names, column names, item IDs) MUST be verified against 
+    the live GitHub project configuration before use.
+    - GPTs MUST NOT assume these values are correct for the current repo/project without Andrew confirmation.
+
     ### 2.1 Create a QA Card
     ```
     gh issue create   --title "<QA_CARD_ID> – Fix failure in <Deliverable>"   --body "<failure description>"   --project "<QA_PROJECT_NUMBER>"   --field "Phase ID=<PHASE_ID>"   --field "Parent Card ID=<PARENT_CARD_ID>"   --field "QA Card ID=<QA_CARD_ID>"   --field "Deliverables=<LIST>"   --field "Result=PENDING"   --field "Attempt #=<ATTEMPT_NUMBER>"
