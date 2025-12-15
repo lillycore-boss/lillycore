@@ -198,6 +198,9 @@
     - `block_loading.script_interface`
       Interface for block retrieval scripts.
 
+    - `block_loading.core_rules`
+      Compatibility alias that redirects to `block_loading.operating_principles`.
+
     - `block_loading.index`
       This index.
 
