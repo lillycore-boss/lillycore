@@ -43,7 +43,7 @@
     - `registry_system.allowed_kinds`
       Allowed block kinds for this file.
 
-    - `registry_system.file_layout`
+    - `registry_system.locations`
       Expected on-disk layout for registry files and scripts (conceptual; actual paths must match repo reality).
 
     - `registry_system.phase_file_schema`

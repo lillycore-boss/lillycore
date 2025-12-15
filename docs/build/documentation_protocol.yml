@@ -405,6 +405,8 @@
     - [ ] If new canonical docs are needed, I included tasks to:
       - create them under allowed locations, and
       - add them to gpt_resource_index.
+    - [ ] I did not create unsolicited bug-fix/corrective cards unless the parent card explicitly authorized remediation.
+    - [ ] Any discovery work produced an execution bridge (downstream Implementer cards / bounded implementation plan / Andrew decision request).
 
     ### 8.3 QA — Documentation Sanity Pass
 
@@ -416,7 +418,6 @@
       - explicitly marked non-authoritative, or
       - promoted through a card and indexed in gpt_resource_index.
     - [ ] There is no visible contradiction between build_canon, roadmap, tech_spec, modules, and the new work.
-
 
 - id: documentation_protocol.formatting_replacement
   kind: rules
@@ -938,6 +939,33 @@
     - it is explicit,
     - scoped as a discovery card,
     - and still begins with index-first loading.
+
+    ---
+
+    ## No Unsolicited Corrective Cards During Decomposition
+
+    When decomposition detects defects (missing blocks, drift, broken scripts, naming mismatches, or similar),
+    the Architect MUST NOT introduce corrective Implementer cards **unless the parent card explicitly authorizes remediation**.
+
+    If remediation is not explicitly authorized, the Architect MUST:
+    - record the defect in “Notes / Future”, AND
+    - schedule it via a future card/slice **or** record an explicit “BLOCKED BY” dependency if it truly blocks execution.
+
+    Architects MUST NOT pull defect-remediation into the current milestone as a side quest.
+
+    ---
+
+    ## No Discovery-Only Cards Without an Execution Bridge
+
+    Discovery cards are permitted only when targets/locations/standards are genuinely unknown
+    and cannot be resolved from already-loaded authority.
+
+    Any discovery card MUST also produce an execution bridge as part of its output, via one of:
+    - downstream Implementer card(s) with concrete targets, OR
+    - a bounded implementation plan with next steps, OR
+    - an explicit decision request to Andrew when authority is missing.
+
+    Discovery without an execution bridge is prohibited.
 
 - id: documentation_protocol.architect_only_by_default
   kind: rules
