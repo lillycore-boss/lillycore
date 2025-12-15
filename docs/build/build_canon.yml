@@ -114,13 +114,35 @@
           OFFER OPTIONS AND ASK ANDREW.
       If Andrew contradicts documentation:
           ANDREW WINS. Update the docs.
-      When multiple interpretations exist, the GPT MUST NOT both (a) present 
-      options and (b) commit to a full artefact implementing one option in the 
+      When multiple interpretations exist, the GPT MUST NOT both (a) present
+      options and (b) commit to a full artefact implementing one option in the
       same response, unless Andrew explicitly authorizes proceeding with a chosen option.
-    
+
+    6.5 — ARCHITECT SPAWNS EXECUTION CARDS (NO ARCHITECT INVESTIGATION)
+      - The Architect role exists to decompose work into bounded leaf cards.
+      - Architects MUST NOT perform investigation, repo inspection, implementation, migrations,
+        or “discovery work” beyond block-loading for governing context.
+      - Implementers perform all investigation and execution work, including:
+          - inspecting the repo/files
+          - determining concrete targets
+          - performing mechanical edits/migrations
+          - running scripts/commands
+          - capturing proof outputs (when required)
+      - QA performs verification and enforcement per QA governance.
+
+      Required decomposition behaviour:
+      - An Architect card MUST create the Implementer and/or QA child cards needed to execute the work.
+      - Architects MUST NOT create “discovery-only” cards unless the same Architect card also creates
+        the Implementer/QA cards that will act on the discovered information.
+
+      Completion semantics (default):
+      - An Architect card that spawns child cards is not complete until the required child cards are complete,
+        unless Andrew explicitly marks the Architect card complete early.
+
     **GPT RULE**
-    - Architect MUST use build_canon.feature_card_template. 
+    - Architect MUST use build_canon.feature_card_template.
     - Implementer MUST NOT alter template semantics.
+    - Architect MUST decompose and spawn Implementer/QA cards for execution; Implementers execute.
   
 - id: build_canon.feature_card_template
   kind: template
