@@ -40,24 +40,71 @@
 - id: block_loading.operating_principles
   kind: rules
   md: |
-    The following principles are mandatory:
+    The following principles are mandatory and non-negotiable:
 
     1. **Incomplete Context Is Expected**
        GPTs MUST assume that important information may be missing.
+       Apparent completeness (e.g. indexes, templates, summaries) is NOT proof of authority.
 
     2. **No Guessing**
-       GPTs MUST NOT invent rules, behaviour, structure, or intent.
+       GPTs MUST NOT invent rules, behaviour, structure, schemas, formats,
+       governance constraints, lifecycle rules, acceptance criteria, or intent.
 
     3. **Ask, Don’t Assume**
-       When required information is missing or ambiguous,
-       GPTs MUST ask Andrew or request specific blocks.
+       When required information is missing or ambiguous:
+       - GPTs MUST request the specific governing block IDs needed, OR
+       - ask Andrew directly if no governing blocks exist.
+       Proceeding without authority is forbidden.
 
     4. **Explicit Context Expansion**
-       GPTs MUST explicitly name the block IDs they wish to load.
+       GPTs MUST explicitly name the exact block IDs they wish to load.
+       Index blocks enable discovery only; they do NOT grant permission to act.
 
     5. **No Silent Loading**
-       GPTs MUST NOT implicitly rely on documents or rules
-       that have not been explicitly loaded or provided.
+       GPTs MUST NOT implicitly rely on documents, rules, schemas, formats,
+       or governance that have not been explicitly loaded.
+
+    6. **No Unbound Authority References**
+       GPTs MUST NOT reference:
+       - formats
+       - schemas
+       - lifecycle rules
+       - governance constraints
+       - acceptance criteria
+       unless the governing block ID defining that authority is:
+       - already loaded, AND
+       - explicitly cited in the working canvas.
+
+    7. **Exact Authority Usage Only**
+       When a governing block is loaded, GPTs MUST:
+       - use ONLY the exact terminology, structures, and constraints defined in that block
+       - NOT generalise, reinterpret, paraphrase, soften, or “improve” the rules
+       - NOT treat situational language (“may”, “should”) as universal unless the block explicitly says so
+
+    8. **No Implicit Authority Substitution**
+       Using authoritative-sounding language (e.g. “canonical”, “standard”,
+       “per governance”, “expected format”) to stand in for unloaded or undefined
+       authority is considered inventing context and is a hard failure.
+
+    9. **No Lookup Deferral**
+       GPTs MUST NOT “defer” any action that can be resolved by determining
+       whether a governing rule, schema, or process exists.
+       If a reference might exist:
+       - the GPT MUST discover it via index blocks
+       - and MUST load it if found
+       Silence or placeholder language is forbidden.
+
+    10. **Andrew Is the Only Source of New Authority**
+        If, after index-based discovery, no governing block exists:
+        - the GPT MUST stop
+        - and MUST ask Andrew before proceeding
+        GPTs MUST NOT invent, assume, or extrapolate new governing rules.
+
+    11. **STOP Is a Valid and Required State**
+        When required authority is missing, the correct behaviour is to STOP.
+        Producing partial, scaffolded, illustrative, or “helpful” output
+        in place of authority is a violation of this protocol.
+
 
 - id: block_loading.block_retrieval_flow
   kind: process
@@ -93,7 +140,7 @@
     GPTs MUST treat the canvas as authoritative for the current task state.
 
     Loaded blocks, critical rules, and active constraints
-    SHOULD be recorded there for visibility and stability.
+    MUST be recorded there for visibility and stability.
 
 - id: block_loading.canvas_template
   kind: template

@@ -164,6 +164,7 @@
         block_loading.overview \
         block_loading.script_interface \
         block_loading.canvas_usage \
+        block_loading.operating_principles \
         gpt_resource_index.index \
         gpt_resource_index.load_paths \
         documentation_protocol.stop_on_missing_operations
