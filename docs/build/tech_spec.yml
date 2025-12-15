@@ -188,6 +188,9 @@
     - `tech_spec.change_log`
       Lightweight change history.
 
+    - `tech_spec.block_loading_tooling`
+      Canonical block loading retrieval script (`get_md.py`) and usage rules.
+
     ### Explicitly not defined here
 
     - System ontology and authority (see BUILD_CANON)
@@ -220,3 +223,16 @@
     - timestamp (optional)
 
     QA may use the manifest to locate evidence quickly.
+
+- id: tech_spec.block_loading_tooling
+  kind: rules
+  md: |
+    ## Block Loading Tooling
+
+    Canonical block retrieval script:
+    - `docs/build/get_md.py`
+
+    Rules:
+    - GPTs MUST request blocks by ID and may ask Andrew to run `get_md.py` to retrieve them.
+    - The script output is treated as an exact extract (non-authoritative evidence of doc contents).
+    - The script MUST NOT summarize or transform block content.
