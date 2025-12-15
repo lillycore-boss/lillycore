@@ -820,7 +820,7 @@
     - `documentation_protocol.required_use_canonical_automation`
       If canonical automation exists (scripts/workflows), it must be used unless Andrew waives or tooling is broken/escalated.
 
-    - `documentation_protocol.required_stop_on_missing_operations`
+    - `documentation_protocol.required_stop_on_missing_context`
       Stop condition: if operational details are missing (paths/schema/workflow), load indexes; no speculative decomposition.
 
     ### Explicitly not defined here
