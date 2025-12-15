@@ -79,7 +79,7 @@
 
     - Any Canon or Roadmap text is changed.
     - Any new canonical doc type is introduced.
-    - Any structural/taxonomy change is made in tech_spec §3.
+    - Any structural/taxonomy change is made in tech_spec.
 
 - id: documentation_protocol.responsibilities.architect
   kind: rules
