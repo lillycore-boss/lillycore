@@ -142,18 +142,32 @@
 - id: block_loading.script_interface
   kind: reference
   md: |
-    Block retrieval may be assisted by scripts.
+    Block retrieval is assisted by a small build script.
+
+    Canonical script:
+    - `docs/build/get_md.py`
 
     Script responsibilities:
-    - Return exact block contents
-    - Preserve block order and formatting
-    - Perform no summarization or interpretation
+    - Return exact block contents (no summarization, no inference)
+    - Preserve ordering of requested blocks
+    - Perform no reformatting of `md` content
 
-    Example conceptual commands:
-    - get_block <block_id>
-    - get_blocks <block_id_1> <block_id_2>
+    Primary usage:
 
-    Script implementation details live outside this document.
+    - Fetch one or more blocks (markdown bodies only):
+      ```bash
+      python3 docs/build/get_md.py --block <block_id_1> <block_id_2> ...
+      ```
+
+    - Fetch full YAML blocks (for paste-back into docs):
+      ```bash
+      python3 docs/build/get_md.py --mode block --block <block_id_1> <block_id_2> ...
+      ```
+
+    Standard first pull for any new task:
+    - `gpt_resource_index.index`
+    - `block_loading.index`
+    - (then request specific blocks referenced by those indexes)
 
 - id: block_loading.index
   kind: index
