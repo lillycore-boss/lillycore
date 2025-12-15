@@ -204,7 +204,6 @@
     - `block_loading.default_discovery_set`
       Practical playbook: default blocks to load when a task touches docs/workflows (resource index + block_loading + relevant `*.index`).
 
-
     - `block_loading.index`
       This index.
 
