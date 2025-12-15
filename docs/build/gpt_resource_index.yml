@@ -182,7 +182,7 @@
       Entry describing BUILD_GITHUB_REFERENCE (main GitHub board layout + CLI templates).
 
     - `gpt_resource_idex.block_loading`
-      Canonical block loading retrieval script (`get_md.py`) and usage rules.
+      Entry describing BLOCK_LOADING (retrieving partial files)
 
 
     ### Explicitly not defined here
