@@ -98,12 +98,12 @@
     - Linter: Ruff
     - Test framework: Pytest
 
-  - id: tech_spec.change_log
-    kind: meta
-    md: |
-      ## Change Log (Lightweight)
+- id: tech_spec.change_log
+  kind: meta
+  md: |
+    ## Change Log (Lightweight)
 
-      - v1.0: Clean baseline rewrite. Python 3.11+ established. No-guessing + best-practice policy defined.
+    - v1.0: Clean baseline rewrite. Python 3.11+ established. No-guessing + best-practice policy defined.
 
 - id: tech_spec.repo_taxonomy_authority
   kind: rules
