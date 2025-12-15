@@ -48,8 +48,8 @@
     This protocol:
 
     - **Follows**:
-      - build_canon §1–§2 (Prime Directive, ask-before-acting, no assumptions).
-      - build_canon §4 (documentation standards: every change updates docs; atomic file updates).
+      - build_canon (Prime Directive, ask-before-acting, no assumptions).
+      - build_canon (documentation standards: every change updates docs; atomic file updates).
       - build_canon role boundaries (Architect, Implementer, QA).
 
     - **Respects**:
