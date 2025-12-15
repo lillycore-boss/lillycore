@@ -172,7 +172,7 @@
 - id: block_loading.index
   kind: index
   md: |
-    Blocks in this file:
+    ## BLOCK_LOADING Block Index
 
     - `block_loading.overview`
       Purpose and scope of the block loading system.
@@ -181,13 +181,16 @@
       Permitted block kinds for this file.
 
     - `block_loading.operating_principles`
-      Core behavioural rules governing GPT operation.
+      Mandatory behavioural rules governing GPT operation.
+
+    - `block_loading.core_rules`
+      Alias for `block_loading.operating_principles` (compatibility name).
 
     - `block_loading.block_retrieval_flow`
       Standard procedure for requesting additional context.
 
     - `block_loading.canvas_usage`
-      Rules governing use of the canvas.
+      Rules governing use of the canvas alongside block loading.
 
     - `block_loading.canvas_template`
       Canonical canvas structure for GPTs.
@@ -196,10 +199,7 @@
       Conditions that require stopping and escalation.
 
     - `block_loading.script_interface`
-      Interface for block retrieval scripts.
-
-    - `block_loading.core_rules`
-      Compatibility alias that redirects to `block_loading.operating_principles`.
+      Interface for block retrieval scripts (`docs/build/get_md.py`).
 
     - `block_loading.index`
       This index.
@@ -215,3 +215,29 @@
     - `block_loading.operating_principles`
 
     GPTs SHOULD load `block_loading.operating_principles` instead of this block.
+
+- id: block_loading.core_rules
+  kind: rules
+  md: |
+    ## Core Rules (Alias)
+
+    This block is an alias for `block_loading.operating_principles`.
+
+    The following principles are mandatory:
+
+    1. **Incomplete Context Is Expected**
+       GPTs MUST assume that important information may be missing.
+
+    2. **No Guessing**
+       GPTs MUST NOT invent rules, behaviour, structure, or intent.
+
+    3. **Ask, Don’t Assume**
+       When required information is missing or ambiguous,
+       GPTs MUST ask Andrew or request specific blocks.
+
+    4. **Explicit Context Expansion**
+       GPTs MUST explicitly name the block IDs they wish to load.
+
+    5. **No Silent Loading**
+       GPTs MUST NOT implicitly rely on documents or rules
+       that have not been explicitly loaded or provided.
