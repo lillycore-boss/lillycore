@@ -167,7 +167,7 @@
         block_loading.operating_principles \
         gpt_resource_index.index \
         gpt_resource_index.load_paths \
-        documentation_protocol.stop_on_missing_operations
+        documentation_protocol.required_stop_on_missing_context
       ```
 
     Required Blocks (task-specific; list exact IDs):
