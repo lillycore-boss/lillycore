@@ -817,10 +817,10 @@
     - `documentation_protocol.architect_only_by_default`
       Planning/card-generation defaults to Architect-only; Implementer cards only when delegation is intentional and justified.
 
-    - `documentation_protocol.use_canonical_automation`
+    - `documentation_protocol.required_use_canonical_automation`
       If canonical automation exists (scripts/workflows), it must be used unless Andrew waives or tooling is broken/escalated.
 
-    - `documentation_protocol.stop_on_missing_operations`
+    - `documentation_protocol.required_stop_on_missing_operations`
       Stop condition: if operational details are missing (paths/schema/workflow), load indexes; no speculative decomposition.
 
     ### Explicitly not defined here
@@ -955,10 +955,12 @@
     Architect child cards are gate-holders by default and hold open their parent
     until complete.
 
-- id: documentation_protocol.use_canonical_automation
+- id: documentation_protocol.required_use_canonical_automation
   kind: rules
   md: |
     ## Use Canonical Automation When Present
+
+    ALL gpts MUST check if automation exsists for some or all of there job. Automation is detailed in qa_reference and build_github_reference. 
 
     If a canonical workflow, tool, or script exists for an action
     (e.g. GitHub card creation, registry sync, validation),
@@ -968,17 +970,19 @@
     - Andrew explicitly waives tooling usage, OR
     - the tooling is unavailable or broken and escalation is documented.
 
-- id: documentation_protocol.stop_on_missing_operations
+- id: documentation_protocol.required_stop_on_missing_context
   kind: rules
   md: |
-    ## Stop Condition: Missing Operational Detail
+    ## REQUIRED Stop Condition: Missing Operational Detail
 
     If required operational details are missing (paths, schemas, script invocation,
-    workflow definitions), GPTs MUST stop and request the relevant `*.index` blocks.
+    workflow definitions, operating instruction, ), GPTs MUST stop and request the relevant `*.index` blocks.
 
     GPTs MUST NOT proceed by:
     - inventing structure,
     - guessing locations,
     - or creating speculative decomposition.
 
+    Having the syntax of a thing is not the same as semantic permission.
     Missing context is not permission to continue.
+    You may not proceed until you can prove you have all required operational authorities loaded.
