@@ -201,6 +201,10 @@
     - `block_loading.script_interface`
       Interface for block retrieval scripts (`docs/build/get_md.py`).
 
+    - `block_loading.default_discovery_set`
+      Practical playbook: default blocks to load when a task touches docs/workflows (resource index + block_loading + relevant `*.index`).
+
+
     - `block_loading.index`
       This index.
 
@@ -241,3 +245,22 @@
     5. **No Silent Loading**
        GPTs MUST NOT implicitly rely on documents or rules
        that have not been explicitly loaded or provided.
+      
+     6. **Index-First Discovery**
+      When interacting with any canonical document, GPTs SHOULD load its
+      `*.index` block first unless specific sub-block IDs are already known.
+
+- id: block_loading.default_discovery_set
+  kind: reference
+  md: |
+    ## Default Discovery Set (Practical Playbook)
+
+    When a task references documentation, workflows, or automation,
+    GPTs SHOULD begin by loading:
+
+    - `gpt_resource_index.index`
+    - `gpt_resource_index.load_paths`
+    - `block_loading.index`
+    - the relevant document’s `*.index` block
+
+    This is the fastest safe path to situational awareness.

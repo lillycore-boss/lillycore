@@ -808,6 +808,21 @@
     - `documentation_protocol.responsibilities.qa`
       QA documentation verification responsibilities and enforcement boundaries.
 
+    - `documentation_protocol.index_first_discovery`
+      Index-first rule: load `<doc>.index` before using/requesting sub-blocks unless IDs are already known.
+
+    - `documentation_protocol.no_placeholder_deferral`
+      Architect decomposition must not defer via placeholders; unknown targets require index loading or explicit discovery cards.
+
+    - `documentation_protocol.architect_only_by_default`
+      Planning/card-generation defaults to Architect-only; Implementer cards only when delegation is intentional and justified.
+
+    - `documentation_protocol.use_canonical_automation`
+      If canonical automation exists (scripts/workflows), it must be used unless Andrew waives or tooling is broken/escalated.
+
+    - `documentation_protocol.stop_on_missing_operations`
+      Stop condition: if operational details are missing (paths/schema/workflow), load indexes; no speculative decomposition.
+
     ### Explicitly not defined here
 
     - System ontology and highest-level meaning (see BUILD_CANON)
@@ -885,3 +900,85 @@
     QA Enforcement:
     - QA MUST FAIL documentation if internal references use inconsistent casing
       or ambiguous identifiers.
+
+- id: documentation_protocol.index_first_discovery
+  kind: rules
+  md: |
+    ## Index-First Discovery Rule
+
+    For any referenced canonical document, GPTs MUST load that document’s
+    `*.index` block before requesting or using any sub-blocks, unless the
+    exact sub-block IDs are already known from currently loaded context.
+
+    This rule exists to:
+    - prevent speculative block usage,
+    - ensure complete awareness of available sections,
+    - and make context discovery explicit and auditable.
+
+    Index-first discovery is the default.
+    Skipping it requires explicit justification.
+
+- id: documentation_protocol.no_placeholder_deferral
+  kind: rules
+  md: |
+    ## No Placeholder Deferral in Decomposition
+
+    Architect decomposition cards MUST NOT create downstream cards that depend on:
+    - unspecified “inventory outputs”
+    - unknown file targets
+    - unnamed scripts or workflows
+    - undocumented schemas or locations
+
+    If required targets are unknown, the Architect MUST:
+    - stop,
+    - load the relevant `*.index` blocks,
+    - and identify concrete targets before proceeding.
+
+    Deferral is permitted ONLY if:
+    - it is explicit,
+    - scoped as a discovery card,
+    - and still begins with index-first loading.
+
+- id: documentation_protocol.architect_only_by_default
+  kind: rules
+  md: |
+    ## Architect-Only by Default (Planning & Card Generation)
+
+    When work consists of planning, structuring, or generating other cards
+    (including GitHub card creation, registry shaping, or milestone definition),
+    the default executor role MUST be **Architect**.
+
+    Implementer cards MUST be introduced ONLY when:
+    - work is explicitly delegated to a separate execution role, AND
+    - the delegation is justified (code changes, mechanical edits, migrations).
+
+    Architect child cards are gate-holders by default and hold open their parent
+    until complete.
+
+- id: documentation_protocol.use_canonical_automation
+  kind: rules
+  md: |
+    ## Use Canonical Automation When Present
+
+    If a canonical workflow, tool, or script exists for an action
+    (e.g. GitHub card creation, registry sync, validation),
+    GPTs MUST request and use the authoritative blocks defining that workflow.
+
+    Manual or paste-based alternatives are permitted ONLY when:
+    - Andrew explicitly waives tooling usage, OR
+    - the tooling is unavailable or broken and escalation is documented.
+
+- id: documentation_protocol.stop_on_missing_operations
+  kind: rules
+  md: |
+    ## Stop Condition: Missing Operational Detail
+
+    If required operational details are missing (paths, schemas, script invocation,
+    workflow definitions), GPTs MUST stop and request the relevant `*.index` blocks.
+
+    GPTs MUST NOT proceed by:
+    - inventing structure,
+    - guessing locations,
+    - or creating speculative decomposition.
+
+    Missing context is not permission to continue.
