@@ -196,7 +196,7 @@
       Conditions that require stopping and escalation.
 
     - `block_loading.script_interface`
-      Conceptual interface for block retrieval scripts.
+      Interface for block retrieval scripts.
 
     - `block_loading.index`
       This index.
