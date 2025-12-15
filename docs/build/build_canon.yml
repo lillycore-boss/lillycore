@@ -165,7 +165,8 @@
         block_loading.script_interface \
         block_loading.canvas_usage \
         gpt_resource_index.index \
-        gpt_resource_index.load_paths
+        gpt_resource_index.load_paths \
+        documentation_protocol.stop_on_missing_operations
       ```
 
     Required Blocks (task-specific; list exact IDs):
