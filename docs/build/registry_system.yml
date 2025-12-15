@@ -208,6 +208,10 @@
     GPT Rule:
     - GPTs MUST NOT hand-edit registry YAML during normal operation.
     - If scripts are missing or fail, GPTs MUST ask Andrew before proposing manual edits.
+    - GPTs MUST NOT reference specific script filenames/paths as executable truth unless 
+    the exact script names/paths have been loaded from an authoritative block.
+    - If only conceptual script names are known, the GPT MUST label them as conceptual 
+    examples and MUST ask Andrew to confirm repo reality before using them.
 
 - id: registry_system.gpt_usage_guidelines
   kind: rules
