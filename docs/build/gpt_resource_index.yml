@@ -42,7 +42,7 @@
     registry_system: "docs/build/registry_system.yml"
     roadmap: "docs/build/roadmap.yml"
     build_github_reference: "docs/build/build_github_reference.yml"
-    block_loading" "docs/build/block_loading.yml"
+    block_loading: "docs/build/block_loading.yml"
 
 - id: gpt_resource_index.build_canon
   kind: reference
@@ -181,9 +181,8 @@
     - `gpt_resource_index.build_github_reference`
       Entry describing BUILD_GITHUB_REFERENCE (main GitHub board layout + CLI templates).
 
-    - `gpt_resource_idex.block_loading`
-      Entry describing BLOCK_LOADING (retrieving partial files)
-
+    - `gpt_resource_index.block_loading`
+      Entry describing BLOCK_LOADING (block retrieval + canvas anchoring rules)
 
     ### Explicitly not defined here
 
