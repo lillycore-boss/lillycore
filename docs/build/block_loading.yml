@@ -200,3 +200,15 @@
 
     - `block_loading.index`
       This index.
+
+- id: block_loading.core_rules
+  kind: reference
+  md: |
+    ## Compatibility Alias: core_rules
+
+    This block exists for backward compatibility with older prompts/instructions.
+
+    Canonical rules live in:
+    - `block_loading.operating_principles`
+
+    GPTs SHOULD load `block_loading.operating_principles` instead of this block.
