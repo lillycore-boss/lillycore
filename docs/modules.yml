@@ -488,15 +488,3 @@
     dependencies:
       - HELPER_ENGINE (usually)
       - DRIFT_ENGINE (where context/personality matters)
-
-- id: modules.future_placeholder
-  kind: future_placeholder
-  md: |
-    ## SECTION: FUTURE ENGINES / PLUGINS PLACEHOLDER
-
-    Placeholder for:
-      - Appliance Layer specifics
-      - Enterprise demo orchestration
-      - Any future engines/plugins not yet described.
-
-
