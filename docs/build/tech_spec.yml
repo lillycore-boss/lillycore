@@ -191,12 +191,16 @@
     - `tech_spec.block_loading_tooling`
       Canonical block loading retrieval script (`get_md.py`) and usage rules.
 
+    - `tech_spec.build_artifact_write_scope`
+      Where build-time scripts are allowed to write artefacts (docs/build/outputs, plus registry).
+
+
     ### Explicitly not defined here
 
     - System ontology and authority (see BUILD_CANON)
     - Documentation governance (see DOCUMENTATION_PROTOCOL)
     - Phase intent and sequencing (see ROADMAP)
-
+    
 - id: tech_spec.proof_outputs_convention
   kind: rules
   md: |
@@ -204,7 +208,7 @@
 
     Any card/phase that requires execution proof MUST store raw proof artefacts under:
 
-    - `builds/outputs/<phase_id>/`
+    - `docs/build/outputs/<phase_id>/`
 
     Where `<phase_id>` is the phase or slice identifier (e.g. `p1`, `p1_runtime`, etc.).
 
@@ -215,7 +219,7 @@
 
     ### Minimal Manifest (Recommended)
     Each proof folder SHOULD include a minimal manifest file (inventory only), e.g.:
-    - `builds/outputs/<phase_id>/manifest.txt`
+    - `docs/build/outputs/<phase_id>/manifest.txt`
 
     The manifest SHOULD list:
     - command(s) executed
@@ -236,3 +240,24 @@
     - GPTs MUST request blocks by ID and may ask Andrew to run `get_md.py` to retrieve them.
     - The script output is treated as an exact extract (non-authoritative evidence of doc contents).
     - The script MUST NOT summarize or transform block content.
+
+- id: tech_spec.build_artifact_write_scope
+  kind: rules
+  md: |
+    ## Build Artefact Write Scope
+
+    Build-time scripts (tooling, validation, registry sync, block utilities) MUST write
+    generated artefacts only under:
+
+    - `docs/build/outputs/`
+
+    Registry mutation scripts may additionally write under:
+    - `docs/build/registry/`
+
+    Prohibited:
+    - creating new top-level folders at repository root
+    - writing build artefacts into runtime source folders unless a card explicitly requires it
+
+    QA Enforcement:
+    - QA MUST FAIL any card/phase where build-time artefacts are written outside these locations,
+      unless Andrew explicitly approves an exception.
