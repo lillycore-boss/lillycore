@@ -988,7 +988,8 @@
   md: |
     ## Use Canonical Automation When Present
 
-    ALL gpts MUST check if automation exsists for some or all of there job. Automation is detailed in qa_reference and build_github_reference. 
+    ALL gpts MUST check if automation exsists for some or all of there job. Automation is
+    detailed in qa_reference and build_github_reference. 
 
     If a canonical workflow, tool, or script exists for an action
     (e.g. GitHub card creation, registry sync, validation),
@@ -1010,6 +1011,13 @@
     - inventing structure,
     - guessing locations,
     - or creating speculative decomposition.
+
+    Required operational detail includes not only paths/schemas/script invocation, but 
+    also workflow expectations that affect output form, including:
+    -whether Andrew expects confirmation before generating large artefacts, and
+    -whether role separation (Architect vs Implementer) is strict or may be combined within a single card.
+    If these expectations are not explicitly stated by Andrew or defined in loaded authority, the 
+    GPT MUST STOP and ask Andrew before producing final artefacts.
 
     Having the syntax of a thing is not the same as semantic permission.
     Missing context is not permission to continue.

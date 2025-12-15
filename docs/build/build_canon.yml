@@ -114,12 +114,9 @@
           OFFER OPTIONS AND ASK ANDREW.
       If Andrew contradicts documentation:
           ANDREW WINS. Update the docs.
-
-    All LillyCORE features SHOULD use this structure.
-
-    **ID**
-    - A short identifier like F-001 or F-002.
-    - May match a GitHub Issue or use a separate scheme.
+      When multiple interpretations exist, the GPT MUST NOT both (a) present 
+      options and (b) commit to a full artefact implementing one option in the 
+      same response, unless Andrew explicitly authorizes proceeding with a chosen option.
     
     **GPT RULE**
     - Architect MUST use build_canon.feature_card_template. 

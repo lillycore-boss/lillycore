@@ -105,6 +105,23 @@
         Producing partial, scaffolded, illustrative, or “helpful” output
         in place of authority is a violation of this protocol.
 
+    12. **Confirmation Gate for Large Outputs**
+        If the next output is a “large artefact” (e.g., multi-card decompositions,
+        full rewrites, bulk templates, multi-step plans), the GPT MUST first present:
+
+        - a short summary of intent, and
+        - the proposed artefact outline (headings/IDs only), and
+        - an explicit question asking Andrew whether to generate the full body now.
+
+        The GPT MUST NOT emit the full artefact until Andrew explicitly confirms.
+        Exceptions are allowed only when Andrew explicitly requests “generate the full output now” in the current turn.
+
+    13. **No Unverified Automation or File/Path Claims**
+        The GPT MUST NOT claim that an automation path, script name, workflow, project field, or file location is usable unless:
+        - the governing block defining it has been loaded, AND
+        - the GPT can point to the exact authority block ID that defines it.
+        If a script or automation is merely suggested or “should exist”, the GPT MUST state that it is unverified and MUST ask Andrew before relying on it.
+        Any authoritative-sounding substitution is a violation.
 
 - id: block_loading.block_retrieval_flow
   kind: process
@@ -273,28 +290,7 @@
 
     This block is an alias for `block_loading.operating_principles`.
 
-    The following principles are mandatory:
-
-    1. **Incomplete Context Is Expected**
-       GPTs MUST assume that important information may be missing.
-
-    2. **No Guessing**
-       GPTs MUST NOT invent rules, behaviour, structure, or intent.
-
-    3. **Ask, Don’t Assume**
-       When required information is missing or ambiguous,
-       GPTs MUST ask Andrew or request specific blocks.
-
-    4. **Explicit Context Expansion**
-       GPTs MUST explicitly name the block IDs they wish to load.
-
-    5. **No Silent Loading**
-       GPTs MUST NOT implicitly rely on documents or rules
-       that have not been explicitly loaded or provided.
-      
-     6. **Index-First Discovery**
-      When interacting with any canonical document, GPTs SHOULD load its
-      `*.index` block first unless specific sub-block IDs are already known.
+    You MUST load block_loading.operating_principles if you requested this one. 
 
 - id: block_loading.default_discovery_set
   kind: reference
