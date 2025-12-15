@@ -202,6 +202,10 @@
       <1–3 paragraphs describing what this card does and what it deliberately does NOT do>
 
     ---
+    Reminder (non-authoritative): Due to model variance under partial authority, default to the 
+    most cautious interpretation of scope/permission; when in doubt, STOP and request the governing block(s).
+
+    ---
     Block Load Requirements (Hard Gate)
 
     Executor MUST NOT proceed until:
