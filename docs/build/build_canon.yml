@@ -141,6 +141,11 @@
       - Architect investigation is analytical and non-mutating.
         Architect execution is prohibited.
 
+      - During decomposition, if an Architect identifies missing information and would
+        otherwise create a card whose sole purpose is discovery, the Architect MUST ask Andrew 
+        for authoritative clarification instead of creating a discovery-only card, and MUST treat 
+        Andrew’s response as binding authority for the resulting decomposition.
+
       - Implementers perform all execution work, including:
           - modifying code or documentation
           - performing mechanical edits or migrations
