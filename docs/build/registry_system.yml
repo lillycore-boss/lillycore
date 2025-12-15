@@ -174,7 +174,7 @@
     ```
 
     GPTs should use this index for global discovery of registry files and script locations.
-
+    
 - id: registry_system.script_contracts
   kind: reference
   md: |
@@ -186,13 +186,24 @@
     - GitHub issues on the "LillyCORE Main" project board hold full card bodies.
     - The registry holds topology + minimal metadata only.
 
+    Write locations (strict):
+    - Build artefacts (snapshots, validation reports, proof captures):
+      - `docs/build/outputs/`
+    - Registry state (phase files + manifest):
+      - `docs/build/registry/`
+
     Scripts:
     - `registry_sync_from_github.py`
       - Reads cards from GitHub (via gh CLI) and writes/updates:
         - `docs/build/registry/p<n>.yml` phase files
         - `docs/build/registry/phase_registry_index.yml` manifest (recommended)
+      - May emit snapshots for inspection under:
+        - `docs/build/outputs/registry_sync/`
+
     - `registry_validate.py`
       - Validates registry files and relationships (schema, uniqueness, parent links).
+      - Writes validation reports under:
+        - `docs/build/outputs/registry_validate/`
 
     GPT Rule:
     - GPTs MUST NOT hand-edit registry YAML during normal operation.
