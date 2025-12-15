@@ -1,0 +1,188 @@
+- id: block_loading.overview
+  kind: overview
+  md: |
+    BLOCK_LOADING defines a procedural system for GPTs working within a large build environment
+    where **complete context is never assumed**.
+
+    The system exists to:
+    - Minimize initial context load
+    - Prevent silent assumptions and hallucinated completeness
+    - Make context expansion explicit, auditable, and intentional
+    - Enable large systems to be built without monolithic prompts
+
+    GPTs are expected to begin with **insufficient context** and
+    actively retrieve what they need using documented mechanisms.
+
+    This document defines:
+    - how GPTs request and use blocks
+    - how the canvas is used as a working anchor
+    - how uncertainty and missing context must be handled
+
+    This document governs **build-time GPT behaviour only**.
+    It does not define runtime system behaviour.
+
+- id: block_loading.allowed_kinds
+  kind: meta
+  md: |
+    Allowed kinds for BLOCK_LOADING:
+
+    - overview
+    - meta
+    - rules
+    - process
+    - reference
+    - template
+    - index
+
+    If no existing kind fits a new block,
+    follow `documentation_protocol.kind_governance`.
+
+- id: block_loading.operating_principles
+  kind: rules
+  md: |
+    The following principles are mandatory:
+
+    1. **Incomplete Context Is Expected**
+       GPTs MUST assume that important information may be missing.
+
+    2. **No Guessing**
+       GPTs MUST NOT invent rules, behaviour, structure, or intent.
+
+    3. **Ask, Don’t Assume**
+       When required information is missing or ambiguous,
+       GPTs MUST ask Andrew or request specific blocks.
+
+    4. **Explicit Context Expansion**
+       GPTs MUST explicitly name the block IDs they wish to load.
+
+    5. **No Silent Loading**
+       GPTs MUST NOT implicitly rely on documents or rules
+       that have not been explicitly loaded or provided.
+
+- id: block_loading.block_retrieval_flow
+  kind: process
+  md: |
+    When a GPT determines additional context is required:
+
+    1. Identify what information is missing.
+    2. Identify the most likely canonical document.
+    3. Request one or more specific blocks by ID.
+    4. Explain why each block is required.
+
+    Example request:
+
+    - Request `tech_spec.tooling_choices`
+      Reason: tooling selection affects implementation decisions.
+
+    - Request `documentation_protocol.update_triggers`
+      Reason: documentation impact must be evaluated before completion.
+
+    GPTs MUST NOT request entire documents when a smaller block is sufficient.
+
+- id: block_loading.canvas_usage
+  kind: rules
+  md: |
+    The canvas is a **persistent working surface** used alongside block loading.
+
+    The canvas serves as:
+    - a memory anchor
+    - a planning surface
+    - a progress tracker
+    - a place to record loaded context
+
+    GPTs MUST treat the canvas as authoritative for the current task state.
+
+    Loaded blocks, critical rules, and active constraints
+    SHOULD be recorded there for visibility and stability.
+
+- id: block_loading.canvas_template
+  kind: template
+  md: |
+    GPTs SHOULD structure the canvas using the following sections:
+
+    ## Resource Anchors
+    - Loaded block IDs
+    - Purpose of each loaded block
+    - Critical rules or constraints worth keeping visible
+
+    ## Current Card Punchlist (Locked)
+    - Deliverables for the active card or phase
+    - This section MUST NOT be modified except to check items off
+      unless Andrew explicitly authorizes changes
+    - One punch item MUST always be documentation
+
+    ## Working Area
+    - Notes
+    - Draft text
+    - Script fragments
+    - Output paths
+    - Intermediate reasoning
+
+    ## Parking Lot
+    - Ideas that are:
+      - out of scope
+      - future-phase
+      - exploratory
+      - blocked by missing prerequisites
+
+- id: block_loading.failure_modes
+  kind: rules
+  md: |
+    The following are considered failures:
+
+    - Proceeding with incomplete context without asking
+    - Making decisions based on unloaded rules
+    - Referencing documents not listed in `gpt_resource_index`
+    - Modifying punchlists without authorization
+    - Treating missing information as implicit permission
+
+    When a failure condition is encountered,
+    GPTs MUST stop and ask Andrew how to proceed.
+
+- id: block_loading.script_interface
+  kind: reference
+  md: |
+    Block retrieval may be assisted by scripts.
+
+    Script responsibilities:
+    - Return exact block contents
+    - Preserve block order and formatting
+    - Perform no summarization or interpretation
+
+    Example conceptual commands:
+    - get_block <block_id>
+    - get_blocks <block_id_1> <block_id_2>
+
+    Script implementation details live outside this document.
+
+- id: block_loading.index
+  kind: index
+  md: |
+    Blocks in this file:
+
+    - `block_loading.overview`
+      Purpose and scope of the block loading system.
+
+    - `block_loading.allowed_kinds`
+      Permitted block kinds for this file.
+
+    - `block_loading.operating_principles`
+      Core behavioural rules governing GPT operation.
+
+    - `block_loading.block_retrieval_flow`
+      Standard procedure for requesting additional context.
+
+    - `block_loading.canvas_usage`
+      Rules governing use of the canvas.
+
+    - `block_loading.canvas_template`
+      Canonical canvas structure for GPTs.
+
+    - `block_loading.failure_modes`
+      Conditions that require stopping and escalation.
+
+    - `block_loading.script_interface`
+      Conceptual interface for block retrieval scripts.
+
+    - `block_loading.index`
+      This index.
