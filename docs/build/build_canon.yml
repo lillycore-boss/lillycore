@@ -118,26 +118,54 @@
       options and (b) commit to a full artefact implementing one option in the
       same response, unless Andrew explicitly authorizes proceeding with a chosen option.
 
-    6.5 — ARCHITECT SPAWNS EXECUTION CARDS (NO ARCHITECT INVESTIGATION)
-      - The Architect role exists to decompose work into bounded leaf cards.
-      - Architects MUST NOT perform investigation, repo inspection, implementation, migrations,
-        or “discovery work” beyond block-loading for governing context.
-      - Implementers perform all investigation and execution work, including:
-          - inspecting the repo/files
-          - determining concrete targets
-          - performing mechanical edits/migrations
-          - running scripts/commands
-          - capturing proof outputs (when required)
+    6.5 — ARCHITECT INVESTIGATION & EXECUTION BOUNDARIES
+
+      - The Architect role exists to:
+          - understand system reality well enough to plan correctly, and
+          - decompose work into bounded, executable Implementer and QA leaf cards.
+
+      - Architects MAY perform read-only investigation, including:
+          - inspecting the repository structure
+          - reading files, scripts, and documentation
+          - enumerating concrete targets (paths, files, modules, docs, phases)
+          - identifying drift, gaps, legacy artefacts, and inconsistencies
+          - using these findings to define accurate scope and dependencies
+
+      - Architects MUST NOT:
+          - modify files (code or documentation)
+          - run mutating scripts or commands
+          - perform migrations or refactors
+          - claim implementation progress or execution proof
+          - mark execution work as complete
+
+      - Architect investigation is analytical and non-mutating.
+        Architect execution is prohibited.
+
+      - Implementers perform all execution work, including:
+          - modifying code or documentation
+          - performing mechanical edits or migrations
+          - running scripts or commands
+          - creating or updating registry artefacts
+          - capturing execution proof outputs (when required)
+
+      - If Implementer execution reveals unexpected conditions, the Implementer MUST:
+          - stop,
+          - report findings,
+          - and escalate via corrective or follow-up cards per governance.
+
       - QA performs verification and enforcement per QA governance.
 
-      Required decomposition behaviour:
-      - An Architect card MUST create the Implementer and/or QA child cards needed to execute the work.
-      - Architects MUST NOT create “discovery-only” cards unless the same Architect card also creates
-        the Implementer/QA cards that will act on the discovered information.
+  Required decomposition behaviour:
+  - An Architect card MUST create the Implementer and/or QA child cards needed to execute the work.
+  - Architects MUST NOT create subordinate Architect cards whose sole purpose is
+    investigation, discovery, or planning.
+  - If additional understanding is required to plan execution, the active Architect card
+    MUST perform the investigation directly.
 
-      Completion semantics (default):
-      - An Architect card that spawns child cards is not complete until the required child cards are complete,
-        unless Andrew explicitly marks the Architect card complete early.
+  Completion semantics (default):
+  - An Architect card that spawns child cards is not complete until the required child cards are complete,
+    unless Andrew explicitly marks the Architect card complete early.
+
 
     **GPT RULE**
     - Architect MUST use build_canon.feature_card_template.
