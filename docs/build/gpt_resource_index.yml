@@ -38,10 +38,10 @@
     tech_spec: "docs/build/tech_spec.yml"
     gpt_resource_index: "docs/build/gpt_resource_index.yml"
     documentation_protocol: "docs/build/documentation_protocol.yml"
-    qa_reference: "docs/build/optional/qa_reference.yml"
-    registry_system: "docs/build/optional/registry_system.yml"
-    roadmap: "docs/build/optional/roadmap.yml"
-    build_github_reference: "docs/build/optional/build_github_reference.yml"
+    qa_reference: "docs/build/qa_reference.yml"
+    registry_system: "docs/build/registry_system.yml"
+    roadmap: "docs/build/roadmap.yml"
+    build_github_reference: "docs/build/build_github_reference.yml"
 
 - id: gpt_resource_index.build_canon
   kind: reference
