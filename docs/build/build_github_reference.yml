@@ -42,8 +42,10 @@
   md: |
     ## 2. GitHub Automation Scripts & Command Templates (Main Board)
 
-    Card creation automation. Use this script to save a ton of time. 
-    ONLY replace the pasrts listed as replaceable inthe templates. 
+    Note from Andrew:
+      - Card creation automation. Use this script to save a ton of time. 
+      ONLY replace the parts listed as replaceable in the templates.
+      - Please put the output of this in a temporary canvas. It is a pain to copy any other way
     
     BASIC INSTRUCTIONS (COPY/PASTE FRIENDLY)
 
