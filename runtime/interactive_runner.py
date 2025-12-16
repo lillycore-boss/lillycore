@@ -1,7 +1,7 @@
 # lillycore/runtime/interactive_runner.py
 
 import time
-from lillycore.runtime.heartbeat import HeartbeatLoop
+from lillycore.runtime.heartbeat import HeartbeatLoop, RuntimeStopRequested
 
 
 def run_interactive(
@@ -21,9 +21,22 @@ def run_interactive(
     # ---- settings -------------------------------------------------------
     settings = settings_loader()
 
+    # ---- command handling (Phase 1: demonstrate ingestion, minimal semantics)
+    def on_command(cmd: str):
+        logger.info(f"COMMAND: {cmd}")
+        if cmd.lower() in {"exit", "quit"}:
+            raise RuntimeStopRequested()
+
+    # If the ingress adapter supports a handler injection pattern, prefer it.
+    # Otherwise, adapters can close over on_command internally.
+    if ingress_adapter and hasattr(ingress_adapter, "set_handler"):
+        ingress_adapter.set_handler(on_command)
+
     # ---- lifecycle hooks ------------------------------------------------
     def on_start():
         logger.info("Runtime starting (Phase 1 interactive)")
+        if ingress_adapter and hasattr(ingress_adapter, "start"):
+            ingress_adapter.start()
 
     def on_tick():
         # ingress polling is a seam, not behaviour
