@@ -1,0 +1,93 @@
+- id: system_resource_index.overview
+  kind: overview
+  md: |
+    SYSTEM_RESOURCE_INDEX is the system-level entry point for discovering **non-build** documentation under `docs/`.
+
+    This registry is intended for:
+    - GPTs and tools that need to find system-level documentation without scanning the repo
+    - Humans who need a single map of the system-level docs and what they are for
+
+    Scope:
+    - Includes only documentation that lives under `docs/` (not `docs/build/`).
+    - Acts as an entry point and locator; it does not redefine or govern the meaning of the referenced docs.
+
+    Non-scope:
+    - Build-time governance and protocols (see `docs/build/` resources instead).
+
+- id: system_resource_index.allowed_kinds
+  kind: meta
+  md: |
+    Permitted block kinds in this file:
+
+    - overview
+    - meta
+    - index
+    - reference
+
+    Notes:
+    - This file is a small registry. Prefer `reference` blocks for individual entries.
+    - Do not introduce additional kinds in this file without an explicit governing card.
+
+- id: system_resource_index.index
+  kind: index
+  md: |
+    ## SYSTEM_RESOURCE_INDEX Block Index
+
+    Blocks in this file:
+
+    - `system_resource_index.overview`
+      Purpose and scope of SYSTEM_RESOURCE_INDEX.
+
+    - `system_resource_index.allowed_kinds`
+      Permitted block kinds for this file.
+
+    - `system_resource_index.index`
+      Index of all blocks in this file.
+
+    - `system_resource_index.load_paths`
+      Authoritative mapping from system doc names to on-disk paths under `docs/`.
+
+    - `system_resource_index.modules`
+      Entry describing `docs/modules.yml`.
+
+    - `system_resource_index.system_canon`
+      Entry describing `docs/system_canon.yml`.
+
+- id: system_resource_index.load_paths
+  kind: reference
+  md: |
+    ## System Resource Load Paths
+
+    Authoritative mapping from conceptual system document names to on-disk paths.
+
+    Tools or GPTs that need to locate a system-level doc SHOULD read this mapping
+    rather than hardcoding paths elsewhere.
+
+    modules: "docs/modules.yml"
+    system_canon: "docs/system_canon.yml"
+
+- id: system_resource_index.modules
+  kind: reference
+  md: |
+    ## modules
+
+    Path: `docs/modules.yml`
+
+    `modules.yml` describes the system's module catalogue at the system-doc level.
+    It exists so tools and GPTs can discover what modules exist and where their
+    documentation lives, without needing build-time documentation context.
+
+    This index file does not modify or reinterpret `modules.yml`; it only points to it.
+
+- id: system_resource_index.system_canon
+  kind: reference
+  md: |
+    ## system_canon
+
+    Path: `docs/system_canon.yml`
+
+    `system_canon.yml` contains the system-level canon: the authoritative narrative
+    and constraints for the system itself (non-build), as distinct from build-time
+    governance under `docs/build/`.
+
+    This index file does not modify or reinterpret `system_canon.yml`; it only points to it.
