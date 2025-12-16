@@ -1,0 +1,14 @@
+Command:
+python3 -m lillycore.run_runtime
+
+Observed:
+Runtime starting (Phase 1 interactive)
+(ran continuously for ~N seconds)
+Stopped via Ctrl+C
+Runtime stopping (Phase 1 interactive)
+
+Files:
+stdout.txt
+stderr.txt
+manifest.txt
+
