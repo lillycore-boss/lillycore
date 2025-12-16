@@ -1,3 +1,40 @@
+- id: system_canon.overview
+  kind: overview
+  md: |
+    This document is the canonical system-level registry for LillyCORE.
+    It is expressed as a block-structured YAML document so GPT tooling can load
+    discrete authoritative blocks by stable ID.
+
+    Scope:
+    - System-level canon blocks that define durable, shared vocabulary and references.
+    - Structural alignment only for this card; meanings are preserved.
+
+    Non-goals:
+    - Introducing new governance, categories, or kinds.
+    - Changing the semantic meaning of existing canon content.
+
+- id: system_canon.allowed_kinds
+  kind: meta
+  md: |
+    # Allowed kinds
+
+    This file uses the following block kinds:
+
+    - overview
+    - meta
+    - index
+    - ontology
+
+- id: system_canon.index
+  kind: index
+  md: |
+    # system_canon index
+
+    - system_canon.overview
+    - system_canon.allowed_kinds
+    - system_canon.index
+    - system_canon.system_ontology
+
 - id: system_canon.system_ontology
   kind: ontology
   md: |
@@ -37,3 +74,4 @@
       - System DOC → durable system-level storage
       - Plugin DOC → per-plugin storage boundary
       - User DOC   → user-generated content
+

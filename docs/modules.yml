@@ -1,92 +1,78 @@
 - id: modules.overview
   kind: overview
   md: |
-    # modules
+    # Modules
 
-    **FILE:** modules  
-    **ROLE:** Overview of major engines and plugins in LillyCORE  
-
-    > NOTE: This file tracks BIG PIECES of the system, not individual features.
-
-    ## SECTION: OVERVIEW
+    This file tracks **major engines and plugins** in LillyCORE (not individual features).
 
     In LillyCORE, we distinguish between:
 
-      CORE ENGINES (core modules):
-        - DRIFT_ENGINE       (2a) front/context/emotion
-        - HELPER_ENGINE      (2b) work engine / helper
-        - MODULE_ENGINE      module / plugin management
-        - HELP_DESK_ENGINE   stability / auto-fix
-        - DREAM_ENGINE       offline reasoning/maintenance
-        - SCRIPT_ENGINE      script optimisation + self-maintenance
+    **Core engines (core modules):**
+    - DRIFT_ENGINE       (2a) front/context/emotion
+    - HELPER_ENGINE      (2b) work engine / helper
+    - MODULE_ENGINE      module / plugin management
+    - HELP_DESK_ENGINE   stability / auto-fix
+    - DREAM_ENGINE       offline reasoning/maintenance
+    - SCRIPT_ENGINE      script optimisation + self-maintenance
 
-      PLUGINS (add-on modules):
-        - UX_INTERFACE
-        - PROJECT_MANAGEMENT
-        - PERSONAL_ASSISTANT
-        - NOTES_PLUGIN       (demo/testbed)
-        - MULTI_USER
-        - DEMOS_AND_CORP
-        - Any future “extra capability” systems
+    **Plugins (add-on modules):**
+    - UX_INTERFACE
+    - PROJECT_MANAGEMENT
+    - PERSONAL_ASSISTANT
+    - NOTES_PLUGIN       (demo/testbed)
+    - MULTI_USER
+    - DEMOS_AND_CORP
+    - Any future “extra capability” systems
 
     **Engines:**
-
     - Core of how Lilly thinks, works, and maintains itself.
 
     **Plugins:**
-
     - Built on top of engines.
-    - NOT part of the core runtime.
+    - Not part of the core runtime.
 
-    **Implementation layout (folder mapping):**
+    ## Implementation layout (folder mapping)
 
-    - All engines are implemented under:
+    All engines are implemented under:
+    - `engines/<engine_name>/`
 
-      `engines/<engine_name>/`
+    Examples:
+    - `engines/drift_engine/`
+    - `engines/helper_engine/`
+    - `engines/plugin_engine/`
+    - `engines/helpdesk_engine/`
+    - `engines/dream_engine/`
+    - `engines/script_engine/`
 
-      e.g.:
+    All plugins are implemented under:
+    - `plugins/<plugin_name>/`
 
-      - `engines/drift_engine/`
-      - `engines/helper_engine/`
-      - `engines/plugin_engine/`
-      - `engines/helpdesk_engine/`
-      - `engines/dream_engine/`
-      - `engines/script_engine/`
+    Examples:
+    - `plugins/notes_plugin/`
+    - `plugins/ux_interface/`
+    - `plugins/project_management/`
+    - `plugins/personal_assistant/`
+    - `plugins/multi_user/`
+    - `plugins/demos_and_corp/`
 
-    - All plugins are implemented under:
+    The folder taxonomy for these modules is defined in tech_spec Section 3 and MUST be kept in sync with this overview.
 
-      `plugins/<plugin_name>/`
+    ## Dependency and boundary rules
 
-      e.g.:
+    Engines may depend on:
+    - `core/` (runtime loop, logging, AI pools, System DOC)
+    - other engines where explicitly listed under "dependencies" in this modules file
 
-      - `plugins/notes_plugin/`
-      - `plugins/ux_interface/`
-      - `plugins/project_management/`
-      - `plugins/personal_assistant/`
-      - `plugins/multi_user/`
-      - `plugins/demos_and_corp/`
+    Engines MUST NOT import plugins directly; they see plugins only through PLUGIN_ENGINE / MODULE_ENGINE registries and capability interfaces.
 
-    - The folder taxonomy for these modules is defined in tech_spec Section 3
-      and MUST be kept in sync with this overview.
+    Plugins may depend on:
+    - `core/` and `engines/`, as clients of those APIs
 
-    **Dependency and boundary rules:**
+    Plugins MUST NOT:
+    - be imported directly by `core/` or `engines/` (except via plugin registration and routing interfaces)
+    - own or redefine System DOC schemas (plugins operate within the DOC layer boundaries defined by core/System DOC)
 
-    - Engines may depend on:
-        `core/` (runtime loop, logging, AI pools, System DOC),
-        other engines where explicitly listed under "dependencies"
-        in this modules file.
-    - Engines MUST NOT import plugins directly; they see plugins only through
-      PLUGIN_ENGINE / MODULE_ENGINE registries and capability interfaces.
-
-    - Plugins may depend on:
-        `core/` and engines/, as clients of those APIs.
-    - Plugins MUST NOT:
-        be imported directly by `core/` or engines/ (except via plugin
-        registration and routing interfaces),
-        own or redefine System DOC schemas (plugins operate within the
-        DOC layer boundaries defined by core/System DOC).
-
-    This file answers:
+    ## This file answers
 
     - What engines and plugins exist?
     - When do they appear (which phase)?
@@ -94,22 +80,92 @@
     - What do they depend on?
 
     Architect GPT can use this to:
-
     - Keep subsystems distinct.
     - Place new features in the right engine or plugin.
 
-    QA GPT can use this to verify that implemented work respects module boundaries
-    and responsibilities.
+    QA GPT can use this to verify that implemented work respects module boundaries and responsibilities.
 
     Implementer GPT can use this for:
-
     - Context when touching specific engines/plugins.
+
+- id: modules.allowed_kinds
+  kind: meta
+  md: |
+    Allowed block kinds in this file:
+
+    - overview
+    - meta
+    - entry_template
+    - module
+
+- id: modules.index
+  kind: meta
+  md: |
+    Blocks in this file:
+
+    - modules.overview
+      Overview and boundary/dependency notes for major modules.
+
+    - modules.allowed_kinds
+      Allowed block kinds for this file.
+
+    - modules.index
+      Index of blocks in this file.
+
+    - modules.entry_template
+      Template for module entries.
+
+    - modules.core_runtime
+      Core runtime loop, logging, and preference handling.
+
+    - modules.ai_pools
+      LLM pools and execution wrappers.
+
+    - modules.system_doc
+      Durable storage layer for system state and work logs.
+
+    - modules.drift_engine
+      2a “Lilly the Person” — front/context/emotion engine.
+
+    - modules.helper_engine
+      2b “Lilly the Worker” — executes work in context.
+
+    - modules.plugin_engine
+      Dynamic plugin loading/unloading and capability registry.
+
+    - modules.help_desk_engine
+      Stability spine — failure detection, auto-repair, escalation.
+
+    - modules.dream_engine
+      Offline reasoning, compression, drift correction.
+
+    - modules.script_engine
+      Automation script management and improvement.
+
+    - modules.notes_plugin
+      Notes demo/testbed plugin.
+
+    - modules.ux_interface
+      UI for chat/output/debug panels.
+
+    - modules.project_management
+      Internal project management plugin.
+
+    - modules.personal_assistant
+      User-facing assistant behaviour plugin.
+
+    - modules.multi_user
+      Multi-user identity and isolation plugin.
+
+    - modules.io_network_layer
+      Infra layer for cross-device communication.
+
+    - modules.demos_and_corp
+      Demo plugins and corp/enterprise-specific plugins.
 
 - id: modules.entry_template
   kind: entry_template
   md: |
-    ## SECTION: ENTRY TEMPLATE
-
     Use this pattern for each entry:
 
     ```text
@@ -488,3 +544,4 @@
     dependencies:
       - HELPER_ENGINE (usually)
       - DRIFT_ENGINE (where context/personality matters)
+
