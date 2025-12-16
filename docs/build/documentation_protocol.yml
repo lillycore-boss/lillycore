@@ -379,6 +379,10 @@
     - generate corrective Implementer card(s)
     - generate a QA card per the QA System rules
 
+    QA MUST NOT FAIL a card based on block-loading compliance, execution process, 
+    or intermediate workflow artifacts, unless the deliverable explicitly requires 
+    proof of such process.
+
     Ambiguity defaults to FAIL until clarified by Andrew.
 
 - id: documentation_protocol.checklists
