@@ -69,68 +69,68 @@ def run(cmd: List[str]) -> str:
 def gh_graphql(owner: str, project_number: int, after: Optional[str] = None) -> Dict[str, Any]:
     """
     Fetch one page of project items + their field values using GitHub GraphQL through `gh api graphql`.
-    We pull:
-      - Item content (Issue/PR) title/url
-      - Single-select/text/number field values for the custom fields you defined
+    This environment's gh build rejects Int GraphQL variables, so project_number is inlined.
     """
-    # NOTE: GraphQL queries are brittle if you rename fields.
-    # This script matches field *names* exactly as configured on the project.
-    query = r"""
-query($owner: String!, $projectNumber: Int!, $after: String) {
-  user(login: $owner) {
-    projectV2(number: $projectNumber) {
-      items(first: 100, after: $after) {
-        pageInfo { hasNextPage endCursor }
-        nodes {
+    # IMPORTANT: project_number is inlined as an int literal to avoid gh Int-variable bugs.
+    query = f"""
+query($owner: String!, $after: String) {{
+  user(login: $owner) {{
+    projectV2(number: {int(project_number)}) {{
+      items(first: 100, after: $after) {{
+        pageInfo {{ hasNextPage endCursor }}
+        nodes {{
           id
-          content {
+          content {{
             __typename
-            ... on Issue {
+            ... on Issue {{
               title
               url
-            }
-            ... on PullRequest {
+            }}
+            ... on PullRequest {{
               title
               url
-            }
-          }
-          fieldValues(first: 50) {
-            nodes {
+            }}
+          }}
+          fieldValues(first: 50) {{
+            nodes {{
               __typename
-              ... on ProjectV2ItemFieldTextValue {
+              ... on ProjectV2ItemFieldTextValue {{
                 text
-                field { ... on ProjectV2FieldCommon { name } }
-              }
-              ... on ProjectV2ItemFieldNumberValue {
+                field {{ ... on ProjectV2FieldCommon {{ name }} }}
+              }}
+              ... on ProjectV2ItemFieldNumberValue {{
                 number
-                field { ... on ProjectV2FieldCommon { name } }
-              }
-              ... on ProjectV2ItemFieldSingleSelectValue {
+                field {{ ... on ProjectV2FieldCommon {{ name }} }}
+              }}
+              ... on ProjectV2ItemFieldSingleSelectValue {{
                 name
-                field { ... on ProjectV2FieldCommon { name } }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
+                field {{ ... on ProjectV2FieldCommon {{ name }} }}
+              }}
+            }}
+          }}
+        }}
+      }}
+    }}
+  }}
+}}
 """
-    variables = {"owner": owner, "projectNumber": project_number, "after": after}
-    out = run(
-        [
-            "gh",
-            "api",
-            "graphql",
-            "-f",
-            f"query={query}",
-            "-f",
-            f"variables={json.dumps(variables)}",
-        ]
-    )
-    return json.loads(out)
 
+    cmd = [
+        "gh",
+        "api",
+        "graphql",
+        "-f",
+        f"query={query}",
+        "-F",
+        f"owner={owner}",
+    ]
+
+    # Only pass `after` when present; avoid null/None.
+    if after is not None:
+        cmd += ["-F", f"after={after}"]
+
+    out = run(cmd)
+    return json.loads(out)
 
 def extract_fields(field_nodes: List[Dict[str, Any]]) -> Dict[str, Any]:
     fields: Dict[str, Any] = {}
