@@ -291,17 +291,17 @@
     - Retrieved using the block-loading retrieval script (`get_md.py`)
       or via Andrew-provided block excerpts.
 
-  - id: gpt_resource_index.system_resource_index
-    kind: reference
-    md: |
-      ## SYSTEM_RESOURCE_INDEX
-      
-      SYSTEM_RESOURCE_INDEX is the entry point for discovering **system-level (non-build)**
-      documentation that lives under `docs/`.
-      
-      It exists so GPTs and tools can locate core system documents (such as
-      `modules.yml` and `system_canon.yml`) without scanning the repository
-      or loading build-time governance under `docs/build/`.
-      
-      This entry does not redefine or govern the contents of the system-level
-      documents it points to; it only makes them discoverable.
+- id: gpt_resource_index.system_resource_index
+  kind: reference
+  md: |
+    ## SYSTEM_RESOURCE_INDEX
+    
+    SYSTEM_RESOURCE_INDEX is the entry point for discovering **system-level (non-build)**
+    documentation that lives under `docs/`.
+    
+    It exists so GPTs and tools can locate core system documents (such as
+    `modules.yml` and `system_canon.yml`) without scanning the repository
+    or loading build-time governance under `docs/build/`.
+    
+    This entry does not redefine or govern the contents of the system-level
+    documents it points to; it only makes them discoverable.
