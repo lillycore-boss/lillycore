@@ -85,6 +85,10 @@
        Using authoritative-sounding language (e.g. “canonical”, “standard”,
        “per governance”, “expected format”) to stand in for unloaded or undefined
        authority is considered inventing context and is a hard failure.
+       This includes assumptions based on file system layout or discovery path.
+       The presence of a block file in a searched directory
+       does NOT imply priority, precedence, or canonical status.
+
 
     9. **No Lookup Deferral**
        GPTs MUST NOT “defer” any action that can be resolved by determining
@@ -132,6 +136,10 @@
     2. Identify the most likely canonical document.
     3. Request one or more specific blocks by ID.
     4. Explain why each block is required.
+    5. If block retrieval fails due to ambiguity or missing files:
+     - STOP
+     - Report the failure explicitly
+     - Ask Andrew to resolve the ambiguity or specify the correct block
 
     Example request:
 
@@ -232,6 +240,44 @@
     - `gpt_resource_index.index`
     - `block_loading.index`
     - (then request specific blocks referenced by those indexes)
+
+    ### Block File Resolution Behaviour
+
+    The retrieval script resolves block files by prefix (`<prefix>.yml`)
+    using the following ordered strategy:
+
+    1. **Direct root lookup (authoritative path)**
+       - `<root>/<prefix>.yml`
+
+    2. **Expanded discovery search**
+       If the file is not found at the direct root path, the script performs
+       a recursive search for `<prefix>.yml` within:
+       - the root directory
+       - the root’s parent directory
+       - the root’s grandparent directory
+
+       Subdirectories are included in all cases.
+
+    3. **Explicit search root override**
+       - When an explicit search root is provided,
+         the script searches *only* that directory recursively.
+
+    ### Ambiguity Handling
+
+    If multiple matching `<prefix>.yml` files are discovered:
+    - the script MUST stop
+    - and MUST emit an explicit error listing all matches
+
+    The script MUST NOT guess, rank, or silently select a candidate.
+
+    ### Authority Implications
+
+    File location alone does NOT confer authority.
+
+    GPTs MUST treat retrieved blocks as authoritative
+    **only because they were explicitly requested by ID and successfully resolved**,
+    not because of directory structure, proximity, or naming conventions.
+
 
 - id: block_loading.index
   kind: index
