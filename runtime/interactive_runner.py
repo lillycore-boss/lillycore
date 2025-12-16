@@ -1,7 +1,7 @@
 # lillycore/runtime/interactive_runner.py
 
 import time
-from lillycore.runtime.heartbeat import HeartbeatLoop, RuntimeStopRequested
+from runtime.heartbeat import HeartbeatLoop, RuntimeStopRequested
 
 
 def run_interactive(

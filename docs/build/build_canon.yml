@@ -224,6 +224,7 @@
         gpt_resource_index.index \
         gpt_resource_index.load_paths \
         documentation_protocol.required_stop_on_missing_context
+        system_resource_index.index
       ```
 
     Required Blocks (task-specific; list exact IDs):

@@ -150,6 +150,8 @@
     GPT_RESOURCE_INDEX is the directory of canonical build/system documents for LillyCORE.
     It lists what documents exist, what they are for, and where they live.
 
+    For RUNTIME and SYTEM documentation, see system_resource_index
+
     ### Blocks in this file
 
     - `gpt_resource_index.overview`
@@ -185,13 +187,13 @@
     - `gpt_resource_index.block_loading`
       Entry describing BLOCK_LOADING (block retrieval + canvas anchoring rules)
 
+    - gpt_resource_index.system_resource_index
+    - Entry describing SYSTEM_RESOURCE_INDEX (system-level, non-build documentation entry point).
+
     ### Explicitly not defined here
 
     - Procedural governance (see DOCUMENTATION_PROTOCOL)
     - Runtime architecture and behaviour specs (appear in phase cards / future system docs)
-
-    - gpt_resource_index.system_resource_index
-    - Entry describing SYSTEM_RESOURCE_INDEX (system-level, non-build documentation entry point).
 
 - id: gpt_resource_index.qa_reference
   kind: reference

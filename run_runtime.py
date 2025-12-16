@@ -1,8 +1,8 @@
 # run_runtime.py
 
-from lillycore.runtime.interactive_runner import run_interactive
-from lillycore.runtime.terminal_ingress import TerminalIngressAdapter
-
+from runtime.interactive_runner import run_interactive
+from runtime.terminal_ingress import TerminalIngressAdapter
+from runtime.heartbeat import RuntimeStopRequested
 
 class DummyLogger:
     def info(self, msg): print(msg)
@@ -22,7 +22,8 @@ def handle_envelope(exc):
 # (runner’s on_command is used if you implement set_handler; otherwise this just logs itself)
 def _noop_handler(cmd: str) -> None:
     print(f"[ingress] {cmd}")
-
+    if cmd.strip().lower() in {"quit", "exit"}:
+        raise RuntimeStopRequested()
 
 ingress = TerminalIngressAdapter(on_command=_noop_handler, prompt="lilly> ")
 

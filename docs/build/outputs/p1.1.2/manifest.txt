@@ -1,0 +1,19 @@
+phase: p1.1.2
+
+command:
+  python3 run_runtime.py | tee docs/build/outputs/p1.1.2/terminal_session.txt
+
+artefacts:
+  - terminal_session.txt
+  - manifest.txt
+
+manual_input:
+  - hello
+  - status
+  - quit
+
+claims_verified:
+  - terminal-based command ingress (interactive stdin)
+  - ingress adapter behind replaceable boundary (poll seam)
+  - loop continues while commands are ingested
+  - graceful stop via command (quit)

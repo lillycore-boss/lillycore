@@ -213,16 +213,20 @@
 
     notes:
       - Implementation surface for Phase 1 runtime is `lillycore/runtime/` (per P1.1.1 constraint).
-      - Repo currently contains a root-level `runtime/` directory from earlier prep; it is not the target surface for P1.1.1 and should be treated as transitional until files are relocated.
-      - Interactive invocation is expected to run via module form (example): `python3 -m lillycore.run_runtime` (runner is proof harness, not canonical API).
+      - Repo may temporarily contain a root-level `runtime/` directory from earlier prep; it is not the target surface for Phase 1 and should be treated as transitional until files are relocated.
+      - Interactive invocation is expected to run via a proof harness (example): `python3 run_runtime.py`; runner is not a canonical API.
+      - Command ingress semantics are transport-agnostic; Phase 1 provides a terminal-based adapter only.
       - Do NOT bake in assumptions that all engines are forever fused; future phases may split processes/machines.
 
     implementation:
-      - runtime/
-        - heartbeat.py        (core loop + lifecycle)
+      - lillycore/runtime/
+        - heartbeat.py          (core loop + lifecycle)
         - interactive_runner.py (Phase 1 interactive entrypoint)
-        - __init__.py         (runtime package marker)
-      - run_runtime.py        (manual interactive runner / proof harness)
+        - command_ingress.py    (ingress boundary / protocol)
+        - terminal_ingress.py   (Phase 1 terminal-based ingress adapter)
+        - __init__.py           (runtime package marker)
+      - run_runtime.py          (manual interactive runner / proof harness)
+
 
 - id: modules.ai_pools
   kind: module
