@@ -8,11 +8,11 @@ mkdir -p "${OUT_DIR}"
 # REQUIRED: Fill these with the *actual* issue numbers for p0.1–p0.5.
 # (Do not guess. Pull from the board or issue list.)
 # --------------------------------------------------------------------
-P0_1_ISSUE="<ISSUE_NUMBER_FOR_p0.1>"
-P0_2_ISSUE="<ISSUE_NUMBER_FOR_p0.2>"
-P0_3_ISSUE="<ISSUE_NUMBER_FOR_p0.3>"
-P0_4_ISSUE="<ISSUE_NUMBER_FOR_p0.4>"
-P0_5_ISSUE="<ISSUE_NUMBER_FOR_p0.5>"
+P0_1_ISSUE="46"
+P0_2_ISSUE="47"
+P0_3_ISSUE="48"
+P0_4_ISSUE="50"
+P0_5_ISSUE="21"
 
 # Capture issue bodies (source of truth for card bodies)
 gh issue view "${P0_1_ISSUE}" --json number,title,body --jq '.body' > "${OUT_DIR}/p0.1.issue_body.md"

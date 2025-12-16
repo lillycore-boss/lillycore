@@ -1,0 +1,14 @@
+p0.qa input capture
+Timestamp: 2025-12-15T20:39:30-05:00
+
+Issue bodies:
+- p0.1 -> 46 -> p0.1.issue_body.md
+- p0.2 -> 47 -> p0.2.issue_body.md
+- p0.3 -> 48 -> p0.3.issue_body.md
+- p0.4 -> 50 -> p0.4.issue_body.md
+- p0.5 -> 21 -> p0.5.issue_body.md
+
+Docs captured:
+- docs/modules.yml              -> docs.modules.yml
+- docs/system_canon.yml         -> docs.system_canon.yml
+- docs/system_resource_index.yml -> docs.system_resource_index.yml
