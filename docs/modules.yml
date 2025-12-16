@@ -99,7 +99,7 @@
     - module
 
 - id: modules.index
-  kind: meta
+  kind: index
   md: |
     Blocks in this file:
 
