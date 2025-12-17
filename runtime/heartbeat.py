@@ -51,6 +51,11 @@ class HeartbeatLoop:
         self._envelope_sink = envelope_sink
 
         self._stop_requested = False
+        self._stop_reason = None
+
+        # Phase 1 stop command triggers (P1.1.6):
+        # Keep this small and explicit; command routing beyond stop remains out of scope.
+        self._stop_commands = {"stop", "quit", "exit", "/stop", "/quit"}
 
         # Phase 1 logging hook support (P1.1.5):
         # Keep a deterministic tick counter so heartbeat logging can reference
@@ -59,8 +64,10 @@ class HeartbeatLoop:
 
     # ---- control surface -------------------------------------------------
 
-    def request_stop(self):
+    def request_stop(self, reason: Optional[str] = None):
         self._stop_requested = True
+        if reason is not None:
+            self._stop_reason = reason
 
     # ---- lifecycle -------------------------------------------------------
 
@@ -81,6 +88,24 @@ class HeartbeatLoop:
                 self._on_start()
 
             while not self._stop_requested:
+
+                # Phase 1 stop/shutdown semantics (P1.1.6):
+                # If an ingress adapter exists, poll it for commands and allow
+                # explicit stop commands to request graceful exit.
+                if self._ingress and hasattr(self._ingress, "poll"):
+                    try:
+                        cmds = self._ingress.poll()
+                    except Exception as exc:
+                        # Ingress failure is a boundary error: envelope it.
+                        self._propagate_error(exc, where="runtime.ingress")
+                        cmds = []
+                    for raw in cmds or []:
+                        cmd = (raw or "").strip().lower()
+                        if cmd in self._stop_commands:
+                            self.request_stop(reason=f"command:{cmd}")
+                            # exit the loop cleanly
+                            raise RuntimeStopRequested()
+
                 try:
                     # Deterministic tick progression (owned by the loop).
                     self._tick_id += 1
@@ -98,7 +123,8 @@ class HeartbeatLoop:
                     if self._on_tick:
                         self._on_tick()
                 except RuntimeStopRequested:
-                    self.request_stop()
+                    # stop already requested (possibly with reason); don't override
+                    self._stop_requested = True
                 except Exception as exc:
                     self._propagate_error(exc)
 
@@ -107,16 +133,31 @@ class HeartbeatLoop:
             if self._logger and hasattr(self._logger, "lifecycle_stop"):
                 try:
                     self._logger.lifecycle_stop(component="core_runtime")
-                except Exception:
-                    # Logging MUST NOT break runtime control flow in Phase 1.
-                    pass
+                except Exception as exc:
+                    # Shutdown-time errors MUST be enveloped and logged (P1.1.6).
+                    self._propagate_error(exc, where="runtime.shutdown.lifecycle_stop")
 
             if self._on_stop:
-                self._on_stop()
+                try:
+                    self._on_stop()
+                except Exception as exc:
+                    # Shutdown-time errors MUST be enveloped and logged (P1.1.6).
+                    self._propagate_error(exc, where="runtime.shutdown.on_stop")
+
+            # Phase 1 logging finalization (P1.1.6):
+            # Respect flush/finish/finalize if present; must not break shutdown.
+            if self._logger:
+                for hook_name in ("finalize", "flush", "finish"):
+                    if hasattr(self._logger, hook_name):
+                        try:
+                            getattr(self._logger, hook_name)()
+                        except Exception as exc:
+                            self._propagate_error(exc, where=f"runtime.shutdown.logger.{hook_name}")
+
 
     # ---- error handling --------------------------------------------------
 
-    def _propagate_error(self, exc: Exception):
+    def _propagate_error(self, exc: Exception, where: str = "runtime.tick"):
         """
         Treat envelope as opaque.
 
@@ -128,7 +169,7 @@ class HeartbeatLoop:
         This method MUST NOT inspect or mutate envelope contents.
         """
         if self._envelope_factory and self._envelope_sink:
-            env = self._envelope_factory(exc, where="runtime.tick")
+            env = self._envelope_factory(exc, where=where)
             self._envelope_sink(env)
             return
 
