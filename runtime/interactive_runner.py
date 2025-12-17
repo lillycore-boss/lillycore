@@ -1,6 +1,7 @@
 # lillycore/runtime/interactive_runner.py
 
 import time
+import os
 from lillycore.runtime.heartbeat import HeartbeatLoop, RuntimeStopRequested
 
 
@@ -52,7 +53,7 @@ def run_interactive(
     # ---- command handling (Phase 1: demonstrate ingestion, minimal semantics)
     def on_command(cmd: str):
         logger.info(f"COMMAND: {cmd}")
-        if cmd.lower() in {"exit", "quit"}:
+        if cmd.strip().lower() in {"stop", "/stop", "exit", "quit", "/quit"}:
             raise RuntimeStopRequested()
 
     # If the ingress adapter supports a handler injection pattern, prefer it.
@@ -86,14 +87,17 @@ def run_interactive(
             ingress_adapter.start()
 
     def on_tick():
-        # ingress polling is a seam, not behaviour
-        if ingress_adapter:
-            ingress_adapter.poll()
-
+        # NOTE (P1.1.6): ingress polling for stop semantics is handled by the
+        # heartbeat loop (via the ingress seam). Avoid double polling here.
         time.sleep(tick_interval_sec)
 
     def on_stop():
         logger.info("Runtime stopping (Phase 1 interactive)")
+
+        # P1.1.6 negative-path proof hook:
+        # if set, force an error during shutdown so HeartbeatLoop must envelope+log it.
+        if os.environ.get("FORCE_SHUTDOWN_ERROR", "").strip() == "1":
+            raise RuntimeError("forced shutdown failure (P1.1.6 negative-path proof)")
 
     loop = HeartbeatLoop(
         on_start=on_start,

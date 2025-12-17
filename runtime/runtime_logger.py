@@ -71,6 +71,20 @@ class RuntimeLogger:
 
     # ---- public event helpers ----
 
+    def finalize(self, **fields: Any) -> None:
+        """
+        Phase 1 shutdown finalization hook (P1.1.6).
+
+        Even though we flush per line, the runtime loop should have an explicit
+        place to ask logging to finish/flush any buffered work.
+        """
+        self._emit("INFO", "runtime.logging.finalize", fields)
+        try:
+            self.stream.flush()
+        except Exception:
+            # Logging MUST NOT break runtime control flow in Phase 1.
+            pass
+
     def lifecycle_start(self, **fields: Any) -> None:
         self._emit("INFO", "runtime.lifecycle.start", fields)
 

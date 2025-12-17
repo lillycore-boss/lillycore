@@ -53,9 +53,10 @@ class HeartbeatLoop:
         self._stop_requested = False
         self._stop_reason = None
 
+        #This line made unneccesary in P1.1.6
         # Phase 1 stop command triggers (P1.1.6):
         # Keep this small and explicit; command routing beyond stop remains out of scope.
-        self._stop_commands = {"stop", "quit", "exit", "/stop", "/quit"}
+        # self._stop_commands = {"stop", "quit", "exit", "/stop", "/quit"}
 
         # Phase 1 logging hook support (P1.1.5):
         # Keep a deterministic tick counter so heartbeat logging can reference
@@ -90,21 +91,18 @@ class HeartbeatLoop:
             while not self._stop_requested:
 
                 # Phase 1 stop/shutdown semantics (P1.1.6):
-                # If an ingress adapter exists, poll it for commands and allow
-                # explicit stop commands to request graceful exit.
+                # Ingress is a seam. Adapters may implement command handling via
+                # a handler callback (raising RuntimeStopRequested as control flow).
                 if self._ingress and hasattr(self._ingress, "poll"):
                     try:
-                        cmds = self._ingress.poll()
+                        self._ingress.poll()
+                    except RuntimeStopRequested:
+                        # Control signal: not an envelope.
+                        self.request_stop(reason="command:handler")
+                        continue
                     except Exception as exc:
                         # Ingress failure is a boundary error: envelope it.
                         self._propagate_error(exc, where="runtime.ingress")
-                        cmds = []
-                    for raw in cmds or []:
-                        cmd = (raw or "").strip().lower()
-                        if cmd in self._stop_commands:
-                            self.request_stop(reason=f"command:{cmd}")
-                            # exit the loop cleanly
-                            raise RuntimeStopRequested()
 
                 try:
                     # Deterministic tick progression (owned by the loop).
@@ -123,7 +121,7 @@ class HeartbeatLoop:
                     if self._on_tick:
                         self._on_tick()
                 except RuntimeStopRequested:
-                    # stop already requested (possibly with reason); don't override
+                    # Stop requested; reason may already be set.
                     self._stop_requested = True
                 except Exception as exc:
                     self._propagate_error(exc)

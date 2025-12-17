@@ -51,9 +51,16 @@ class Phase1RuntimeLogger:
         # settings may be a dict or an object; support both without assumptions.
         try:
             if isinstance(settings, dict):
-                cfg = settings.get("runtime_logging", {}) or {}
-                self._heartbeat_enabled = bool(cfg.get("heartbeat_enabled", self._heartbeat_enabled))
-                self._heartbeat_every_n_ticks = int(cfg.get("heartbeat_every_n_ticks", self._heartbeat_every_n_ticks))
+                cfg = settings.get("runtime_logging", None)
+                if isinstance(cfg, dict):
+                    src = cfg
+                else:
+                    # Back-compat: allow top-level keys in Phase 1 settings.
+                    src = settings
+
+                self._heartbeat_enabled = bool(src.get("heartbeat_enabled", self._heartbeat_enabled))
+                self._heartbeat_every_n_ticks = int(src.get("heartbeat_every_n_ticks", self._heartbeat_every_n_ticks))
+
             else:
                 # Object-style: only apply if attributes exist.
                 if hasattr(settings, "heartbeat_enabled"):
@@ -108,6 +115,9 @@ class Phase1RuntimeLogger:
     def error(self, msg, exc_info=None):
         self._base.error(msg, exc_info=exc_info)
 
+    def finalize(self, **fields):
+        self._base.info("RUNTIME_LOG_FINALIZE %s", fields if fields else "")
+
 
 def load_settings(logger):
     return resolve_runtime_system_settings(
@@ -133,7 +143,7 @@ def _noop_handler(cmd: str) -> None:
     if cmd.strip().lower() == "boom":
         raise ValueError("forced error for envelope proof")
 
-    if cmd.strip().lower() in {"quit", "exit"}:
+    if cmd.strip().lower() in {"stop", "/stop", "quit", "exit", "/quit", "eof"}:
         raise RuntimeStopRequested()
 
 ingress = TerminalIngressAdapter(on_command=_noop_handler, prompt="lilly> ")

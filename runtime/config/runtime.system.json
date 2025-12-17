@@ -4,6 +4,6 @@
   "log_level": "DEBUG",
   "log_format": "text",
   "heartbeat_enabled": true,
-  "heartbeat_every_n_ticks": 1
+  "heartbeat_every_n_ticks": 10
 }
 

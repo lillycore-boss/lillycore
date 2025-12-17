@@ -1,0 +1,9 @@
+Commands executed:
+- PYTHONPATH=.. python3 -m lillycore.run_runtime | tee docs/build/outputs/p1.1.6/normal_shutdown.txt
+- FORCE_SHUTDOWN_ERROR=1 PYTHONPATH=.. python3 -m lillycore.run_runtime | tee docs/build/outputs/p1.1.6/negative_shutdown.txt
+
+Stop command used:
+- stop
+
+Notes:
+- Negative-path run forces an exception during shutdown (on_stop); runtime envelopes and logs it.

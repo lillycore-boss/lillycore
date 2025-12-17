@@ -1,0 +1,13 @@
+Runtime system settings resolved. sources=['defaults', 'file'] changed_keys={'file': ['tick_interval_ms', 'log_level', 'heartbeat_enabled']}
+RUNTIME_START {'component': 'core_runtime'}
+Runtime starting (Phase 1 interactive)
+lilly> HEARTBEAT {'tick_id': 10, 'every_n_ticks': 10}
+HEARTBEAT {'tick_id': 20, 'every_n_ticks': 10}
+HEARTBEAT {'tick_id': 30, 'every_n_ticks': 10}
+HEARTBEAT {'tick_id': 40, 'every_n_ticks': 10}
+lilly> [ingress] stop
+RUNTIME_STOP {'component': 'core_runtime'}
+Runtime stopping (Phase 1 interactive)
+ENVELOPE_EVENT: {'envelope': ErrorEnvelope(_exc=RuntimeError('forced shutdown failure (P1.1.6 negative-path proof)'), _where='runtime.shutdown.on_stop', _severity='error', _context={}, _tags={}, _ts=1765991806.2126925, _traceback='Traceback (most recent call last):\n  File "/library/lillycore/runtime/heartbeat.py", line 140, in run\n    self._on_stop()\n  File "/library/lillycore/runtime/interactive_runner.py", line 101, in on_stop\n    raise RuntimeError("forced shutdown failure (P1.1.6 negative-path proof)")\nRuntimeError: forced shutdown failure (P1.1.6 negative-path proof)\n'), 'meta': {'source': 'runtime_boundary'}}
+ENVELOPE_EVENT: ErrorEnvelope(_exc=RuntimeError('forced shutdown failure (P1.1.6 negative-path proof)'), _where='runtime.shutdown.on_stop', _severity='error', _context={}, _tags={}, _ts=1765991806.2126925, _traceback='Traceback (most recent call last):\n  File "/library/lillycore/runtime/heartbeat.py", line 140, in run\n    self._on_stop()\n  File "/library/lillycore/runtime/interactive_runner.py", line 101, in on_stop\n    raise RuntimeError("forced shutdown failure (P1.1.6 negative-path proof)")\nRuntimeError: forced shutdown failure (P1.1.6 negative-path proof)\n')
+RUNTIME_LOG_FINALIZE 
