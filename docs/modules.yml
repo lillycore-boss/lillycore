@@ -226,6 +226,14 @@
       - Runtime produces envelopes at catch boundaries via an injected
         envelope_factory and forwards them to logging via envelope_sink.
       - Envelope objects are treated as opaque outside the authority module.
+      - Phase 1 stop/shutdown semantics (P1.1.6):
+        - Terminal stop commands: `stop` (plus `quit`/`exit`; adapter may also treat EOF as stop).
+        - Stop is an internal control signal (RuntimeStopRequested) and MUST NOT be wrapped as an envelope.
+        - Shutdown finalization: runtime will call logger finalization hooks if present (e.g., `finalize` / `flush` / `finish`).
+        - Negative-path shutdown proof hook: `FORCE_SHUTDOWN_ERROR=1` forces an exception during shutdown (on_stop) which MUST be enveloped and logged.
+      - Command ingress contract (P1.1.2 / command_ingress):
+        - `CommandIngress.poll()` returns `None` (handler-based); runtime should not assume poll returns a list of commands.
+
 
     implementation:
       - lillycore/runtime/
