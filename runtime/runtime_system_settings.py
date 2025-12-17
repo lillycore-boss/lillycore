@@ -7,6 +7,8 @@ from typing import Any, Dict, Optional, Tuple, List
 
 
 # Phase 1 canonical path (per card)
+# NOTE: Project root is `lillycore/`, so the canonical Phase 1 config path is:
+# lillycore/runtime/config/runtime.system.json
 CANONICAL_SYSTEM_SETTINGS_PATH = "runtime/config/runtime.system.json"
 
 
@@ -18,8 +20,16 @@ class RuntimeSystemSettings:
     """
     async_enabled: bool
     tick_interval_ms: int
+
+    # Phase 1 logging controls (P1.1.3 + P1.1.5):
+    # Keep keys minimal and operational.
     log_level: str      # DEBUG|INFO|WARNING|ERROR|CRITICAL
     log_format: str     # text|json
+
+    # Phase 1 heartbeat logging controls (P1.1.5):
+    # Heartbeat must be bounded and avoid spam by default.
+    heartbeat_enabled: bool
+    heartbeat_every_n_ticks: int
 
 
 def default_runtime_system_settings() -> RuntimeSystemSettings:
@@ -29,6 +39,10 @@ def default_runtime_system_settings() -> RuntimeSystemSettings:
         tick_interval_ms=100,
         log_level="INFO",
         log_format="text",
+
+        # Heartbeat defaults: OFF + bounded (avoid spam by default).
+        heartbeat_enabled=False,
+        heartbeat_every_n_ticks=10,
     )
 
 
@@ -50,7 +64,16 @@ def _load_json_file(path: str) -> Tuple[Optional[Dict[str, Any]], Optional[str]]
 
 
 def _coerce_and_validate(settings: Dict[str, Any]) -> RuntimeSystemSettings:
-    allowed_keys = {"async_enabled", "tick_interval_ms", "log_level", "log_format"}
+    allowed_keys = {
+        "async_enabled",
+        "tick_interval_ms",
+        "log_level",
+        "log_format",
+
+        # P1.1.5 heartbeat controls
+        "heartbeat_enabled",
+        "heartbeat_every_n_ticks",
+    }
     unknown = set(settings.keys()) - allowed_keys
     if unknown:
         raise ValueError(f"Unknown runtime system settings keys: {sorted(unknown)}")
@@ -63,6 +86,9 @@ def _coerce_and_validate(settings: Dict[str, Any]) -> RuntimeSystemSettings:
     log_level = str(merged["log_level"]).upper()
     log_format = str(merged["log_format"]).lower()
 
+    heartbeat_enabled = bool(merged["heartbeat_enabled"])
+    heartbeat_every_n_ticks = int(merged["heartbeat_every_n_ticks"])
+
     if tick_interval_ms <= 0:
         raise ValueError("tick_interval_ms must be > 0")
     if log_level not in {"DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"}:
@@ -70,11 +96,17 @@ def _coerce_and_validate(settings: Dict[str, Any]) -> RuntimeSystemSettings:
     if log_format not in {"text", "json"}:
         raise ValueError(f"Unsupported log_format: {log_format}")
 
+    # Heartbeat bounding safety (P1.1.5)
+    if heartbeat_every_n_ticks <= 0:
+        raise ValueError("heartbeat_every_n_ticks must be > 0")
+
     return RuntimeSystemSettings(
         async_enabled=async_enabled,
         tick_interval_ms=tick_interval_ms,
         log_level=log_level,
         log_format=log_format,
+        heartbeat_enabled=heartbeat_enabled,
+        heartbeat_every_n_ticks=heartbeat_every_n_ticks,
     )
 
 

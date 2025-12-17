@@ -1,7 +1,7 @@
 # lillycore/runtime/interactive_runner.py
 
 import time
-from runtime.heartbeat import HeartbeatLoop, RuntimeStopRequested
+from lillycore.runtime.heartbeat import HeartbeatLoop, RuntimeStopRequested
 
 
 def run_interactive(
@@ -25,6 +25,30 @@ def run_interactive(
     # ---- settings -------------------------------------------------------
     settings = settings_loader()
 
+    # Phase 1 settings contract (P1.1.3): settings are operational/runtime-focused.
+    # We apply only minimal operational values here to avoid expanding scope.
+    #
+    # If present, allow settings to override the tick interval used by this runner.
+    # If absent or invalid, we keep the provided default argument.
+    if isinstance(settings, dict):
+        try:
+            maybe_interval = settings.get("tick_interval_sec", None)
+            if maybe_interval is not None:
+                tick_interval_sec = float(maybe_interval)
+        except Exception:
+            # Settings must not break the runtime in Phase 1; keep the default.
+            pass
+
+    # If the logger supports being configured from settings, allow it.
+    # This keeps logging verbosity/heartbeat emission controlled by settings (P1.1.5)
+    # without assuming a specific logging backend implementation.
+    if logger and hasattr(logger, "configure_from_settings"):
+        try:
+            logger.configure_from_settings(settings)
+        except Exception:
+            # Logging configuration MUST NOT break runtime control flow in Phase 1.
+            pass
+
     # ---- command handling (Phase 1: demonstrate ingestion, minimal semantics)
     def on_command(cmd: str):
         logger.info(f"COMMAND: {cmd}")
@@ -35,6 +59,25 @@ def run_interactive(
     # Otherwise, adapters can close over on_command internally.
     if ingress_adapter and hasattr(ingress_adapter, "set_handler"):
         ingress_adapter.set_handler(on_command)
+
+    # ---- envelope sink wrapping -----------------------------------------
+    # Phase 1 envelope integration boundary (P1.1.4):
+    # - treat envelope as opaque (do not inspect schema)
+    # - ensure envelope propagation reaches unified logging (P1.1.5)
+    def _envelope_sink_wrapped(envelope_obj):
+        # If the logger supports a first-class envelope event, emit it.
+        if logger and hasattr(logger, "envelope"):
+            try:
+                logger.envelope(envelope_obj, source="runtime_boundary")
+            except Exception:
+                # Logging MUST NOT break runtime control flow in Phase 1.
+                pass
+
+        # Preserve existing sink behaviour if provided.
+        if envelope_sink:
+            return envelope_sink(envelope_obj)
+
+        return None
 
     # ---- lifecycle hooks ------------------------------------------------
     def on_start():
@@ -59,7 +102,7 @@ def run_interactive(
         logger=logger,
         ingress=ingress_adapter,
         envelope_factory=envelope_factory,
-        envelope_sink=envelope_sink,
+        envelope_sink=_envelope_sink_wrapped,
     )
 
     return loop

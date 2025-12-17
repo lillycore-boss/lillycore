@@ -52,6 +52,11 @@ class HeartbeatLoop:
 
         self._stop_requested = False
 
+        # Phase 1 logging hook support (P1.1.5):
+        # Keep a deterministic tick counter so heartbeat logging can reference
+        # a stable tick_id without relying on wall-clock time.
+        self._tick_id = 0
+
     # ---- control surface -------------------------------------------------
 
     def request_stop(self):
@@ -61,11 +66,35 @@ class HeartbeatLoop:
 
     def run(self):
         try:
+            # Phase 1 logging hook: lifecycle start
+            # - Do not assume a logging backend.
+            # - If a unified runtime logger exists (P1.1.5), it can expose
+            #   lifecycle_start(). If not, this becomes a no-op.
+            if self._logger and hasattr(self._logger, "lifecycle_start"):
+                try:
+                    self._logger.lifecycle_start(component="core_runtime")
+                except Exception:
+                    # Logging MUST NOT break runtime control flow in Phase 1.
+                    pass
+
             if self._on_start:
                 self._on_start()
 
             while not self._stop_requested:
                 try:
+                    # Deterministic tick progression (owned by the loop).
+                    self._tick_id += 1
+
+                    # Phase 1 logging hook: bounded heartbeat/tick
+                    # Heartbeat "spam control" is handled by the logger/settings,
+                    # not by the runtime loop. The loop only provides tick_id.
+                    if self._logger and hasattr(self._logger, "tick"):
+                        try:
+                            self._logger.tick(tick_id=self._tick_id)
+                        except Exception:
+                            # Logging MUST NOT break runtime control flow in Phase 1.
+                            pass
+
                     if self._on_tick:
                         self._on_tick()
                 except RuntimeStopRequested:
@@ -74,6 +103,14 @@ class HeartbeatLoop:
                     self._propagate_error(exc)
 
         finally:
+            # Phase 1 logging hook: lifecycle stop
+            if self._logger and hasattr(self._logger, "lifecycle_stop"):
+                try:
+                    self._logger.lifecycle_stop(component="core_runtime")
+                except Exception:
+                    # Logging MUST NOT break runtime control flow in Phase 1.
+                    pass
+
             if self._on_stop:
                 self._on_stop()
 

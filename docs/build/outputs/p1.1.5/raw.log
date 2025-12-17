@@ -1,0 +1,47 @@
+Runtime system settings resolved. sources=['defaults', 'file'] changed_keys={'file': ['tick_interval_ms', 'log_level', 'heartbeat_enabled', 'heartbeat_every_n_ticks']}
+RUNTIME_START {'component': 'core_runtime'}
+Runtime starting (Phase 1 interactive)
+lilly> HEARTBEAT {'tick_id': 1, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 2, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 3, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 4, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 5, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 6, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 7, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 8, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 9, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 10, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 11, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 12, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 13, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 14, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 15, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 16, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 17, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 18, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 19, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 20, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 21, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 22, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 23, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 24, 'every_n_ticks': 1}
+lilly> HEARTBEAT {'tick_id': 25, 'every_n_ticks': 1}
+[ingress] boom
+ENVELOPE_EVENT: {'envelope': ErrorEnvelope(_exc=ValueError('forced error for envelope proof'), _where='runtime.tick', _severity='error', _context={}, _tags={}, _ts=1765946484.421408, _traceback='Traceback (most recent call last):\n  File "/library/lillycore/runtime/heartbeat.py", line 99, in run\n    self._on_tick()\n  File "/library/lillycore/runtime/interactive_runner.py", line 91, in on_tick\n    ingress_adapter.poll()\n  File "/library/lillycore/runtime/terminal_ingress.py", line 69, in poll\n    self._on_command(cmd)\n  File "/library/lillycore/run_runtime.py", line 134, in _noop_handler\n    raise ValueError("forced error for envelope proof")\nValueError: forced error for envelope proof\n'), 'meta': {'source': 'runtime_boundary'}}
+ENVELOPE_EVENT: ErrorEnvelope(_exc=ValueError('forced error for envelope proof'), _where='runtime.tick', _severity='error', _context={}, _tags={}, _ts=1765946484.421408, _traceback='Traceback (most recent call last):\n  File "/library/lillycore/runtime/heartbeat.py", line 99, in run\n    self._on_tick()\n  File "/library/lillycore/runtime/interactive_runner.py", line 91, in on_tick\n    ingress_adapter.poll()\n  File "/library/lillycore/runtime/terminal_ingress.py", line 69, in poll\n    self._on_command(cmd)\n  File "/library/lillycore/run_runtime.py", line 134, in _noop_handler\n    raise ValueError("forced error for envelope proof")\nValueError: forced error for envelope proof\n')
+HEARTBEAT {'tick_id': 26, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 27, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 28, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 29, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 30, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 31, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 32, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 33, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 34, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 35, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 36, 'every_n_ticks': 1}
+HEARTBEAT {'tick_id': 37, 'every_n_ticks': 1}
+lilly> HEARTBEAT {'tick_id': 38, 'every_n_ticks': 1}
+[ingress] exit
+RUNTIME_STOP {'component': 'core_runtime'}
+Runtime stopping (Phase 1 interactive)

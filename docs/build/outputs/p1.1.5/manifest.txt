@@ -1,0 +1,8 @@
+p1.1.5 proof inventory
+- command:
+  - mkdir -p docs/build/outputs/p1.1.5
+  - PYTHONPATH=.. python3 -m lillycore.run_runtime > docs/build/outputs/p1.1.5/raw.log 2>&1
+  - cp runtime/config/runtime.system.json docs/build/outputs/p1.1.5/runtime.system.json.used
+- files:
+  - raw.log
+  - runtime.system.json.used

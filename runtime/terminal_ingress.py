@@ -7,7 +7,7 @@ import sys
 import threading
 from typing import Optional
 
-from runtime.command_ingress import Command, CommandHandler, CommandIngress
+from lillycore.runtime.command_ingress import Command, CommandHandler, CommandIngress
 
 
 class TerminalIngressAdapter(CommandIngress):

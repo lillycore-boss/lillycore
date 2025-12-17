@@ -218,7 +218,9 @@
         - canonical file: `lillycore/runtime/config/runtime.system.json` (JSON)
         - precedence: defaults < system settings file < temporary override
         - missing file behaviour: MUST fall back to defaults; SHOULD log a warning
-      - Interactive invocation is expected to run via a proof harness (example): `python3 run_runtime.py`; runner is not a canonical API.
+        - Phase 1 heartbeat logging controls (P1.1.5): bounded tick emission is controlled by settings (e.g., `heartbeat_enabled`, `heartbeat_every_n_ticks`) and should avoid spam by default.
+      - Interactive invocation is expected to run via a proof harness; runner is not a canonical API.
+        - For running from the repo root folder without directory switching: `PYTHONPATH=.. python3 -m lillycore.run_runtime`
       - Command ingress semantics are transport-agnostic; Phase 1 provides a terminal-based adapter only.
       - Do NOT bake in assumptions that all engines are forever fused; future phases may split processes/machines.
       - Runtime produces envelopes at catch boundaries via an injected
@@ -229,6 +231,7 @@
       - lillycore/runtime/
         - heartbeat.py                  (core loop + lifecycle)
         - interactive_runner.py         (Phase 1 interactive entrypoint)
+        - runtime_logger.py             (Phase 1 unified logging adapter; lifecycle, heartbeat, envelope hooks)
         - command_ingress.py            (ingress boundary / protocol)
         - terminal_ingress.py           (Phase 1 terminal-based ingress adapter)
         - config/runtime.system.json    (runtime system settings JSON; P1.1.3)
