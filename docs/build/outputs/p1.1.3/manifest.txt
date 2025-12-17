@@ -1,0 +1,8 @@
+Card: P1.1.3 — Runtime System Settings Contract
+Commands:
+- cp runtime/config/runtime.system.json docs/build/outputs/p1.1.3/runtime.system.json
+- python3 - <<'PY' | tee docs/build/outputs/p1.1.3/raw_output.txt  (see shell history)
+Outputs:
+- docs/build/outputs/p1.1.3/runtime.system.json
+- docs/build/outputs/p1.1.3/raw_output.txt
+- docs/build/outputs/p1.1.3/manifest.txt

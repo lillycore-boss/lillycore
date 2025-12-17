@@ -1,0 +1,12 @@
+=== CASE 1: defaults only (missing file) ===
+WARN: Runtime system settings file not found at '__missing__.json' (using defaults).
+INFO: Runtime system settings resolved. sources=['defaults'] changed_keys={}
+RuntimeSystemSettings(async_enabled=True, tick_interval_ms=100, log_level='INFO', log_format='text')
+
+=== CASE 2: defaults < file ===
+INFO: Runtime system settings resolved. sources=['defaults', 'file'] changed_keys={'file': ['tick_interval_ms', 'log_level']}
+RuntimeSystemSettings(async_enabled=True, tick_interval_ms=250, log_level='DEBUG', log_format='text')
+
+=== CASE 3: defaults < file < temp_override ===
+INFO: Runtime system settings resolved. sources=['defaults', 'file', 'temp_override'] changed_keys={'file': ['tick_interval_ms', 'log_level'], 'temp_override': ['tick_interval_ms', 'log_level']}
+RuntimeSystemSettings(async_enabled=True, tick_interval_ms=50, log_level='ERROR', log_format='text')

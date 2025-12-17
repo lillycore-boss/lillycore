@@ -1,0 +1,6 @@
+{
+  "async_enabled": true,
+  "tick_interval_ms": 250,
+  "log_level": "DEBUG",
+  "log_format": "text"
+}

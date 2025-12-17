@@ -34,6 +34,8 @@
     - system_canon.allowed_kinds
     - system_canon.index
     - system_canon.system_ontology
+    - system_canon.runtime_system_settings_contract
+
 
 - id: system_canon.system_ontology
   kind: ontology
@@ -75,3 +77,24 @@
       - Plugin DOC → per-plugin storage boundary
       - User DOC   → user-generated content
 
+- id: system_canon.runtime_settings_contract
+  kind: ontology
+  md: |
+    ## Runtime System Settings Contract
+    Purpose:
+    - Define the canonical Phase 1 contract for operational/runtime settings.
+    - Prevent path/format/precedence drift across tools and GPTs.
+    
+    Scope:
+    - Runtime/operational settings only (e.g. loop timing, logging verbosity).
+    - Explicitly NOT persona or AI behaviour settings.
+    
+    Canonical file:
+    Path: `lillycore/runtime/config/runtime.system.json`
+    Format: JSON
+    
+    Precedence (lowest → highest):
+    - defaults < system settings file < temporary override
+
+    Missing file behaviour:
+    - If the canonical file is missing, runtime MUST fall back to defaults and SHOULD log a warning.
