@@ -1,0 +1,8 @@
+P1.1.4 proof artefacts
+Command(s):
+- python3 run_runtime.py
+- printf "boom\nexit\n" | python3 run_runtime.py
+
+Files:
+- run_stdout_interactive.txt
+- run_stdout_piped.txt

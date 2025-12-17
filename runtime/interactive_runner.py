@@ -9,7 +9,11 @@ def run_interactive(
     settings_loader,
     logger,
     ingress_adapter,
-    envelope_handler,
+
+    # Phase 1 envelope integration seams
+    envelope_factory,
+    envelope_sink,
+
     tick_interval_sec: float = 0.5,
 ):
     """
@@ -54,7 +58,8 @@ def run_interactive(
         on_stop=on_stop,
         logger=logger,
         ingress=ingress_adapter,
-        envelope_handler=envelope_handler,
+        envelope_factory=envelope_factory,
+        envelope_sink=envelope_sink,
     )
 
     return loop

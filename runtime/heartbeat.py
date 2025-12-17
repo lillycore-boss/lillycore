@@ -1,6 +1,6 @@
 # lillycore/runtime/heartbeat.py
 
-from typing import Callable, Optional
+from typing import Callable, Optional, Any
 
 
 class RuntimeStopRequested(Exception):
@@ -34,7 +34,12 @@ class HeartbeatLoop:
         *,
         logger=None,
         ingress=None,
-        envelope_handler=None,
+
+        # Phase 1 envelope integration:
+        # - factory: creates an opaque envelope from an exception
+        # - sink: emits the envelope to logging or other consumers
+        envelope_factory: Optional[Callable[..., Any]] = None,
+        envelope_sink: Optional[Callable[[Any], None]] = None,
     ):
         self._on_start = on_start
         self._on_tick = on_tick
@@ -42,7 +47,8 @@ class HeartbeatLoop:
 
         self._logger = logger
         self._ingress = ingress
-        self._envelope_handler = envelope_handler
+        self._envelope_factory = envelope_factory
+        self._envelope_sink = envelope_sink
 
         self._stop_requested = False
 
@@ -76,12 +82,21 @@ class HeartbeatLoop:
     def _propagate_error(self, exc: Exception):
         """
         Treat envelope as opaque.
-        Creation/wrapping occurs elsewhere.
+
+        Phase 1 boundary:
+        - runtime converts an exception into an envelope via the
+          envelope authority (factory)
+        - runtime forwards the envelope to the logging seam (sink)
+
+        This method MUST NOT inspect or mutate envelope contents.
         """
-        if self._envelope_handler:
-            self._envelope_handler(exc)
-        elif self._logger:
-            # last-resort visibility without schema assumptions
+        if self._envelope_factory and self._envelope_sink:
+            env = self._envelope_factory(exc, where="runtime.tick")
+            self._envelope_sink(env)
+            return
+
+        # existing fallback behaviour remains intact
+        if self._logger:
             self._logger.error("Unhandled exception in heartbeat loop", exc_info=exc)
         else:
             raise

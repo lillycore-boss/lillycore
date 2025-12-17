@@ -1,0 +1,6 @@
+Runtime system settings resolved. sources=['defaults', 'file'] changed_keys={'file': ['tick_interval_ms', 'log_level']}
+Runtime starting (Phase 1 interactive)
+lilly> lilly> [ingress] boom
+ENVELOPE_EVENT: ErrorEnvelope(_exc=ValueError('forced error for envelope proof'), _where='runtime.tick', _severity='error', _context={}, _tags={}, _ts=1765942903.35255, _traceback='Traceback (most recent call last):\n  File "/library/lillycore/runtime/heartbeat.py", line 70, in run\n    self._on_tick()\n  File "/library/lillycore/runtime/interactive_runner.py", line 48, in on_tick\n    ingress_adapter.poll()\n  File "/library/lillycore/runtime/terminal_ingress.py", line 69, in poll\n    self._on_command(cmd)\n  File "/library/lillycore/run_runtime.py", line 47, in _noop_handler\n    raise ValueError("forced error for envelope proof")\nValueError: forced error for envelope proof\n')
+lilly> [ingress] exit
+Runtime stopping (Phase 1 interactive)
