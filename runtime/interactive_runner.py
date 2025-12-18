@@ -50,16 +50,11 @@ def run_interactive(
             # Logging configuration MUST NOT break runtime control flow in Phase 1.
             pass
 
-    # ---- command handling (Phase 1: demonstrate ingestion, minimal semantics)
-    def on_command(cmd: str):
-        logger.info(f"COMMAND: {cmd}")
-        if cmd.strip().lower() in {"stop", "/stop", "exit", "quit", "/quit"}:
-            raise RuntimeStopRequested()
-
-    # If the ingress adapter supports a handler injection pattern, prefer it.
-    # Otherwise, adapters can close over on_command internally.
-    if ingress_adapter and hasattr(ingress_adapter, "set_handler"):
-        ingress_adapter.set_handler(on_command)
+    # ---- command handling ------------------------------------------------
+    # Phase 1 ingress is handler-based, but the CommandIngress protocol does not
+    # require a handler injection method. Adapters (e.g., TerminalIngressAdapter)
+    # capture their handler at construction time and may raise RuntimeStopRequested
+    # as a control signal for stop semantics.
 
     # ---- envelope sink wrapping -----------------------------------------
     # Phase 1 envelope integration boundary (P1.1.4):
@@ -93,11 +88,6 @@ def run_interactive(
 
     def on_stop():
         logger.info("Runtime stopping (Phase 1 interactive)")
-
-        # P1.1.6 negative-path proof hook:
-        # if set, force an error during shutdown so HeartbeatLoop must envelope+log it.
-        if os.environ.get("FORCE_SHUTDOWN_ERROR", "").strip() == "1":
-            raise RuntimeError("forced shutdown failure (P1.1.6 negative-path proof)")
 
     loop = HeartbeatLoop(
         on_start=on_start,

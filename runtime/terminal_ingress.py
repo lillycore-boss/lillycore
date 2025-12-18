@@ -8,7 +8,7 @@ import threading
 from typing import Optional
 
 from lillycore.runtime.command_ingress import Command, CommandHandler, CommandIngress
-
+from lillycore.runtime.heartbeat import RuntimeStopRequested
 
 class TerminalIngressAdapter(CommandIngress):
     """
@@ -65,6 +65,11 @@ class TerminalIngressAdapter(CommandIngress):
 
             if not cmd:
                 continue
+
+            # Phase 1 stop commands (P1.1.6):
+            # These are control signals, not errors.
+            if cmd in {"stop", "quit", "exit"}:
+                raise RuntimeStopRequested()
 
             self._on_command(cmd)
 

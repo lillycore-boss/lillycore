@@ -118,6 +118,14 @@ class Phase1RuntimeLogger:
     def finalize(self, **fields):
         self._base.info("RUNTIME_LOG_FINALIZE %s", fields if fields else "")
 
+    # Phase 1 shutdown finalization aliases (P1.1.6):
+    # HeartbeatLoop may call these if present.
+    def flush(self, **fields):
+        self.finalize(**fields)
+
+    def finish(self, **fields):
+        self.finalize(**fields)
+
 
 def load_settings(logger):
     return resolve_runtime_system_settings(
@@ -143,8 +151,11 @@ def _noop_handler(cmd: str) -> None:
     if cmd.strip().lower() == "boom":
         raise ValueError("forced error for envelope proof")
 
-    if cmd.strip().lower() in {"stop", "/stop", "quit", "exit", "/quit", "eof"}:
+    # EOF may be treated as stop (P1.1.6):
+    # terminal_ingress passes the literal string "EOF" to the handler.
+    if cmd.strip().upper() == "EOF":
         raise RuntimeStopRequested()
+
 
 ingress = TerminalIngressAdapter(on_command=_noop_handler, prompt="lilly> ")
 
@@ -154,7 +165,11 @@ loop = run_interactive(
     ingress_adapter=ingress,
     envelope_factory=wrap_exception,
     envelope_sink=envelope_sink,
-    tick_interval_sec=settings.tick_interval_ms / 1000.0,
+    tick_interval_sec=(
+        (settings.get("tick_interval_ms", 500) / 1000.0) if isinstance(settings, dict)
+        else (getattr(settings, "tick_interval_ms", 500) / 1000.0)
+    ),
+
 )
 
 try:

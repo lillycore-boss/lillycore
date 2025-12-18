@@ -85,11 +85,36 @@ class RuntimeLogger:
             # Logging MUST NOT break runtime control flow in Phase 1.
             pass
 
+    def flush(self, **fields: Any) -> None:
+        """
+        Phase 1 shutdown finalization alias (P1.1.6).
+        HeartbeatLoop may call flush() if present.
+        """
+        self.finalize(**fields)
+
+    def finish(self, **fields: Any) -> None:
+        """
+        Phase 1 shutdown finalization alias (P1.1.6).
+        HeartbeatLoop may call finish() if present.
+        """
+        self.finalize(**fields)
+
     def lifecycle_start(self, **fields: Any) -> None:
         self._emit("INFO", "runtime.lifecycle.start", fields)
 
     def lifecycle_stop(self, **fields: Any) -> None:
         self._emit("INFO", "runtime.lifecycle.stop", fields)
+
+    def configure_from_settings(self, settings: Dict[str, Any]) -> None:
+        """
+        Optional Phase 1 seam: allow runtime to configure logging from settings (P1.1.5).
+        Must never throw in a way that breaks runtime control flow; caller already guards,
+        but keep this safe anyway.
+        """
+        try:
+            self.config = logging_config_from_settings(settings)
+        except Exception:
+            pass
 
     def tick(self, tick_id: int, **fields: Any) -> None:
         """

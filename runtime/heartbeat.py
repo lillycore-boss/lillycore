@@ -1,7 +1,7 @@
 # lillycore/runtime/heartbeat.py
 
 from typing import Callable, Optional, Any
-
+import os
 
 class RuntimeStopRequested(Exception):
     """
@@ -137,21 +137,35 @@ class HeartbeatLoop:
 
             if self._on_stop:
                 try:
+                    # Negative-path shutdown proof hook (P1.1.6):
+                    # FORCE_SHUTDOWN_ERROR=1 forces an exception during shutdown (on_stop)
+                    # which MUST be enveloped and logged.
+                    if os.getenv("FORCE_SHUTDOWN_ERROR") == "1":
+                        raise RuntimeError("Forced shutdown error (FORCE_SHUTDOWN_ERROR=1)")
+
                     self._on_stop()
+                except RuntimeStopRequested:
+                    # Control signal: MUST NOT be wrapped as an envelope.
+                    # Shutdown is already in progress; treat as no-op.
+                    pass
                 except Exception as exc:
                     # Shutdown-time errors MUST be enveloped and logged (P1.1.6).
                     self._propagate_error(exc, where="runtime.shutdown.on_stop")
 
             # Phase 1 logging finalization (P1.1.6):
-            # Respect flush/finish/finalize if present; must not break shutdown.
+            # Prefer a single finalization hook if present (avoid triple-calling aliases).
             if self._logger:
-                for hook_name in ("finalize", "flush", "finish"):
-                    if hasattr(self._logger, hook_name):
-                        try:
-                            getattr(self._logger, hook_name)()
-                        except Exception as exc:
-                            self._propagate_error(exc, where=f"runtime.shutdown.logger.{hook_name}")
+                hook_name = None
+                for candidate in ("finalize", "flush", "finish"):
+                    if hasattr(self._logger, candidate):
+                        hook_name = candidate
+                        break
 
+                if hook_name is not None:
+                    try:
+                        getattr(self._logger, hook_name)()
+                    except Exception as exc:
+                        self._propagate_error(exc, where=f"runtime.shutdown.logger.{hook_name}")
 
     # ---- error handling --------------------------------------------------
 

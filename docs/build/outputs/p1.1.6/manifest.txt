@@ -1,9 +1,13 @@
+P1.1.6 — Stop/Shutdown Semantics (Phase 1 Graceful Exit)
+
 Commands executed:
-- PYTHONPATH=.. python3 -m lillycore.run_runtime | tee docs/build/outputs/p1.1.6/normal_shutdown.txt
-- FORCE_SHUTDOWN_ERROR=1 PYTHONPATH=.. python3 -m lillycore.run_runtime | tee docs/build/outputs/p1.1.6/negative_shutdown.txt
 
-Stop command used:
-- stop
+1) Normal shutdown:
+   cd /library
+   PYTHONPATH=. python3 lillycore/run_runtime.py | tee lillycore/docs/build/outputs/p1.1.6/normal_shutdown.log
+   Action: typed "stop" at prompt
 
-Notes:
-- Negative-path run forces an exception during shutdown (on_stop); runtime envelopes and logs it.
+2) Negative-path shutdown (forced shutdown error):
+   cd /library
+   FORCE_SHUTDOWN_ERROR=1 PYTHONPATH=. python3 lillycore/run_runtime.py | tee lillycore/docs/build/outputs/p1.1.6/negative_shutdown.log
+   Action: typed "stop" at prompt

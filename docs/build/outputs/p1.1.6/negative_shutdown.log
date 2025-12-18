@@ -1,0 +1,8 @@
+WARN: Runtime system settings file not found at 'runtime/config/runtime.system.json' (using defaults).
+Runtime system settings resolved. sources=['defaults'] changed_keys={}
+RUNTIME_START {'component': 'core_runtime'}
+Runtime starting (Phase 1 interactive)
+lilly> lilly> RUNTIME_STOP {'component': 'core_runtime'}
+ENVELOPE_EVENT: {'envelope': ErrorEnvelope(_exc=RuntimeError('Forced shutdown error (FORCE_SHUTDOWN_ERROR=1)'), _where='runtime.shutdown.on_stop', _severity='error', _context={}, _tags={}, _ts=1766015311.2466803, _traceback='Traceback (most recent call last):\n  File "/library/lillycore/runtime/heartbeat.py", line 144, in run\n    raise RuntimeError("Forced shutdown error (FORCE_SHUTDOWN_ERROR=1)")\nRuntimeError: Forced shutdown error (FORCE_SHUTDOWN_ERROR=1)\n'), 'meta': {'source': 'runtime_boundary'}}
+ENVELOPE_EVENT: ErrorEnvelope(_exc=RuntimeError('Forced shutdown error (FORCE_SHUTDOWN_ERROR=1)'), _where='runtime.shutdown.on_stop', _severity='error', _context={}, _tags={}, _ts=1766015311.2466803, _traceback='Traceback (most recent call last):\n  File "/library/lillycore/runtime/heartbeat.py", line 144, in run\n    raise RuntimeError("Forced shutdown error (FORCE_SHUTDOWN_ERROR=1)")\nRuntimeError: Forced shutdown error (FORCE_SHUTDOWN_ERROR=1)\n')
+RUNTIME_LOG_FINALIZE 
