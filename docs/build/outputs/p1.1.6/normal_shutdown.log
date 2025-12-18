@@ -1,9 +1,0 @@
-WARN: Runtime system settings file not found at 'runtime/config/runtime.system.json' (using defaults).
-Runtime system settings resolved. sources=['defaults'] changed_keys={}
-RUNTIME_START {'component': 'core_runtime'}
-Runtime starting (Phase 1 interactive)
-lilly> lilly> RUNTIME_STOP {'component': 'core_runtime'}
-Runtime stopping (Phase 1 interactive)
-RUNTIME_LOG_FINALIZE 
-RUNTIME_LOG_FINALIZE 
-RUNTIME_LOG_FINALIZE 
