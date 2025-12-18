@@ -34,7 +34,7 @@
     - system_canon.allowed_kinds
     - system_canon.index
     - system_canon.system_ontology
-    - system_canon.rruntime_settings_contract
+    - system_canon.runtime_settings_contract
 
 
 - id: system_canon.system_ontology
