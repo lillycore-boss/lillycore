@@ -65,6 +65,12 @@
     - `contracts.runtime_settings_failure_reporting_p1`
       Phase 1 failure + drift reporting for runtime settings (safe mode, warn-once signals, envelope/log wiring).
 
+    - `contracts.ai_pools_v1`
+      AI pool structural contract v1 (pools, entries, ai_ref handles; no runtime behaviour).
+
+    - `contracts.inter_engine_package_v1`
+      Canonical inter-engine package v1 (addressing, payload, context bundles, trace breadcrumbs).
+
 - id: contracts.error_envelope_v1
   kind: reference
   md: |
@@ -349,3 +355,105 @@
     - Missing file: WARN log only (`config.missing_file`).
     - Invalid/corrupt file: ERROR log + ERROR envelope; continue (safe mode).
     - Unsupported `schema_version`: ERROR log + ERROR envelope; continue (safe mode).
+
+- id: contracts.ai_pools_v1
+  kind: reference
+  md: |
+    # AI Pools v1 (Phase 1, Structural Only)
+
+    Pools are named structural targets referenced by subsystems.
+    Pools may list multiple candidate AI resources as entries.
+
+    ## Non-goals (Phase 1)
+    - No execution, scheduling, lifecycle, scaling, idle shutdown, or availability state
+    - No runtime counters (error counts) stored in pool definitions
+    - No provider APIs or adapter formatting rules
+
+    ## Entity: ai_pool
+    - `pool_id` (string, required)
+    - `pool_kind` (enum, required): `conversational` | `light` | `worker`
+    - `entries` (list[ai_pool_entry], optional)
+
+    ## Entity: ai_pool_entry
+    - `entry_id` (string, required)
+      - e.g. `primary`, `coder_primary`, `prose_primary`
+    - `ai_ref_id` (string, required)
+      - opaque handle to the backing AI resource (may be shared across pools initially)
+      - future phases may map this to a DB-backed registry
+    - `specialties` (list[string], optional)
+    - `weaknesses` (list[string], optional)
+    - `notes` (string, optional)
+
+- id: contracts.inter_engine_package_v1
+  kind: reference
+  md: |
+    # Inter-Engine Package v1 (Structural Only)
+
+    Canonical container for messages between subsystems (engines, plugins, scripts, AI pools, DB).
+    Used for consistent addressing and breadcrumb tracing.
+
+    ## Non-goals
+    - No transport, routing rules, retries, timeouts, scheduling, or lifecycle semantics
+    - No persistence/storage rules
+    - No execution adapter/provider formatting rules
+
+    ## Entity: inter_engine_package
+
+    ### Identity
+    - `package_id` (string, required)
+    - `package_kind` (string, required)
+      Common kinds (non-exhaustive):
+      - `user_message`
+      - `work_item`
+      - `ai_call`
+      - `db_call`
+      - `user_message_response`
+      - `work_item_response`
+      - `ai_call_response`
+      - `db_call_response`
+
+    ### Addressing
+    - `target` (endpoint_ref, required)
+
+    ### Breadcrumb source
+    - `source` (endpoint_ref, optional)
+      - included when known to support tracing
+
+    ### Payload
+    - `payload` (any, optional)
+      - may be absent when the payload is carried entirely by `context_bundles`
+
+    ### Context bundles
+    - `context_bundles` (list[context_bundle_ref], optional)
+      - may be supporting context OR the effective payload
+
+    ### Trace metadata
+    - `trace` (trace_meta, optional)
+
+    ### Extensibility
+    - `extensions` (map[string, any], optional)
+      - receivers must treat unknown fields as inert
+
+    ## Supporting types
+
+    ### endpoint_ref
+    Identifies the logical subsystem plus the specific handler when known.
+    - `endpoint_kind` (string, required)
+      - e.g. `engine`, `plugin`, `script`, `ai_pool`, doc`, `other`
+    - `endpoint_id` (string, required)
+      - logical name, e.g. `drift_engine`, `helper_engine`, `worker`, `settings_db`
+    - `handler_id` (string, optional)
+      - REQUIRED when known
+      - identifies the specific handler/worker/model/script instance used
+      - examples: `coder_primary`, `prose_primary`, `script_apply_patch_v1`, `db_primary`
+
+    ### context_bundle_ref
+    - `bundle_id` (string, required)
+    - `bundle_kind` (string, optional)
+
+    ### trace_meta
+    - `correlation_id` (string, optional)
+    - `parent_package_id` (string, optional)
+    - `span_id` (string, optional)
+    - `tags` (list[string], optional)
+
