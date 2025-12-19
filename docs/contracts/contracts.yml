@@ -1,0 +1,161 @@
+- id: contracts.overview
+  kind: overview
+  md: |
+    Canonical build-time contracts for Phase 1 logging and error envelopes.
+
+    Scope:
+    - Error envelope v1 schema + severity semantics (P1.D3 authority)
+    - LogRecord v1 schema + level/event taxonomy (P1.D2 authority)
+    - Runtime ↔ logging ↔ envelope wiring rules (Phase 1 boundary semantics)
+
+    Non-scope:
+    - Runtime implementation details (lives in Phase 1 implementer work)
+    - Persistence destinations (files/DB/remote sinks) — out of Phase 1 contract scope unless explicitly decided later
+    - Phase 2+ observability pipelines, analytics, tracing
+
+    Source of truth:
+    - These blocks are canonical. GitHub cards may contain working drafts, but contracts must be reflected here.
+
+- id: contracts.allowed_kinds
+  kind: meta
+  md: |
+    Allowed kinds for CONTRACTS:
+
+    - overview
+    - meta
+    - index
+    - reference
+
+- id: contracts.index
+  kind: index
+  md: |
+    ## Contracts Index
+
+    - `contracts.overview`
+      Purpose and scope of contracts.
+
+    - `contracts.allowed_kinds`
+      Allowed kinds for this file.
+
+    - `contracts.error_envelope_v1`
+      Canonical error envelope v1 contract (schema + severity semantics).
+
+    - `contracts.log_record_v1`
+      Canonical log record v1 contract (required fields + levels + event taxonomy).
+
+    - `contracts.runtime_logging_wiring_p1`
+      Phase 1 wiring rules: where envelopes are created, propagated, and emitted; stop signal is not an envelope.
+
+    - `contracts.work_trace_compat_notes_p1`
+      Phase 1 compatibility notes for future work-trace systems (no DB commitment in Phase 1).
+
+- id: contracts.error_envelope_v1
+  kind: reference
+  md: |
+    ## Error Envelope v1
+
+    ### Required fields
+    - `envelope_version` (number): MUST be `1`.
+    - `id` (string): Unique identifier for correlation.
+    - `timestamp` (string): ISO-8601 timestamp when envelope is created.
+    - `severity` (string): `WARN | ERROR | FATAL`.
+    - `message` (string): Human-readable summary.
+    - `origin` (object):
+      - `component` (string): e.g., `runtime`
+      - `boundary` (string): `start | tick | ingress | stop | shutdown`
+
+    ### Optional fields
+    - `kind` (string): Coarse classification.
+    - `cause` (object):
+      - `type` (string)
+      - `message` (string)
+      - `stack` (string): Stack trace text (included by default for `WARN/ERROR/FATAL`).
+    - `context` (object): Structured metadata (tick number, command, settings source).
+    - `tags` (array[string])
+    - `is_retryable` (boolean)
+
+    ### Propagation rules
+    - Created at runtime catch boundaries via injected `envelope_factory`.
+    - Forwarded to logging via injected `envelope_sink`.
+    - `RuntimeStopRequested` MUST NOT be wrapped as an envelope.
+
+    ### Extension rule
+    - Readers MUST ignore unknown fields.
+    - `context` is the primary extension surface in Phase 1.
+
+
+- id: contracts.log_record_v1
+  kind: reference
+  md: |
+    ## LogRecord v1
+
+    ### Default format
+    - JSON Lines (JSONL): one LogRecord JSON object per line.
+
+    ### Required fields
+    - `log_version` (number): MUST be `1`.
+    - `timestamp` (string): ISO-8601
+    - `level` (string): `DEBUG | INFO | WARN | ERROR | FATAL`
+    - `event` (string): Stable event name (taxonomy-defined)
+    - `component` (string)
+    - `message` (string)
+
+    ### Optional fields
+    - `tick` (number)
+    - `data` (object)
+    - `envelope` (object | null)
+    - `correlation_id` (string)
+
+    ### Level semantics (Phase 1)
+    - `DEBUG`: Development detail; may be suppressed by settings.
+    - `INFO`: Normal lifecycle/heartbeat events.
+    - `WARN`: Degraded/maybe-bug; MUST be emitted and tracked.
+    - `ERROR`: Error event; MUST be emitted; commonly paired with an envelope.
+    - `FATAL`: Terminal event; MUST be emitted; paired with an envelope; runtime stops after emission + shutdown attempt.
+
+    ### Minimum event taxonomy (Phase 1 backbone)
+    - `runtime.start`
+    - `runtime.tick`
+    - `runtime.stop_requested`
+    - `runtime.shutdown.start`
+    - `runtime.shutdown.complete`
+    - `ingress.command.received`
+    - `config.missing_file`
+    - `runtime.envelope`
+
+    ### Heartbeat controls (settings)
+    - Heartbeat/tick logging MUST be bounded by settings (`enabled` + `every_n_ticks`) and avoid spam by default.
+
+
+- id: contracts.runtime_logging_wiring_p1
+  kind: reference
+  md: |
+    ## Phase 1 runtime ↔ logging ↔ envelope wiring rules
+
+    ### Wrap boundaries (envelope creation)
+    Envelopes MUST be created at:
+    - start boundary
+    - tick/step boundary
+    - ingress handling boundary
+    - shutdown finalization boundary
+
+    ### Non-envelope stop signal
+    - Stop requested creates `RuntimeStopRequested`.
+    - It MUST be logged as `runtime.stop_requested`.
+    - It MUST NOT be wrapped as an envelope.
+
+    ### Propagation
+    - Runtime catch boundary → `envelope_factory` → Error Envelope v1.
+    - Runtime forwards envelope to `envelope_sink`.
+    - Logging emits a LogRecord v1:
+      - `event = runtime.envelope`
+      - `level` mapped from envelope severity
+      - `envelope` populated
+
+
+- id: contracts.work_trace_compat_notes_p1
+  kind: reference
+  md: |
+    Prefer LogRecord v1 as shared event shape across backbone logs and future work-trace.
+    correlation_id remains optional in v1.
+    Future systems may add rich correlation inside data without changing v1.

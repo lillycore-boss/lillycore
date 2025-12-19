@@ -56,6 +56,8 @@
 - id: system_resource_index.load_paths
   kind: reference
   md: |
+    ## system_resource_index.load_paths
+
     ## System Resource Load Paths
 
     Authoritative mapping from conceptual system document names to on-disk paths.
@@ -65,6 +67,7 @@
 
     modules: "docs/modules.yml"
     system_canon: "docs/system_canon.yml"
+    contracts: "docs/contracts/contracts.yml"
 
 - id: system_resource_index.modules
   kind: reference
