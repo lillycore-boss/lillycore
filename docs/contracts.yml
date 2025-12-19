@@ -1,0 +1,351 @@
+- id: contracts.overview
+  kind: overview
+  md: |
+    Canonical Phase 1 contracts for LillyCORE runtime behaviour surfaces.
+
+    Scope (Phase 1):
+    - Logging + error envelopes (schemas + wiring rules).
+    - Runtime system settings (“preferences”) contract:
+      - canonical file + format
+      - schema shape + namespacing rules
+      - precedence / override semantics
+      - safe failure behaviour + logging/envelope reporting requirements
+
+    Non-scope (Phase 1):
+    - Runtime implementation details (lives in Phase 1 implementer work).
+    - Storage engines and persistence destinations beyond explicitly named canonical files.
+    - Phase 2+ observability pipelines, analytics, tracing, or migration frameworks.
+    - Persona / AI behaviour settings (handled outside Phase 1 runtime operational settings).
+
+    Source of truth:
+    - These blocks are canonical. Working drafts may exist elsewhere, but contracts must be reflected here.
+
+- id: contracts.allowed_kinds
+  kind: meta
+  md: |
+    Allowed kinds for CONTRACTS:
+
+    - overview
+    - meta
+    - index
+    - reference
+
+- id: contracts.index
+  kind: index
+  md: |
+    ## Contracts Index
+
+    - `contracts.overview`
+      Purpose and scope of contracts.
+
+    - `contracts.allowed_kinds`
+      Allowed kinds for this file.
+
+    - `contracts.error_envelope_v1`
+      Canonical error envelope v1 contract (schema + severity semantics).
+
+    - `contracts.log_record_v1`
+      Canonical log record v1 contract (required fields + levels + event taxonomy).
+
+    - `contracts.runtime_logging_wiring_p1`
+      Phase 1 wiring rules: where envelopes are created, propagated, and emitted; stop signal is not an envelope.
+
+    - `contracts.work_trace_compat_notes_p1`
+      Phase 1 compatibility notes for future work-trace systems (no DB commitment in Phase 1).
+
+    - `contracts.runtime_settings_v1`
+      Runtime system settings (“preferences”) contract v1: schema shape, namespacing, types, and compatibility stance.
+
+    - `contracts.runtime_settings_precedence_p1`
+      Phase 1 precedence/override semantics for runtime settings (defaults < file < temporary override).
+
+    - `contracts.runtime_settings_persistence_p1`
+      Phase 1 persistence boundary for runtime settings (canonical file, read/write expectations, atomicity stance).
+
+    - `contracts.runtime_settings_failure_reporting_p1`
+      Phase 1 failure + drift reporting for runtime settings (safe mode, warn-once signals, envelope/log wiring).
+
+- id: contracts.error_envelope_v1
+  kind: reference
+  md: |
+    ## Error Envelope v1
+
+    ### Required fields
+    - `envelope_version` (number): MUST be `1`.
+    - `id` (string): Unique identifier for correlation.
+    - `timestamp` (string): ISO-8601 timestamp when envelope is created.
+    - `severity` (string): `WARN | ERROR | FATAL`.
+    - `message` (string): Human-readable summary.
+    - `origin` (object):
+      - `component` (string): e.g., `runtime`
+      - `boundary` (string): `start | tick | ingress | stop | shutdown`
+
+    ### Optional fields
+    - `kind` (string): Coarse classification.
+    - `cause` (object):
+      - `type` (string)
+      - `message` (string)
+      - `stack` (string): Stack trace text (included by default for `WARN/ERROR/FATAL`).
+    - `context` (object): Structured metadata (tick number, command, settings source).
+    - `tags` (array[string])
+    - `is_retryable` (boolean)
+
+    ### Propagation rules
+    - Created at runtime catch boundaries via injected `envelope_factory`.
+    - Forwarded to logging via injected `envelope_sink`.
+    - `RuntimeStopRequested` MUST NOT be wrapped as an envelope.
+
+    ### Extension rule
+    - Readers MUST ignore unknown fields.
+    - `context` is the primary extension surface in Phase 1.
+
+
+- id: contracts.log_record_v1
+  kind: reference
+  md: |
+    ## LogRecord v1
+
+    ### Default format
+    - JSON Lines (JSONL): one LogRecord JSON object per line.
+
+    ### Required fields
+    - `log_version` (number): MUST be `1`.
+    - `timestamp` (string): ISO-8601
+    - `level` (string): `DEBUG | INFO | WARN | ERROR | FATAL`
+    - `event` (string): Stable event name (taxonomy-defined)
+    - `component` (string)
+    - `message` (string)
+
+    ### Optional fields
+    - `tick` (number)
+    - `data` (object)
+    - `envelope` (object | null)
+    - `correlation_id` (string)
+
+    ### Level semantics (Phase 1)
+    - `DEBUG`: Development detail; may be suppressed by settings.
+    - `INFO`: Normal lifecycle/heartbeat events.
+    - `WARN`: Degraded/maybe-bug; MUST be emitted and tracked.
+    - `ERROR`: Error event; MUST be emitted; commonly paired with an envelope.
+    - `FATAL`: Terminal event; MUST be emitted; paired with an envelope; runtime stops after emission + shutdown attempt.
+
+    ### Minimum event taxonomy (Phase 1 backbone)
+    - `runtime.start`
+    - `runtime.tick`
+    - `runtime.stop_requested`
+    - `runtime.shutdown.start`
+    - `runtime.shutdown.complete`
+    - `ingress.command.received`
+    - `config.missing_file`
+    - `runtime.envelope`
+
+    ### Heartbeat controls (settings)
+    - Heartbeat/tick logging MUST be bounded by settings (`enabled` + `every_n_ticks`) and avoid spam by default.
+
+
+- id: contracts.runtime_logging_wiring_p1
+  kind: reference
+  md: |
+    ## Phase 1 runtime ↔ logging ↔ envelope wiring rules
+
+    ### Wrap boundaries (envelope creation)
+    Envelopes MUST be created at:
+    - start boundary
+    - tick/step boundary
+    - ingress handling boundary
+    - shutdown finalization boundary
+
+    ### Non-envelope stop signal
+    - Stop requested creates `RuntimeStopRequested`.
+    - It MUST be logged as `runtime.stop_requested`.
+    - It MUST NOT be wrapped as an envelope.
+
+    ### Propagation
+    - Runtime catch boundary → `envelope_factory` → Error Envelope v1.
+    - Runtime forwards envelope to `envelope_sink`.
+    - Logging emits a LogRecord v1:
+      - `event = runtime.envelope`
+      - `level` mapped from envelope severity
+      - `envelope` populated
+
+
+- id: contracts.work_trace_compat_notes_p1
+  kind: reference
+  md: |
+    Prefer LogRecord v1 as shared event shape across backbone logs and future work-trace.
+    correlation_id remains optional in v1.
+    Future systems may add rich correlation inside data without changing v1.
+
+- id: contracts.runtime_settings_v1
+  kind: reference
+  md: |
+    ## Runtime system settings contract (v1)
+
+    Purpose:
+    - Define the Phase 1 contract for runtime operational settings (“preferences”).
+    - Prevent drift across runtime, logging, and future engines that consume settings.
+    - Provide a stable foundation for growth (including large settings sets) without enumerating all keys.
+
+    Canonical file (Phase 1):
+    - Path: `lillycore/runtime/config/runtime.system.json`
+    - Format: JSON
+
+    Versioning:
+    - The file MAY include `schema_version` (number).
+    - Phase 1 supported value: `1`.
+    - `schema_version` is a decoder selector, not a release counter. It may remain `1` for an extended time.
+
+    Schema shape (preferred / canonical going forward):
+    - Top-level object with:
+      - `schema_version` (number, SHOULD be `1`)
+      - `settings` (object)
+
+    Example (minimal):
+    ```json
+    {
+      "schema_version": 1,
+      "settings": {}
+    }
+    ```
+
+    Legacy compatibility (Phase 1 requirement / blocker):
+    - Phase 1 MUST support the current “legacy flat key” file shape (top-level keys without `settings`).
+    - If legacy flat keys are detected:
+      - runtime MUST emit a **warn-once-per-load** signal (see `contracts.runtime_settings_failure_reporting_p1`).
+    - If both legacy flat keys and `settings.*` keys exist, `settings.*` wins (deterministic).
+
+    Namespacing rules (canonical `settings` object):
+    - Keys and namespaces MUST use lowercase `snake_case`.
+    - Settings are grouped by namespace to avoid flat-key sprawl.
+
+    Reserved namespaces (Phase 1):
+    - `settings.runtime`  (runtime loop operational controls)
+    - `settings.helper`  (“potato mode” interaction + scheduling controls)
+    - `settings.logging` (operational logging controls; primary consumer is `help_desk_engine`)
+    - `settings.config`  (settings-loader policy controls)
+    - `settings.engines` (per-engine settings namespaces; keys are engine-owned)
+
+    Reserved engine namespaces (Phase 1; keys may be added later):
+    - `settings.engines.drift_engine`
+    - `settings.engines.helper_engine`
+    - `settings.engines.plugin_engine`
+    - `settings.engines.help_desk_engine`
+    - `settings.engines.dream_engine`
+    - `settings.engines.script_engine`
+
+    Future reserved namespace (ignored in Phase 1):
+    - `settings.helper.engine_pool` (reserved for multi-helper-engine scenarios; ignored in Phase 1)
+
+    Supported value types (Phase 1):
+    - JSON primitives and containers only:
+      - string, boolean, number, object, array, null
+    - No tagged/custom/encoded types in Phase 1.
+
+    Unknown keys policy (Phase 1):
+    - Unknown keys MUST NOT break load.
+    - Unknown keys MUST be ignored.
+    - Unknown keys MUST trigger a **warn-once-per-load** signal.
+
+- id: contracts.runtime_settings_precedence_p1
+  kind: reference
+  md: |
+    ## Runtime settings precedence & overrides (Phase 1)
+
+    Precedence (lowest → highest):
+    1) Defaults
+    2) System settings file (`lillycore/runtime/config/runtime.system.json`)
+    3) Temporary override (runtime-provided, in-memory)
+
+    Defaults:
+    - Defaults are the baseline for all known settings keys.
+    - The settings file MAY be partial; missing keys fall back to defaults.
+
+    Temporary override (Phase 1 contract):
+    - Temporary override is provided explicitly by the runtime at startup as an in-memory settings override object.
+    - It MUST be applied last.
+    - Additional override channels (env vars, CLI flags, remote overrides) are out of scope in Phase 1 unless explicitly added later with precedence rules.
+
+    Canonical-vs-legacy precedence (within the settings file):
+    - If `settings` exists, it is the canonical source for keys under `settings.*`.
+    - Legacy flat keys are supported for compatibility, but:
+      - If both provide a value for the same logical setting, the canonical `settings.*` value wins.
+
+    Merge rule (deterministic):
+    - Merge is key-wise and deterministic:
+      - defaults → file → temporary override
+    - Unknown keys are ignored (with warn-once-per-load reporting per contract).
+
+- id: contracts.runtime_settings_persistence_p1
+  kind: reference
+  md: |
+    ## Runtime settings persistence boundary (Phase 1)
+
+    Boundary:
+    - Persistence for Phase 1 runtime settings is limited to the canonical JSON file:
+      `lillycore/runtime/config/runtime.system.json`.
+
+    Read behaviour (Phase 1):
+    - Settings MUST be loaded at the runtime settings load boundary (startup seam).
+    - The loader MUST produce a resolved settings view by applying precedence rules.
+
+    Write behaviour (Phase 1 stance):
+    - Phase 1 does not require live mutation of runtime settings during a run.
+    - If a write/save operation is implemented in Phase 1, it MUST be explicit (no implicit autosave).
+
+    Atomicity expectation (design-level):
+    - If writing is implemented, writes MUST be atomic at the file level (no partial file states).
+    - If atomicity cannot be guaranteed, the system MUST treat the file as potentially corrupt on next load and enter safe mode.
+
+    Storage location constraints:
+    - The canonical path is fixed by contract.
+    - No OS-specific path guessing is permitted beyond the canonical path.
+
+- id: contracts.runtime_settings_failure_reporting_p1
+  kind: reference
+  md: |
+    ## Runtime settings failure reporting (Phase 1)
+
+    Goals:
+    - Failures and drift signals must be visible for diagnosis.
+    - Settings failures must not brick runtime startup (safe mode stance), unless explicitly escalated later.
+
+    Baseline behaviour:
+    - Missing settings file:
+      - Runtime MUST fall back to defaults.
+      - Runtime SHOULD emit a warning log event: `config.missing_file`.
+
+    Safe mode on invalid/corrupt settings file (Andrew decision):
+    - If the file exists but cannot be parsed/validated for Phase 1:
+      - Runtime MUST fall back to defaults.
+      - Runtime MUST emit:
+        - a LogRecord v1 describing the condition, and
+        - an Error Envelope v1 created at `origin.boundary: start`.
+      - Runtime MUST continue running.
+
+    Warn-once-per-load signals (Phase 1):
+    - Legacy flat keys detected:
+      - LogRecord v1 event: `config.legacy_keys_detected` (WARN), emitted once per load.
+    - Unknown keys detected:
+      - LogRecord v1 event: `config.unknown_keys_detected` (WARN), emitted once per load.
+
+    Envelope requirements (when emitted):
+    - Envelope MUST follow Error Envelope v1.
+    - `origin.component` SHOULD be `runtime`.
+    - `origin.boundary` MUST be `start` for settings load failures.
+    - Envelope `context` SHOULD include:
+      - settings source (`defaults`, `file`, `override`)
+      - file path
+      - failure classification (missing, invalid, unsupported_version, etc.)
+      - whether safe mode was entered
+
+    Logging requirements (when emitted):
+    - Logs MUST follow LogRecord v1.
+    - `component` SHOULD be `runtime` (even if primary consumer is `help_desk_engine`).
+    - If an envelope is emitted, the runtime ↔ logging ↔ envelope wiring rules apply:
+      - envelope forwarded to logging (`envelope_sink`)
+      - logging emits `runtime.envelope` with mapped severity/level
+
+    Severity guidance (Phase 1):
+    - Missing file: WARN log only (`config.missing_file`).
+    - Invalid/corrupt file: ERROR log + ERROR envelope; continue (safe mode).
+    - Unsupported `schema_version`: ERROR log + ERROR envelope; continue (safe mode).

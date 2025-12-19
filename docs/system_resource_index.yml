@@ -67,7 +67,7 @@
 
     modules: "docs/modules.yml"
     system_canon: "docs/system_canon.yml"
-    contracts: "docs/contracts/contracts.yml"
+    contracts: "docs/contracts.yml"
 
 - id: system_resource_index.modules
   kind: reference
