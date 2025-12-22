@@ -18,32 +18,6 @@
     - GPT role behaviour rules (see build_canon and documentation_protocol)
     - Documentation update procedures (see documentation_protocol)
 
-    Phase 1 Local Checks Entrypoint
-    Canonical local command for Phase 1 build-time checks:
-
-    python3 docs/build/p1_checks.py
-
-    Behavior:
-    - Must be invoked from repository root.
-    - Runs checks in deterministic order:
-      1. Ruff (lint)
-      2. Black (--check, format verification)
-      3. Pytest (tests)
-    - Exits non-zero on the first failure.
-    - Intended to act as a CI gate as well as a local developer check.
-
-    Phase 1 Bootstrap Note (Tests):
-    - During early Phase 1 bootstrap, the repository may contain no tests.
-    - In this case, Pytest exits with code 5 (“no tests collected”).
-    - The canonical Phase 1 checks entrypoint treats Pytest exit code 5 as PASS.
-    - Any real test failure (non-zero exit code other than 5) is treated as FAIL.
-    - This behavior allows CI to function as a lint/format gate before tests are introduced.
-
-    Notes:
-    - This entrypoint is the single supported local invocation for Phase 1 checks.
-    - Editor integrations or alternative wrappers are optional conveniences and must delegate to this command.
-    - This bootstrap exception applies only to Phase 1; later phases may require tests to exist.
-
 
 - id: tech_spec.platform_assumptions
   kind: baseline
@@ -124,6 +98,32 @@
     - Formatter: Black
     - Linter: Ruff
     - Test framework: Pytest
+
+    Phase 1 Local Checks Entrypoint
+    Canonical local command for Phase 1 build-time checks:
+
+    python3 docs/build/p1_checks.py
+
+    Behavior:
+    - Must be invoked from repository root.
+    - Runs checks in deterministic order:
+      1. Ruff (lint)
+      2. Black (--check, format verification)
+      3. Pytest (tests)
+    - Exits non-zero on the first failure.
+    - Intended to act as a CI gate as well as a local developer check.
+
+    Phase 1 Bootstrap Note (Tests):
+    - During early Phase 1 bootstrap, the repository may contain no tests.
+    - In this case, Pytest exits with code 5 (“no tests collected”).
+    - The canonical Phase 1 checks entrypoint treats Pytest exit code 5 as PASS.
+    - Any real test failure (non-zero exit code other than 5) is treated as FAIL.
+    - This behavior allows CI to function as a lint/format gate before tests are introduced.
+
+    Notes:
+    - This entrypoint is the single supported local invocation for Phase 1 checks.
+    - Editor integrations or alternative wrappers are optional conveniences and must delegate to this command.
+    - This bootstrap exception applies only to Phase 1; later phases may require tests to exist.
 
 - id: tech_spec.change_log
   kind: meta

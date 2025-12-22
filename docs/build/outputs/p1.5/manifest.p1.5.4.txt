@@ -1,0 +1,3 @@
+P1.5.4 manifest
+Added/changed:
+- pyproject.toml

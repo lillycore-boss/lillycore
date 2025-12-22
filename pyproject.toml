@@ -1,0 +1,18 @@
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+# Keep Phase 1 minimal: basic pycodestyle errors + pyflakes.
+select = ["E", "F"]
+
+# Do NOT enforce line-length in Phase 1 (avoids noisy refactors on scripts/docs tooling).
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+minversion = "6.2.5"
+addopts = "-ra"
