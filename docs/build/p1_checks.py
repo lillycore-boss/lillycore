@@ -61,9 +61,19 @@ def main() -> int:
 
     for cmd in steps:
         rc = _run(cmd, cwd=repo_root)
+
+        # Pytest exit code 5 means "no tests collected".
+        # In Phase 1 bootstrap, treat that as PASS so CI can function as a gate
+        # for Ruff/Black even before tests exist.
+        if cmd == pytest and rc == 5:
+            print("Pytest: no tests collected (exit code 5). Treating as PASS for Phase 1 bootstrap.", flush=True)
+            continue
+
         if rc != 0:
             return rc
+
     return 0
+
 
 
 if __name__ == "__main__":
