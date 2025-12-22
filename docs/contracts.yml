@@ -71,6 +71,9 @@
     - `contracts.inter_engine_package_v1`
       Canonical inter-engine package v1 (addressing, payload, context bundles, trace breadcrumbs).
 
+    - `contracts.ai_call_package_requirements_v1`
+      Phase 2 requirements for `ai_call` packages at the Unified AI API boundary (trace required, targeting rules, provider-stripping stance).
+
 - id: contracts.error_envelope_v1
   kind: reference
   md: |
@@ -219,6 +222,13 @@
     - If legacy flat keys are detected:
       - runtime MUST emit a **warn-once-per-load** signal (see `contracts.runtime_settings_failure_reporting_p1`).
     - If both legacy flat keys and `settings.*` keys exist, `settings.*` wins (deterministic).
+
+    ## Migration intent (Phase 1 → Phase 2+)
+    - The legacy “flat key” settings file shape is supported for Phase 1 compatibility.
+    - When the runtime settings file is next edited, the preferred action is to migrate it to the canonical shape:
+      - `{ "schema_version": 1, "settings": { ... } }`
+    - Migration is intended to be forward-safe:
+      - legacy keys may remain temporarily, but `settings.*` is authoritative when both exist.
 
     Namespacing rules (canonical `settings` object):
     - Keys and namespaces MUST use lowercase `snake_case`.
@@ -457,3 +467,44 @@
     - `span_id` (string, optional)
     - `tags` (list[string], optional)
 
+- id: contracts.ai_call_package_requirements_v1
+  kind: reference
+  md: |
+    # contracts.ai_call_package_requirements_v1
+
+    # AI Call Package Requirements v1 (Phase 2 boundary rules)
+
+    Defines Phase 2 requirements for inter-engine packages of kind `ai_call`
+    at the Unified AI API boundary.
+
+    This contract layers additional requirements on top of:
+    - `contracts.inter_engine_package_v1` (structural container)
+
+    ## Requirements at Unified AI API boundary
+
+    ### Package identity
+    - `package_kind` MUST be `ai_call`.
+
+    ### Targeting
+    - `target.endpoint_kind` MUST be `ai_pool`.
+    - `target.endpoint_id` MUST identify the logical pool target (stable, backend-agnostic).
+    - `target.handler_id` SHOULD be present when known (e.g., selected entry or specialization),
+      but callers MUST NOT rely on provider/model identifiers.
+
+    ### Trace / provenance (required)
+    - `trace` MUST be present.
+    - `trace.correlation_id` SHOULD be present when available.
+    - The Unified AI API and execution envelope MUST preserve trace metadata for correlation.
+
+    ### Payload and extensibility
+    - `payload` MAY be omitted if `context_bundles` carries the effective payload.
+    - Unknown fields and `extensions` MUST be treated as inert by receivers (per inter-engine package rules).
+
+    ## Provider-facing stripping rule
+    - Provider adapters MUST NOT require `trace` to be embedded into the provider prompt/context.
+    - The system MAY strip trace/breadcrumb fields from provider-facing payloads to minimize context load.
+    - Trace MUST remain available in envelope/logging surfaces.
+
+    ## Safety posture
+    - Execution MUST enforce hard safety limits regardless of runtime settings preferences.
+    - Preferences may reduce concurrency or tighten limits, but must not expand beyond safe caps.

@@ -365,6 +365,27 @@
           - "All jobs must be cancellable unless explicitly declared non-cancellable."
           - "Interactive lane has a reserved slot; batch cannot consume it."
 
+      ## Phase 2 clarifications (authority notes)
+
+      ### Trace and provenance
+      - For `ai_call` inter-engine packages, `trace` is REQUIRED at the Unified AI API boundary to support diagnosis and error-correction workflows.
+      - Provider-facing calls MUST NOT require trace to be present in the prompt/context sent to the model.
+        - Trace/provenance may be stripped prior to provider execution to minimize context load and token usage.
+      - Trace MUST remain available in the execution envelope/logging surface for correlation.
+
+      ### Preferences vs hard safety caps
+      - Runtime settings (preferences) may permit or restrict concurrency and co-scheduling, but MUST be bounded by hard safety limits.
+      - Hard safety limits are authoritative and MUST NOT be overridable by runtime settings or temporary overrides if doing so risks exhausting hardware resources.
+
+      ### Lightweight pool intent
+      - The lightweight pool is intended for fast “traffic control” tasks (routing, classification-ish, prompt splitting, system plumbing).
+      - Lightweight work MUST remain bounded so it cannot starve the interactive/talker lane.
+      - Lightweight tasks must not be scheduled as long-running batch work by default.
+
+      ### Capability-first, backend-agnostic stance
+      - Capabilities represent what the system can do; pools/lanes and providers implement those capabilities.
+      - LLM is an initial capability family, but Phase 2 design must remain extensible to non-LLM families (e.g., ASR/transcription, retrieval/embeddings).
+
 
 - id: modules.system_doc
   kind: module
