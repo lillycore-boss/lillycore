@@ -1,5 +1,7 @@
 # run_runtime.py
 
+import argparse
+
 from lillycore.runtime.interactive_runner import run_interactive
 from lillycore.runtime.terminal_ingress import TerminalIngressAdapter
 from lillycore.runtime.heartbeat import RuntimeStopRequested
@@ -170,8 +172,28 @@ def _noop_handler(cmd: str) -> None:
     if cmd.strip().upper() == "EOF":
         raise RuntimeStopRequested()
 
+def parse_args():
+    p = argparse.ArgumentParser()
+    p.add_argument(
+        "--deterministic",
+        action="store_true",
+        help="Run non-interactively for a fixed number of ticks.",
+    )
+    p.add_argument(
+        "--ticks",
+        type=int,
+        default=0,
+        help="Number of ticks to run in deterministic mode (required if --deterministic).",
+    )
+    return p.parse_args()
 
-ingress = TerminalIngressAdapter(on_command=_noop_handler, prompt="lilly> ")
+
+args = parse_args()
+
+if args.deterministic and args.ticks <= 0:
+    raise SystemExit("ERROR: --deterministic requires --ticks N (N > 0)")
+
+ingress = None if args.deterministic else TerminalIngressAdapter(on_command=_noop_handler, prompt="lilly> ")
 
 loop = run_interactive(
     settings_loader=lambda: settings,
@@ -183,6 +205,9 @@ loop = run_interactive(
         (settings.get("tick_interval_ms", 500) / 1000.0)
         if isinstance(settings, dict)
         else (getattr(settings, "tick_interval_ms", 500) / 1000.0)
+    ),
+    max_ticks=(
+        args.ticks if args.deterministic else None
     ),
 )
 

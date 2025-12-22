@@ -13,7 +13,9 @@ def run_interactive(
     envelope_factory,
     envelope_sink,
     tick_interval_sec: float = 0.5,
+    max_ticks: int | None = None,
 ):
+
     """
     Phase 1 interactive runtime runner.
 
@@ -73,6 +75,10 @@ def run_interactive(
         return None
 
     # ---- lifecycle hooks ------------------------------------------------
+
+    ticks = 0
+    loop = None  # will be assigned after HeartbeatLoop construction
+
     def on_start():
         logger.info("Runtime starting (Phase 1 interactive)")
         if ingress_adapter and hasattr(ingress_adapter, "start"):
@@ -81,6 +87,15 @@ def run_interactive(
     def on_tick():
         # NOTE (P1.1.6): ingress polling for stop semantics is handled by the
         # heartbeat loop (via the ingress seam). Avoid double polling here.
+        nonlocal ticks, loop
+
+        if max_ticks is not None:
+            ticks += 1
+            if ticks >= max_ticks:
+                if loop and hasattr(loop, "request_stop"):
+                    loop.request_stop()
+                return
+
         time.sleep(tick_interval_sec)
 
     def on_stop():

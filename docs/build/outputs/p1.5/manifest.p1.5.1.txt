@@ -1,0 +1,11 @@
+P1.5.1 deterministic runtime harness proof
+Command:
+./run_phase1.sh --deterministic --ticks 25
+
+Files:
+- p1.5.1_det_run1_stdout.txt
+- p1.5.1_det_run1_stderr.txt
+- p1.5.1_det_run2_stdout.txt
+- p1.5.1_det_run2_stderr.txt
+- p1.5.1_det_stdout_diff.txt
+- p1.5.1_det_stderr_diff.txt

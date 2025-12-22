@@ -1,0 +1,8 @@
+Runtime system settings resolved. sources=['defaults', 'file'] changed_keys={'file': ['tick_interval_ms', 'log_level', 'heartbeat_enabled']}
+RUNTIME_START {'component': 'core_runtime'}
+Runtime starting (Phase 1 interactive)
+lilly> HEARTBEAT {'tick_id': 10, 'every_n_ticks': 10}
+HEARTBEAT {'tick_id': 20, 'every_n_ticks': 10}
+lilly> RUNTIME_STOP {'component': 'core_runtime'}
+Runtime stopping (Phase 1 interactive)
+RUNTIME_LOG_FINALIZE 

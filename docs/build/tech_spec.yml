@@ -85,6 +85,35 @@
     - CI gate:
         A rule that says: "Changes are not considered valid unless required checks pass."
 
+    #### Phase 1 Deterministic Runtime Harness (QA / CI)
+
+    Phase 1 provides a deterministic runtime harness mode intended for QA verification
+    and CI proof. Interactive runtime execution remains supported for human use but
+    MUST NOT be used for determinism or QA proof.
+
+    Canonical deterministic invocation:
+
+        ./run_phase1.sh --deterministic --ticks <N> (e.g. --ticks 25)
+
+    Deterministic harness characteristics:
+    - Runs non-interactively (no terminal ingress, no human input).
+    - Executes a real runtime loop for exactly N ticks.
+    - Exits automatically with exit code 0 on success.
+    - Produces repeatable stdout/stderr across runs with identical arguments.
+
+    QA enforcement:
+    - QA MUST use the deterministic harness invocation when verifying runtime behavior.
+    - Two consecutive runs with identical arguments MUST be captured.
+    - Raw stdout/stderr and diff artefacts MUST be stored under
+      `docs/build/outputs/<phase_id>/` per `tech_spec.proof_outputs_convention`.
+
+    Interactive runtime mode (without `--deterministic`) is explicitly non-deterministic
+    and is intended for human operation only.
+
+    This deterministic harness definition applies only to Phase 1.
+    Later phases may redefine or replace runtime verification semantics.
+
+
 - id: tech_spec.tooling_choices
   kind: decisions
   md: |
