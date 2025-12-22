@@ -1,5 +1,16 @@
-card: P1.5.1
-command: ./run_phase1.sh
-proof:
-  - p1.5.1_run_phase1_stdout.txt
-notes: runtime started successfully; clean shutdown via Ctrl+C
+P1.5.3 — Add GitHub Actions CI Gate for Phase 1 Checks
+
+Workflow file:
+- .github/workflows/p1-ci.yml
+
+Canonical entrypoint invoked:
+- python3 docs/build/p1_checks.py
+
+Notes:
+- Phase 1 bootstrap: pytest exit code 5 (“no tests collected”) treated as PASS.
+
+Commit:
+- <INSERT_COMMIT_HASH>
+
+CI run evidence (raw):
+- <PASTE_GITHUB_ACTIONS_RUN_URL_OR_RUN_ID>
