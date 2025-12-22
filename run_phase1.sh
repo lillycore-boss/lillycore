@@ -1,9 +1,34 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Always run Phase 1 harness from the repo root (no matter where you call it from)
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+# Deterministically resolve repository root (folder containing .git)
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
+if [[ -d "${SCRIPT_DIR}/.git" ]]; then
+  REPO_ROOT="${SCRIPT_DIR}"
+else
+  REPO_ROOT="${SCRIPT_DIR}"
+  while [[ "${REPO_ROOT}" != "/" && ! -d "${REPO_ROOT}/.git" ]]; do
+    REPO_ROOT="$(cd -- "${REPO_ROOT}/.." >/dev/null 2>&1 && pwd)"
+  done
+  if [[ ! -d "${REPO_ROOT}/.git" ]]; then
+    echo "ERROR: Could not locate repo root (no .git found) starting from: ${SCRIPT_DIR}" >&2
+    exit 1
+  fi
+fi
 
 cd "${REPO_ROOT}"
-PYTHONPATH="." python3 lillycore/run_runtime.py
+
+ENTRYPOINT="${REPO_ROOT}/run_runtime.py"
+if [[ ! -f "${ENTRYPOINT}" ]]; then
+  echo "ERROR: Expected runtime entrypoint not found: ${ENTRYPOINT}" >&2
+  exit 1
+fi
+
+# IMPORTANT:
+# The import path expects `lillycore` to be importable as a package.
+# In this repo, the repo root directory itself is `lillycore/`, so PYTHONPATH must include its parent.
+REPO_PARENT="$(cd -- "${REPO_ROOT}/.." >/dev/null 2>&1 && pwd)"
+export PYTHONPATH="${REPO_PARENT}${PYTHONPATH:+:${PYTHONPATH}}"
+
+exec python3 "${ENTRYPOINT}"

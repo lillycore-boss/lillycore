@@ -1,0 +1,13 @@
+Script started on 2025-12-19 18:53:24-05:00 [TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="166" LINES="62"]
+Runtime system settings resolved. sources=['defaults', 'file'] changed_keys={'file': ['tick_interval_ms', 'log_level', 'heartbeat_enabled']}
+RUNTIME_START {'component': 'core_runtime'}
+Runtime starting (Phase 1 interactive)
+lilly> HEARTBEAT {'tick_id': 10, 'every_n_ticks': 10}
+HEARTBEAT {'tick_id': 20, 'every_n_ticks': 10}
+HEARTBEAT {'tick_id': 30, 'every_n_ticks': 10}
+exit
+lilly> RUNTIME_STOP {'component': 'core_runtime'}
+Runtime stopping (Phase 1 interactive)
+RUNTIME_LOG_FINALIZE 
+
+Script done on 2025-12-19 18:53:33-05:00 [COMMAND_EXIT_CODE="0"]

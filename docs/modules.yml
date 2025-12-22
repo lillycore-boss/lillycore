@@ -256,17 +256,115 @@
     status: planned
 
     summary:
-      Encapsulates different LLM "brains" and execution wrappers.
+      Backend-agnostic execution layer for model-backed capabilities (LLM, ASR, etc.)
+      with safe envelopes, routing, and resource-aware pooling.
 
     responsibilities:
-      - Provide conversational, deterministic, and worker pools.
-      - Wrap LLM calls with retries, timeouts, and envelopes.
+      - Provide pool types:
+          - interactive (low latency; talker lane)
+          - batch (long-running; worker lane)
+          - utility (small/support models; retrieval/embeddings/etc.)
+      - Support multiple model families (initially LLM; extendable to ASR/transcription).
+      - Wrap calls with retries, timeouts, cancellation, and structured error envelopes.
+      - Expose a stable, provider-agnostic API to DRIFT/HELPER/PLUGINS.
 
     dependencies:
       - CORE_RUNTIME
 
     notes:
-      - Backend choices (OpenAI, local models, etc.) are defined elsewhere.
+      - Provider/backends (OpenAI, local, etc.) are configured elsewhere.
+      - Pool policy must prevent interactive starvation (talker must not block).
+      - |
+        Andrew added the following based on a conversation with an AI about types of AI
+        It did NOT know the full context of the system so it may be an incomlpete picture. 
+        ai_capabilities.
+
+          # NOTE: Capabilities are what the system can DO.
+          # Pools/providers implement capabilities using specific models + hardware.
+
+          llm:
+            text_generation:
+              uses: [conversation, planning, extraction, writing, codegen, qa]
+              notes: >
+                General-purpose text reasoning/generation. Used by Drift/Helper/Talker.
+                Not tied to "summarization" only—summarization is a TASK that uses this.
+            function_calling:
+              uses: [structured_outputs, tool_use, routing, intent, tagging, sentiment-ish, routing]
+              notes: >
+                Same family as text_generation but with stricter output contracts.
+
+          asr:
+            transcription:
+              uses: [video_to_text, audio_to_text, meeting_notes_ingest]
+              notes: >
+                Speech-to-text (e.g., Whisper/WhisperX). Different compute profile than LLM.
+                Often GPU-accelerated; should be scheduled separately from LLM workers.
+            diarization_optional:
+              uses: [speaker_labels]
+              notes: >
+                Optional speaker separation/labeling. May be slower + extra dependencies.
+
+          retrieval:
+            embedding:
+              uses: [semantic_search, memory_recall, context_injection]
+              notes: >
+                Turns text into vectors for similarity search. Often runs on CPU or GPU.
+            rerank_optional:
+              uses: [better_search_results]
+              notes: >
+                Improves retrieval quality by reranking candidates.
+
+          vision:
+            image_understanding_optional:
+              uses: [screenshots, diagrams, photos]
+            video_understanding_optional:
+              uses: [raw_video_summary, scene_detection]
+              notes: >
+                If you skip this initially, you can still do video via asr.transcription.
+
+          classical_nlp_optional:
+            intent_classification:
+              uses: [routing, spam_filtering, safety_gating, quick_labels]
+
+
+        ai_pools:
+          pool_conversational:
+            provides: [llm.text_generation, llm.function_calling]
+            lane: interactive
+            hardware_hint: gpu_or_cpu
+            notes: >
+              "Talker" lane. Must remain responsive. Avoid running long batch jobs here.
+
+          pool_worker_llm:
+            provides: [llm.text_generation, llm.function_calling]
+            lane: batch
+            hardware_hint: gpu_preferred
+            notes: >
+              Heavy lifting: planning, extraction, codegen, QA passes, long summaries.
+
+          pool_asr:
+            provides: [asr.transcription, asr.diarization_optional]
+            lane: batch
+            hardware_hint: gpu_preferred
+            notes: >
+              Audio/video ingest lane. Schedule to avoid VRAM contention with worker_llm.
+
+          pool_retrieval:
+            provides: [retrieval.embedding, retrieval.rerank_optional]
+            lane: background
+            hardware_hint: cpu_ok
+            notes: >
+              Memory + search lane. Can run concurrently with LLMs.
+
+
+        scheduler_policy_notes:
+          - "Interactive pool never runs batch tasks."
+          - "Only one heavy GPU job per GPU device unless explicitly allowed."
+          - "Transcription and worker_llm should not share GPU simultaneously by default."
+          - "Tasks declare required capabilities; scheduler picks pool/provider."
+          - "All jobs must be cancellable unless explicitly declared non-cancellable."
+          - "Interactive lane has a reserved slot; batch cannot consume it."
+
 
 - id: modules.system_doc
   kind: module
