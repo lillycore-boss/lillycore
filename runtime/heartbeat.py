@@ -3,11 +3,13 @@
 from typing import Callable, Optional, Any
 import os
 
+
 class RuntimeStopRequested(Exception):
     """
     Internal control signal.
     Not an error envelope.
     """
+
     pass
 
 
@@ -34,7 +36,6 @@ class HeartbeatLoop:
         *,
         logger=None,
         ingress=None,
-
         # Phase 1 envelope integration:
         # - factory: creates an opaque envelope from an exception
         # - sink: emits the envelope to logging or other consumers
@@ -53,7 +54,7 @@ class HeartbeatLoop:
         self._stop_requested = False
         self._stop_reason = None
 
-        #This line made unneccesary in P1.1.6
+        # This line made unneccesary in P1.1.6
         # Phase 1 stop command triggers (P1.1.6):
         # Keep this small and explicit; command routing beyond stop remains out of scope.
         # self._stop_commands = {"stop", "quit", "exit", "/stop", "/quit"}
@@ -141,7 +142,9 @@ class HeartbeatLoop:
                     # FORCE_SHUTDOWN_ERROR=1 forces an exception during shutdown (on_stop)
                     # which MUST be enveloped and logged.
                     if os.getenv("FORCE_SHUTDOWN_ERROR") == "1":
-                        raise RuntimeError("Forced shutdown error (FORCE_SHUTDOWN_ERROR=1)")
+                        raise RuntimeError(
+                            "Forced shutdown error (FORCE_SHUTDOWN_ERROR=1)"
+                        )
 
                     self._on_stop()
                 except RuntimeStopRequested:
@@ -165,7 +168,9 @@ class HeartbeatLoop:
                     try:
                         getattr(self._logger, hook_name)()
                     except Exception as exc:
-                        self._propagate_error(exc, where=f"runtime.shutdown.logger.{hook_name}")
+                        self._propagate_error(
+                            exc, where=f"runtime.shutdown.logger.{hook_name}"
+                        )
 
     # ---- error handling --------------------------------------------------
 

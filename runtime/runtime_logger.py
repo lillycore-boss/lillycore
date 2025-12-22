@@ -162,7 +162,11 @@ def logging_config_from_settings(settings: Dict[str, Any]) -> LoggingConfig:
     Settings keys are operational only (P1.1.3). Keep minimal.
     This reads a small "runtime_logging" namespace and falls back safely.
     """
-    cfg = (settings or {}).get("runtime_logging", {}) if isinstance(settings, dict) else {}
+    cfg = (
+        (settings or {}).get("runtime_logging", {})
+        if isinstance(settings, dict)
+        else {}
+    )
     return LoggingConfig(
         level=str(cfg.get("level", "INFO")).upper(),
         heartbeat_enabled=bool(cfg.get("heartbeat_enabled", False)),

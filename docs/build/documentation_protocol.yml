@@ -346,7 +346,7 @@
 
     1) A runnable command is provided (exact invocation)
     2) Raw output artefacts exist under:
-       `builds/outputs/<phase_id>/`
+       `docs/build/outputs/<phase_id>/`
     3) Artefacts correspond to the claimed behaviour
     4) At least one negative-path result exists when applicable
 

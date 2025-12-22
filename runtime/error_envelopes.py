@@ -17,6 +17,7 @@ class ErrorEnvelope:
     - Treat this as the envelope authority object.
     - Other modules (runtime/logging) should NOT rely on its internal shape.
     """
+
     _exc: BaseException
     _where: Optional[str]
     _severity: str

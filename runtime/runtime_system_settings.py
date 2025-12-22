@@ -18,13 +18,14 @@ class RuntimeSystemSettings:
     Operational/runtime settings only.
     Explicitly NOT persona / AI behaviour settings.
     """
+
     async_enabled: bool
     tick_interval_ms: int
 
     # Phase 1 logging controls (P1.1.3 + P1.1.5):
     # Keep keys minimal and operational.
-    log_level: str      # DEBUG|INFO|WARNING|ERROR|CRITICAL
-    log_format: str     # text|json
+    log_level: str  # DEBUG|INFO|WARNING|ERROR|CRITICAL
+    log_format: str  # text|json
 
     # Phase 1 heartbeat logging controls (P1.1.5):
     # Heartbeat must be bounded and avoid spam by default.
@@ -39,7 +40,6 @@ def default_runtime_system_settings() -> RuntimeSystemSettings:
         tick_interval_ms=100,
         log_level="INFO",
         log_format="text",
-
         # Heartbeat defaults: OFF + bounded (avoid spam by default).
         heartbeat_enabled=False,
         heartbeat_every_n_ticks=10,
@@ -52,7 +52,10 @@ def _load_json_file(path: str) -> Tuple[Optional[Dict[str, Any]], Optional[str]]
     Invalid JSON / wrong shape raises ValueError.
     """
     if not os.path.exists(path):
-        return None, f"Runtime system settings file not found at '{path}' (using defaults)."
+        return (
+            None,
+            f"Runtime system settings file not found at '{path}' (using defaults).",
+        )
 
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -69,7 +72,6 @@ def _coerce_and_validate(settings: Dict[str, Any]) -> RuntimeSystemSettings:
         "tick_interval_ms",
         "log_level",
         "log_format",
-
         # P1.1.5 heartbeat controls
         "heartbeat_enabled",
         "heartbeat_every_n_ticks",
@@ -154,7 +156,10 @@ def resolve_runtime_system_settings(
 
     return settings
 
-def temp_override_from_env(env_var: str = "LILLYCORE_RUNTIME_TEMP_OVERRIDE_JSON") -> Optional[Dict[str, Any]]:
+
+def temp_override_from_env(
+    env_var: str = "LILLYCORE_RUNTIME_TEMP_OVERRIDE_JSON",
+) -> Optional[Dict[str, Any]]:
     """
     Phase 1 temp override mechanism:
     - Set env var to a JSON object string, e.g.:

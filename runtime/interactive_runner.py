@@ -1,8 +1,7 @@
 # lillycore/runtime/interactive_runner.py
 
 import time
-import os
-from lillycore.runtime.heartbeat import HeartbeatLoop, RuntimeStopRequested
+from lillycore.runtime.heartbeat import HeartbeatLoop
 
 
 def run_interactive(
@@ -10,11 +9,9 @@ def run_interactive(
     settings_loader,
     logger,
     ingress_adapter,
-
     # Phase 1 envelope integration seams
     envelope_factory,
     envelope_sink,
-
     tick_interval_sec: float = 0.5,
 ):
     """

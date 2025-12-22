@@ -16,4 +16,5 @@ class CommandIngress(Protocol):
     - poll() must be non-blocking
     - any blocking IO must happen outside the tick path
     """
+
     def poll(self) -> None: ...

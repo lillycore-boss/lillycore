@@ -1,2 +1,5 @@
+card: P1.5.1
 command: ./run_phase1.sh
-notes: run from arbitrary working directory; stdout/stderr captured via tee
+proof:
+  - p1.5.1_run_phase1_stdout.txt
+notes: runtime started successfully; clean shutdown via Ctrl+C

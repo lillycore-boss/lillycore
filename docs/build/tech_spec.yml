@@ -18,6 +18,24 @@
     - GPT role behaviour rules (see build_canon and documentation_protocol)
     - Documentation update procedures (see documentation_protocol)
 
+    Phase 1 Local Checks Entrypoint
+    Canonical local command for Phase 1 build-time checks:
+
+    python3 docs/build/p1_checks.py
+
+    Behavior:
+    - Must be invoked from repository root.
+    - Runs checks in deterministic order:
+      1. Ruff (lint)
+      2. Black (--check, format verification)
+      3. Pytest (tests)
+    - Exits non-zero on the first failure.
+    - Intended to act as a CI gate as well as a local developer check.
+
+    Notes:
+    - This entrypoint is the single supported local invocation for Phase 1 checks.
+    - Editor integrations or alternative wrappers are optional conveniences and must delegate to this command.
+
 - id: tech_spec.platform_assumptions
   kind: baseline
   md: |

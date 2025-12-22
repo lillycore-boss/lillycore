@@ -10,6 +10,7 @@ from lillycore.runtime.runtime_system_settings import (
     temp_override_from_env,
 )
 
+
 class DummyLogger:
     def info(self, msg, *args):
         print(msg % args if args else msg)
@@ -25,7 +26,9 @@ class DummyLogger:
     # Updated to accept optional metadata without breaking older callers.
     def envelope(self, env, **kwargs):
         if kwargs:
-            print("ENVELOPE_EVENT:", {"envelope": env, "meta": kwargs})  # opaque object + meta
+            print(
+                "ENVELOPE_EVENT:", {"envelope": env, "meta": kwargs}
+            )  # opaque object + meta
         else:
             print("ENVELOPE_EVENT:", env)  # opaque object
 
@@ -58,15 +61,23 @@ class Phase1RuntimeLogger:
                     # Back-compat: allow top-level keys in Phase 1 settings.
                     src = settings
 
-                self._heartbeat_enabled = bool(src.get("heartbeat_enabled", self._heartbeat_enabled))
-                self._heartbeat_every_n_ticks = int(src.get("heartbeat_every_n_ticks", self._heartbeat_every_n_ticks))
+                self._heartbeat_enabled = bool(
+                    src.get("heartbeat_enabled", self._heartbeat_enabled)
+                )
+                self._heartbeat_every_n_ticks = int(
+                    src.get("heartbeat_every_n_ticks", self._heartbeat_every_n_ticks)
+                )
 
             else:
                 # Object-style: only apply if attributes exist.
                 if hasattr(settings, "heartbeat_enabled"):
-                    self._heartbeat_enabled = bool(getattr(settings, "heartbeat_enabled"))
+                    self._heartbeat_enabled = bool(
+                        getattr(settings, "heartbeat_enabled")
+                    )
                 if hasattr(settings, "heartbeat_every_n_ticks"):
-                    self._heartbeat_every_n_ticks = int(getattr(settings, "heartbeat_every_n_ticks"))
+                    self._heartbeat_every_n_ticks = int(
+                        getattr(settings, "heartbeat_every_n_ticks")
+                    )
         except Exception:
             # Settings must not break logging in Phase 1.
             pass
@@ -133,9 +144,11 @@ def load_settings(logger):
         logger=logger,
     )
 
+
 # Use a Phase 1 unified logger wrapper (P1.1.5) so heartbeat.py hook calls work.
 logger = Phase1RuntimeLogger(DummyLogger())
 settings = load_settings(logger)
+
 
 def envelope_sink(env):
     # runtime -> logging seam (P1.1.5 will harden this)
@@ -143,6 +156,7 @@ def envelope_sink(env):
         logger.envelope(env)
     else:
         logger.error("Envelope event (no logger.envelope)", exc_info=None)
+
 
 def _noop_handler(cmd: str) -> None:
     print(f"[ingress] {cmd}")
@@ -166,10 +180,10 @@ loop = run_interactive(
     envelope_factory=wrap_exception,
     envelope_sink=envelope_sink,
     tick_interval_sec=(
-        (settings.get("tick_interval_ms", 500) / 1000.0) if isinstance(settings, dict)
+        (settings.get("tick_interval_ms", 500) / 1000.0)
+        if isinstance(settings, dict)
         else (getattr(settings, "tick_interval_ms", 500) / 1000.0)
     ),
-
 )
 
 try:

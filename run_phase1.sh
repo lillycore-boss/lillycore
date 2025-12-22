@@ -26,9 +26,11 @@ if [[ ! -f "${ENTRYPOINT}" ]]; then
 fi
 
 # IMPORTANT:
-# The import path expects `lillycore` to be importable as a package.
-# In this repo, the repo root directory itself is `lillycore/`, so PYTHONPATH must include its parent.
+# Support both possible layouts:
+#  - repo root IS the `lillycore` package  => need parent on PYTHONPATH
+#  - repo root CONTAINS `lillycore/`       => need repo root on PYTHONPATH
 REPO_PARENT="$(cd -- "${REPO_ROOT}/.." >/dev/null 2>&1 && pwd)"
-export PYTHONPATH="${REPO_PARENT}${PYTHONPATH:+:${PYTHONPATH}}"
+export PYTHONPATH="${REPO_ROOT}:${REPO_PARENT}${PYTHONPATH:+:${PYTHONPATH}}"
 
-exec python3 "${ENTRYPOINT}"
+exec python3 "${ENTRYPOINT}" "$@"
+

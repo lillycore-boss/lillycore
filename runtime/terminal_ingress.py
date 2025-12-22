@@ -7,8 +7,9 @@ import sys
 import threading
 from typing import Optional
 
-from lillycore.runtime.command_ingress import Command, CommandHandler, CommandIngress
+from lillycore.runtime.command_ingress import CommandHandler, CommandIngress
 from lillycore.runtime.heartbeat import RuntimeStopRequested
+
 
 class TerminalIngressAdapter(CommandIngress):
     """
@@ -40,7 +41,9 @@ class TerminalIngressAdapter(CommandIngress):
                 return
             self._started = True
 
-            t = threading.Thread(target=self._reader_thread, name="terminal-ingress", daemon=True)
+            t = threading.Thread(
+                target=self._reader_thread, name="terminal-ingress", daemon=True
+            )
             t.start()
 
     def poll(self) -> None:
