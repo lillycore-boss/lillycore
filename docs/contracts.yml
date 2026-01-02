@@ -74,6 +74,9 @@
     - `contracts.ai_call_package_requirements_v1`
       Phase 2 requirements for `ai_call` packages at the Unified AI API boundary (trace required, targeting rules, provider-stripping stance).
 
+    - `contracts.ai_execution_lanes_v1`
+      Phase 2 execution-lane and capability-governance contract defining interactive, batch, and utility lane invariants, including anti-starvation admission control.
+
 - id: contracts.error_envelope_v1
   kind: reference
   md: |
@@ -470,8 +473,6 @@
 - id: contracts.ai_call_package_requirements_v1
   kind: reference
   md: |
-    # contracts.ai_call_package_requirements_v1
-
     # AI Call Package Requirements v1 (Phase 2 boundary rules)
 
     Defines Phase 2 requirements for inter-engine packages of kind `ai_call`
@@ -508,3 +509,193 @@
     ## Safety posture
     - Execution MUST enforce hard safety limits regardless of runtime settings preferences.
     - Preferences may reduce concurrency or tighten limits, but must not expand beyond safe caps.
+
+- id: contracts.ai_execution_lanes_v1
+  kind: reference
+  md: |
+    # contracts.ai_execution_lanes_v1
+
+    ## Purpose
+
+    This contract defines **Phase 2 execution semantics** for AI work in LillyCORE.
+
+    It establishes:
+    - Execution lanes as **resource-governed behavioral categories**
+    - Lane-level **invariants** that must hold regardless of implementation
+    - A **capability-first request model**
+    - A **compatibility bridge** from Phase 1 structural AI pools to Phase 2 lanes
+
+    This contract is **normative**. Downstream Phase 2 design, routing, scheduling, and QA
+    work MUST comply with the rules defined here.
+
+    ---
+
+    ## Non-Goals
+
+    This contract does NOT:
+    - Define execution code, schedulers, queues, or threading models
+    - Define provider adapters or model-specific behavior
+    - Define hardware wiring or device allocation strategies
+    - Introduce persistence, memory engines, analytics, or Phase 3+ systems
+
+    ---
+
+    ## Execution Lanes
+
+    Execution lanes are **behavioral categories** that govern how AI work competes for
+    system resources. Lanes do not imply specific hardware, schedulers, or providers.
+
+    ### Interactive Lane
+
+    **Intent:** Reserved responsiveness for user-facing, latency-sensitive AI work.
+
+    Characteristics:
+    - Low-latency expectation
+    - Must remain responsive under system load
+    - Protected from starvation by other lanes
+
+    ---
+
+    ### Batch Lane
+
+    **Intent:** Long-running or heavy AI work that may be queued or deferred.
+
+    Characteristics:
+    - Long-running work permitted
+    - Throughput-oriented rather than latency-oriented
+    - May be delayed without violating system guarantees
+
+    ---
+
+    ### Utility Lane
+
+    **Intent:** Lightweight, bounded support work for system plumbing and assistance.
+
+    Characteristics:
+    - Short-lived, bounded execution
+    - Background-friendly
+    - Must not materially interfere with interactive responsiveness
+
+    ---
+
+    ## Lane Invariants
+
+    Lane invariants are **hard rules** that must remain true regardless of runtime
+    implementation or hardware topology.
+
+    ### Allowed Work
+
+    - **Interactive**
+      - Latency-sensitive, user-facing AI interactions
+      - Conversational or immediate-response tasks
+
+    - **Batch**
+      - Long-running reasoning, planning, extraction, transcription, or analysis tasks
+
+    - **Utility**
+      - Routing, classification-ish tasks, embeddings, retrieval helpers, and similar bounded work
+
+    ---
+
+    ### Forbidden Work
+
+    - **Interactive MUST NOT**
+      - Execute long-running batch workloads
+      - Be used for background or throughput-oriented processing
+
+    - **Utility MUST NOT**
+      - Execute unbounded or long-running workloads
+      - Starve or block interactive execution
+
+    - **Batch MUST NOT**
+      - Consume resources reserved for interactive responsiveness
+
+    ---
+
+    ### Cancellation Expectations
+
+    - All lanes assume **cancellation is supported by default**
+    - Non-cancellable work must be explicitly declared by the caller or governing contract
+    - Interactive work is expected to respond promptly to cancellation
+
+    ---
+
+    ### Anti-Starvation Posture
+
+    - The interactive lane has **reserved capacity**
+    - **Batch admission control invariant:**
+      Batch work MUST NOT be admitted (started) if doing so would consume the
+      **last interactive-capable slot**
+
+      - This rule is independent of hardware topology (single GPU, multi-GPU, CPU-only)
+      - The enforcement mechanism (quotas, tokens, keep-one-free, preemption, etc.)
+        is an implementation detail deferred to later Phase 2 work
+
+    - Utility work MUST remain bounded and MUST back off if it threatens interactive responsiveness
+    - Starvation prevention is a **hard requirement**, not a best-effort preference
+
+    ---
+
+    ## Capability-First Request Model
+
+    ### Definitions
+
+    - **Capability**
+      - A description of what the system can do (e.g., text generation, transcription, embedding)
+
+    - **Lane**
+      - A resource-governance category controlling execution behavior
+
+    - **Pool**
+      - A structural grouping of AI resources eligible to implement capabilities
+
+    - **Provider / Model**
+      - Backend-specific implementations hidden behind adapters
+
+    ---
+
+    ### Core Principle
+
+    > **Capabilities describe intent.**  
+    > **Pools, lanes, and providers describe execution.**
+
+    Callers request **capabilities**, not pools, lanes, models, or providers.
+
+    ---
+
+    ### Separation of Concerns
+
+    - Capability requests are backend-agnostic
+    - Lane selection governs **how** work may execute, not **what** work is requested
+    - Pools and providers implement capabilities within lane constraints
+
+    This separation allows:
+    - Backend substitution without API changes
+    - Extension to non-LLM capability families (e.g., ASR, retrieval)
+    - Stable policy enforcement under hardware scarcity
+
+    ---
+
+    ## Compatibility Bridge (Phase 1 → Phase 2)
+
+    Phase 1 defines **structural AI pool kinds** without execution semantics.
+    Phase 2 interprets these pool kinds by default as follows:
+
+    | Phase 1 pool_kind | Phase 2 lane |
+    |-------------------|--------------|
+    | conversational    | interactive  |
+    | worker            | batch        |
+    | light             | utility      |
+
+    Notes:
+    - This mapping is interpretive and does NOT modify Phase 1 contracts
+    - Overrides may exist via configuration defined in later Phase 2 work
+    - Overrides MUST NOT violate lane invariants
+
+    ---
+
+    ## Notes / Future (Non-Authoritative)
+
+    - Capability taxonomy expansion (ASR, vision, retrieval) is supported by design
+    - Device-level scheduling details are intentionally out of scope
+    - Lane override configuration surfaces are deferred to later Phase 2 contracts
